@@ -17,7 +17,7 @@ public class ByteBuffer {
 	}
 	
 	public void write(int b) {
-		write((int) b);
+		write((byte) b);
 	}
 	
 	public void print(String text) {
@@ -30,8 +30,17 @@ public class ByteBuffer {
 	public byte[] getBytes() {
 		byte[] ret = new byte[bytes.size()];
 		for (int i = 0; i < bytes.size(); i++) {
-			ret[i] = bytes.get(i);
+			ret[i] = (byte) bytes.get(i);
 		}
 		return ret;
 	}
+	
+	public char[] getBytesChar() {
+		char[] ret = new char[bytes.size()];
+		for (int i = 0; i < bytes.size(); i++) {
+			ret[i] = (char) bytes.get(i).byteValue();
+		}
+		return ret;
+	}
+	
 }
