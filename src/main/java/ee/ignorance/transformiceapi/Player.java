@@ -30,6 +30,9 @@ public class Player {
 	private Boolean loginResult;
 	private boolean syncStatus;
 	
+	private Integer secondShamanCode;
+	private boolean isShaman;
+	
 	public Player(String username, String password, GameConnection connection) {
 		this.connection = connection;
 		this.username = username;
@@ -125,6 +128,7 @@ public class Player {
 	}
 
 	public void setMouseId(int mouseId) {
+		System.out.println("ïd = " + mouseId);
 		this.mouseId = mouseId;
 	}
 
@@ -166,6 +170,22 @@ public class Player {
 
 	public void setSyncStatus(boolean syncStatus) {
 		this.syncStatus = syncStatus;
+	}
+
+	public Integer getSecondShamanCode() {
+		return secondShamanCode;
+	}
+
+	public void setSecondShamanCode(Integer secondShamanCode) {
+		this.secondShamanCode = secondShamanCode;
+	}
+
+	public boolean isShaman() {
+		return isShaman;
+	}
+
+	public void setShaman(boolean isShaman) {
+		this.isShaman = isShaman;
 	}
 	
 	

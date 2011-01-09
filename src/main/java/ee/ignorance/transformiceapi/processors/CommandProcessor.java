@@ -6,6 +6,7 @@ import ee.ignorance.transformiceapi.protocol.server.LoginFailedResponse;
 import ee.ignorance.transformiceapi.protocol.server.LoginSuccessResponse;
 import ee.ignorance.transformiceapi.protocol.server.MouseListResponse;
 import ee.ignorance.transformiceapi.protocol.server.RoomResponse;
+import ee.ignorance.transformiceapi.protocol.server.ShamanStatusResponse;
 import ee.ignorance.transformiceapi.protocol.server.StartGameResponse;
 import ee.ignorance.transformiceapi.protocol.server.SyncStatusResponse;
 import ee.ignorance.transformiceapi.protocol.server.TZATResponse;
@@ -33,6 +34,9 @@ public abstract class CommandProcessor {
 		}
 		if (command instanceof SyncStatusResponse) {
 			return new SyncStatusProcessor();
+		}
+		if (command instanceof ShamanStatusResponse) {
+			return new ShamanStatusProcessor();
 		}
 		return null;
 	}

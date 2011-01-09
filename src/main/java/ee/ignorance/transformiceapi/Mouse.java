@@ -7,17 +7,20 @@ public class Mouse {
 	private String name;
 	private boolean dead;
 	private int score;
+	private int codeForum;
 	
 	public static Mouse parse(String[] mouseData) {
 		Mouse mouse = new Mouse();
 		String name = mouseData[0];
 		int code = Integer.parseInt(mouseData[1]);
 		int score = Integer.parseInt(mouseData[3]);
+		int codeForum = Integer.parseInt(mouseData[8]);
 		boolean dead = mouseData[2].equals("1");
 		mouse.setName(name);
 		mouse.setDead(dead);
 		mouse.setCode(code);
 		mouse.setScore(score);
+		mouse.setCodeForum(codeForum);
 		return mouse;
 	}
 
@@ -53,10 +56,18 @@ public class Mouse {
 		this.score = score;
 	}
 
+	public int getCodeForum() {
+		return codeForum;
+	}
+
+	public void setCodeForum(int codeForum) {
+		this.codeForum = codeForum;
+	}
+
 	@Override
 	public String toString() {
 		return "Mouse [code=" + code + ", name=" + name + ", dead=" + dead
-				+ ", score=" + score + "]";
+				+ ", score=" + score + ", codeForum=" + codeForum + "]";
 	}
 	
 }

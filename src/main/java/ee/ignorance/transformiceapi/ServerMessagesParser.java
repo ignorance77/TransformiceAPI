@@ -9,6 +9,7 @@ import ee.ignorance.transformiceapi.protocol.server.LoginFailedResponse;
 import ee.ignorance.transformiceapi.protocol.server.LoginSuccessResponse;
 import ee.ignorance.transformiceapi.protocol.server.MouseListResponse;
 import ee.ignorance.transformiceapi.protocol.server.RoomResponse;
+import ee.ignorance.transformiceapi.protocol.server.ShamanStatusResponse;
 import ee.ignorance.transformiceapi.protocol.server.StartGameResponse;
 import ee.ignorance.transformiceapi.protocol.server.SyncStatusResponse;
 import ee.ignorance.transformiceapi.protocol.server.TZATResponse;
@@ -51,6 +52,9 @@ public class ServerMessagesParser {
 			}
 			if (codeMinor == 21) {
 				return new SyncStatusResponse(rawMessage);
+			}
+			if (codeMinor == 20) {
+				return new ShamanStatusResponse(rawMessage);
 			}
 		}
 		return null;
