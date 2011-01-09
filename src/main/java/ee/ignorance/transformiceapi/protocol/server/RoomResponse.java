@@ -8,7 +8,6 @@ public class RoomResponse extends AbstractResponse {
 	
 	public RoomResponse(List<String> rawMessage) {
 		super(rawMessage);
-		System.out.println("Room response");
 	}
 
 	@Override

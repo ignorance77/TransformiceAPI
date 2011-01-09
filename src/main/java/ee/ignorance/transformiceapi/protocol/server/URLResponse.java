@@ -25,7 +25,6 @@ public class URLResponse extends AbstractResponse {
 		}
 		setMDT(MDT);
 		setCMDTEC(Integer.parseInt(rawMessage.get(3)));
-		System.out.println(getCMDTEC());
 	}
 
 	public Integer getCMDTEC() {

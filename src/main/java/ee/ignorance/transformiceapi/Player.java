@@ -6,6 +6,9 @@ import ee.ignorance.transformiceapi.protocol.client.ChatRequest;
 import ee.ignorance.transformiceapi.protocol.client.CommandRequest;
 import ee.ignorance.transformiceapi.protocol.client.HoleRequest;
 import ee.ignorance.transformiceapi.protocol.client.LoginRequest;
+import ee.ignorance.transformiceapi.protocol.client.MagicBeginRequest;
+import ee.ignorance.transformiceapi.protocol.client.MagicCastRequest;
+import ee.ignorance.transformiceapi.protocol.client.MagicStopRequest;
 import ee.ignorance.transformiceapi.protocol.client.PositionRequest;
 import ee.ignorance.transformiceapi.protocol.client.TakeCheeseRequest;
 
@@ -185,6 +188,24 @@ public class Player {
 
 	public void setShaman(boolean isShaman) {
 		this.isShaman = isShaman;
+	}
+	
+	public void magic(int type, int x, int y) {
+		MagicBeginRequest magicBeginRequest = new MagicBeginRequest(type, x, y);
+		getConnection().sendRequest(magicBeginRequest);
+		sleep(50);
+		MagicCastRequest magicCastRequest = new MagicCastRequest(type, x, y);
+		getConnection().sendRequest(magicCastRequest);
+		sleep(50);
+		MagicStopRequest magicStopRequest = new MagicStopRequest();
+		getConnection().sendRequest(magicStopRequest);
+	}
+	
+	private void sleep(long interval) {
+		try {
+			Thread.sleep(interval);
+		} catch (InterruptedException e) {
+		}
 	}
 	
 	
