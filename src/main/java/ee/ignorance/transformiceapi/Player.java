@@ -28,6 +28,7 @@ public class Player {
 	private Mouse playerMouse;
 	
 	private Boolean loginResult;
+	private boolean syncStatus;
 	
 	public Player(String username, String password, GameConnection connection) {
 		this.connection = connection;
@@ -157,6 +158,15 @@ public class Player {
 
 	public void setPlayerMouse(Mouse playerMouse) {
 		this.playerMouse = playerMouse;
+	}
+
+	public boolean isSyncStatus() {
+		return syncStatus;
+	}
+
+	public void setSyncStatus(boolean syncStatus) {
+		System.out.println(syncStatus);
+		this.syncStatus = syncStatus;
 	}
 	
 	

@@ -6,9 +6,11 @@ import java.util.List;
 import ee.ignorance.transformiceapi.protocol.server.AbstractResponse;
 import ee.ignorance.transformiceapi.protocol.server.IntroduceResponse;
 import ee.ignorance.transformiceapi.protocol.server.LoginFailedResponse;
+import ee.ignorance.transformiceapi.protocol.server.LoginSuccessResponse;
 import ee.ignorance.transformiceapi.protocol.server.MouseListResponse;
 import ee.ignorance.transformiceapi.protocol.server.RoomResponse;
 import ee.ignorance.transformiceapi.protocol.server.StartGameResponse;
+import ee.ignorance.transformiceapi.protocol.server.SyncStatusResponse;
 import ee.ignorance.transformiceapi.protocol.server.TZATResponse;
 import ee.ignorance.transformiceapi.protocol.server.URLResponse;
 
@@ -46,6 +48,9 @@ public class ServerMessagesParser {
 		if (codeMajor == 8) {
 			if (codeMinor == 9) {
 				return new MouseListResponse(rawMessage);
+			}
+			if (codeMinor == 21) {
+				return new SyncStatusResponse(rawMessage);
 			}
 		}
 		return null;
