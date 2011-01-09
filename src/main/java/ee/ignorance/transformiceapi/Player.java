@@ -4,12 +4,17 @@ import java.util.List;
 
 import ee.ignorance.transformiceapi.protocol.client.ChatRequest;
 import ee.ignorance.transformiceapi.protocol.client.CommandRequest;
+import ee.ignorance.transformiceapi.protocol.client.CryRequest;
+import ee.ignorance.transformiceapi.protocol.client.DanceRequest;
+import ee.ignorance.transformiceapi.protocol.client.DeathRequest;
 import ee.ignorance.transformiceapi.protocol.client.HoleRequest;
+import ee.ignorance.transformiceapi.protocol.client.KissRequest;
 import ee.ignorance.transformiceapi.protocol.client.LoginRequest;
 import ee.ignorance.transformiceapi.protocol.client.MagicBeginRequest;
 import ee.ignorance.transformiceapi.protocol.client.MagicCastRequest;
 import ee.ignorance.transformiceapi.protocol.client.MagicStopRequest;
 import ee.ignorance.transformiceapi.protocol.client.PositionRequest;
+import ee.ignorance.transformiceapi.protocol.client.SmileRequest;
 import ee.ignorance.transformiceapi.protocol.client.TakeCheeseRequest;
 
 public class Player {
@@ -81,7 +86,32 @@ public class Player {
 		ChatRequest request = new ChatRequest(message);
 		connection.sendRequest(request);
 	}
-	
+
+        public void cry() {
+                CryRequest request = new CryRequest(getGameCode());
+                connection.sendRequest(request);
+        }
+
+        public void dance() {
+                DanceRequest request = new DanceRequest(getGameCode());
+                connection.sendRequest(request);
+        }
+
+        public void die() {
+                DeathRequest request = new DeathRequest(getGameCode());
+                connection.sendRequest(request);
+        }
+
+        public void kiss() {
+                KissRequest request = new KissRequest(getGameCode());
+                connection.sendRequest(request);
+        }
+
+        public void smile() {
+                SmileRequest request = new SmileRequest(getGameCode());
+                connection.sendRequest(request);
+        }
+
 	public void command(String message) {
 		CommandRequest request = new CommandRequest(message);
 		connection.sendRequest(request);
