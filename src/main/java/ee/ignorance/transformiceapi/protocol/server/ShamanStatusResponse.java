@@ -14,6 +14,10 @@ public class ShamanStatusResponse extends AbstractResponse{
 
 	@Override
 	public void parse(List<String> rawMessage) {
+                if(rawMessage.size() == 1){ //Map without shaman
+                    setShamanCode(0);
+                    return;
+                }
 		setShamanCode(Integer.parseInt(rawMessage.get(1)));
 		if (rawMessage.size() > 2) {
 			setTwoShamans(true);
