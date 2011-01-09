@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.InetSocketAddress;
+import java.net.Proxy;
 import java.net.Socket;
 
 import org.apache.log4j.Logger;
@@ -38,6 +39,7 @@ public class GameConnection {
 	private Integer CMDTEC;
 
 	private Boolean registerResult;
+	private Boolean connected;
 	
 	public GameConnection(String host, int port, String version) {
 		this.host = host;
@@ -45,10 +47,10 @@ public class GameConnection {
 		this.version = version;
 	}
 		
-	public void connect(boolean login) {
+	public void connect(boolean login, String referer) {
 		try {
 			socket = new Socket();
-//			socket.setSoTimeout(30000);
+			connected = false;
 			socket.connect(new InetSocketAddress(host, port), 1500);
 			in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 			out = new PrintWriter(socket.getOutputStream(), true);
@@ -57,6 +59,7 @@ public class GameConnection {
 			while (!(urlSent)) {
 				Thread.sleep(50);
 			}
+			connected = true;
 			if (login) {
 				startPingThread();
 			}
@@ -127,7 +130,7 @@ public class GameConnection {
 				CommandProcessor processor = CommandProcessor.create(command);
 				if (player == null) {
 					// registering
-					if (command instanceof RoomResponse) {
+					if (command instanceof LoginSuccessResponse) {
 						registerResult = true;
 					} else if (command instanceof LoginFailedResponse) {
 						registerResult = false;
@@ -164,6 +167,10 @@ public class GameConnection {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public boolean isConnected() {
+		return connected;
 	}
 	
 }

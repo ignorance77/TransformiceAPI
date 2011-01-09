@@ -6,6 +6,7 @@ import java.util.List;
 import ee.ignorance.transformiceapi.protocol.server.AbstractResponse;
 import ee.ignorance.transformiceapi.protocol.server.IntroduceResponse;
 import ee.ignorance.transformiceapi.protocol.server.LoginFailedResponse;
+import ee.ignorance.transformiceapi.protocol.server.MouseListResponse;
 import ee.ignorance.transformiceapi.protocol.server.RoomResponse;
 import ee.ignorance.transformiceapi.protocol.server.StartGameResponse;
 import ee.ignorance.transformiceapi.protocol.server.TZATResponse;
@@ -27,6 +28,9 @@ public class ServerMessagesParser {
 			if (codeMinor == 3) {
 				return new LoginFailedResponse(rawMessage);
 			}
+			if (codeMinor == 8) {
+				return new LoginSuccessResponse(rawMessage);
+			}
 			if (codeMinor == 26) {
 				return new TZATResponse(rawMessage);
 			}
@@ -37,6 +41,11 @@ public class ServerMessagesParser {
 			}
 			if (codeMinor == 5) {
 				return new StartGameResponse(rawMessage);
+			}
+		}
+		if (codeMajor == 8) {
+			if (codeMinor == 9) {
+				return new MouseListResponse(rawMessage);
 			}
 		}
 		return null;

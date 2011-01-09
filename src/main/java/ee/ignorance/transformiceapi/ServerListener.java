@@ -2,7 +2,6 @@ package ee.ignorance.transformiceapi;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.util.Arrays;
 
 import org.apache.log4j.Logger;
 

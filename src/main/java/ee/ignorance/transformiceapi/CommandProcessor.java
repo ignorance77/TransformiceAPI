@@ -1,6 +1,8 @@
 package ee.ignorance.transformiceapi;
 
 import ee.ignorance.transformiceapi.protocol.server.AbstractResponse;
+import ee.ignorance.transformiceapi.protocol.server.LoginFailedResponse;
+import ee.ignorance.transformiceapi.protocol.server.MouseListResponse;
 import ee.ignorance.transformiceapi.protocol.server.RoomResponse;
 import ee.ignorance.transformiceapi.protocol.server.StartGameResponse;
 import ee.ignorance.transformiceapi.protocol.server.TZATResponse;
@@ -16,6 +18,15 @@ public abstract class CommandProcessor {
 		}
 		if (command instanceof TZATResponse) {
 			return new TZATResponseProcessor();
+		}
+		if (command instanceof MouseListResponse) {
+			return new MouseListProcessor();
+		}
+		if (command instanceof LoginSuccessResponse) {
+			return new LoginSuccessProcessor();
+		}
+		if (command instanceof LoginFailedResponse) {
+			return new LoginFailedProcessor();
 		}
 		return null;
 	}

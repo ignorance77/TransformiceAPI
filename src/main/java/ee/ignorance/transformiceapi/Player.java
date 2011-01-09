@@ -1,5 +1,7 @@
 package ee.ignorance.transformiceapi;
 
+import java.util.List;
+
 import ee.ignorance.transformiceapi.protocol.client.ChatRequest;
 import ee.ignorance.transformiceapi.protocol.client.CommandRequest;
 import ee.ignorance.transformiceapi.protocol.client.HoleRequest;
@@ -12,11 +14,20 @@ public class Player {
 	private GameConnection connection;
 	private String username;
 	private String password;
-	private String room;
 	private String gameCode;
 	
 	private int currentX;
 	private int currentY;
+	
+	private String room;
+	private List<Mouse> roomMice;
+	
+	private int mouseId;
+	private boolean admin;
+	private boolean moderator;
+	private Mouse playerMouse;
+	
+	private Boolean loginResult;
 	
 	public Player(String username, String password, GameConnection connection) {
 		this.connection = connection;
@@ -24,17 +35,19 @@ public class Player {
 		this.password = password;
 	}
 
-	public void login(boolean waitToFinish) {
+	public boolean login(boolean waitToFinish) {
+		loginResult = null;
 		LoginRequest request = new LoginRequest( username, password );
 		connection.sendRequest(request);
 		if (waitToFinish) {
 			new Blocker(20) {
 				@Override
 				public boolean check() {
-					return getGameCode() != null;
+					return loginResult != null;
 				}
 			};
 		}
+		return loginResult;
 	}
 	
 	public void changeRoom(final String roomName, boolean waitToFinish) {
@@ -96,7 +109,55 @@ public class Player {
 	public GameConnection getConnection() {
 		return connection;
 	}
-	
+
+	public void setRoomMice(List<Mouse> mice) {
+		for (Mouse mouse : mice) {
+			if (mouse.getCode() == mouseId) {
+				setPlayerMouse(mouse);
+			}
+		}
+		this.roomMice = mice;
+	}
+
+	public int getMouseId() {
+		return mouseId;
+	}
+
+	public void setMouseId(int mouseId) {
+		this.mouseId = mouseId;
+	}
+
+	public boolean isAdmin() {
+		return admin;
+	}
+
+	public void setAdmin(boolean admin) {
+		this.admin = admin;
+	}
+
+	public boolean isModerator() {
+		return moderator;
+	}
+
+	public void setModerator(boolean moderator) {
+		this.moderator = moderator;
+	}
+
+	public Boolean getLoginResult() {
+		return loginResult;
+	}
+
+	public void setLoginResult(Boolean loginResult) {
+		this.loginResult = loginResult;
+	}
+
+	public Mouse getPlayerMouse() {
+		return playerMouse;
+	}
+
+	public void setPlayerMouse(Mouse playerMouse) {
+		this.playerMouse = playerMouse;
+	}
 	
 	
 }
