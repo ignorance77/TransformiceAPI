@@ -5,6 +5,7 @@ import ee.ignorance.transformiceapi.protocol.server.AbstractResponse;
 import ee.ignorance.transformiceapi.protocol.server.LoginFailedResponse;
 import ee.ignorance.transformiceapi.protocol.server.LoginSuccessResponse;
 import ee.ignorance.transformiceapi.protocol.server.MouseListResponse;
+import ee.ignorance.transformiceapi.protocol.server.NormalChatResponse;
 import ee.ignorance.transformiceapi.protocol.server.RoomResponse;
 import ee.ignorance.transformiceapi.protocol.server.ShamanStatusResponse;
 import ee.ignorance.transformiceapi.protocol.server.StartGameResponse;
@@ -37,6 +38,9 @@ public abstract class CommandProcessor {
 		}
 		if (command instanceof ShamanStatusResponse) {
 			return new ShamanStatusProcessor();
+		}
+                if (command instanceof NormalChatResponse) {
+			return new NormalChatProcessor();
 		}
 		return null;
 	}

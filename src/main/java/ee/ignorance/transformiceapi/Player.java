@@ -1,6 +1,7 @@
 package ee.ignorance.transformiceapi;
 
 import java.util.List;
+import java.util.ArrayList;
 
 import ee.ignorance.transformiceapi.protocol.client.ChatRequest;
 import ee.ignorance.transformiceapi.protocol.client.CommandRequest;
@@ -11,6 +12,7 @@ import ee.ignorance.transformiceapi.protocol.client.MagicCastRequest;
 import ee.ignorance.transformiceapi.protocol.client.MagicStopRequest;
 import ee.ignorance.transformiceapi.protocol.client.PositionRequest;
 import ee.ignorance.transformiceapi.protocol.client.TakeCheeseRequest;
+import ee.ignorance.transformiceapi.listeners.NormalChatListener;
 
 public class Player {
 
@@ -35,11 +37,15 @@ public class Player {
 	
 	private Integer secondShamanCode;
 	private boolean isShaman;
+
+        private ArrayList <NormalChatListener>normalChatListeners;
 	
 	public Player(String username, String password, GameConnection connection) {
 		this.connection = connection;
 		this.username = username;
 		this.password = password;
+
+                normalChatListeners = new ArrayList<NormalChatListener>() ;
 	}
 
 	public boolean login(boolean waitToFinish) {
@@ -189,6 +195,16 @@ public class Player {
 	public void setShaman(boolean isShaman) {
 		this.isShaman = isShaman;
 	}
+
+        public void registerNormalChatListener(NormalChatListener listener){
+            normalChatListeners.add(listener);
+        }
+
+        public void notifyNormalChatListeners(String sender, String message){
+            for (NormalChatListener listener : normalChatListeners) {
+                listener.processNormalChatMessage(sender, message);
+            }
+        }
 	
 	public void magic(int type, int x, int y) {
 		MagicBeginRequest magicBeginRequest = new MagicBeginRequest(type, x, y);
