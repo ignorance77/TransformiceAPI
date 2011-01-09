@@ -1,5 +1,6 @@
 package ee.ignorance.transformiceapi;
 
+import ee.ignorance.transformiceapi.listeners.ModChatListener;
 import ee.ignorance.transformiceapi.listeners.NormalChatListener;
 import ee.ignorance.transformiceapi.listeners.PrivateChatListener;
 import ee.ignorance.transformiceapi.listeners.TribeChatListener;
@@ -11,6 +12,7 @@ public class ListenerHandler {
     private ArrayList<NormalChatListener> normalChatListeners;
     private ArrayList<TribeChatListener> tribeChatListeners;
     private ArrayList<PrivateChatListener> privateChatListeners;
+    private ArrayList<ModChatListener> modChatListeners;
 
     private Player player;
 
@@ -18,6 +20,7 @@ public class ListenerHandler {
         normalChatListeners = new ArrayList<NormalChatListener>();
         tribeChatListeners = new ArrayList<TribeChatListener>();
         privateChatListeners = new ArrayList<PrivateChatListener>();
+        modChatListeners = new ArrayList<ModChatListener>();
 
         this.player = player;
     }
@@ -50,6 +53,16 @@ public class ListenerHandler {
     public void notifyPrivateChatListeners(String sender, String message) {
         for (PrivateChatListener listener : privateChatListeners) {
             listener.processPrivateChatMessage(sender, message);
+        }
+    }
+
+    public void registerModChatListener(ModChatListener listener) {
+         modChatListeners.add(listener);
+    }
+
+    public void notifyModChatListeners(String message) {
+        for (ModChatListener listener : modChatListeners) {
+            listener.processModChatMessage(message);
         }
     }
 

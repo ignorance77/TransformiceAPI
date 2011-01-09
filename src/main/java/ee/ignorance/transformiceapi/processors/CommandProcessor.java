@@ -4,6 +4,7 @@ import ee.ignorance.transformiceapi.Player;
 import ee.ignorance.transformiceapi.protocol.server.AbstractResponse;
 import ee.ignorance.transformiceapi.protocol.server.LoginFailedResponse;
 import ee.ignorance.transformiceapi.protocol.server.LoginSuccessResponse;
+import ee.ignorance.transformiceapi.protocol.server.ModChatResponse;
 import ee.ignorance.transformiceapi.protocol.server.MouseListResponse;
 import ee.ignorance.transformiceapi.protocol.server.NormalChatResponse;
 import ee.ignorance.transformiceapi.protocol.server.PrivateChatResponse;
@@ -49,6 +50,9 @@ public abstract class CommandProcessor {
 		}
                 if (command instanceof PrivateChatResponse) {
 			return new PrivateChatProcessor();
+		}
+                if (command instanceof ModChatResponse) {
+			return new ModChatProcessor();
 		}
 		return null;
 	}
