@@ -165,7 +165,6 @@ public class Player {
 	}
 
 	public void setSyncStatus(boolean syncStatus) {
-		System.out.println(syncStatus);
 		this.syncStatus = syncStatus;
 	}
 	
