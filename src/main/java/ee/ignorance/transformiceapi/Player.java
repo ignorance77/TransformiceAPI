@@ -128,7 +128,6 @@ public class Player {
 	}
 
 	public void setMouseId(int mouseId) {
-		System.out.println("ïd = " + mouseId);
 		this.mouseId = mouseId;
 	}
 
