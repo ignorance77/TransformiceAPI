@@ -6,6 +6,7 @@ import ee.ignorance.transformiceapi.protocol.server.LoginFailedResponse;
 import ee.ignorance.transformiceapi.protocol.server.LoginSuccessResponse;
 import ee.ignorance.transformiceapi.protocol.server.MouseListResponse;
 import ee.ignorance.transformiceapi.protocol.server.NormalChatResponse;
+import ee.ignorance.transformiceapi.protocol.server.PrivateChatResponse;
 import ee.ignorance.transformiceapi.protocol.server.RoomResponse;
 import ee.ignorance.transformiceapi.protocol.server.ShamanStatusResponse;
 import ee.ignorance.transformiceapi.protocol.server.StartGameResponse;
@@ -45,6 +46,9 @@ public abstract class CommandProcessor {
 		}
                 if (command instanceof TribeChatResponse) {
 			return new TribeChatProcessor();
+		}
+                if (command instanceof PrivateChatResponse) {
+			return new PrivateChatProcessor();
 		}
 		return null;
 	}

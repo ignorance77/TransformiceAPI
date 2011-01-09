@@ -50,7 +50,7 @@ public class Player {
 		this.username = username;
 		this.password = password;
 
-                listenerHandler = new ListenerHandler();
+                listenerHandler = new ListenerHandler(this);
 	}
 
 	public boolean login(boolean waitToFinish) {
@@ -95,6 +95,10 @@ public class Player {
 
         public void tribeChat(String message) {
 		command("t "+message);
+	}
+
+        public void privateChat(String recipient, String message) {
+		command("c "+recipient+" "+message);
 	}
 
         public void cry() {

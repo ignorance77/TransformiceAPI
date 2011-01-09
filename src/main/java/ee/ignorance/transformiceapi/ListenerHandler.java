@@ -1,6 +1,7 @@
 package ee.ignorance.transformiceapi;
 
 import ee.ignorance.transformiceapi.listeners.NormalChatListener;
+import ee.ignorance.transformiceapi.listeners.PrivateChatListener;
 import ee.ignorance.transformiceapi.listeners.TribeChatListener;
 import java.util.ArrayList;
 
@@ -9,10 +10,16 @@ public class ListenerHandler {
     
     private ArrayList<NormalChatListener> normalChatListeners;
     private ArrayList<TribeChatListener> tribeChatListeners;
+    private ArrayList<PrivateChatListener> privateChatListeners;
 
-    public ListenerHandler(){
+    private Player player;
+
+    public ListenerHandler(Player player){
         normalChatListeners = new ArrayList<NormalChatListener>();
         tribeChatListeners = new ArrayList<TribeChatListener>();
+        privateChatListeners = new ArrayList<PrivateChatListener>();
+
+        this.player = player;
     }
     
     
@@ -33,6 +40,16 @@ public class ListenerHandler {
     public void notifyTribeChatListeners(String sender, String message) {
         for (TribeChatListener listener : tribeChatListeners) {
             listener.processTribeChatMessage(sender, message);
+        }
+    }
+
+    public void registerPrivateChatListener(PrivateChatListener listener) {
+        privateChatListeners.add(listener);
+    }
+
+    public void notifyPrivateChatListeners(String sender, String message) {
+        for (PrivateChatListener listener : privateChatListeners) {
+            listener.processPrivateChatMessage(sender, message);
         }
     }
 
