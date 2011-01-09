@@ -43,14 +43,14 @@ public class Player {
 	private Integer secondShamanCode;
 	private boolean isShaman;
 
-        private ArrayList <NormalChatListener>normalChatListeners;
+        private ListenerHandler listenerHandler;
 	
 	public Player(String username, String password, GameConnection connection) {
 		this.connection = connection;
 		this.username = username;
 		this.password = password;
 
-                normalChatListeners = new ArrayList<NormalChatListener>() ;
+                listenerHandler = new ListenerHandler();
 	}
 
 	public boolean login(boolean waitToFinish) {
@@ -88,9 +88,13 @@ public class Player {
 		connection.sendRequest(request);
 	}
 	
-	public void chat(String message) {
+	public void normalChat(String message) {
 		ChatRequest request = new ChatRequest(message);
 		connection.sendRequest(request);
+	}
+
+        public void tribeChat(String message) {
+		command("t "+message);
 	}
 
         public void cry() {
@@ -226,14 +230,8 @@ public class Player {
 		this.isShaman = isShaman;
 	}
 
-        public void registerNormalChatListener(NormalChatListener listener){
-            normalChatListeners.add(listener);
-        }
-
-        public void notifyNormalChatListeners(String sender, String message){
-            for (NormalChatListener listener : normalChatListeners) {
-                listener.processNormalChatMessage(sender, message);
-            }
+        public ListenerHandler getListenerHandler(){
+            return listenerHandler;
         }
 	
 	public void magic(int type, int x, int y) {

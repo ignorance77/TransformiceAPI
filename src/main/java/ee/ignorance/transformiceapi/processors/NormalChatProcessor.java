@@ -10,7 +10,7 @@ public class NormalChatProcessor extends CommandProcessor{
     @Override
     public void process(AbstractResponse command, Player player) {
         NormalChatResponse response = (NormalChatResponse) command;
-        player.notifyNormalChatListeners(response.getSender(), response.getMessage());
+        player.getListenerHandler().notifyNormalChatListeners(response.getSender(), response.getMessage());
     }
 
 }

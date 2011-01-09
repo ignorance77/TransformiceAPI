@@ -14,6 +14,7 @@ import ee.ignorance.transformiceapi.protocol.server.ShamanStatusResponse;
 import ee.ignorance.transformiceapi.protocol.server.StartGameResponse;
 import ee.ignorance.transformiceapi.protocol.server.SyncStatusResponse;
 import ee.ignorance.transformiceapi.protocol.server.TZATResponse;
+import ee.ignorance.transformiceapi.protocol.server.TribeChatResponse;
 import ee.ignorance.transformiceapi.protocol.server.URLResponse;
 
 public class ServerMessagesParser {
@@ -48,7 +49,7 @@ public class ServerMessagesParser {
 			}
 		}
                 if (codeMajor == 6){
-                        if(codeMinor == 6){
+                        if(codeMinor == 6){ //Normal chat message
                             return new NormalChatResponse(rawMessage);
                         }
                 }
@@ -63,6 +64,11 @@ public class ServerMessagesParser {
 				return new ShamanStatusResponse(rawMessage);
 			}
 		}
+                if (codeMajor == 16){
+                        if(codeMinor == 5){ //Tribe message
+                            return new TribeChatResponse(rawMessage);
+                        }
+                }
 		return null;
 	}
 

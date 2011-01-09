@@ -107,7 +107,7 @@ public class GameConnection {
 		out.write(0x00);
 		out.flush();
 	}
-	
+        
 	private void writePrefix() {
 		String local2 = Integer.toString((CMDTEC % 9000) + 1000);
 		int d1 = local2.charAt(0) - '0';

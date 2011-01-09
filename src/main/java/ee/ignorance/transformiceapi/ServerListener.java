@@ -35,6 +35,7 @@ public class ServerListener implements Runnable {
 				Thread.sleep(50);
 			}
 		} catch (Exception e) {
+                    e.printStackTrace();
 			logger.error("Error receiving data ", e);
 		}
 	}

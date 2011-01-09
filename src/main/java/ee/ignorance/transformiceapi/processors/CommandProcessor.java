@@ -11,6 +11,7 @@ import ee.ignorance.transformiceapi.protocol.server.ShamanStatusResponse;
 import ee.ignorance.transformiceapi.protocol.server.StartGameResponse;
 import ee.ignorance.transformiceapi.protocol.server.SyncStatusResponse;
 import ee.ignorance.transformiceapi.protocol.server.TZATResponse;
+import ee.ignorance.transformiceapi.protocol.server.TribeChatResponse;
 
 public abstract class CommandProcessor {
 
@@ -41,6 +42,9 @@ public abstract class CommandProcessor {
 		}
                 if (command instanceof NormalChatResponse) {
 			return new NormalChatProcessor();
+		}
+                if (command instanceof TribeChatResponse) {
+			return new TribeChatProcessor();
 		}
 		return null;
 	}
