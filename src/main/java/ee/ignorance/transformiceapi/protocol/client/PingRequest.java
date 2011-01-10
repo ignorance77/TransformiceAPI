@@ -16,8 +16,7 @@ public class PingRequest extends AbstractClientRequest {
 		bf.write(0x1a);
 		bf.write(0x02);
 		bf.write(0x01);
-//		bf.print("" + (System.currentTimeMillis() - lastPingTime));
-		bf.print("10500");
+		bf.print("" + (System.currentTimeMillis() - lastPingTime));
 		return bf.getBytesChar();
 	}
 
