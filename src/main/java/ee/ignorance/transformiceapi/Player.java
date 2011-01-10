@@ -97,6 +97,10 @@ public class Player {
 		command("t "+message);
 	}
 
+        public void privateChat(String recipient, String message) {
+		command("c "+recipient+" "+message);
+	}
+
         public void cry() {
                 CryRequest request = new CryRequest(getGameCode());
                 connection.sendRequest(request);

@@ -7,8 +7,10 @@ import ee.ignorance.transformiceapi.protocol.server.AbstractResponse;
 import ee.ignorance.transformiceapi.protocol.server.IntroduceResponse;
 import ee.ignorance.transformiceapi.protocol.server.LoginFailedResponse;
 import ee.ignorance.transformiceapi.protocol.server.LoginSuccessResponse;
+import ee.ignorance.transformiceapi.protocol.server.ModChatResponse;
 import ee.ignorance.transformiceapi.protocol.server.MouseListResponse;
 import ee.ignorance.transformiceapi.protocol.server.NormalChatResponse;
+import ee.ignorance.transformiceapi.protocol.server.PrivateChatResponse;
 import ee.ignorance.transformiceapi.protocol.server.RoomResponse;
 import ee.ignorance.transformiceapi.protocol.server.ShamanStatusResponse;
 import ee.ignorance.transformiceapi.protocol.server.StartGameResponse;
@@ -39,6 +41,9 @@ public class ServerMessagesParser {
 			if (codeMinor == 26) {
 				return new TZATResponse(rawMessage);
 			}
+                        if (codeMinor == 4) { //mod messsage
+				return new ModChatResponse(rawMessage);
+			}
 		}
 		if (codeMajor == 5) {
 			if (codeMinor == 21) {
@@ -51,6 +56,9 @@ public class ServerMessagesParser {
                 if (codeMajor == 6){
                         if(codeMinor == 6){ //Normal chat message
                             return new NormalChatResponse(rawMessage);
+                        }
+                        if(codeMinor == 7){ //private chat message
+                            return new PrivateChatResponse(rawMessage);
                         }
                 }
 		if (codeMajor == 8) {
