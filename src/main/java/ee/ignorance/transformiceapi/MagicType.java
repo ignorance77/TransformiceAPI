@@ -3,6 +3,7 @@ package ee.ignorance.transformiceapi;
 public class MagicType {
 
 	public static final int ARROW = 0;
+	public static final int SMALLBOX = 1;
 	public static final int LARGEBOX = 2;
 	public static final int SMALLBOARD = 3;
 	public static final int LARGEBOARD = 4;

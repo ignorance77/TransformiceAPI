@@ -93,38 +93,38 @@ public class Player {
 		connection.sendRequest(request);
 	}
 
-        public void tribeChat(String message) {
+    public void tribeChat(String message) {
 		command("t "+message);
 	}
 
-        public void privateChat(String recipient, String message) {
+    public void privateChat(String recipient, String message) {
 		command("c "+recipient+" "+message);
 	}
 
-        public void cry() {
-                CryRequest request = new CryRequest(getGameCode());
-                connection.sendRequest(request);
-        }
+    public void cry() {
+        CryRequest request = new CryRequest(getGameCode());
+        connection.sendRequest(request);
+    }
 
-        public void dance() {
-                DanceRequest request = new DanceRequest(getGameCode());
-                connection.sendRequest(request);
-        }
+	public void dance() {
+		DanceRequest request = new DanceRequest(getGameCode());
+		connection.sendRequest(request);
+	}
 
-        public void die() {
-                DeathRequest request = new DeathRequest(getGameCode());
-                connection.sendRequest(request);
-        }
+	public void die() {
+		DeathRequest request = new DeathRequest(getGameCode());
+		connection.sendRequest(request);
+	}
 
-        public void kiss() {
-                KissRequest request = new KissRequest(getGameCode());
-                connection.sendRequest(request);
-        }
+	public void kiss() {
+		KissRequest request = new KissRequest(getGameCode());
+		connection.sendRequest(request);
+	}
 
-        public void smile() {
-                SmileRequest request = new SmileRequest(getGameCode());
-                connection.sendRequest(request);
-        }
+	public void smile() {
+		SmileRequest request = new SmileRequest(getGameCode());
+		connection.sendRequest(request);
+	}
 
 	public void command(String message) {
 		CommandRequest request = new CommandRequest(message);
@@ -260,5 +260,19 @@ public class Player {
 		eventService.notifyListeners(e);
 	}
 	
+	public void goLeft() {
+		PositionRequest request = new PositionRequest(getGameCode(), currentX, currentY, false, true);
+		getConnection().sendRequest(request);
+	}
+	
+	public void goRight() {
+		PositionRequest request = new PositionRequest(getGameCode(), currentX, currentY, true, false);
+		getConnection().sendRequest(request);
+	}
+	
+	public void jump() {
+		PositionRequest request = new PositionRequest(getGameCode(), currentX, currentY, false, false, true);
+		getConnection().sendRequest(request);
+	}
 	
 }
