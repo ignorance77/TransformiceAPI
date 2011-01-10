@@ -4,9 +4,9 @@ import java.util.List;
 
 public class MouseFinishResponse extends AbstractResponse {
 
-	public int mouseID;
-        public int standing;
-        public double finishTime;
+	private int mouseID;
+        private int standing;
+        private double finishTime;
 
 	public MouseFinishResponse(List<String> rawMessage) {
 		super(rawMessage);
@@ -14,9 +14,9 @@ public class MouseFinishResponse extends AbstractResponse {
 
 	@Override
 	public void parse(List<String> rawMessage) {
-                this.mouseID = Integer.valueOf(rawMessage.get(1));
-                this.standing = Integer.valueOf(rawMessage.get(4));
-                this.finishTime = Integer.valueOf(rawMessage.get(5)) / 10.0;
+                setMouseID(Integer.valueOf(rawMessage.get(1)));
+                setStanding(Integer.valueOf(rawMessage.get(4)));
+                setFinishTime(Integer.valueOf(rawMessage.get(5)) / 10.0);
         }
 
 	public int getMouseID() {
@@ -41,6 +41,10 @@ public class MouseFinishResponse extends AbstractResponse {
 
         public void setStanding(int standing) {
 		this.standing = standing;
+	}
+
+        public void setFinishTime(double finishTime) {
+		this.finishTime = finishTime;
 	}
 }
 
