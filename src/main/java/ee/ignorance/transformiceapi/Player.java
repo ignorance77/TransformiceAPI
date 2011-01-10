@@ -1,8 +1,10 @@
 package ee.ignorance.transformiceapi;
 
 import java.util.List;
-import java.util.ArrayList;
 
+import ee.ignorance.transformiceapi.event.Event;
+import ee.ignorance.transformiceapi.event.EventListener;
+import ee.ignorance.transformiceapi.event.EventService;
 import ee.ignorance.transformiceapi.protocol.client.ChatRequest;
 import ee.ignorance.transformiceapi.protocol.client.CommandRequest;
 import ee.ignorance.transformiceapi.protocol.client.CryRequest;
@@ -17,7 +19,6 @@ import ee.ignorance.transformiceapi.protocol.client.MagicStopRequest;
 import ee.ignorance.transformiceapi.protocol.client.PositionRequest;
 import ee.ignorance.transformiceapi.protocol.client.SmileRequest;
 import ee.ignorance.transformiceapi.protocol.client.TakeCheeseRequest;
-import ee.ignorance.transformiceapi.listeners.NormalChatListener;
 
 public class Player {
 
@@ -29,7 +30,7 @@ public class Player {
 	private int currentX;
 	private int currentY;
 	
-	private String room;
+	private String room = "null";
 	private List<Mouse> roomMice;
 	
 	private int mouseId;
@@ -43,14 +44,13 @@ public class Player {
 	private Integer secondShamanCode;
 	private boolean isShaman;
 
-        private ListenerHandler listenerHandler;
-	
+    private EventService eventService;
+    
 	public Player(String username, String password, GameConnection connection) {
 		this.connection = connection;
 		this.username = username;
 		this.password = password;
-
-                listenerHandler = new ListenerHandler();
+        this.eventService = new EventService();
 	}
 
 	public boolean login(boolean waitToFinish) {
@@ -229,10 +229,6 @@ public class Player {
 	public void setShaman(boolean isShaman) {
 		this.isShaman = isShaman;
 	}
-
-        public ListenerHandler getListenerHandler(){
-            return listenerHandler;
-        }
 	
 	public void magic(int type, int x, int y) {
 		MagicBeginRequest magicBeginRequest = new MagicBeginRequest(type, x, y);
@@ -250,6 +246,14 @@ public class Player {
 			Thread.sleep(interval);
 		} catch (InterruptedException e) {
 		}
+	}
+
+	public void registerEventListener(EventListener listener) {
+		eventService.registerEventListener(listener);
+	}
+	
+	public void notifyListeners(Event e) {
+		eventService.notifyListeners(e);
 	}
 	
 	

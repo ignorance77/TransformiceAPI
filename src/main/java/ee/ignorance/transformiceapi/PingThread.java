@@ -17,7 +17,7 @@ public class PingThread extends Thread {
 	public void run() {
 		while (true) {
 			try {
-				Thread.sleep(11000);
+				Thread.sleep(100);
 			} catch (InterruptedException e) {
 			}
 			sendPing();
