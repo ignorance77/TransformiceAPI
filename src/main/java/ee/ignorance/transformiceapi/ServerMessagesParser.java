@@ -63,7 +63,7 @@ public class ServerMessagesParser {
                         }
                 }
 		if (codeMajor == 8) {
-                        if (codeMinor == 8) {
+                        if (codeMinor == 6) {
                                 return new MouseFinishResponse(rawMessage);
                         }
 			if (codeMinor == 9) {
