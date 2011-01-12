@@ -4,6 +4,7 @@ import ee.ignorance.transformiceapi.Player;
 import ee.ignorance.transformiceapi.protocol.server.AbstractResponse;
 import ee.ignorance.transformiceapi.protocol.server.LoginFailedResponse;
 import ee.ignorance.transformiceapi.protocol.server.LoginSuccessResponse;
+import ee.ignorance.transformiceapi.protocol.server.MapXMLResponse;
 import ee.ignorance.transformiceapi.protocol.server.ModChatResponse;
 import ee.ignorance.transformiceapi.protocol.server.MouseFinishResponse;
 import ee.ignorance.transformiceapi.protocol.server.MouseListResponse;
@@ -57,6 +58,10 @@ public abstract class CommandProcessor {
 		}
                 if (command instanceof MouseFinishResponse) {
                         return new MouseFinishProcessor();
+                }
+
+                if (command instanceof MapXMLResponse) {
+                        return new MapXMLProcessor();
                 }
 		return null;
 	}
