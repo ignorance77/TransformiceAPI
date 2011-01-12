@@ -7,6 +7,7 @@ import ee.ignorance.transformiceapi.protocol.server.AbstractResponse;
 import ee.ignorance.transformiceapi.protocol.server.IntroduceResponse;
 import ee.ignorance.transformiceapi.protocol.server.LoginFailedResponse;
 import ee.ignorance.transformiceapi.protocol.server.LoginSuccessResponse;
+import ee.ignorance.transformiceapi.protocol.server.MapXMLResponse;
 import ee.ignorance.transformiceapi.protocol.server.ModChatResponse;
 import ee.ignorance.transformiceapi.protocol.server.MouseFinishResponse;
 import ee.ignorance.transformiceapi.protocol.server.MouseListResponse;
@@ -47,6 +48,9 @@ public class ServerMessagesParser {
 			}
 		}
 		if (codeMajor == 5) {
+                        if (codeMinor == 5) {
+                                return new MapXMLResponse(rawMessage);
+                        }
 			if (codeMinor == 21) {
 				return new RoomResponse(rawMessage);
 			}
