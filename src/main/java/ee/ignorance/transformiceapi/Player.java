@@ -1,7 +1,6 @@
 package ee.ignorance.transformiceapi;
 
 import java.util.List;
-
 import ee.ignorance.transformiceapi.event.Event;
 import ee.ignorance.transformiceapi.event.EventListener;
 import ee.ignorance.transformiceapi.event.EventService;
@@ -44,7 +43,7 @@ public class Player {
 	private Integer secondShamanCode;
 	private boolean isShaman;
 
-    private EventService eventService;
+        private EventService eventService;
     
 	public Player(String username, String password, GameConnection connection) {
 		this.connection = connection;
@@ -93,18 +92,18 @@ public class Player {
 		connection.sendRequest(request);
 	}
 
-    public void tribeChat(String message) {
-		command("t "+message);
+        public void tribeChat(String message) {
+                command("t "+message);
 	}
 
-    public void privateChat(String recipient, String message) {
-		command("c "+recipient+" "+message);
-	}
+        public void privateChat(String recipient, String message) {
+                command("c "+recipient+" "+message);
+        }
 
-    public void cry() {
-        CryRequest request = new CryRequest(getGameCode());
-        connection.sendRequest(request);
-    }
+        public void cry() {
+                CryRequest request = new CryRequest(getGameCode());
+                connection.sendRequest(request);
+        }
 
 	public void dance() {
 		DanceRequest request = new DanceRequest(getGameCode());
@@ -274,5 +273,13 @@ public class Player {
 		PositionRequest request = new PositionRequest(getGameCode(), currentX, currentY, false, false, true);
 		getConnection().sendRequest(request);
 	}
-	
+
+        public Mouse getMouseByID(int id) {
+                for (Mouse mouse : roomMice) {
+                        if (mouse.getCode() == id) {
+                                return mouse;
+                        }
+                }
+                return null;
+        }
 }
