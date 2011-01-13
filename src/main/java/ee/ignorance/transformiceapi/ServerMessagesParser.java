@@ -19,7 +19,7 @@ import ee.ignorance.transformiceapi.protocol.server.ShamanStatusResponse;
 import ee.ignorance.transformiceapi.protocol.server.StartGameResponse;
 import ee.ignorance.transformiceapi.protocol.server.SyncStatusResponse;
 import ee.ignorance.transformiceapi.protocol.server.TZATResponse;
-import ee.ignorance.transformiceapi.protocol.server.TribeChatResponse;
+import ee.ignorance.transformiceapi.protocol.server.TribeChatMessageResponse;
 import ee.ignorance.transformiceapi.protocol.server.URLResponse;
 
 public class ServerMessagesParser {
@@ -60,10 +60,10 @@ public class ServerMessagesParser {
 			}
 		}
                 if (codeMajor == 6){
-                        if(codeMinor == 6){ //Normal chat message
+                        if(codeMinor == 6){
                             return new NormalChatResponse(rawMessage);
                         }
-                        if(codeMinor == 7){ //private chat message
+                        if(codeMinor == 7){
                             return new PrivateChatResponse(rawMessage);
                         }
                 }
@@ -85,8 +85,8 @@ public class ServerMessagesParser {
 			}
 		}
                 if (codeMajor == 16){
-                        if(codeMinor == 5){ //Tribe message
-                            return new TribeChatResponse(rawMessage);
+                        if(codeMinor == 5){
+                            return new TribeChatMessageResponse(rawMessage);
                         }
                 }
 		return null;
