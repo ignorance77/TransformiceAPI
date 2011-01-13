@@ -2,6 +2,7 @@ package ee.ignorance.transformiceapi.processors;
 
 import ee.ignorance.transformiceapi.Player;
 import ee.ignorance.transformiceapi.protocol.server.AbstractResponse;
+import ee.ignorance.transformiceapi.protocol.server.FriendJoinResponse;
 import ee.ignorance.transformiceapi.protocol.server.LoginFailedResponse;
 import ee.ignorance.transformiceapi.protocol.server.LoginSuccessResponse;
 import ee.ignorance.transformiceapi.protocol.server.MapXMLResponse;
@@ -59,9 +60,11 @@ public abstract class CommandProcessor {
                 if (command instanceof MouseFinishResponse) {
                         return new MouseFinishProcessor();
                 }
-
                 if (command instanceof MapXMLResponse) {
                         return new MapXMLProcessor();
+                }
+                if (command instanceof FriendJoinResponse) {
+                        return new FriendJoinProcessor();
                 }
 		return null;
 	}

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ee.ignorance.transformiceapi.protocol.server.AbstractResponse;
+import ee.ignorance.transformiceapi.protocol.server.FriendJoinResponse;
 import ee.ignorance.transformiceapi.protocol.server.IntroduceResponse;
 import ee.ignorance.transformiceapi.protocol.server.LoginFailedResponse;
 import ee.ignorance.transformiceapi.protocol.server.LoginSuccessResponse;
@@ -72,6 +73,9 @@ public class ServerMessagesParser {
                         }
 			if (codeMinor == 9) {
 				return new MouseListResponse(rawMessage);
+			}
+                        if (codeMinor == 11) {
+				return new FriendJoinResponse(rawMessage);
 			}
 			if (codeMinor == 21) {
 				return new SyncStatusResponse(rawMessage);
