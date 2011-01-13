@@ -8,7 +8,7 @@ import ee.ignorance.transformiceapi.protocol.server.IntroduceResponse;
 import ee.ignorance.transformiceapi.protocol.server.LoginFailedResponse;
 import ee.ignorance.transformiceapi.protocol.server.LoginSuccessResponse;
 import ee.ignorance.transformiceapi.protocol.server.MapXMLResponse;
-import ee.ignorance.transformiceapi.protocol.server.ModChatResponse;
+import ee.ignorance.transformiceapi.protocol.server.ModChatMessageResponse;
 import ee.ignorance.transformiceapi.protocol.server.MouseFinishResponse;
 import ee.ignorance.transformiceapi.protocol.server.MouseListResponse;
 import ee.ignorance.transformiceapi.protocol.server.NormalChatResponse;
@@ -44,7 +44,7 @@ public class ServerMessagesParser {
 				return new TZATResponse(rawMessage);
 			}
                         if (codeMinor == 4) { //mod messsage
-				return new ModChatResponse(rawMessage);
+				return new ModChatMessageResponse(rawMessage);
 			}
 		}
 		if (codeMajor == 5) {

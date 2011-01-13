@@ -5,7 +5,7 @@ import ee.ignorance.transformiceapi.protocol.server.AbstractResponse;
 import ee.ignorance.transformiceapi.protocol.server.LoginFailedResponse;
 import ee.ignorance.transformiceapi.protocol.server.LoginSuccessResponse;
 import ee.ignorance.transformiceapi.protocol.server.MapXMLResponse;
-import ee.ignorance.transformiceapi.protocol.server.ModChatResponse;
+import ee.ignorance.transformiceapi.protocol.server.ModChatMessageResponse;
 import ee.ignorance.transformiceapi.protocol.server.MouseFinishResponse;
 import ee.ignorance.transformiceapi.protocol.server.MouseListResponse;
 import ee.ignorance.transformiceapi.protocol.server.NormalChatResponse;
@@ -53,8 +53,8 @@ public abstract class CommandProcessor {
                 if (command instanceof PrivateChatResponse) {
 			return new PrivateChatProcessor();
 		}
-                if (command instanceof ModChatResponse) {
-			return new ModChatProcessor();
+                if (command instanceof ModChatMessageResponse) {
+			return new ModChatMessageProcessor();
 		}
                 if (command instanceof MouseFinishResponse) {
                         return new MouseFinishProcessor();
