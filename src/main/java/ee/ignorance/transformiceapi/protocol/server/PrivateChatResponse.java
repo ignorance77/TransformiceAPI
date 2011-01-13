@@ -14,7 +14,7 @@ public class PrivateChatResponse extends AbstractResponse{
 
     @Override
     public void parse(List<String> rawMessage) {
-        if (rawMessage.size() > 1) {
+        if (rawMessage.size() > 2) {
             setSender(rawMessage.get(2));
             setMessage(rawMessage.get(1));
         } else {  //server reply to private chat request with a nonexistent player

@@ -15,7 +15,12 @@ public class TribeChatMessageResponse extends AbstractResponse{
     @Override
     public void parse(List<String> rawMessage) {
         setSender(rawMessage.get(1));
-        setMessage(rawMessage.get(2));
+        if(rawMessage.size() > 2){
+            setMessage(rawMessage.get(2));
+        }
+        else{
+            setMessage("");
+        }
     }
 
     public void setSender(String sender) {
