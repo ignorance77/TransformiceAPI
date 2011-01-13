@@ -282,4 +282,8 @@ public class Player {
                 }
                 return null;
         }
+
+        public List<Mouse> getRoomMice(){
+            return roomMice;
+        }
 }
