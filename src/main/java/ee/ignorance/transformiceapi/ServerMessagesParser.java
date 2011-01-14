@@ -50,13 +50,10 @@ public class ServerMessagesParser {
 		}
 		if (codeMajor == 5) {
                         if (codeMinor == 5) {
-                                return new MapXMLResponse(rawMessage);
+                                return new StartGameResponse(rawMessage);
                         }
 			if (codeMinor == 21) {
 				return new RoomResponse(rawMessage);
-			}
-			if (codeMinor == 5) {
-				return new StartGameResponse(rawMessage);
 			}
 		}
                 if (codeMajor == 6){
