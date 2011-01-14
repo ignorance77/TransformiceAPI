@@ -60,9 +60,6 @@ public abstract class CommandProcessor {
                 if (command instanceof MouseFinishResponse) {
                         return new MouseFinishProcessor();
                 }
-                if (command instanceof MapXMLResponse) {
-                        return new MapXMLProcessor();
-                }
                 if (command instanceof FriendJoinResponse) {
                         return new FriendJoinProcessor();
                 }
