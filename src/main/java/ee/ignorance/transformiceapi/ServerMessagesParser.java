@@ -19,6 +19,7 @@ import ee.ignorance.transformiceapi.protocol.server.StartGameResponse;
 import ee.ignorance.transformiceapi.protocol.server.SyncStatusResponse;
 import ee.ignorance.transformiceapi.protocol.server.TZATResponse;
 import ee.ignorance.transformiceapi.protocol.server.TribeChatMessageResponse;
+import ee.ignorance.transformiceapi.protocol.server.TribePlayerResponse;
 import ee.ignorance.transformiceapi.protocol.server.URLResponse;
 
 public class ServerMessagesParser {
@@ -81,6 +82,9 @@ public class ServerMessagesParser {
 			}
 		}
                 if (codeMajor == 16){
+                        if(codeMinor == 4){
+                            return new TribePlayerResponse(rawMessage);
+                        }
                         if(codeMinor == 5){
                             return new TribeChatMessageResponse(rawMessage);
                         }
