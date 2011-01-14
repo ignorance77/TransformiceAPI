@@ -3,6 +3,7 @@ package ee.ignorance.transformiceapi.processors;
 import ee.ignorance.transformiceapi.Player;
 import ee.ignorance.transformiceapi.event.TribePlayerConnectEvent;
 import ee.ignorance.transformiceapi.event.TribePlayerDisconnectEvent;
+import ee.ignorance.transformiceapi.event.TribePlayerJoinEvent;
 import ee.ignorance.transformiceapi.protocol.server.AbstractResponse;
 import ee.ignorance.transformiceapi.protocol.server.TribePlayerResponse;
 
@@ -17,6 +18,9 @@ public class TribePlayerProcessor extends CommandProcessor{
         }
         if(response.getType() == 2){
             player.notifyListeners(new TribePlayerDisconnectEvent(response.getPlayerName()));
+        }
+        if(response.getType() == 6){
+            player.notifyListeners(new TribePlayerJoinEvent(response.getPlayerName()));
         }
     }
 }
