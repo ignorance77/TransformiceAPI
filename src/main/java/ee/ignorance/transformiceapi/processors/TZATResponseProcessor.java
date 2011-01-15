@@ -1,13 +1,13 @@
 package ee.ignorance.transformiceapi.processors;
 
-import ee.ignorance.transformiceapi.Player;
+import ee.ignorance.transformiceapi.PlayerImpl;
 import ee.ignorance.transformiceapi.protocol.client.TZATRequest;
 import ee.ignorance.transformiceapi.protocol.server.AbstractResponse;
 
 public class TZATResponseProcessor extends CommandProcessor {
 
 	@Override
-	public void process(AbstractResponse command, final Player player) {
+	public void process(AbstractResponse command, final PlayerImpl player) {
 		final long start = System.currentTimeMillis();
 		new Thread() {
 			@Override

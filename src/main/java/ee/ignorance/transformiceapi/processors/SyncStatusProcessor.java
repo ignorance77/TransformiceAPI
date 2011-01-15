@@ -1,7 +1,7 @@
 package ee.ignorance.transformiceapi.processors;
 
 import ee.ignorance.transformiceapi.Mouse;
-import ee.ignorance.transformiceapi.Player;
+import ee.ignorance.transformiceapi.PlayerImpl;
 import ee.ignorance.transformiceapi.event.SyncChangedEvent;
 import ee.ignorance.transformiceapi.protocol.server.AbstractResponse;
 import ee.ignorance.transformiceapi.protocol.server.SyncStatusResponse;
@@ -9,7 +9,7 @@ import ee.ignorance.transformiceapi.protocol.server.SyncStatusResponse;
 public class SyncStatusProcessor extends CommandProcessor {
 
 	@Override
-	public void process(AbstractResponse command, Player player) {
+	public void process(AbstractResponse command, PlayerImpl player) {
 		SyncStatusResponse response = (SyncStatusResponse) command;
 		player.setSyncStatus(response.getCodeSync() == player.getMouseId());
                 

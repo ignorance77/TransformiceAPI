@@ -29,7 +29,7 @@ public class GameConnection {
 	private int port;
 	private String version;
 	
-	private Player player;
+	private PlayerImpl player;
 	private Socket socket;	
 	
 	private BufferedReader in;
@@ -85,7 +85,7 @@ public class GameConnection {
 		}
 	}
 	
-	private void terminate(String message, Throwable e) throws GameException {
+	public void terminate(String message, Throwable e) throws GameException {
 		serverListener.terminate();
 		if (pingThread != null) {
 			pingThread.terminate();
@@ -120,7 +120,7 @@ public class GameConnection {
 			throw new GameException("Player was already created for this connection");
 		}
 		Thread.currentThread().setName("P-" + username);
-		player = new Player( username, password, this );
+		player = new PlayerImpl( username, password, this );
 		return player;
 	}
 

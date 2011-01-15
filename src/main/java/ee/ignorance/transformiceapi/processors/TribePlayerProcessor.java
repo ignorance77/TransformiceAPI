@@ -1,6 +1,6 @@
 package ee.ignorance.transformiceapi.processors;
 
-import ee.ignorance.transformiceapi.Player;
+import ee.ignorance.transformiceapi.PlayerImpl;
 import ee.ignorance.transformiceapi.event.TribePlayerConnectEvent;
 import ee.ignorance.transformiceapi.event.TribePlayerDisconnectEvent;
 import ee.ignorance.transformiceapi.event.TribePlayerJoinEvent;
@@ -12,7 +12,7 @@ import ee.ignorance.transformiceapi.protocol.server.TribePlayerResponse;
 public class TribePlayerProcessor extends CommandProcessor{
 
     @Override
-    public void process(AbstractResponse command, Player player) {
+    public void process(AbstractResponse command, PlayerImpl player) {
         TribePlayerResponse response = (TribePlayerResponse) command;
         if(response.getType() == 1){
             player.notifyListeners(new TribePlayerConnectEvent(response.getPlayerName()));

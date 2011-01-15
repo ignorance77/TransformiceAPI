@@ -1,6 +1,6 @@
 package ee.ignorance.transformiceapi.processors;
 
-import ee.ignorance.transformiceapi.Player;
+import ee.ignorance.transformiceapi.PlayerImpl;
 import ee.ignorance.transformiceapi.protocol.server.AbstractResponse;
 import ee.ignorance.transformiceapi.protocol.server.FriendJoinResponse;
 import ee.ignorance.transformiceapi.protocol.server.LoginFailedResponse;
@@ -73,6 +73,6 @@ public abstract class CommandProcessor {
 		return null;
 	}
 	
-	public abstract void process(AbstractResponse command, Player player);
+	public abstract void process(AbstractResponse command, PlayerImpl player);
 	
 }

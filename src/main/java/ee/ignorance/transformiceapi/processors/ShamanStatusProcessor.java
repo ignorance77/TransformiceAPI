@@ -1,6 +1,6 @@
 package ee.ignorance.transformiceapi.processors;
 
-import ee.ignorance.transformiceapi.Player;
+import ee.ignorance.transformiceapi.PlayerImpl;
 import ee.ignorance.transformiceapi.event.ShamanChangeEvent;
 import ee.ignorance.transformiceapi.event.ShamanStatusEvent;
 import ee.ignorance.transformiceapi.protocol.server.AbstractResponse;
@@ -9,7 +9,7 @@ import ee.ignorance.transformiceapi.protocol.server.ShamanStatusResponse;
 public class ShamanStatusProcessor extends CommandProcessor {
 
 	@Override
-	public void process(AbstractResponse command, Player player) {
+	public void process(AbstractResponse command, PlayerImpl player) {
 		ShamanStatusResponse response = (ShamanStatusResponse) command;
 		if (response.getShamanCode() == player.getMouseId()) {
 			player.notifyListeners(new ShamanStatusEvent());

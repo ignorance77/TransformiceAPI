@@ -4,6 +4,8 @@ import ee.ignorance.transformiceapi.protocol.client.PingRequest;
 
 public class PingThread extends Thread {
 
+	private static final long PING_INTERVAL = 11000;
+
 	private GameConnection connection;
 	
 	private long lastPingTime;
@@ -17,15 +19,18 @@ public class PingThread extends Thread {
 
 	@Override
 	public void run() {
-		while (true) {
-			try {
-				Thread.sleep(11000);
-				if (terminate) {
-					break;
+		try {
+			synchronized (this) {
+				while (!terminate) {
+					wait(500);
+					if (System.currentTimeMillis() - lastPingTime >= PING_INTERVAL) {
+						lastPingTime = System.currentTimeMillis();
+						sendPing();
+					}
 				}
-			} catch (InterruptedException e) {
 			}
-			sendPing();
+		} catch (InterruptedException e) {
+			throw new RuntimeException("Ping thread failed", e);
 		}
 	}
 	
