@@ -6,6 +6,7 @@ import ee.ignorance.transformiceapi.protocol.server.FriendJoinResponse;
 import ee.ignorance.transformiceapi.protocol.server.LoginFailedResponse;
 import ee.ignorance.transformiceapi.protocol.server.LoginSuccessResponse;
 import ee.ignorance.transformiceapi.protocol.server.ModChatMessageResponse;
+import ee.ignorance.transformiceapi.protocol.server.MouseDeathResponse;
 import ee.ignorance.transformiceapi.protocol.server.MouseFinishResponse;
 import ee.ignorance.transformiceapi.protocol.server.MouseListResponse;
 import ee.ignorance.transformiceapi.protocol.server.NormalChatResponse;
@@ -59,6 +60,9 @@ public abstract class CommandProcessor {
 		}
                 if (command instanceof MouseFinishResponse) {
                         return new MouseFinishProcessor();
+                }
+                if (command instanceof MouseDeathResponse) {
+                        return new MouseDeathProcessor();
                 }
                 if (command instanceof FriendJoinResponse) {
                         return new FriendJoinProcessor();
