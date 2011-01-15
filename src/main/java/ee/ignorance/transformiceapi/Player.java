@@ -18,4 +18,10 @@ public interface Player {
 
 	void registerEventListener(EventListener listener);
 
+	void goLeft();
+	
+	void goRight();
+	
+	void jump();
+	
 }
