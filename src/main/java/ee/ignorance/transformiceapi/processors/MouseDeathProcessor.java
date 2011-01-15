@@ -12,7 +12,7 @@ public class MouseDeathProcessor extends CommandProcessor{
     public void process(AbstractResponse command, PlayerImpl player) {
     	MouseDeathResponse response = (MouseDeathResponse) command;
     	player.notifyListeners(new MouseDeathEvent(response.getMouseID(),
-                player.getMouseByID(response.getMouseID()).getName()));
+                player.getMouseById(response.getMouseID()).getName()));
     }
 
 

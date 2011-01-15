@@ -47,4 +47,6 @@ public interface Player {
 
 	void kiss();
 	
+	void createObject(int type, int x, int y);
+	
 }

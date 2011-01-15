@@ -5,8 +5,10 @@ import java.util.List;
 import ee.ignorance.transformiceapi.event.Event;
 import ee.ignorance.transformiceapi.event.EventListener;
 import ee.ignorance.transformiceapi.event.EventService;
+import ee.ignorance.transformiceapi.event.ShamanChangeListener;
 import ee.ignorance.transformiceapi.protocol.client.ChatRequest;
 import ee.ignorance.transformiceapi.protocol.client.CommandRequest;
+import ee.ignorance.transformiceapi.protocol.client.CreateObjectRequest;
 import ee.ignorance.transformiceapi.protocol.client.CryRequest;
 import ee.ignorance.transformiceapi.protocol.client.DanceRequest;
 import ee.ignorance.transformiceapi.protocol.client.DeathRequest;
@@ -31,6 +33,7 @@ public class PlayerImpl implements Player {
 	
 	private int currentX;
 	private int currentY;
+	private int objectsCounter;
 	
 	private String room = "null";
 	private List<Mouse> roomMice;
@@ -53,6 +56,14 @@ public class PlayerImpl implements Player {
 		this.username = username;
 		this.password = password;
         this.eventService = new EventService();
+        eventService.registerEventListener(new ShamanChangeListener() {
+			
+			@Override
+			public void actionPerformed(Event e) {
+				// new round
+				objectsCounter = 10;
+			}
+		});
 	}
 
 	public void login() throws GameException {
@@ -305,7 +316,7 @@ public class PlayerImpl implements Player {
 		getConnection().sendRequest(request);
 	}
 
-	public Mouse getMouseByID(int id) {
+	public Mouse getMouseById(int id) {
 		for (Mouse mouse : roomMice) {
 			if (mouse.getCode() == id) {
 				return mouse;
@@ -316,5 +327,10 @@ public class PlayerImpl implements Player {
 
 	public List<Mouse> getRoomMice() {
 		return roomMice;
+	}
+
+	@Override
+	public void createObject(int type, int x, int y) {
+		getConnection().sendRequest(new CreateObjectRequest(type, x, y));
 	}
 }
