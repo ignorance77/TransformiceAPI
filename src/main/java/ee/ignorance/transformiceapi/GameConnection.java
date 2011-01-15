@@ -35,7 +35,6 @@ public class GameConnection {
 	private BufferedReader in;
 	private PrintWriter out;
 	
-	private boolean introduced = false;
 	private boolean urlSent = false;
 
 	private char[] MDT;
@@ -80,8 +79,10 @@ public class GameConnection {
 			if (login) {
 				startPingThread();
 			}
-		} catch (Exception e) {
-			terminate("Connect failed", e);
+		} catch (IOException e) {
+			throw new GameException("Connect failed", e);
+		} catch (InterruptedException e) {
+			throw new GameException("Connect failed", e);
 		}
 	}
 	
@@ -90,7 +91,7 @@ public class GameConnection {
 		if (pingThread != null) {
 			pingThread.terminate();
 		}
-		throw new RuntimeException(message, e);
+		throw new GameException(message, e);
 	}
 
 	private void startPingThread() {
@@ -144,7 +145,6 @@ public class GameConnection {
 
 	public void processCommand(AbstractResponse command) {
 		if (command instanceof IntroduceResponse) {
-			introduced = true;
 			sendURL();
 		} else {
 			if (command instanceof URLResponse) {

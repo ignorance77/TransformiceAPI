@@ -72,7 +72,7 @@ public class PlayerImpl implements Player {
 			if (!loginResult) {
 				throw new GameException("Login failed");
 			}
-		} catch (Exception e) {
+		} catch (InterruptedException e) {
 			getConnection().terminate("Player login failed: ", e);
 		}
 	}
@@ -90,7 +90,7 @@ public class PlayerImpl implements Player {
 					}
 				}
 			}
-		} catch (Exception e) {
+		} catch (InterruptedException e) {
 			getConnection().terminate("Change room failed", e);
 		}
 	}

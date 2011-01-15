@@ -32,6 +32,7 @@ public class ServerListener implements Runnable {
 					AbstractResponse response = ServerMessagesParser.parse(bytes);
 					if (response != null) {
 						synchronized (connection) {
+							System.out.println(response);
 							connection.processCommand(response);
 							connection.notifyAll();
 						}
