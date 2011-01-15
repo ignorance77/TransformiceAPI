@@ -173,17 +173,23 @@ public class GameConnection {
 		return in;
 	}
 	
-	public boolean registerPlayer(String username, String password) {
-		registerResult = null;
+	public void registerPlayer(String username, String password) throws GameException {
 		RegisterRequest registerRequest = new RegisterRequest(username, password);
 		sendRequest(registerRequest);
-		new Blocker(20) {
-			@Override
-			public boolean check() {
-				return registerResult != null;
+		try {
+			synchronized ( this ) {
+				registerResult = null;
+				long startTime = System.currentTimeMillis();
+				while (registerResult == null) {
+					wait(500);
+					if (System.currentTimeMillis() - startTime > MAXWAITTIME) {
+						throw new GameException("Register timed out");
+					}
+				}
 			}
-		};
-		return registerResult;
+		} catch (Exception e) {
+			terminate("Register failed : ", e);
+		}
 	}
 
 	public void disconnect() {
