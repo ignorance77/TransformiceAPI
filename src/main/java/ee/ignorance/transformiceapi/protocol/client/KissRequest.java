@@ -4,12 +4,6 @@ import ee.ignorance.transformiceapi.protocol.ByteBuffer;
 
 public class KissRequest extends AbstractClientRequest {
 
-        private String gameCode;
-
-        public KissRequest(String gameCode) {
-                this.gameCode = gameCode;
-        }
-
         @Override
         public char[] getBytes() {
                 ByteBuffer bf = new ByteBuffer();

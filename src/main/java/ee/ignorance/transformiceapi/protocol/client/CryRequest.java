@@ -4,12 +4,6 @@ import ee.ignorance.transformiceapi.protocol.ByteBuffer;
 
 public class CryRequest extends AbstractClientRequest {
 
-        private String gameCode;
-
-        public CryRequest(String gameCode) {
-                this.gameCode = gameCode;
-        }
-
         @Override
         public char[] getBytes() {
                 ByteBuffer bf = new ByteBuffer();

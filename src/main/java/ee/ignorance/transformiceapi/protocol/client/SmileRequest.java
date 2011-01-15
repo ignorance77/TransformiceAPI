@@ -4,12 +4,6 @@ import ee.ignorance.transformiceapi.protocol.ByteBuffer;
 
 public class SmileRequest extends AbstractClientRequest {
 
-        private String gameCode;
-
-        public SmileRequest(String gameCode) {
-                this.gameCode = gameCode;
-        }
-
         @Override
         public char[] getBytes() {
                 ByteBuffer bf = new ByteBuffer();

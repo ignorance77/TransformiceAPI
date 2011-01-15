@@ -41,7 +41,6 @@ public class GameConnection {
 	private Integer CMDTEC;
 
 	private Boolean registerResult;
-	private Boolean connected;
 	
 	private ServerListener serverListener;
 	private PingThread pingThread;
@@ -60,7 +59,6 @@ public class GameConnection {
 			} else {
 				socket = new Socket();
 			}
-			connected = false;
 			socket.connect(new InetSocketAddress(host, port), 1500);
 			in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 			out = new PrintWriter(socket.getOutputStream(), true);
@@ -75,7 +73,6 @@ public class GameConnection {
 					}
 				}
 			}
-			connected = true;
 			if (login) {
 				startPingThread();
 			}
@@ -198,8 +195,4 @@ public class GameConnection {
 		}
 	}
 
-	public boolean isConnected() {
-		return connected;
-	}
-	
 }

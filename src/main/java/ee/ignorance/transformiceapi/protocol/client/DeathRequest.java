@@ -4,12 +4,6 @@ import ee.ignorance.transformiceapi.protocol.ByteBuffer;
 
 public class DeathRequest extends AbstractClientRequest {
 
-        private String gameCode;
-
-        public DeathRequest(String gameCode) {
-                this.gameCode = gameCode;
-        }
-
         @Override
         public char[] getBytes() {
                 ByteBuffer bf = new ByteBuffer();

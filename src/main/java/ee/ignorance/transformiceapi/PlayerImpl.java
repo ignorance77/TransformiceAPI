@@ -121,31 +121,31 @@ public class PlayerImpl implements Player {
 
 	@Override
 	public void cry() {
-		CryRequest request = new CryRequest(getGameCode());
+		CryRequest request = new CryRequest();
 		connection.sendRequest(request);
 	}
 
     @Override
 	public void dance() {
-		DanceRequest request = new DanceRequest(getGameCode());
+		DanceRequest request = new DanceRequest();
 		connection.sendRequest(request);
 	}
 
 	@Override
 	public void die() {
-		DeathRequest request = new DeathRequest(getGameCode());
+		DeathRequest request = new DeathRequest();
 		connection.sendRequest(request);
 	}
 
 	@Override
 	public void kiss() {
-		KissRequest request = new KissRequest(getGameCode());
+		KissRequest request = new KissRequest();
 		connection.sendRequest(request);
 	}
 
 	@Override
 	public void smile() {
-		SmileRequest request = new SmileRequest(getGameCode());
+		SmileRequest request = new SmileRequest();
 		connection.sendRequest(request);
 	}
 

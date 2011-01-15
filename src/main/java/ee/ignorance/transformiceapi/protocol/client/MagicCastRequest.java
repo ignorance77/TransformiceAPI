@@ -1,6 +1,5 @@
 package ee.ignorance.transformiceapi.protocol.client;
 
-import ee.ignorance.transformiceapi.MagicType;
 import ee.ignorance.transformiceapi.protocol.ByteBuffer;
 
 
@@ -8,7 +7,6 @@ public class MagicCastRequest extends AbstractClientRequest {
 
 	private int x;
 	private int y;
-	private MagicType type;
 	
 	private int code;
 	

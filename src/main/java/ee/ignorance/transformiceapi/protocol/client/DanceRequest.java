@@ -4,12 +4,6 @@ import ee.ignorance.transformiceapi.protocol.ByteBuffer;
 
 public class DanceRequest extends AbstractClientRequest {
 
-        private String gameCode;
-
-        public DanceRequest(String gameCode) {
-                this.gameCode = gameCode;
-        }
-
         @Override
         public char[] getBytes() {
                 ByteBuffer bf = new ByteBuffer();
