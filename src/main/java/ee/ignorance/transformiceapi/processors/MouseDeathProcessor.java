@@ -11,7 +11,7 @@ public class MouseDeathProcessor extends CommandProcessor{
     @Override
     public void process(AbstractResponse command, PlayerImpl player) {
     	MouseDeathResponse response = (MouseDeathResponse) command;
-        player.getMouseByID(response.getMouseID()).setDead(true);
+        player.getMouseById(response.getMouseID()).setDead(true);
     	player.notifyListeners(new MouseDeathEvent(response.getMouseID(),
                 player.getMouseById(response.getMouseID()).getName()));
     }

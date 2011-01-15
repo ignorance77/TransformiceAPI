@@ -5,7 +5,6 @@ import java.util.List;
 import ee.ignorance.transformiceapi.event.Event;
 import ee.ignorance.transformiceapi.event.EventListener;
 import ee.ignorance.transformiceapi.event.EventService;
-import ee.ignorance.transformiceapi.event.ShamanChangeListener;
 import ee.ignorance.transformiceapi.protocol.client.ChatRequest;
 import ee.ignorance.transformiceapi.protocol.client.CommandRequest;
 import ee.ignorance.transformiceapi.protocol.client.CreateObjectRequest;
@@ -33,7 +32,6 @@ public class PlayerImpl implements Player {
 	
 	private int currentX;
 	private int currentY;
-	private int objectsCounter;
 	
 	private String room = "null";
 	private List<Mouse> roomMice;
@@ -56,14 +54,6 @@ public class PlayerImpl implements Player {
 		this.username = username;
 		this.password = password;
         this.eventService = new EventService();
-        eventService.registerEventListener(new ShamanChangeListener() {
-			
-			@Override
-			public void actionPerformed(Event e) {
-				// new round
-				objectsCounter = 10;
-			}
-		});
 	}
 
 	public void login() throws GameException {
