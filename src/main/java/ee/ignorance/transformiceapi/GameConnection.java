@@ -17,7 +17,6 @@ import ee.ignorance.transformiceapi.protocol.server.AbstractResponse;
 import ee.ignorance.transformiceapi.protocol.server.IntroduceResponse;
 import ee.ignorance.transformiceapi.protocol.server.LoginFailedResponse;
 import ee.ignorance.transformiceapi.protocol.server.LoginSuccessResponse;
-import ee.ignorance.transformiceapi.protocol.server.RoomResponse;
 import ee.ignorance.transformiceapi.protocol.server.URLResponse;
 
 public class GameConnection {
@@ -49,9 +48,9 @@ public class GameConnection {
 		this.version = version;
 	}
 		
-	public void connect(boolean login, String referer) {
+	public void connect(boolean login, Proxy proxy) {
 		try {
-			socket = new Socket();
+			socket = new Socket(proxy);
 			connected = false;
 			socket.connect(new InetSocketAddress(host, port), 1500);
 			in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
