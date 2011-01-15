@@ -2,9 +2,11 @@ package ee.ignorance.transformiceapi.processors;
 
 import ee.ignorance.transformiceapi.Player;
 import ee.ignorance.transformiceapi.protocol.server.AbstractResponse;
+import ee.ignorance.transformiceapi.protocol.server.FriendJoinResponse;
 import ee.ignorance.transformiceapi.protocol.server.LoginFailedResponse;
 import ee.ignorance.transformiceapi.protocol.server.LoginSuccessResponse;
-import ee.ignorance.transformiceapi.protocol.server.ModChatResponse;
+import ee.ignorance.transformiceapi.protocol.server.ModChatMessageResponse;
+import ee.ignorance.transformiceapi.protocol.server.MouseDeathResponse;
 import ee.ignorance.transformiceapi.protocol.server.MouseFinishResponse;
 import ee.ignorance.transformiceapi.protocol.server.MouseListResponse;
 import ee.ignorance.transformiceapi.protocol.server.NormalChatResponse;
@@ -14,7 +16,8 @@ import ee.ignorance.transformiceapi.protocol.server.ShamanStatusResponse;
 import ee.ignorance.transformiceapi.protocol.server.StartGameResponse;
 import ee.ignorance.transformiceapi.protocol.server.SyncStatusResponse;
 import ee.ignorance.transformiceapi.protocol.server.TZATResponse;
-import ee.ignorance.transformiceapi.protocol.server.TribeChatResponse;
+import ee.ignorance.transformiceapi.protocol.server.TribeChatMessageResponse;
+import ee.ignorance.transformiceapi.protocol.server.TribePlayerResponse;
 
 public abstract class CommandProcessor {
 
@@ -46,17 +49,26 @@ public abstract class CommandProcessor {
                 if (command instanceof NormalChatResponse) {
 			return new NormalChatProcessor();
 		}
-                if (command instanceof TribeChatResponse) {
-			return new TribeChatProcessor();
+                if (command instanceof TribeChatMessageResponse) {
+			return new TribeChatMessageProcessor();
 		}
                 if (command instanceof PrivateChatResponse) {
 			return new PrivateChatProcessor();
 		}
-                if (command instanceof ModChatResponse) {
-			return new ModChatProcessor();
+                if (command instanceof ModChatMessageResponse) {
+			return new ModChatMessageProcessor();
 		}
                 if (command instanceof MouseFinishResponse) {
                         return new MouseFinishProcessor();
+                }
+                if (command instanceof MouseDeathResponse) {
+                        return new MouseDeathProcessor();
+                }
+                if (command instanceof FriendJoinResponse) {
+                        return new FriendJoinProcessor();
+                }
+                if (command instanceof TribePlayerResponse) {
+                        return new TribePlayerProcessor();
                 }
 		return null;
 	}

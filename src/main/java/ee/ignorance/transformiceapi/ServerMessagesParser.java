@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ee.ignorance.transformiceapi.protocol.server.AbstractResponse;
+import ee.ignorance.transformiceapi.protocol.server.FriendJoinResponse;
 import ee.ignorance.transformiceapi.protocol.server.IntroduceResponse;
 import ee.ignorance.transformiceapi.protocol.server.LoginFailedResponse;
 import ee.ignorance.transformiceapi.protocol.server.LoginSuccessResponse;
-import ee.ignorance.transformiceapi.protocol.server.ModChatResponse;
+import ee.ignorance.transformiceapi.protocol.server.ModChatMessageResponse;
+import ee.ignorance.transformiceapi.protocol.server.MouseDeathResponse;
 import ee.ignorance.transformiceapi.protocol.server.MouseFinishResponse;
 import ee.ignorance.transformiceapi.protocol.server.MouseListResponse;
 import ee.ignorance.transformiceapi.protocol.server.NormalChatResponse;
@@ -17,7 +19,8 @@ import ee.ignorance.transformiceapi.protocol.server.ShamanStatusResponse;
 import ee.ignorance.transformiceapi.protocol.server.StartGameResponse;
 import ee.ignorance.transformiceapi.protocol.server.SyncStatusResponse;
 import ee.ignorance.transformiceapi.protocol.server.TZATResponse;
-import ee.ignorance.transformiceapi.protocol.server.TribeChatResponse;
+import ee.ignorance.transformiceapi.protocol.server.TribeChatMessageResponse;
+import ee.ignorance.transformiceapi.protocol.server.TribePlayerResponse;
 import ee.ignorance.transformiceapi.protocol.server.URLResponse;
 
 public class ServerMessagesParser {
@@ -43,31 +46,37 @@ public class ServerMessagesParser {
 				return new TZATResponse(rawMessage);
 			}
                         if (codeMinor == 4) { //mod messsage
-				return new ModChatResponse(rawMessage);
+				return new ModChatMessageResponse(rawMessage);
 			}
 		}
 		if (codeMajor == 5) {
+                        if (codeMinor == 5) {
+                                return new StartGameResponse(rawMessage);
+                        }
 			if (codeMinor == 21) {
 				return new RoomResponse(rawMessage);
 			}
-			if (codeMinor == 5) {
-				return new StartGameResponse(rawMessage);
-			}
 		}
                 if (codeMajor == 6){
-                        if(codeMinor == 6){ //Normal chat message
+                        if(codeMinor == 6){
                             return new NormalChatResponse(rawMessage);
                         }
-                        if(codeMinor == 7){ //private chat message
+                        if(codeMinor == 7){
                             return new PrivateChatResponse(rawMessage);
                         }
                 }
 		if (codeMajor == 8) {
-                        if (codeMinor == 8) {
+                        if (codeMinor == 5) {
+                                return new MouseDeathResponse(rawMessage);
+                        }
+                        if (codeMinor == 6) {
                                 return new MouseFinishResponse(rawMessage);
                         }
 			if (codeMinor == 9) {
 				return new MouseListResponse(rawMessage);
+			}
+                        if (codeMinor == 11) {
+				return new FriendJoinResponse(rawMessage);
 			}
 			if (codeMinor == 21) {
 				return new SyncStatusResponse(rawMessage);
@@ -77,8 +86,11 @@ public class ServerMessagesParser {
 			}
 		}
                 if (codeMajor == 16){
-                        if(codeMinor == 5){ //Tribe message
-                            return new TribeChatResponse(rawMessage);
+                        if(codeMinor == 4){
+                            return new TribePlayerResponse(rawMessage);
+                        }
+                        if(codeMinor == 5){
+                            return new TribeChatMessageResponse(rawMessage);
                         }
                 }
 		return null;

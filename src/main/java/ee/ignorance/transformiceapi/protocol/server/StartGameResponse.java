@@ -4,45 +4,78 @@ import java.util.List;
 
 public class StartGameResponse extends AbstractResponse {
 
-	private String modeNext;
-	private String text;
-	private String gameCode;
-	
-	public StartGameResponse(List<String> rawMessage) {
-		super(rawMessage);
-	}
+        private String modeNext;
+        private String text;
+        private String gameCode;
+        private String mapXML;
+        private String mapMaker;
 
-	@Override
-	public void parse(List<String> rawMessage) {
-		setModeNext(rawMessage.get(1));
-		setText(rawMessage.get(2));
-		setGameCode(rawMessage.get(3));
-	}
+        public StartGameResponse(List<String> rawMessage) {
+                super(rawMessage);
+        }
 
-	public String getModeNext() {
-		return modeNext;
-	}
+        @Override
+        public void parse(List<String> rawMessage) {
+                setModeNext(rawMessage.get(1));
+                setText(rawMessage.get(2));
+                setGameCode(rawMessage.get(3));
 
-	public void setModeNext(String modeNext) {
-		this.modeNext = modeNext;
-	}
+                if (getModeNext().equals("-1")) {   //custom usermade map
+                        char separator = (char) 0x02;
+                        int index;
 
-	public String getText() {
-		return text;
-	}
+                        if (rawMessage.get(4).startsWith("<")) {
+                                index = 4;
+                        } else {
+                                index = 5;
+                        }
 
-	public void setText(String text) {
-		this.text = text;
-	}
+                        String[] mapData = rawMessage.get(index).split(String.valueOf(separator));
+                        setMapXML(mapData[0]);
+                        setMapMaker(mapData[1]);
+                } else {        //vanilla map
+                        setMapMaker(getModeNext());         //store map number as map maker name for vanilla maps
+                        setMapXML("");                      //no xml
+                }
+        }
 
-	public String getGameCode() {
-		return gameCode;
-	}
+        public String getModeNext() {
+                return modeNext;
+        }
 
-	public void setGameCode(String gameCode) {
-		this.gameCode = gameCode;
-	}
-	
-	
+        public void setModeNext(String modeNext) {
+                this.modeNext = modeNext;
+        }
 
+        public String getText() {
+                return text;
+        }
+
+        public void setText(String text) {
+                this.text = text;
+        }
+
+        public String getGameCode() {
+                return gameCode;
+        }
+
+        public void setGameCode(String gameCode) {
+                this.gameCode = gameCode;
+        }
+
+        public String getMapMaker() {
+                return mapMaker;
+        }
+
+        public void setMapMaker(String mapMaker) {
+                this.mapMaker = mapMaker;
+        }
+
+        public String getMapXML() {
+                return mapXML;
+        }
+
+        public void setMapXML(String mapXML) {
+                this.mapXML = mapXML;
+        }
 }

@@ -3,23 +3,23 @@ package ee.ignorance.transformiceapi.protocol.server;
 import java.util.List;
 
 
-public class PrivateChatResponse extends AbstractResponse{
+public class TribeChatMessageResponse extends AbstractResponse{
 
     private String sender;
     private String message;
 
-    public PrivateChatResponse(List<String> rawMessage) {
+    public TribeChatMessageResponse(List<String> rawMessage) {
         super(rawMessage);
     }
 
     @Override
     public void parse(List<String> rawMessage) {
-        if (rawMessage.size() > 2) {
-            setSender(rawMessage.get(2));
-            setMessage(rawMessage.get(1));
-        } else {  //server reply to private chat request with a nonexistent player
-            setSender("");
-            setMessage("This player does not exist.");
+        setSender(rawMessage.get(1));
+        if(rawMessage.size() > 2){
+            setMessage(rawMessage.get(2));
+        }
+        else{
+            setMessage("");
         }
     }
 
