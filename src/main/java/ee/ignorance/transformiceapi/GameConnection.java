@@ -79,10 +79,8 @@ public class GameConnection {
 			if (login) {
 				startPingThread();
 			}
-		} catch (IOException e) {
-			throw new GameException("Connect failed", e);
-		} catch (InterruptedException e) {
-			throw new GameException("Connect failed", e);
+		} catch (Exception e) {
+			terminate("Connect failed", e);
 		}
 	}
 	

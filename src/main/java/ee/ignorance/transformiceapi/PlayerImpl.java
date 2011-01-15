@@ -72,7 +72,7 @@ public class PlayerImpl implements Player {
 			if (!loginResult) {
 				throw new GameException("Login failed");
 			}
-		} catch (InterruptedException e) {
+		} catch (Exception e) {
 			getConnection().terminate("Player login failed: ", e);
 		}
 	}
