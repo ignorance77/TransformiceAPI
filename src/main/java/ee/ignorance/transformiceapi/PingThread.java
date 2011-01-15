@@ -8,6 +8,8 @@ public class PingThread extends Thread {
 	
 	private long lastPingTime;
 	
+	private boolean terminate;
+	
 	public PingThread(GameConnection connection) {
 		this.connection = connection;
 		this.lastPingTime = System.currentTimeMillis();
@@ -18,6 +20,9 @@ public class PingThread extends Thread {
 		while (true) {
 			try {
 				Thread.sleep(11000);
+				if (terminate) {
+					break;
+				}
 			} catch (InterruptedException e) {
 			}
 			sendPing();
@@ -27,6 +32,10 @@ public class PingThread extends Thread {
 	private void sendPing() {
 		PingRequest pingRequest = new PingRequest( lastPingTime );
 		connection.sendRequest(pingRequest);
+	}
+
+	public void terminate() {
+		this.terminate = true;
 	}
 	
 }

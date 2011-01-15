@@ -23,6 +23,8 @@ public class GameConnection {
 
 	private static final Logger logger = Logger.getLogger( GameConnection.class );
 	
+	private long MAXWAITTIME = 10000;
+
 	private String host;
 	private int port;
 	private String version;
@@ -42,35 +44,57 @@ public class GameConnection {
 	private Boolean registerResult;
 	private Boolean connected;
 	
+	private ServerListener serverListener;
+	private PingThread pingThread;
+
+	
 	public GameConnection(String host, int port, String version) {
 		this.host = host;
 		this.port = port;
 		this.version = version;
 	}
 		
-	public void connect(boolean login, Proxy proxy) {
+	public void connect(boolean login, Proxy proxy) throws GameException {
 		try {
-			socket = new Socket(proxy);
+			if (proxy != null) {
+				socket = new Socket(proxy);
+			} else {
+				socket = new Socket();
+			}
 			connected = false;
 			socket.connect(new InetSocketAddress(host, port), 1500);
 			in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 			out = new PrintWriter(socket.getOutputStream(), true);
 			startListening();
 			introduce();
+			long startTime = System.currentTimeMillis();
 			while (!(urlSent)) {
-				Thread.sleep(50);
+				synchronized (this) {
+					wait(509);
+					if (System.currentTimeMillis() - startTime > MAXWAITTIME ) {
+						throw new GameException("Connect timed out");
+					}
+				}
 			}
 			connected = true;
 			if (login) {
 				startPingThread();
 			}
 		} catch (Exception e) {
-			logger.error("Error creating connection : ", e);
+			terminate("Connect failed", e);
 		}
 	}
 	
+	private void terminate(String message, Throwable e) throws GameException {
+		serverListener.terminate();
+		if (pingThread != null) {
+			pingThread.terminate();
+		}
+		throw new RuntimeException(message, e);
+	}
+
 	private void startPingThread() {
-		PingThread pingThread = new PingThread( this );
+		pingThread = new PingThread( this );
 		pingThread.start();
 	}
 
@@ -87,8 +111,8 @@ public class GameConnection {
 	}
 
 	private void startListening() {
-		ServerListener listener = new ServerListener( this );
-		new Thread(listener).start();
+		serverListener = new ServerListener( this );
+		new Thread(serverListener).start();
 	}
 
 	public Player createPlayer(String username, String password) throws GameException {

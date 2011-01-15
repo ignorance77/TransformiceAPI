@@ -15,6 +15,8 @@ public class ServerListener implements Runnable {
 	private GameConnection connection;
 	
 	private BufferedReader in;
+
+	private boolean terminate;
 	
 	public ServerListener(GameConnection connection) {
 		this.connection = connection;
@@ -29,10 +31,16 @@ public class ServerListener implements Runnable {
 					byte[] bytes = readMessage();
 					AbstractResponse response = ServerMessagesParser.parse(bytes);
 					if (response != null) {
-						connection.processCommand(response);
+						synchronized (connection) {
+							connection.processCommand(response);
+							connection.notifyAll();
+						}
 					}
 				}
 				Thread.sleep(50);
+				if (terminate) {
+					break;
+				}
 			}
 		} catch (Exception e) {
                     e.printStackTrace();
@@ -48,5 +56,11 @@ public class ServerListener implements Runnable {
 		}
 		return bf.getBytes();
 	}
+
+	public void terminate() {
+		this.terminate = true;
+	}
+	
+	
 
 }
