@@ -95,6 +95,7 @@ public class PlayerImpl implements Player {
 		}
 	}
 	
+	@Override
 	public void move(int x, int y) {
 		currentX = x;
 		currentY = y;
@@ -102,39 +103,47 @@ public class PlayerImpl implements Player {
 		connection.sendRequest(request);
 	}
 	
+	@Override
 	public void normalChat(String message) {
 		ChatRequest request = new ChatRequest(message);
 		connection.sendRequest(request);
 	}
 
-        public void tribeChat(String message) {
-                command("t "+message);
+	@Override
+    public void tribeChat(String message) {
+            command("t "+message);
 	}
 
-        public void privateChat(String recipient, String message) {
-                command("c "+recipient+" "+message);
-        }
+	@Override
+	public void privateChat(String recipient, String message) {
+		command("c " + recipient + " " + message);
+	}
 
-        public void cry() {
-                CryRequest request = new CryRequest(getGameCode());
-                connection.sendRequest(request);
-        }
+	@Override
+	public void cry() {
+		CryRequest request = new CryRequest(getGameCode());
+		connection.sendRequest(request);
+	}
 
+    @Override
 	public void dance() {
 		DanceRequest request = new DanceRequest(getGameCode());
 		connection.sendRequest(request);
 	}
 
+	@Override
 	public void die() {
 		DeathRequest request = new DeathRequest(getGameCode());
 		connection.sendRequest(request);
 	}
 
+	@Override
 	public void kiss() {
 		KissRequest request = new KissRequest(getGameCode());
 		connection.sendRequest(request);
 	}
 
+	@Override
 	public void smile() {
 		SmileRequest request = new SmileRequest(getGameCode());
 		connection.sendRequest(request);
@@ -161,11 +170,13 @@ public class PlayerImpl implements Player {
 		this.gameCode = gameCode;
 	}
 
+	@Override
 	public void cheese() {
 		TakeCheeseRequest request = new TakeCheeseRequest(getGameCode());
 		connection.sendRequest(request);
 	}
 
+	@Override
 	public void hole() {
 		HoleRequest request = new HoleRequest(getGameCode());
 		connection.sendRequest(request);
@@ -248,6 +259,7 @@ public class PlayerImpl implements Player {
 		this.isShaman = isShaman;
 	}
 	
+	@Override
 	public void magic(int type, int x, int y) {
 		MagicBeginRequest magicBeginRequest = new MagicBeginRequest(type, x, y);
 		getConnection().sendRequest(magicBeginRequest);
@@ -266,6 +278,7 @@ public class PlayerImpl implements Player {
 		}
 	}
 
+	@Override
 	public void registerEventListener(EventListener listener) {
 		eventService.registerEventListener(listener);
 	}
@@ -274,31 +287,34 @@ public class PlayerImpl implements Player {
 		eventService.notifyListeners(e);
 	}
 	
+	@Override
 	public void goLeft() {
 		PositionRequest request = new PositionRequest(getGameCode(), currentX, currentY, false, true);
 		getConnection().sendRequest(request);
 	}
 	
+	@Override
 	public void goRight() {
 		PositionRequest request = new PositionRequest(getGameCode(), currentX, currentY, true, false);
 		getConnection().sendRequest(request);
 	}
 	
+	@Override
 	public void jump() {
 		PositionRequest request = new PositionRequest(getGameCode(), currentX, currentY, false, false, true);
 		getConnection().sendRequest(request);
 	}
 
-        public Mouse getMouseByID(int id) {
-                for (Mouse mouse : roomMice) {
-                        if (mouse.getCode() == id) {
-                                return mouse;
-                        }
-                }
-                return null;
-        }
+	public Mouse getMouseByID(int id) {
+		for (Mouse mouse : roomMice) {
+			if (mouse.getCode() == id) {
+				return mouse;
+			}
+		}
+		return null;
+	}
 
-        public List<Mouse> getRoomMice(){
-            return roomMice;
-        }
+	public List<Mouse> getRoomMice() {
+		return roomMice;
+	}
 }
