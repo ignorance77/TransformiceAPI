@@ -9,6 +9,7 @@ import ee.ignorance.transformiceapi.protocol.server.IntroduceResponse;
 import ee.ignorance.transformiceapi.protocol.server.LoginFailedResponse;
 import ee.ignorance.transformiceapi.protocol.server.LoginSuccessResponse;
 import ee.ignorance.transformiceapi.protocol.server.ModChatMessageResponse;
+import ee.ignorance.transformiceapi.protocol.server.MouseDeathResponse;
 import ee.ignorance.transformiceapi.protocol.server.MouseFinishResponse;
 import ee.ignorance.transformiceapi.protocol.server.MouseListResponse;
 import ee.ignorance.transformiceapi.protocol.server.NormalChatResponse;
@@ -65,6 +66,9 @@ public class ServerMessagesParser {
                         }
                 }
 		if (codeMajor == 8) {
+                        if (codeMinor == 5) {
+                                return new MouseDeathResponse(rawMessage);
+                        }
                         if (codeMinor == 6) {
                                 return new MouseFinishResponse(rawMessage);
                         }
