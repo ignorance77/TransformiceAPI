@@ -90,7 +90,7 @@ public class PlayerImpl implements Player {
 					}
 				}
 			}
-		} catch (InterruptedException e) {
+		} catch (Exception e) {
 			getConnection().terminate("Change room failed", e);
 		}
 	}
