@@ -1,11 +1,12 @@
 package ee.ignorance.transformiceapi;
 
-import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
+import java.io.DataInputStream;
 import java.io.IOException;
+import java.util.Arrays;
 
 import org.apache.log4j.Logger;
 
-import ee.ignorance.transformiceapi.protocol.ByteBuffer;
 import ee.ignorance.transformiceapi.protocol.server.AbstractResponse;
 
 public class ServerListener implements Runnable {
@@ -14,7 +15,7 @@ public class ServerListener implements Runnable {
 	
 	private GameConnection connection;
 	
-	private BufferedReader in;
+	private DataInputStream in;
 
 	private boolean terminate;
 	
@@ -27,20 +28,20 @@ public class ServerListener implements Runnable {
 		try {
 			in = connection.getInputStream();
 			while (true) {
-				while (in.ready()) {
-					byte[] bytes = readMessage();
-					AbstractResponse response = ServerMessagesParser.parse(bytes);
-					if (response != null) {
-						synchronized (connection) {
-							connection.processCommand(response);
-							connection.notifyAll();
+					while (in.available() > 0) {
+						byte[] message = readMessage();
+						AbstractResponse response = ServerMessagesParser.parse(message);
+						if (response != null) {
+							synchronized (connection) {
+								connection.processCommand(response);
+								connection.notifyAll();
+							}
 						}
 					}
-				}
-				Thread.sleep(50);
-				if (terminate) {
-					break;
-				}
+					Thread.sleep(50);
+					if (terminate) {
+						break;
+					}
 			}
 		} catch (Exception e) {
                     e.printStackTrace();
@@ -49,12 +50,13 @@ public class ServerListener implements Runnable {
 	}
 
 	private byte[] readMessage() throws IOException {
-		ByteBuffer bf = new ByteBuffer();
-		int cur;
-		while ((cur = in.read()) != 0 && (cur != -1)) {
-			bf.write(cur);
+		int len = in.readInt();
+		ByteArrayOutputStream ret = new ByteArrayOutputStream();
+		for (int i = 0; i < len - 4; i++) {
+			byte c = in.readByte();
+			ret.write(c);
 		}
-		return bf.getBytes();
+		return ret.toByteArray();
 	}
 
 	public void terminate() {

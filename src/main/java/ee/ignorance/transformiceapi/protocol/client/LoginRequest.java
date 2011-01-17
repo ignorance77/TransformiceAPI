@@ -18,7 +18,7 @@ public class LoginRequest extends AbstractClientRequest {
 		ByteBuffer bf = new ByteBuffer();
 		bf.write(0x1a);
 		bf.write(0x04);
-		bf.write(0x01);
+		bf.write(0x01);	
 		bf.print(username);
 		bf.write(0x01);
 		bf.print(HashUtils.SHA256(password));

@@ -42,5 +42,15 @@ public class ByteBuffer {
 		}
 		return ret;
 	}
+
+	public int size() {
+		return bytes.size();
+	}
+
+	@Override
+	public String toString() {
+		return "ByteBuffer [bytes=" + bytes + "]";
+	}
+
 	
 }

@@ -1,5 +1,8 @@
 package ee.ignorance.transformiceapi;
 
+import java.io.ByteArrayInputStream;
+import java.io.DataInputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,10 +28,21 @@ import ee.ignorance.transformiceapi.protocol.server.URLResponse;
 
 public class ServerMessagesParser {
 
-	public static AbstractResponse parse(byte[] bytes) {
+	public static AbstractResponse parse(byte[] message) throws IOException {
+		DataInputStream stream = new DataInputStream(new ByteArrayInputStream(message));
+		stream.readByte();
+		stream.readByte();
+		stream.readByte();
+		stream.readByte();
+		int codeMajor = stream.readByte();
+		int codeMinor = stream.readByte();
+		List<Byte> bytes = new ArrayList<Byte>();
+		while (stream.available() > 0) {
+			byte b = stream.readByte();
+			bytes.add(b);
+		}
 		List<String> rawMessage = split(bytes);
-		int codeMajor = (int) rawMessage.get(0).charAt(0);
-		int codeMinor = (int) rawMessage.get(0).charAt(1);
+		rawMessage.add(0, "");
 		if (codeMajor == 26) {
 			if (codeMinor == 22) {
 				return new IntroduceResponse(rawMessage);
@@ -95,18 +109,18 @@ public class ServerMessagesParser {
                 }
 		return null;
 	}
-
-	private static List<String> split(byte[] bytes) {
+	
+	private static List<String> split(List<Byte> bytes) {
 		List<String> ret = new ArrayList<String>();
 		StringBuffer current = new StringBuffer();
-		for (int i = 0; i <= bytes.length; i++) {
-			if ((i == bytes.length) || bytes[i] == 1) {
+		for (int i = 0; i <= bytes.size(); i++) {
+			if ((i == bytes.size()) || bytes.get(i) == 1) {
 				if (current.length() > 0) {
 					ret.add(current.toString());
 					current = new StringBuffer();
 				}
 			} else {
-				current.append((char)bytes[i]);
+				current.append((char)bytes.get(i).byteValue());
 			}
 		}
 		return ret;

@@ -5,7 +5,7 @@ import java.util.List;
 public class URLResponse extends AbstractResponse {
 
 	private Integer CMDTEC;
-	private char[] MDT;
+	private int[] MDT;
 	
 	public URLResponse(List<String> rawMessage) {
 		super(rawMessage);
@@ -13,14 +13,14 @@ public class URLResponse extends AbstractResponse {
 
 	@Override
 	public void parse(List<String> rawMessage) {
-		char[] MDT = new char[10];
+		int[] MDT = new int[10];
 		String MDTString = rawMessage.get(2);
 		for (int i = 0; i < 10; i++) {
-			int c = MDTString.charAt(i) -'0';
+			int c = MDTString.charAt(i) - '0';
 			if (c == 0) {
-				MDT[i] = (char)(10);
-			} else {
-				MDT[i] = (char)(c);
+				MDT[i] = 10;
+			} else {	
+				MDT[i] = c;
 			}
 		}
 		setMDT(MDT);
@@ -35,11 +35,11 @@ public class URLResponse extends AbstractResponse {
 		CMDTEC = cMDTEC;
 	}
 
-	public char[] getMDT() {
+	public int[] getMDT() {
 		return MDT;
 	}
 
-	public void setMDT(char[] mDT) {
+	public void setMDT(int[] mDT) {
 		MDT = mDT;
 	}
 	

@@ -1,12 +1,13 @@
 package ee.ignorance.transformiceapi;
 
-import java.io.BufferedReader;
+import java.io.BufferedInputStream;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
 import java.net.InetSocketAddress;
 import java.net.Proxy;
 import java.net.Socket;
+import java.util.Arrays;
 
 import org.apache.log4j.Logger;
 
@@ -32,13 +33,13 @@ public class GameConnection {
 	private PlayerImpl player;
 	private Socket socket;	
 	
-	private BufferedReader in;
-	private PrintWriter out;
+	private DataInputStream in;
+	private DataOutputStream out;
 	
 	private boolean urlSent = false;
 
-	private char[] MDT;
-	private Integer CMDTEC;
+	private int[] MDT;
+	private Integer CMDTEC = 2;
 
 	private Boolean registerResult;
 	
@@ -60,8 +61,9 @@ public class GameConnection {
 				socket = new Socket();
 			}
 			socket.connect(new InetSocketAddress(host, port), 1500);
-			in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-			out = new PrintWriter(socket.getOutputStream(), true);
+			in = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
+//			out = new BufferedWriter()(socket.getOutputStream(), true);
+			out = new DataOutputStream(socket.getOutputStream());
 			startListening();
 			introduce();
 			long startTime = System.currentTimeMillis();
@@ -95,14 +97,34 @@ public class GameConnection {
 	}
 
 	private void sendURL() {
-		out.print("http://br2.transformice.com/Transformice.swf?n=0.129 xx"); // it seems it doesnt matter what we send..?
-		out.write(0x00);
-		out.flush();
+		try {
+			String url = "http://br2.transformice.com/Transformice.swf?n=0.129 xx"; 
+			out.writeInt(url.getBytes().length + 4 + 8);
+			int val = 1001;
+			out.writeByte(val % 1000);
+			out.writeByte((val/100) % 10);
+			out.writeByte((val/10)%10);	
+			out.writeByte(val%10);
+			out.writeByte(1);
+			out.writeByte(1);
+			out.writeUTF("http://br2.transformice.com/Transformice.swf?n=0.132 xx"); // it seems it doesnt matter what we send..?
+			out.flush();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
-	private void introduce() {
-		out.print(version);
-		out.write(0x00);
+	private void introduce() throws IOException {
+		int size = (version.getBytes().length + 4);
+		int val = 1000;
+		out.writeInt(size + 8);
+		out.writeByte(val % 1000);
+		out.writeByte((val/100) % 10);
+		out.writeByte((val/10)%10);	
+		out.writeByte(val%10);
+		out.writeByte(1);
+		out.writeByte(1);
+		out.writeUTF(version);
 		out.flush();
 	}
 
@@ -121,21 +143,26 @@ public class GameConnection {
 	}
 
 	public void sendRequest(AbstractClientRequest request) {
-		writePrefix();
-		out.write(request.getBytes());
-		out.write(0x00);
-		out.flush();
+		try {
+			out.writeInt(request.getBytes().length + 8 + 4);
+			writePrefix();
+			out.writeByte(1);
+			out.writeByte(1);
+			out.writeShort(request.getBytes().length);
+			out.writeBytes(new String(request.getBytes()));
+			out.flush();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
         
-	private void writePrefix() {
-		String local2 = Integer.toString((CMDTEC % 9000) + 1000);
-		int d1 = local2.charAt(0) - '0';
-		int d2 = local2.charAt(1) - '0';
-		int d3 = local2.charAt(2) - '0';
-		int d4 = local2.charAt(3) - '0';
-		String begin = "" + MDT[d1] + "" + MDT[d2] + "" + MDT[d3] + "" +  MDT[d4];
+	private void writePrefix() throws IOException {
+		int val = (CMDTEC % 9000) + 1000;
+		out.writeByte(MDT[val / 1000]);
+		out.writeByte(MDT[(val/100) % 10]);
+		out.writeByte(MDT[(val/10)%10]);	
+		out.writeByte(MDT[val%10]);
 		CMDTEC++;
-		out.print(begin);
 	}
 
 	public void processCommand(AbstractResponse command) {
@@ -164,7 +191,7 @@ public class GameConnection {
 		}
 	}
 
-	public BufferedReader getInputStream() {
+	public DataInputStream getInputStream() {
 		return in;
 	}
 	
