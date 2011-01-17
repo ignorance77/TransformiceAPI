@@ -122,14 +122,12 @@ public class PlayerImpl implements Player {
 
 	@Override
 	public void cry() {
-		CryRequest request = new CryRequest();
-		connection.sendRequest(request);
+		command("cry");
 	}
 
     @Override
 	public void dance() {
-		DanceRequest request = new DanceRequest();
-		connection.sendRequest(request);
+		command("dance");
 	}
 
 	@Override
@@ -140,14 +138,12 @@ public class PlayerImpl implements Player {
 
 	@Override
 	public void kiss() {
-		KissRequest request = new KissRequest();
-		connection.sendRequest(request);
+		command("kiss");
 	}
 
 	@Override
 	public void smile() {
-		SmileRequest request = new SmileRequest();
-		connection.sendRequest(request);
+                    command("laugh");
 	}
 
 	public void command(String message) {
