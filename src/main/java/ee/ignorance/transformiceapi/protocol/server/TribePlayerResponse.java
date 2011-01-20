@@ -14,8 +14,14 @@ public class TribePlayerResponse extends AbstractResponse{
 
     @Override
     public void parse(List<String> rawMessage) {
-        setType(Integer.parseInt(rawMessage.get(1)));
-        setPlayerName(rawMessage.get(2));
+        if(rawMessage.size()>1)
+        {
+            setType(Integer.parseInt(rawMessage.get(1)));
+        }
+        if(rawMessage.size()>2)
+        {
+            setPlayerName(rawMessage.get(2));
+        }
     }
 
     public void setPlayerName(String playerName){
