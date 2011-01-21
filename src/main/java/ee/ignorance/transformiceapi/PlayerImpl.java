@@ -8,17 +8,13 @@ import ee.ignorance.transformiceapi.event.EventService;
 import ee.ignorance.transformiceapi.protocol.client.ChatRequest;
 import ee.ignorance.transformiceapi.protocol.client.CommandRequest;
 import ee.ignorance.transformiceapi.protocol.client.CreateObjectRequest;
-import ee.ignorance.transformiceapi.protocol.client.CryRequest;
-import ee.ignorance.transformiceapi.protocol.client.DanceRequest;
 import ee.ignorance.transformiceapi.protocol.client.DeathRequest;
 import ee.ignorance.transformiceapi.protocol.client.HoleRequest;
-import ee.ignorance.transformiceapi.protocol.client.KissRequest;
 import ee.ignorance.transformiceapi.protocol.client.LoginRequest;
 import ee.ignorance.transformiceapi.protocol.client.MagicBeginRequest;
 import ee.ignorance.transformiceapi.protocol.client.MagicCastRequest;
 import ee.ignorance.transformiceapi.protocol.client.MagicStopRequest;
 import ee.ignorance.transformiceapi.protocol.client.PositionRequest;
-import ee.ignorance.transformiceapi.protocol.client.SmileRequest;
 import ee.ignorance.transformiceapi.protocol.client.TakeCheeseRequest;
 
 public class PlayerImpl implements Player {
@@ -95,9 +91,19 @@ public class PlayerImpl implements Player {
 			getConnection().terminate("Change room failed", e);
 		}
 	}
+
+        @Override
+	public void move(int posX, int posY, int movX, int movY,
+                    boolean goingLeft, boolean goingRight, boolean jumping) {
+		currentX = posX;
+		currentY = posY;
+		PositionRequest request = new PositionRequest(getGameCode(),
+                        posX, posY, movX, movY, goingLeft, goingRight, jumping);
+		connection.sendRequest(request);
+	}
 	
 	@Override
-	public void move(int x, int y) {
+	public void moveTo(int x, int y) {
 		currentX = x;
 		currentY = y;
 		PositionRequest request = new PositionRequest(getGameCode(), x, y);
@@ -110,8 +116,16 @@ public class PlayerImpl implements Player {
 		connection.sendRequest(request);
 	}
 
+        public int getCurrentX(){
+                return currentX;
+        }
+
+        public int getCurrentY(){
+                return currentY;
+        }
+
 	@Override
-    public void tribeChat(String message) {
+        public void tribeChat(String message) {
             command("t "+message);
 	}
 
@@ -147,6 +161,7 @@ public class PlayerImpl implements Player {
 	}
 
 	public void command(String message) {
+                message = message.replaceAll("<", "&lt;"); //otherwise the Server will filter it out
 		CommandRequest request = new CommandRequest(message);
 		connection.sendRequest(request);
 	}
@@ -298,7 +313,7 @@ public class PlayerImpl implements Player {
 	
 	@Override
 	public void jump() {
-		PositionRequest request = new PositionRequest(getGameCode(), currentX, currentY, false, false, true);
+		PositionRequest request = new PositionRequest(getGameCode(), currentX, currentY, 0, 0, false, false, true);
 		getConnection().sendRequest(request);
 	}
 
