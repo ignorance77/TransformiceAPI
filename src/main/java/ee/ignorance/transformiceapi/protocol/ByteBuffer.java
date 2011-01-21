@@ -19,7 +19,7 @@ public class ByteBuffer {
 	public void write(int b) {
 		write((byte) b);
 	}
-	
+
 	public void print(String text) {
 		byte[] textBytes = text.getBytes();
 		for (byte x : textBytes) {

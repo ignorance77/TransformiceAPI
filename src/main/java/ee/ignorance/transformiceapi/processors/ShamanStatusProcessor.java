@@ -20,6 +20,9 @@ public class ShamanStatusProcessor extends CommandProcessor {
 		player.notifyListeners(new ShamanChangeEvent(response.getShamanCode(), response.getSecondShamanCode()));
 		if (response.isTwoShamans()) {
 			player.setSecondShamanCode(response.getSecondShamanCode());
+                        if(player.getSecondShamanCode() == player.getMouseId()){
+                            player.setShaman(true);
+                        }
 		} else {
 			player.setSecondShamanCode(null);
 		}

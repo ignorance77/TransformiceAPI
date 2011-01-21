@@ -13,6 +13,7 @@ import org.apache.log4j.Logger;
 
 import ee.ignorance.transformiceapi.processors.CommandProcessor;
 import ee.ignorance.transformiceapi.protocol.client.AbstractClientRequest;
+import ee.ignorance.transformiceapi.protocol.client.PositionRequest;
 import ee.ignorance.transformiceapi.protocol.client.RegisterRequest;
 import ee.ignorance.transformiceapi.protocol.server.AbstractResponse;
 import ee.ignorance.transformiceapi.protocol.server.IntroduceResponse;
@@ -144,13 +145,23 @@ public class GameConnection {
 
 	public void sendRequest(AbstractClientRequest request) {
 		try {
-			out.writeInt(request.getBytes().length + 8 + 4);
-			writePrefix();
-			out.writeByte(1);
-			out.writeByte(1);
-			out.writeShort(request.getBytes().length);
-			out.writeBytes(new String(request.getBytes()));
-			out.flush();
+                        if(request instanceof PositionRequest)
+                        {
+                                out.writeInt(request.getBytes().length + 8);
+                                writePrefix();
+                                out.writeBytes(new String(request.getBytes()));
+                                out.flush();
+                        }
+                        else
+                        {
+                                out.writeInt(request.getBytes().length + 8 + 4);
+                                writePrefix();
+                                out.writeByte(1);
+                                out.writeByte(1);
+                                out.writeShort(request.getBytes().length);
+                                out.writeBytes(new String(request.getBytes()));
+                                out.flush();
+                        }
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

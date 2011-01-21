@@ -31,7 +31,10 @@ public interface Player {
 	
 	void die();
 
-	void move(int x, int y);
+        void move(int posX, int posY, int movX, int movY,
+                boolean goingLeft, boolean goingRight, boolean jumping);
+
+	void moveTo(int x, int y);
 
 	void normalChat(String message);
 
