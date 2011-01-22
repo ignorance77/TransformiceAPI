@@ -19,7 +19,7 @@ public class LoginSuccessResponse extends AbstractResponse {
 	@Override
 	public void parse(List<String> rawMessage) {
 		String username = rawMessage.get(1);
-		int id = Integer.parseInt(rawMessage.get(2).trim());
+		int id = Integer.parseInt(rawMessage.get(2));
 		setUsername(username);
 		setMouseId(id);
 		setInvite(rawMessage.get(3).equals("0")); // ?

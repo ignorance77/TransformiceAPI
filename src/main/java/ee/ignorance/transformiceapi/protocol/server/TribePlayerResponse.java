@@ -16,7 +16,7 @@ public class TribePlayerResponse extends AbstractResponse{
     public void parse(List<String> rawMessage) {
         if(rawMessage.size()>1)
         {
-            setType(Integer.parseInt(rawMessage.get(1).trim()));
+            setType(Integer.parseInt(rawMessage.get(1)));
         }
         if(rawMessage.size()>2)
         {

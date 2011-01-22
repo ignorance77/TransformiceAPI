@@ -14,9 +14,9 @@ public class MouseFinishResponse extends AbstractResponse {
 
 	@Override
 	public void parse(List<String> rawMessage) {
-		setMouseID(Integer.valueOf(rawMessage.get(1).trim()));
-		setStanding(Integer.valueOf(rawMessage.get(4).trim()));
-		setFinishTime(Integer.valueOf(rawMessage.get(5).trim()) / 10.0);
+		setMouseID(Integer.valueOf(rawMessage.get(1)));
+		setStanding(Integer.valueOf(rawMessage.get(4)));
+		setFinishTime(Integer.valueOf(rawMessage.get(5)) / 10.0);
 	}
 
 	public int getMouseID() {

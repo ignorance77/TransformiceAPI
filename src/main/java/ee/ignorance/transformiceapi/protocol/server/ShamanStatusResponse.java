@@ -18,10 +18,14 @@ public class ShamanStatusResponse extends AbstractResponse{
                     setShamanCode(0);
                     return;
                 }
-		setShamanCode(Integer.parseInt(rawMessage.get(1).trim()));
-		if (rawMessage.size() > 2) {
+                if(rawMessage.size() > 1 && !rawMessage.get(1).isEmpty())
+                {
+                        setShamanCode(Integer.parseInt(rawMessage.get(1).trim()));
+                }
+		if (rawMessage.size() > 2 && !rawMessage.get(2).isEmpty())
+                {
 			setTwoShamans(true);
-			setSecondShamanCode(Integer.parseInt(rawMessage.get(2).trim()));
+			setSecondShamanCode(Integer.parseInt(rawMessage.get(2)));
 		}
 	}
 

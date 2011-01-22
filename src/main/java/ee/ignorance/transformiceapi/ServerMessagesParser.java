@@ -120,7 +120,14 @@ public class ServerMessagesParser {
 		for (int i = 0; i <= bytes.size(); i++) {
 			if ((i == bytes.size()) || bytes.get(i) == 1) {
 				if (current.length() > 0) {
-					ret.add(current.toString());
+                                        if(current.charAt(current.length()-1)==0 && current.length()>1)
+                                        {
+                                                ret.add(current.toString().substring(0, current.length()-2));
+                                        }
+                                        else
+                                        {
+                                                ret.add(current.toString());
+                                        }
 					current = new StringBuffer();
 				}
 			} else {

@@ -12,7 +12,7 @@ public class RoomResponse extends AbstractResponse {
 
 	@Override
 	public void parse(List<String> rawMessage) {
-		setRoom(rawMessage.get(1));
+                setRoom(rawMessage.get(1));
 	}
 
 	public String getRoom() {
