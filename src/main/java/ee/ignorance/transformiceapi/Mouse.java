@@ -14,7 +14,7 @@ public class Mouse {
 		String name = mouseData[0];
 		int code = Integer.parseInt(mouseData[1]);
 		int score = Integer.parseInt(mouseData[3]);
-		int codeForum = Integer.parseInt(mouseData[8]);
+		int codeForum = Integer.parseInt(mouseData[8].trim());
 		boolean dead = mouseData[2].equals("1");
 		mouse.setName(name);
 		mouse.setDead(dead);

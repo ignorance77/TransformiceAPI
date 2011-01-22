@@ -30,9 +30,9 @@ public class ServerMessagesParser {
 
 	public static AbstractResponse parse(byte[] message) throws IOException {
 		DataInputStream stream = new DataInputStream(new ByteArrayInputStream(message));
-		stream.readByte();
-		stream.readByte();
-		stream.readByte();
+		byte b1 = stream.readByte();
+		byte b2 = stream.readByte();
+                stream.readByte();
 		stream.readByte();
 		int codeMajor = stream.readByte();
 		int codeMinor = stream.readByte();
@@ -43,6 +43,10 @@ public class ServerMessagesParser {
 		}
 		List<String> rawMessage = split(bytes);
 		rawMessage.add(0, "");
+                if(b1 == 4 && b2 == 4)
+                {
+                        //TODO add Postion handling code here
+                }
 		if (codeMajor == 26) {
 			if (codeMinor == 22) {
 				return new IntroduceResponse(rawMessage);

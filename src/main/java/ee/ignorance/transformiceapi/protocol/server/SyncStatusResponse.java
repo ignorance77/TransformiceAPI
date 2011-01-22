@@ -13,7 +13,7 @@ public class SyncStatusResponse extends AbstractResponse {
 
 	@Override
 	public void parse(List<String> rawMessage) {
-		int codeSync = Integer.parseInt(rawMessage.get(1));
+		int codeSync = Integer.parseInt(rawMessage.get(1).trim());
 		setCodeSync(codeSync);
 	}
 

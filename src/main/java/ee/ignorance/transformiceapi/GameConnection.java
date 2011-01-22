@@ -99,7 +99,7 @@ public class GameConnection {
 
 	private void sendURL() {
 		try {
-			String url = "http://br2.transformice.com/Transformice.swf?n=0.129 xx"; 
+			String url = "http://en.transformice.com/Transformice.swf?n=0.134 xx";
 			out.writeInt(url.getBytes().length + 4 + 8);
 			int val = 1001;
 			out.writeByte(val % 1000);
@@ -108,7 +108,7 @@ public class GameConnection {
 			out.writeByte(val%10);
 			out.writeByte(1);
 			out.writeByte(1);
-			out.writeUTF("http://br2.transformice.com/Transformice.swf?n=0.132 xx"); // it seems it doesnt matter what we send..?
+			out.writeUTF(url); // it seems it doesnt matter what we send..?
 			out.flush();
 		} catch (Exception e) {
 			e.printStackTrace();
