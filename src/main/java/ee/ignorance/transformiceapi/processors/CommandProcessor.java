@@ -10,6 +10,7 @@ import ee.ignorance.transformiceapi.protocol.server.MouseDeathResponse;
 import ee.ignorance.transformiceapi.protocol.server.MouseFinishResponse;
 import ee.ignorance.transformiceapi.protocol.server.MouseListResponse;
 import ee.ignorance.transformiceapi.protocol.server.NormalChatResponse;
+import ee.ignorance.transformiceapi.protocol.server.PlayerMovementResponse;
 import ee.ignorance.transformiceapi.protocol.server.PrivateChatResponse;
 import ee.ignorance.transformiceapi.protocol.server.RoomResponse;
 import ee.ignorance.transformiceapi.protocol.server.ShamanStatusResponse;
@@ -69,6 +70,9 @@ public abstract class CommandProcessor {
                 }
                 if (command instanceof TribePlayerResponse) {
                         return new TribePlayerProcessor();
+                }
+                if (command instanceof PlayerMovementResponse) {
+                        return new PlayerMovementProcessor();
                 }
 		return null;
 	}

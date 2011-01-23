@@ -1,5 +1,6 @@
 package ee.ignorance.transformiceapi;
 
+import ee.ignorance.transformiceapi.protocol.ByteBuffer;
 import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
 import java.io.IOException;
@@ -16,6 +17,7 @@ import ee.ignorance.transformiceapi.protocol.server.MouseDeathResponse;
 import ee.ignorance.transformiceapi.protocol.server.MouseFinishResponse;
 import ee.ignorance.transformiceapi.protocol.server.MouseListResponse;
 import ee.ignorance.transformiceapi.protocol.server.NormalChatResponse;
+import ee.ignorance.transformiceapi.protocol.server.PlayerMovementResponse;
 import ee.ignorance.transformiceapi.protocol.server.PrivateChatResponse;
 import ee.ignorance.transformiceapi.protocol.server.RoomResponse;
 import ee.ignorance.transformiceapi.protocol.server.ShamanStatusResponse;
@@ -32,8 +34,8 @@ public class ServerMessagesParser {
 		DataInputStream stream = new DataInputStream(new ByteArrayInputStream(message));
 		byte b1 = stream.readByte();
 		byte b2 = stream.readByte();
-                stream.readByte();
-		stream.readByte();
+                byte b3 = stream.readByte();
+		byte b4 = stream.readByte();
 		int codeMajor = stream.readByte();
 		int codeMinor = stream.readByte();
 		List<Byte> bytes = new ArrayList<Byte>();
@@ -45,7 +47,16 @@ public class ServerMessagesParser {
 		rawMessage.add(0, "");
                 if(b1 == 4 && b2 == 4)
                 {
-                        //TODO add Postion handling code here
+                        ByteBuffer b = new ByteBuffer();
+                        b.write(b3);
+                        b.write(b4);
+                        b.write(codeMajor);
+                        b.write(codeMinor);
+                        for(int i=0;i<bytes.size();i++)
+                                b.write(bytes.get(i));
+                        ArrayList<String> m = new ArrayList<String>();
+                        m.add(new String(b.getBytes()));
+                        return new PlayerMovementResponse(m);
                 }
 		if (codeMajor == 26) {
 			if (codeMinor == 22) {
