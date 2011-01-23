@@ -3,11 +3,11 @@ package ee.ignorance.transformiceapi.event;
 import ee.ignorance.transformiceapi.Mouse;
 
 
-public class PlayerMovementEvent implements Event{
+public class MouseMovedEvent implements Event{
 
         private Mouse mouse;
 
-        public PlayerMovementEvent(Mouse mouse){
+        public MouseMovedEvent(Mouse mouse){
                 setMouse(mouse);
         }
 

@@ -11,7 +11,7 @@ import ee.ignorance.transformiceapi.protocol.server.MouseFinishResponse;
 import ee.ignorance.transformiceapi.protocol.server.MouseGotCheeseResponse;
 import ee.ignorance.transformiceapi.protocol.server.MouseListResponse;
 import ee.ignorance.transformiceapi.protocol.server.NormalChatResponse;
-import ee.ignorance.transformiceapi.protocol.server.PlayerMovementResponse;
+import ee.ignorance.transformiceapi.protocol.server.MouseMovedResponse;
 import ee.ignorance.transformiceapi.protocol.server.PrivateChatResponse;
 import ee.ignorance.transformiceapi.protocol.server.RoomResponse;
 import ee.ignorance.transformiceapi.protocol.server.ShamanStatusResponse;
@@ -72,8 +72,8 @@ public abstract class CommandProcessor {
                 if (command instanceof TribePlayerResponse) {
                         return new TribePlayerProcessor();
                 }
-                if (command instanceof PlayerMovementResponse) {
-                        return new PlayerMovementProcessor();
+                if (command instanceof MouseMovedResponse) {
+                        return new MouseMovedProcessor();
                 }
                 if (command instanceof MouseGotCheeseResponse) {
                         return new MouseGotCheeseProcessor();

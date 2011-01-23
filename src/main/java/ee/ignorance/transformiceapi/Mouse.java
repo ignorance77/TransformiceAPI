@@ -8,6 +8,9 @@ public class Mouse {
 	private boolean dead;
 	private int score;
 	private int codeForum;
+        private boolean hasFinished = false;
+        private double finishTime = 0.0;
+        private int standing = 0;
 
         private int posX = 0;
         private int posY = 0;
@@ -18,6 +21,7 @@ public class Mouse {
         private boolean jumping = false;
         private byte jumpingImage = 0;
         private byte unk = 0;
+
 	
 	public static Mouse parse(String[] mouseData) {
 		Mouse mouse = new Mouse();
@@ -144,6 +148,30 @@ public class Mouse {
 
         public byte getUnk(){
                 return unk;
+        }
+
+        public void setHasFinished(boolean hasFinished){
+                this.hasFinished = hasFinished;
+        }
+
+        public boolean hasFinished(){
+                return hasFinished;
+        }
+
+        public void setFinishedTime(double finishedTime){
+                this.finishTime = finishedTime;
+        }
+
+        public double getFinshedTime(){
+                return finishTime;
+        }
+
+        public void setStanding(int standing){
+                this.standing = standing;
+        }
+
+        public int getStanding(){
+                return standing;
         }
 
 

@@ -1,42 +1,21 @@
 package ee.ignorance.transformiceapi.event;
 
+import ee.ignorance.transformiceapi.Mouse;
+
 public class MouseFinishEvent implements Event {
 
-	private int mouseId;
-	private int standing;
-	private double finishTime;
+	private Mouse mouse;
 	
-	public MouseFinishEvent(int mouseId, int standing, double finishTime) {
+	public MouseFinishEvent(Mouse mouse) {
 		super();
-		this.mouseId = mouseId;
-		this.standing = standing;
-		this.finishTime = finishTime;
+		this.mouse = mouse;
 	}
 	
-	public int getMouseId() {
-		return mouseId;
+	public Mouse getMouse() {
+		return mouse;
 	}
 	
-	public void setMouseId(int mouseId) {
-		this.mouseId = mouseId;
+	public void setMouse(Mouse mouse) {
+		this.mouse = mouse;
 	}
-	
-	public int getStanding() {
-		return standing;
-	}
-	
-	public void setStanding(int standing) {
-		this.standing = standing;
-	}
-	
-	public double getFinishTime() {
-		return finishTime;
-	}
-	
-	public void setFinishTime(double finishTime) {
-		this.finishTime = finishTime;
-	}
-	
-	
-	
 }

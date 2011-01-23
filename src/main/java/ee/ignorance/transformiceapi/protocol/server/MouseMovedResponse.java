@@ -5,7 +5,7 @@ import java.io.DataInputStream;
 import java.util.List;
 
 
-public class PlayerMovementResponse extends AbstractResponse{
+public class MouseMovedResponse extends AbstractResponse{
 
     private String gameCode;
     private int posX;
@@ -19,7 +19,7 @@ public class PlayerMovementResponse extends AbstractResponse{
     private byte unk; //unknown
     private int playerID;
 
-    	public PlayerMovementResponse(List<String> rawMessage) {
+    	public MouseMovedResponse(List<String> rawMessage) {
 		super(rawMessage);
 	}
 

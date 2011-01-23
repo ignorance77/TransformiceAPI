@@ -18,7 +18,7 @@ import ee.ignorance.transformiceapi.protocol.server.MouseFinishResponse;
 import ee.ignorance.transformiceapi.protocol.server.MouseGotCheeseResponse;
 import ee.ignorance.transformiceapi.protocol.server.MouseListResponse;
 import ee.ignorance.transformiceapi.protocol.server.NormalChatResponse;
-import ee.ignorance.transformiceapi.protocol.server.PlayerMovementResponse;
+import ee.ignorance.transformiceapi.protocol.server.MouseMovedResponse;
 import ee.ignorance.transformiceapi.protocol.server.PrivateChatResponse;
 import ee.ignorance.transformiceapi.protocol.server.RoomResponse;
 import ee.ignorance.transformiceapi.protocol.server.ShamanStatusResponse;
@@ -57,7 +57,7 @@ public class ServerMessagesParser {
                                 b.write(bytes.get(i));
                         ArrayList<String> m = new ArrayList<String>();
                         m.add(new String(b.getBytes()));
-                        return new PlayerMovementResponse(m);
+                        return new MouseMovedResponse(m);
                 }
 		if (codeMajor == 26) {
 			if (codeMinor == 22) {
