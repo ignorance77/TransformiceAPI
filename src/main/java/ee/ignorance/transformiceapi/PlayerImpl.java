@@ -5,7 +5,9 @@ import java.util.List;
 import ee.ignorance.transformiceapi.event.Event;
 import ee.ignorance.transformiceapi.event.EventListener;
 import ee.ignorance.transformiceapi.event.EventService;
-import ee.ignorance.transformiceapi.protocol.client.ChatRequest;
+import ee.ignorance.transformiceapi.protocol.client.ChatNormalRequest;
+import ee.ignorance.transformiceapi.protocol.client.ChatPrivateRequest;
+import ee.ignorance.transformiceapi.protocol.client.ChatTribeRequest;
 import ee.ignorance.transformiceapi.protocol.client.CommandRequest;
 import ee.ignorance.transformiceapi.protocol.client.CreateObjectRequest;
 import ee.ignorance.transformiceapi.protocol.client.DeathRequest;
@@ -113,7 +115,7 @@ public class PlayerImpl implements Player {
 	
 	@Override
 	public void normalChat(String message) {
-		ChatRequest request = new ChatRequest(message);
+		ChatNormalRequest request = new ChatNormalRequest(message);
 		connection.sendRequest(request);
 	}
 
@@ -135,12 +137,14 @@ public class PlayerImpl implements Player {
 
 	@Override
         public void tribeChat(String message) {
-                command("t "+message);
+                ChatTribeRequest request = new ChatTribeRequest(message);
+		connection.sendRequest(request);
 	}
 
 	@Override
 	public void privateChat(String recipient, String message) {
-		command("c " + recipient + " " + message);
+		ChatPrivateRequest request = new ChatPrivateRequest(recipient, message);
+		connection.sendRequest(request);
 	}
 
 	@Override

@@ -7,12 +7,14 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.Proxy;
 import java.net.Socket;
-import java.util.Arrays;
 
 import org.apache.log4j.Logger;
 
 import ee.ignorance.transformiceapi.processors.CommandProcessor;
 import ee.ignorance.transformiceapi.protocol.client.AbstractClientRequest;
+import ee.ignorance.transformiceapi.protocol.client.ChatNormalRequest;
+import ee.ignorance.transformiceapi.protocol.client.ChatPrivateRequest;
+import ee.ignorance.transformiceapi.protocol.client.ChatTribeRequest;
 import ee.ignorance.transformiceapi.protocol.client.PositionRequest;
 import ee.ignorance.transformiceapi.protocol.client.RegisterRequest;
 import ee.ignorance.transformiceapi.protocol.server.AbstractResponse;
@@ -146,6 +148,27 @@ public class GameConnection {
 	public void sendRequest(AbstractClientRequest request) {
 		try {
                         if(request instanceof PositionRequest)
+                        {
+                                out.writeInt(request.getBytes().length + 8);
+                                writePrefix();
+                                out.writeBytes(new String(request.getBytes()));
+                                out.flush();
+                        }
+                        else if(request instanceof ChatNormalRequest)
+                        {
+                                out.writeInt(request.getBytes().length + 8);
+                                writePrefix();
+                                out.writeBytes(new String(request.getBytes()));
+                                out.flush();
+                        }
+                        else if(request instanceof ChatTribeRequest)
+                        {
+                                out.writeInt(request.getBytes().length + 8);
+                                writePrefix();
+                                out.writeBytes(new String(request.getBytes()));
+                                out.flush();
+                        }
+                        else if(request instanceof ChatPrivateRequest)
                         {
                                 out.writeInt(request.getBytes().length + 8);
                                 writePrefix();
