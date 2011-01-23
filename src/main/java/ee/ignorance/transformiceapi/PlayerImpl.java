@@ -14,6 +14,7 @@ import ee.ignorance.transformiceapi.protocol.client.LoginRequest;
 import ee.ignorance.transformiceapi.protocol.client.MagicBeginRequest;
 import ee.ignorance.transformiceapi.protocol.client.MagicCastRequest;
 import ee.ignorance.transformiceapi.protocol.client.MagicStopRequest;
+import ee.ignorance.transformiceapi.protocol.client.MovementDoneRequest;
 import ee.ignorance.transformiceapi.protocol.client.PositionRequest;
 import ee.ignorance.transformiceapi.protocol.client.TakeCheeseRequest;
 
@@ -334,4 +335,8 @@ public class PlayerImpl implements Player {
 	public void createObject(int type, int x, int y) {
 		getConnection().sendRequest(new CreateObjectRequest(type, x, y));
 	}
+
+        public void movementDone() {
+                getConnection().sendRequest(new MovementDoneRequest());
+        }
 }
