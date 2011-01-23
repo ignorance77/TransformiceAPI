@@ -1,5 +1,7 @@
 package ee.ignorance.transformiceapi.protocol.server;
 
+import java.io.ByteArrayInputStream;
+import java.io.DataInputStream;
 import java.util.List;
 
 
@@ -14,12 +16,12 @@ public class TribeChatMessageResponse extends AbstractResponse{
 
     @Override
     public void parse(List<String> rawMessage) {
-        setSender(rawMessage.get(1));
-        if(rawMessage.size() > 2){
-            setMessage(rawMessage.get(2));
-        }
-        else{
-            setMessage("");
+        DataInputStream in = new DataInputStream(new ByteArrayInputStream(rawMessage.get(0).getBytes()));
+        try {
+                setMessage(in.readUTF());
+                setSender(in.readUTF());
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

@@ -24,7 +24,6 @@ public class NormalChatResponse extends AbstractResponse{
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
     public void setSender(String sender){

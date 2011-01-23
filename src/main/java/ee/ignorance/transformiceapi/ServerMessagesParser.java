@@ -68,6 +68,45 @@ public class ServerMessagesParser {
                         m.add(new String(b.getBytes()));
                         return new NormalChatResponse(m);
                 }
+                if(b1 == 6 && b2 == 7)
+                {
+                        ByteBuffer b = new ByteBuffer();
+                        b.write(b3);
+                        b.write(b4);
+                        b.write(codeMajor);
+                        b.write(codeMinor);
+                        for(int i=0;i<bytes.size();i++)
+                                b.write(bytes.get(i));
+                        ArrayList<String> m = new ArrayList<String>();
+                        m.add(new String(b.getBytes()));
+                        return new PrivateChatResponse(m);
+                }
+                if(b1 == 6 && b2 == 8)
+                {
+                        ByteBuffer b = new ByteBuffer();
+                        b.write(b3);
+                        b.write(b4);
+                        b.write(codeMajor);
+                        b.write(codeMinor);
+                        for(int i=0;i<bytes.size();i++)
+                                b.write(bytes.get(i));
+                        ArrayList<String> m = new ArrayList<String>();
+                        m.add(new String(b.getBytes()));
+                        return new TribeChatMessageResponse(m);
+                }
+                if(b1 == 6 && b2 == 10)
+                {
+                        ByteBuffer b = new ByteBuffer();
+                        b.write(b3);
+                        b.write(b4);
+                        b.write(codeMajor);
+                        b.write(codeMinor);
+                        for(int i=0;i<bytes.size();i++)
+                                b.write(bytes.get(i));
+                        ArrayList<String> m = new ArrayList<String>();
+                        m.add(new String(b.getBytes()));
+                        return new ModChatMessageResponse(m);
+                }
 		if (codeMajor == 26) {
 			if (codeMinor == 22) {
 				return new IntroduceResponse(rawMessage);

@@ -1,5 +1,7 @@
 package ee.ignorance.transformiceapi.protocol.server;
 
+import java.io.ByteArrayInputStream;
+import java.io.DataInputStream;
 import java.util.List;
 
 
@@ -7,6 +9,7 @@ public class PrivateChatResponse extends AbstractResponse{
 
     private String sender;
     private String message;
+    private int type;
 
     public PrivateChatResponse(List<String> rawMessage) {
         super(rawMessage);
@@ -14,12 +17,13 @@ public class PrivateChatResponse extends AbstractResponse{
 
     @Override
     public void parse(List<String> rawMessage) {
-        if (rawMessage.size() > 2) {
-            setSender(rawMessage.get(2));
-            setMessage(rawMessage.get(1));
-        } else {  //server reply to private chat request with a nonexistent player
-            setSender("");
-            setMessage("This player does not exist.");
+        DataInputStream in = new DataInputStream(new ByteArrayInputStream(rawMessage.get(0).getBytes()));
+        try {
+                setType(in.readByte());
+                setSender(in.readUTF());
+                setMessage(in.readUTF());
+        } catch (Exception e) {
+                e.printStackTrace();
         }
     }
 
@@ -37,6 +41,14 @@ public class PrivateChatResponse extends AbstractResponse{
 
     public String getMessage() {
         return message;
+    }
+
+    public String setType(int type) {
+        return sender;
+    }
+
+    public int getType() {
+        return type;
     }
 
 }

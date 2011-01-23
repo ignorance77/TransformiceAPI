@@ -1,11 +1,14 @@
 package ee.ignorance.transformiceapi.protocol.server;
 
+import java.io.ByteArrayInputStream;
+import java.io.DataInputStream;
 import java.util.List;
 
 public class ModChatMessageResponse extends AbstractResponse{
 
     private String message;
     private String sender;
+    private int type;
 
     public ModChatMessageResponse(List<String> rawMessage) {
         super(rawMessage);
@@ -13,8 +16,14 @@ public class ModChatMessageResponse extends AbstractResponse{
 
     @Override
     public void parse(List<String> rawMessage) {
-        setSender(rawMessage.get(1));
-        setMessage(rawMessage.get(2));
+        DataInputStream in = new DataInputStream(new ByteArrayInputStream(rawMessage.get(0).getBytes()));
+        try {
+                setType(in.readByte());
+                setSender(in.readUTF());
+                setMessage(in.readUTF());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void setMessage(String message) {
@@ -31,6 +40,14 @@ public class ModChatMessageResponse extends AbstractResponse{
 
     public String getSender() {
         return sender;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+
+    public int getType() {
+        return type;
     }
 
 }
