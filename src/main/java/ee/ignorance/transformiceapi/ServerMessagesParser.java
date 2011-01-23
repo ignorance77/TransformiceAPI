@@ -113,6 +113,9 @@ public class ServerMessagesParser {
 			if (codeMinor == 20) {
 				return new ShamanStatusResponse(rawMessage);
 			}
+                        if (codeMinor == 22) {
+				return new MouseEmoteResponse(rawMessage);
+			}
 		}
                 if (codeMajor == 16){
                         if(codeMinor == 4){

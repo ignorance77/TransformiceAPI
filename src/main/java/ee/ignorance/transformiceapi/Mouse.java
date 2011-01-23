@@ -22,6 +22,12 @@ public class Mouse {
         private byte jumpingImage = 0;
         private byte unk = 0;
 
+        public static final int DANCE = 1;
+        public static final int SMILE = 2;
+        public static final int CRY = 3;
+        public static final int KISS = 4;
+        private int emote = 0;
+
 	
 	public static Mouse parse(String[] mouseData) {
 		Mouse mouse = new Mouse();
@@ -172,6 +178,14 @@ public class Mouse {
 
         public int getStanding(){
                 return standing;
+        }
+
+        public void setEmote(int emote){
+                this.emote= emote;
+        }
+
+        public int getEmote(){
+                return emote;
         }
 
 
