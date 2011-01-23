@@ -1,32 +1,21 @@
 package ee.ignorance.transformiceapi.event;
 
+import ee.ignorance.transformiceapi.Mouse;
+
 public class MouseDeathEvent implements Event {
 
-        private int mouseID;
-        private String mouseName;
+        private Mouse mouse;
 
-        public MouseDeathEvent(int mouseID, String mouseName) {
-                setMouseID(mouseID);
-                setMouseName(mouseName);
+        public MouseDeathEvent(Mouse mouse) {
+                setMouse(mouse);
         }
 
-        public int getMouseID() {
-                return mouseID;
+        public Mouse getMouse() {
+                return mouse;
         }
 
-        public void setMouseID(int mouseID) {
-                this.mouseID = mouseID;
+        public void setMouse(Mouse mouse) {
+                this.mouse = mouse;
         }
-
-        public String getMouseName() {
-                return mouseName;
-        }
-
-        public void setMouseName(String mouseName) {
-                this.mouseName = mouseName;
-        }
-
-
-
 
 }

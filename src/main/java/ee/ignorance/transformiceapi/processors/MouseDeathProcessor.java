@@ -16,8 +16,7 @@ public class MouseDeathProcessor extends CommandProcessor{
         if(deadMouse != null)
         {
                 deadMouse.setDead(true);
-                player.notifyListeners(new MouseDeathEvent(response.getMouseID(),
-                        player.getMouseById(response.getMouseID()).getName()));
+                player.notifyListeners(new MouseDeathEvent(deadMouse));
         }
     }
 
