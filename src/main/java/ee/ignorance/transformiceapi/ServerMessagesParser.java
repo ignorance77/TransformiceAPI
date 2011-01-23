@@ -55,6 +55,19 @@ public class ServerMessagesParser {
                         m.add(new String(b.getBytes()));
                         return new MouseMovedResponse(m);
                 }
+                if(b1 == 6 && b2 == 6)
+                {
+                        ByteBuffer b = new ByteBuffer();
+                        b.write(b3);
+                        b.write(b4);
+                        b.write(codeMajor);
+                        b.write(codeMinor);
+                        for(int i=0;i<bytes.size();i++)
+                                b.write(bytes.get(i));
+                        ArrayList<String> m = new ArrayList<String>();
+                        m.add(new String(b.getBytes()));
+                        return new NormalChatResponse(m);
+                }
 		if (codeMajor == 26) {
 			if (codeMinor == 22) {
 				return new IntroduceResponse(rawMessage);
