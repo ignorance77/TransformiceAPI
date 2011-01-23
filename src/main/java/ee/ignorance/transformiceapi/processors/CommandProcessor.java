@@ -8,6 +8,7 @@ import ee.ignorance.transformiceapi.protocol.server.LoginSuccessResponse;
 import ee.ignorance.transformiceapi.protocol.server.ModChatMessageResponse;
 import ee.ignorance.transformiceapi.protocol.server.MouseDeathResponse;
 import ee.ignorance.transformiceapi.protocol.server.MouseFinishResponse;
+import ee.ignorance.transformiceapi.protocol.server.MouseGotCheeseResponse;
 import ee.ignorance.transformiceapi.protocol.server.MouseListResponse;
 import ee.ignorance.transformiceapi.protocol.server.NormalChatResponse;
 import ee.ignorance.transformiceapi.protocol.server.PlayerMovementResponse;
@@ -73,6 +74,9 @@ public abstract class CommandProcessor {
                 }
                 if (command instanceof PlayerMovementResponse) {
                         return new PlayerMovementProcessor();
+                }
+                if (command instanceof MouseGotCheeseResponse) {
+                        return new MouseGotCheeseProcessor();
                 }
 		return null;
 	}

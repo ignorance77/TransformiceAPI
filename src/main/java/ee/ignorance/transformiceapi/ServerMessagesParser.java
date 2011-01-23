@@ -15,6 +15,7 @@ import ee.ignorance.transformiceapi.protocol.server.LoginSuccessResponse;
 import ee.ignorance.transformiceapi.protocol.server.ModChatMessageResponse;
 import ee.ignorance.transformiceapi.protocol.server.MouseDeathResponse;
 import ee.ignorance.transformiceapi.protocol.server.MouseFinishResponse;
+import ee.ignorance.transformiceapi.protocol.server.MouseGotCheeseResponse;
 import ee.ignorance.transformiceapi.protocol.server.MouseListResponse;
 import ee.ignorance.transformiceapi.protocol.server.NormalChatResponse;
 import ee.ignorance.transformiceapi.protocol.server.PlayerMovementResponse;
@@ -74,13 +75,16 @@ public class ServerMessagesParser {
 			if (codeMinor == 26) {
 				return new TZATResponse(rawMessage);
 			}
-                        if (codeMinor == 4) { //mod messsage
+                        if (codeMinor == 4) {
 				return new ModChatMessageResponse(rawMessage);
 			}
 		}
 		if (codeMajor == 5) {
                         if (codeMinor == 5) {
                                 return new StartGameResponse(rawMessage);
+                        }
+                        if (codeMinor == 19) {
+                                return new MouseGotCheeseResponse(rawMessage);
                         }
 			if (codeMinor == 21) {
 				return new RoomResponse(rawMessage);
