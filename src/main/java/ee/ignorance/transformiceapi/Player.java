@@ -53,5 +53,7 @@ public interface Player {
 	void createObject(int type, int x, int y);
 
 	void command(String string);
+
+        public void movementDone();
 	
 }
