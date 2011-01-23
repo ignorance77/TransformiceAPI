@@ -1,4 +1,7 @@
-package ee.ignorance.transformiceapi.event;
+package ee.ignorance.transformiceapi.event.mouse;
+
+import ee.ignorance.transformiceapi.event.Event;
+import ee.ignorance.transformiceapi.event.EventListener;
 
 
 public abstract class MouseMovedListener  implements EventListener {

@@ -6,12 +6,7 @@ import ee.ignorance.transformiceapi.protocol.server.FriendJoinResponse;
 import ee.ignorance.transformiceapi.protocol.server.LoginFailedResponse;
 import ee.ignorance.transformiceapi.protocol.server.LoginSuccessResponse;
 import ee.ignorance.transformiceapi.protocol.server.ModChatMessageResponse;
-import ee.ignorance.transformiceapi.protocol.server.MouseDeathResponse;
-import ee.ignorance.transformiceapi.protocol.server.MouseFinishResponse;
-import ee.ignorance.transformiceapi.protocol.server.MouseGotCheeseResponse;
-import ee.ignorance.transformiceapi.protocol.server.MouseListResponse;
 import ee.ignorance.transformiceapi.protocol.server.NormalChatResponse;
-import ee.ignorance.transformiceapi.protocol.server.MouseMovedResponse;
 import ee.ignorance.transformiceapi.protocol.server.PrivateChatResponse;
 import ee.ignorance.transformiceapi.protocol.server.RoomResponse;
 import ee.ignorance.transformiceapi.protocol.server.ShamanStatusResponse;
@@ -20,6 +15,8 @@ import ee.ignorance.transformiceapi.protocol.server.SyncStatusResponse;
 import ee.ignorance.transformiceapi.protocol.server.TZATResponse;
 import ee.ignorance.transformiceapi.protocol.server.TribeChatMessageResponse;
 import ee.ignorance.transformiceapi.protocol.server.TribePlayerResponse;
+import ee.ignorance.transformiceapi.protocol.server.mouse.*;
+import ee.ignorance.transformiceapi.processors.mouse.*;
 
 public abstract class CommandProcessor {
 

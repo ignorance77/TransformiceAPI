@@ -1,10 +1,11 @@
-package ee.ignorance.transformiceapi.processors;
+package ee.ignorance.transformiceapi.processors.mouse;
 
 import ee.ignorance.transformiceapi.Mouse;
 import ee.ignorance.transformiceapi.PlayerImpl;
-import ee.ignorance.transformiceapi.event.MouseDeathEvent;
+import ee.ignorance.transformiceapi.event.mouse.MouseDeathEvent;
+import ee.ignorance.transformiceapi.processors.CommandProcessor;
 import ee.ignorance.transformiceapi.protocol.server.AbstractResponse;
-import ee.ignorance.transformiceapi.protocol.server.MouseDeathResponse;
+import ee.ignorance.transformiceapi.protocol.server.mouse.MouseDeathResponse;
 
 
 public class MouseDeathProcessor extends CommandProcessor{

@@ -1,5 +1,6 @@
-package ee.ignorance.transformiceapi.protocol.server;
+package ee.ignorance.transformiceapi.protocol.server.mouse;
 
+import ee.ignorance.transformiceapi.protocol.server.AbstractResponse;
 import java.util.List;
 
 

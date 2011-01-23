@@ -1,10 +1,11 @@
-package ee.ignorance.transformiceapi.processors;
+package ee.ignorance.transformiceapi.processors.mouse;
 
 import ee.ignorance.transformiceapi.Mouse;
 import ee.ignorance.transformiceapi.PlayerImpl;
-import ee.ignorance.transformiceapi.event.MouseGotCheeseEvent;
+import ee.ignorance.transformiceapi.event.mouse.MouseGotCheeseEvent;
+import ee.ignorance.transformiceapi.processors.CommandProcessor;
 import ee.ignorance.transformiceapi.protocol.server.AbstractResponse;
-import ee.ignorance.transformiceapi.protocol.server.MouseGotCheeseResponse;
+import ee.ignorance.transformiceapi.protocol.server.mouse.MouseGotCheeseResponse;
 
 
 public class MouseGotCheeseProcessor extends CommandProcessor{

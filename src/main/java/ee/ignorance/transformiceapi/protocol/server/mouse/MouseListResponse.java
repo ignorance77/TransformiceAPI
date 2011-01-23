@@ -1,9 +1,10 @@
-package ee.ignorance.transformiceapi.protocol.server;
+package ee.ignorance.transformiceapi.protocol.server.mouse;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import ee.ignorance.transformiceapi.Mouse;
+import ee.ignorance.transformiceapi.protocol.server.AbstractResponse;
 
 public class MouseListResponse extends AbstractResponse {
 
