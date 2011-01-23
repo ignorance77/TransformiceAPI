@@ -21,6 +21,7 @@ public class Mouse {
         private boolean jumping = false;
         private byte jumpingImage = 0;
         private byte unk = 0;
+        private boolean balloonAttached = false;
 
         public static final int DANCE = 1;
         public static final int SMILE = 2;
@@ -186,6 +187,14 @@ public class Mouse {
 
         public int getEmote(){
                 return emote;
+        }
+
+        public void setBallonAttached(boolean ballonAttached){
+            this.balloonAttached = ballonAttached;
+        }
+
+        public boolean isBallonAttached(){
+            return balloonAttached;
         }
 
 

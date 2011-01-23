@@ -107,6 +107,9 @@ public class ServerMessagesParser {
                         if (codeMinor == 11) {
 				return new FriendJoinResponse(rawMessage);
 			}
+                        if (codeMinor == 16) {
+				return new MouseBalloonResponse(rawMessage);
+			}
 			if (codeMinor == 21) {
 				return new SyncStatusResponse(rawMessage);
 			}

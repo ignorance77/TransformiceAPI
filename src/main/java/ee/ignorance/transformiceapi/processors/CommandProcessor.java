@@ -78,6 +78,9 @@ public abstract class CommandProcessor {
                 if (command instanceof MouseEmoteResponse) {
                         return new MouseEmoteProcessor();
                 }
+                if (command instanceof MouseBalloonResponse) {
+                        return new MouseBalloonProcessor();
+                }
 		return null;
 	}
 	
