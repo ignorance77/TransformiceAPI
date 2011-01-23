@@ -1,6 +1,5 @@
 package ee.ignorance.transformiceapi.protocol.client;
 
-import ee.ignorance.transformiceapi.protocol.ByteBuffer;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 
@@ -14,17 +13,11 @@ public class PositionRequest extends AbstractClientRequest {
 	private boolean goingLeft;
 	private boolean goingRight;
 	private boolean jumping;
-	
-	public PositionRequest(String gameCode, int posX, int posY, boolean goingLeft, boolean goingRight) {
-		this(gameCode, posX, posY, 0, 0, goingLeft, goingRight, false);
-	}
-	
-	public PositionRequest(String gameCode, int posX, int posY) {
-		this(gameCode, posX, posY, 0, 0, false, false, false);
-	}
+        private byte jumpingImage;
+        private byte unk;
 	
 	public PositionRequest(String gameCode, int posX, int posY, int movX, int movY,
-			boolean goingLeft, boolean goingRight, boolean jumping) {
+			boolean goingLeft, boolean goingRight, boolean jumping, byte jumpingImage, byte unk) {
 		this.gameCode = gameCode;
 		this.posX = posX;
 		this.posY = posY;
@@ -33,6 +26,8 @@ public class PositionRequest extends AbstractClientRequest {
 		this.goingLeft = goingLeft;
 		this.goingRight = goingRight;
 		this.jumping = jumping;
+                this.jumpingImage = jumpingImage;
+                this.unk = unk;
 	}
 
 	@Override
@@ -50,8 +45,8 @@ public class PositionRequest extends AbstractClientRequest {
                         out.writeShort(movX); // x vector
                         out.writeShort(movY); // y vector
                         out.writeBoolean(jumping);
-                        out.writeByte(0); // jumping position (?), 0 for testing
-                        out.writeByte(0); // no clue what this is
+                        out.writeByte(jumpingImage);
+                        out.writeByte(unk); // no clue what this is
 
                 } catch (Exception e)
                 {

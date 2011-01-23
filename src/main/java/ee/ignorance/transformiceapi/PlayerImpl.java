@@ -27,9 +27,6 @@ public class PlayerImpl implements Player {
 	private String password;
 	private String gameCode;
 	
-	private int currentX;
-	private int currentY;
-	
 	private String room = "null";
 	private List<Mouse> roomMice;
 	
@@ -96,19 +93,22 @@ public class PlayerImpl implements Player {
         @Override
 	public void move(int posX, int posY, int movX, int movY,
                     boolean goingLeft, boolean goingRight, boolean jumping) {
-		currentX = posX;
-		currentY = posY;
+		move(posX, posY, movX, movY, goingLeft, goingRight, jumping, (byte)0, (byte)0);
+	}
+
+        @Override
+	public void move(int posX, int posY, int movX, int movY, boolean goingLeft,
+                boolean goingRight, boolean jumping, byte jumpingImage, byte unk) {
+                setCurrentX(posX);
+                setCurrentY(posY);
 		PositionRequest request = new PositionRequest(getGameCode(),
-                        posX, posY, movX, movY, goingLeft, goingRight, jumping);
+                        posX, posY, movX, movY, goingLeft, goingRight, jumping, jumpingImage, unk);
 		connection.sendRequest(request);
 	}
 	
 	@Override
 	public void moveTo(int x, int y) {
-		currentX = x;
-		currentY = y;
-		PositionRequest request = new PositionRequest(getGameCode(), x, y);
-		connection.sendRequest(request);
+                move(x, y, 0, 0, false, false, false);
 	}
 	
 	@Override
@@ -117,17 +117,25 @@ public class PlayerImpl implements Player {
 		connection.sendRequest(request);
 	}
 
+        public void setCurrentX(int currentX){
+                getPlayerMouse().setPosX(currentX);
+        }
+
+        public void setCurrentY(int currentY){
+                getPlayerMouse().setPosY(currentY);
+        }
+
         public int getCurrentX(){
-                return currentX;
+                return getPlayerMouse().getPosX();
         }
 
         public int getCurrentY(){
-                return currentY;
+                return getPlayerMouse().getPosY();
         }
 
 	@Override
         public void tribeChat(String message) {
-            command("t "+message);
+                command("t "+message);
 	}
 
 	@Override
@@ -302,20 +310,17 @@ public class PlayerImpl implements Player {
 	
 	@Override
 	public void goLeft() {
-		PositionRequest request = new PositionRequest(getGameCode(), currentX, currentY, false, true);
-		getConnection().sendRequest(request);
+		move(getCurrentX(), getCurrentY(), 0, 0, false, true, false);
 	}
 	
 	@Override
 	public void goRight() {
-		PositionRequest request = new PositionRequest(getGameCode(), currentX, currentY, true, false);
-		getConnection().sendRequest(request);
+		move(getCurrentX(), getCurrentY(), 0, 0, true, false, false);
 	}
 	
 	@Override
 	public void jump() {
-		PositionRequest request = new PositionRequest(getGameCode(), currentX, currentY, 0, 0, false, false, true);
-		getConnection().sendRequest(request);
+                move(getCurrentX(), getCurrentY(), 0, 0, false, false, true);
 	}
 
 	public Mouse getMouseById(int id) {

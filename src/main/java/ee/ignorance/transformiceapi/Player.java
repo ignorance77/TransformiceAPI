@@ -34,6 +34,9 @@ public interface Player {
         void move(int posX, int posY, int movX, int movY,
                 boolean goingLeft, boolean goingRight, boolean jumping);
 
+         void move(int posX, int posY, int movX, int movY,
+                boolean goingLeft, boolean goingRight, boolean jumping, byte jumpingImage, byte unk);
+
 	void moveTo(int x, int y);
 
 	void normalChat(String message);
