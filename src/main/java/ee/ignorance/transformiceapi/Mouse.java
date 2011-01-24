@@ -197,6 +197,13 @@ public class Mouse {
             return balloonAttached;
         }
 
+        public boolean equals(Object b){
+                if(b instanceof Mouse){
+                        return this.code == ((Mouse)b).getCode();
+                }
+                return false;
+        }
+
 
 	@Override
 	public String toString() {
