@@ -336,6 +336,15 @@ public class PlayerImpl implements Player {
 		return null;
 	}
 
+        public Mouse getMouseByName(String name) {
+		for (Mouse mouse : roomMice) {
+			if (mouse.getName().equals(name)) {
+				return mouse;
+			}
+		}
+		return null;
+	}
+
 	public List<Mouse> getRoomMice() {
 		return roomMice;
 	}
