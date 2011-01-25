@@ -18,7 +18,6 @@ import ee.ignorance.transformiceapi.protocol.client.ChatTribeRequest;
 import ee.ignorance.transformiceapi.protocol.client.PositionRequest;
 import ee.ignorance.transformiceapi.protocol.client.RegisterRequest;
 import ee.ignorance.transformiceapi.protocol.server.AbstractResponse;
-import ee.ignorance.transformiceapi.protocol.server.IntroduceResponse;
 import ee.ignorance.transformiceapi.protocol.server.LoginFailedResponse;
 import ee.ignorance.transformiceapi.protocol.server.LoginSuccessResponse;
 import ee.ignorance.transformiceapi.protocol.server.URLResponse;
@@ -31,7 +30,7 @@ public class GameConnection {
 
 	private String host;
 	private int port;
-	private String version;
+	private int version;
 	
 	private PlayerImpl player;
 	private Socket socket;	
@@ -50,7 +49,7 @@ public class GameConnection {
 	private PingThread pingThread;
 
 	
-	public GameConnection(String host, int port, String version) {
+	public GameConnection(String host, int port, int version) {
 		this.host = host;
 		this.port = port;
 		this.version = version;
@@ -65,7 +64,6 @@ public class GameConnection {
 			}
 			socket.connect(new InetSocketAddress(host, port), 1500);
 			in = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
-//			out = new BufferedWriter()(socket.getOutputStream(), true);
 			out = new DataOutputStream(socket.getOutputStream());
 			startListening();
 			introduce();
@@ -98,37 +96,14 @@ public class GameConnection {
 		pingThread = new PingThread( this );
 		pingThread.start();
 	}
-
-	private void sendURL() {
-		try {
-			String url = "http://en.transformice.com/Transformice.swf?n=0.134 xx";
-			out.writeInt(url.getBytes().length + 4 + 8);
-			int val = 1001;
-			out.writeByte(val % 1000);
-			out.writeByte((val/100) % 10);
-			out.writeByte((val/10)%10);	
-			out.writeByte(val%10);
-			out.writeByte(1);
-			out.writeByte(1);
-			out.writeUTF(url); // it seems it doesnt matter what we send..?
-			out.flush();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 	
 	private void introduce() throws IOException {
-		int size = (version.getBytes().length + 4);
-		int val = 1000;
-		out.writeInt(size + 8);
-		out.writeByte(val % 1000);
-		out.writeByte((val/100) % 10);
-		out.writeByte((val/10)%10);	
-		out.writeByte(val%10);
-		out.writeByte(1);
-		out.writeByte(1);
-		out.writeUTF(version);
-		out.flush();
+                out.writeInt(12);
+                out.writeInt(0);
+                out.writeByte(28);
+                out.writeByte(1);
+                out.writeShort(version);
+                out.flush();
 	}
 
 	private void startListening() {
@@ -200,26 +175,22 @@ public class GameConnection {
 	}
 
 	public void processCommand(AbstractResponse command) {
-		if (command instanceof IntroduceResponse) {
-			sendURL();
+                if (command instanceof URLResponse) {
+                        urlSent = true;
+			MDT = ((URLResponse) command).getMDT();
+			CMDTEC = ((URLResponse) command).getCMDTEC();
 		} else {
-			if (command instanceof URLResponse) {
-				urlSent = true;
-				MDT = ((URLResponse) command).getMDT();
-				CMDTEC = ((URLResponse) command).getCMDTEC();
-			} else {
-				CommandProcessor processor = CommandProcessor.create(command);
-				if (player == null) {
-					// registering
-					if (command instanceof LoginSuccessResponse) {
-						registerResult = true;
-					} else if (command instanceof LoginFailedResponse) {
+                        CommandProcessor processor = CommandProcessor.create(command);
+			if (player == null) {
+                                // registering
+				if (command instanceof LoginSuccessResponse) {
+                                        registerResult = true;
+				} else if (command instanceof LoginFailedResponse) {
 						registerResult = false;
-					}
-				} else {
-					if (processor != null) {
-						processor.process(command, player);
-					}
+				}
+			} else {
+                                if (processor != null) {
+                                        processor.process(command, player);
 				}
 			}
 		}

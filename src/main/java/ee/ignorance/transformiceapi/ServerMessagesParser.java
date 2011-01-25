@@ -180,6 +180,10 @@ public class ServerMessagesParser {
                             return new TribeChatMessageResponse(rawMessage);
                         }
                 }
+                /*if(b1 != 4 && b2 != 3){
+                        System.out.println("Unknown server message "+"b1: "+Integer.toString(b1)+" b2: "+Integer.toString(b2)+" b3: "+Integer.toString(b3)+" b4: "+Integer.toString(b4)+" codeMajor: "+codeMajor+" codeMinor: "+codeMinor);
+
+                }*/
 		return null;
 	}
 	
