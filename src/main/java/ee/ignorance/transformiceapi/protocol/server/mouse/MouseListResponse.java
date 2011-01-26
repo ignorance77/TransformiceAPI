@@ -33,5 +33,4 @@ public class MouseListResponse extends AbstractResponse {
 		this.mice = mice;
 	}
 
-
 }

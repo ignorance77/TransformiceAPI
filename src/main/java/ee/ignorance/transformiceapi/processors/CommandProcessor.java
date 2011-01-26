@@ -81,6 +81,12 @@ public abstract class CommandProcessor {
                 if (command instanceof MouseBalloonResponse) {
                         return new MouseBalloonProcessor();
                 }
+                if (command instanceof MouseJoinRoomResponse) {
+                        return new MouseJoinRoomProcessor();
+                }
+                if (command instanceof MouseLeaveRoomResponse) {
+                        return new MouseLeaveRoomProcessor();
+                }
 		return null;
 	}
 	

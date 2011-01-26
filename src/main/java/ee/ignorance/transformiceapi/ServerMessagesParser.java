@@ -153,6 +153,12 @@ public class ServerMessagesParser {
                         if (codeMinor == 6) {
                                 return new MouseFinishResponse(rawMessage);
                         }
+                        if (codeMinor == 7) {
+                                return new MouseLeaveRoomResponse(rawMessage);
+                        }
+                        if (codeMinor == 8) {
+                                return new MouseJoinRoomResponse(rawMessage);
+                        }
 			if (codeMinor == 9) {
 				return new MouseListResponse(rawMessage);
 			}
