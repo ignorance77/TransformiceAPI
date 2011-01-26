@@ -115,7 +115,7 @@ public class PlayerImpl implements Player {
 	
 	@Override
 	public void normalChat(String message) {
-		ChatNormalRequest request = new ChatNormalRequest(message);
+		ChatNormalRequest request = new ChatNormalRequest(message.replaceAll("<", "&lt;"));
 		connection.sendRequest(request);
 	}
 
@@ -143,7 +143,7 @@ public class PlayerImpl implements Player {
 
 	@Override
 	public void privateChat(String recipient, String message) {
-		ChatPrivateRequest request = new ChatPrivateRequest(recipient, message);
+		ChatPrivateRequest request = new ChatPrivateRequest(recipient, message.replaceAll("<", "&lt;"));
 		connection.sendRequest(request);
 	}
 
