@@ -19,7 +19,7 @@ public class EventService {
 		listeners.remove(listener);
 	}
 	
-	public void notifyListeners(Event e) {
+	public synchronized void notifyListeners(Event e) {
 		for (EventListener listener : listeners) {
 			if (listener.matches(e)) {
 				listener.actionPerformed(e);
