@@ -22,10 +22,11 @@ public class PingThread extends Thread {
 		try {
 			synchronized (this) {
 				while (!terminate) {
-					wait(500);
+					wait(50);
 					if (System.currentTimeMillis() - lastPingTime >= PING_INTERVAL) {
-						lastPingTime = System.currentTimeMillis();
+                                                long tmp = System.currentTimeMillis();
 						sendPing();
+                                                lastPingTime = tmp;
 					}
 				}
 			}
