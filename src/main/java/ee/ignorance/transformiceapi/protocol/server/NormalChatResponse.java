@@ -16,7 +16,11 @@ public class NormalChatResponse extends AbstractResponse{
 
     @Override
     public void parse(List<String> rawMessage) {
-        DataInputStream in = new DataInputStream(new ByteArrayInputStream(rawMessage.get(0).getBytes()));
+        //Do nothing here
+    }
+
+    public void parse(byte[] rawMessage) {
+        DataInputStream in = new DataInputStream(new ByteArrayInputStream(rawMessage));
         try {
                 int playerCode = in.readInt();
                 setSender(in.readUTF());

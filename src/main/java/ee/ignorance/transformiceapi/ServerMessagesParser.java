@@ -28,7 +28,7 @@ import ee.ignorance.transformiceapi.protocol.server.mouse.*;
 public class ServerMessagesParser {
 
 	public static AbstractResponse parse(byte[] message) throws IOException {
-		DataInputStream stream = new DataInputStream(new ByteArrayInputStream(message));
+                    DataInputStream stream = new DataInputStream(new ByteArrayInputStream(message));
 		byte b1 = stream.readByte();
 		byte b2 = stream.readByte();
                 byte b3 = stream.readByte();
@@ -42,70 +42,39 @@ public class ServerMessagesParser {
 		}
 		List<String> rawMessage = split(bytes);
 		rawMessage.add(0, "");
-                if(b1 == 4 && b2 == 4)
-                {
+                if(b1 != 1 && b2 != 1){ //Movement or chat
+                        //rebuild original message
                         ByteBuffer b = new ByteBuffer();
-                        b.write(b3);
-                        b.write(b4);
-                        b.write(codeMajor);
-                        b.write(codeMinor);
-                        for(int i=0;i<bytes.size();i++)
-                                b.write(bytes.get(i));
+                        byte[] buf = new byte[message.length-2];
+                        for(int i=2;i<message.length;i++)
+                                buf[i-2] = message[i];
                         ArrayList<String> m = new ArrayList<String>();
-                        m.add(new String(b.getBytes()));
-                        return new MouseMovedResponse(m);
-                }
-                if(b1 == 6 && b2 == 6)
-                {
-                        ByteBuffer b = new ByteBuffer();
-                        b.write(b3);
-                        b.write(b4);
-                        b.write(codeMajor);
-                        b.write(codeMinor);
-                        for(int i=0;i<bytes.size();i++)
-                                b.write(bytes.get(i));
-                        ArrayList<String> m = new ArrayList<String>();
-                        m.add(new String(b.getBytes()));
-                        return new NormalChatResponse(m);
-                }
-                if(b1 == 6 && b2 == 7)
-                {
-                        ByteBuffer b = new ByteBuffer();
-                        b.write(b3);
-                        b.write(b4);
-                        b.write(codeMajor);
-                        b.write(codeMinor);
-                        for(int i=0;i<bytes.size();i++)
-                                b.write(bytes.get(i));
-                        ArrayList<String> m = new ArrayList<String>();
-                        m.add(new String(b.getBytes()));
-                        return new PrivateChatResponse(m);
-                }
-                if(b1 == 6 && b2 == 8)
-                {
-                        ByteBuffer b = new ByteBuffer();
-                        b.write(b3);
-                        b.write(b4);
-                        b.write(codeMajor);
-                        b.write(codeMinor);
-                        for(int i=0;i<bytes.size();i++)
-                                b.write(bytes.get(i));
-                        ArrayList<String> m = new ArrayList<String>();
-                        m.add(new String(b.getBytes()));
-                        return new TribeChatMessageResponse(m);
-                }
-                if(b1 == 6 && b2 == 10)
-                {
-                        ByteBuffer b = new ByteBuffer();
-                        b.write(b3);
-                        b.write(b4);
-                        b.write(codeMajor);
-                        b.write(codeMinor);
-                        for(int i=0;i<bytes.size();i++)
-                                b.write(bytes.get(i));
-                        ArrayList<String> m = new ArrayList<String>();
-                        m.add(new String(b.getBytes()));
-                        return new ModChatMessageResponse(m);
+                        m.add(new String(buf));
+                        
+                        if(b1 == 4 ){
+                                if(b2 == 4){
+                                        MouseMovedResponse mouseMoved = new MouseMovedResponse(m);
+                                        mouseMoved.parse(buf);
+                                        return mouseMoved;
+                                }
+                        }
+                        if(b1 == 6)
+                        {
+                                if(b2 == 6){
+                                        NormalChatResponse normalChat = new NormalChatResponse(m);
+                                        normalChat.parse(buf);
+                                        return normalChat;
+                                }
+                                if(b2 == 7){
+                                        return new PrivateChatResponse(m);
+                                }
+                                if(b2 == 8){
+                                        return new TribeChatMessageResponse(m);
+                                }
+                                if(b2 == 10){
+                                        return new ModChatMessageResponse(m);
+                                } 
+                        }
                 }
 		if (codeMajor == 26) {
 			if (codeMinor == 22) {
@@ -186,10 +155,6 @@ public class ServerMessagesParser {
                             return new TribeChatMessageResponse(rawMessage);
                         }
                 }
-                /*if(b1 != 4 && b2 != 3){
-                        System.out.println("Unknown server message "+"b1: "+Integer.toString(b1)+" b2: "+Integer.toString(b2)+" b3: "+Integer.toString(b3)+" b4: "+Integer.toString(b4)+" codeMajor: "+codeMajor+" codeMinor: "+codeMinor);
-
-                }*/
 		return null;
 	}
 	

@@ -26,8 +26,12 @@ public class MouseMovedResponse extends AbstractResponse{
 
 	@Override
 	public void parse(List<String> rawMessage) {
-            DataInputStream in = new DataInputStream(new ByteArrayInputStream(rawMessage.get(0).getBytes()));
+            //Do nothing here
+	}
+
+	public void parse(byte[] rawMessage) {
             try {
+                DataInputStream in = new DataInputStream(new ByteArrayInputStream(rawMessage));
                 gameCode = Integer.toString(in.readInt());
                 goingRight = in.readBoolean();
                 goingLeft = in.readBoolean();
