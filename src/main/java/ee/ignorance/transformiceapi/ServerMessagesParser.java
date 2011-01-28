@@ -115,8 +115,6 @@ public class ServerMessagesParser {
                 }
 
                 byte[] buff = Arrays.copyOfRange(message, 2, message.length);
-                List<String> m = new ArrayList<String>();
-                m.add(0, new String(buff));
                 if (b1 == 4) {
                         if (b2 == 4) {
                                 return new MouseMovedResponse(buff);
