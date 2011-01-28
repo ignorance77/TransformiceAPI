@@ -7,7 +7,17 @@ public abstract class AbstractResponse {
 	public AbstractResponse(List<String> rawMessage) {
 		parse(rawMessage);
 	}
+
+        public AbstractResponse(byte[] rawMessage) {
+		parse(rawMessage);
+	}
 	
-	public abstract void parse(List<String> rawMessage);
+	public void parse(List<String> rawMessage){
+                throw new UnsupportedOperationException("This class does not use List<String>") ;
+        }
+
+        public void parse(byte[] rawMessage){
+                throw new UnsupportedOperationException("This class does not use byte[]") ;
+        }
 	
 }

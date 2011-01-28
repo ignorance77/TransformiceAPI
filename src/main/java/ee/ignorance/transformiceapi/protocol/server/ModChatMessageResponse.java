@@ -2,7 +2,6 @@ package ee.ignorance.transformiceapi.protocol.server;
 
 import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
-import java.util.List;
 
 public class ModChatMessageResponse extends AbstractResponse{
 
@@ -10,13 +9,13 @@ public class ModChatMessageResponse extends AbstractResponse{
     private String sender;
     private int type;
 
-    public ModChatMessageResponse(List<String> rawMessage) {
+    public ModChatMessageResponse(byte[] rawMessage) {
         super(rawMessage);
     }
 
     @Override
-    public void parse(List<String> rawMessage) {
-        DataInputStream in = new DataInputStream(new ByteArrayInputStream(rawMessage.get(0).getBytes()));
+    public void parse(byte[] rawMessage) {
+        DataInputStream in = new DataInputStream(new ByteArrayInputStream(rawMessage));
         try {
                 setType(in.readByte());
                 setSender(in.readUTF());

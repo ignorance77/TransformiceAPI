@@ -3,7 +3,6 @@ package ee.ignorance.transformiceapi.protocol.server.mouse;
 import ee.ignorance.transformiceapi.protocol.server.AbstractResponse;
 import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
-import java.util.List;
 
 
 public class MouseMovedResponse extends AbstractResponse{
@@ -20,15 +19,12 @@ public class MouseMovedResponse extends AbstractResponse{
     private byte unk; //unknown
     private int playerID;
 
-    	public MouseMovedResponse(List<String> rawMessage) {
+    	public MouseMovedResponse(byte[] rawMessage) {
 		super(rawMessage);
 	}
 
-	@Override
-	public void parse(List<String> rawMessage) {
-            //Do nothing here
-	}
 
+        @Override
 	public void parse(byte[] rawMessage) {
             try {
                 DataInputStream in = new DataInputStream(new ByteArrayInputStream(rawMessage));
