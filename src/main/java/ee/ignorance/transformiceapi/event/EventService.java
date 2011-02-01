@@ -12,22 +12,25 @@ public class EventService {
 	}
 	
 	public synchronized void registerEventListener(EventListener listener) {
-		listeners.add(listener);
+                synchronized(listeners){
+                        listeners.add(listener);
+                }
 	}
 	
 	public synchronized void unregisterEventListener(EventListener listener) {
-		listeners.remove(listener);
+                synchronized(listeners){
+                        listeners.remove(listener);
+            }
 	}
 	
 	public void notifyListeners(Event e) {
-            synchronized(listeners){
-                    for (EventListener listener : listeners) {
-                            if (listener.matches(e)) {
-                                    listener.actionPerformed(e);
-                            }
-                    }
-            }
-		
+                synchronized(listeners){
+                        for (EventListener listener : listeners) {
+                                if (listener.matches(e)) {
+                                        listener.actionPerformed(e);
+                                }
+                        }
+                }
 	}
 	
 }
