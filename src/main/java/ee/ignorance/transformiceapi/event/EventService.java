@@ -23,7 +23,7 @@ public class EventService {
             }
 	}
 	
-	public void notifyListeners(Event e) {
+	public synchronized void notifyListeners(Event e) {
                 synchronized(listeners){
                         for (EventListener listener : listeners) {
                                 if (listener.matches(e)) {
