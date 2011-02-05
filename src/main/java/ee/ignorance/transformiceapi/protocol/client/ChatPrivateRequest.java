@@ -8,9 +8,9 @@ public class ChatPrivateRequest extends AbstractClientRequest {
 	private String message;
         private String recipient;
 
-	public ChatPrivateRequest(String message, String recipient) {
-		this.message = message;
-                this.recipient = recipient;
+	public ChatPrivateRequest(String recipient,String message ) {
+		this.recipient = recipient;
+                this.message = message;
 	}
 
 	@Override
@@ -20,8 +20,8 @@ public class ChatPrivateRequest extends AbstractClientRequest {
             try {
                 out.writeByte(6);
                 out.writeByte(7);
-                out.writeUTF(message);
                 out.writeUTF(recipient);
+                out.writeUTF(message);
 
             } catch (Exception e) {
                 e.printStackTrace();
