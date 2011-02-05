@@ -13,6 +13,7 @@ import ee.ignorance.transformiceapi.protocol.server.IntroduceResponse;
 import ee.ignorance.transformiceapi.protocol.server.LoginFailedResponse;
 import ee.ignorance.transformiceapi.protocol.server.LoginSuccessResponse;
 import ee.ignorance.transformiceapi.protocol.server.ModChatMessageResponse;
+import ee.ignorance.transformiceapi.protocol.server.MusicPlayedResponse;
 import ee.ignorance.transformiceapi.protocol.server.NormalChatResponse;
 import ee.ignorance.transformiceapi.protocol.server.PrivateChatResponse;
 import ee.ignorance.transformiceapi.protocol.server.RoomResponse;
@@ -109,6 +110,11 @@ public class ServerMessagesParser {
                                 if (codeMajor == 16) {
                                         if (codeMinor == 4) {
                                                 return new TribePlayerResponse(rawMessage);
+                                        }
+                                }
+                                if (codeMajor == 26) {
+                                        if (codeMinor == 12) {
+                                                return new MusicPlayedResponse(rawMessage);
                                         }
                                 }
                         }

@@ -17,6 +17,7 @@ import ee.ignorance.transformiceapi.protocol.server.TribeChatMessageResponse;
 import ee.ignorance.transformiceapi.protocol.server.TribePlayerResponse;
 import ee.ignorance.transformiceapi.protocol.server.mouse.*;
 import ee.ignorance.transformiceapi.processors.mouse.*;
+import ee.ignorance.transformiceapi.protocol.server.MusicPlayedResponse;
 
 public abstract class CommandProcessor {
 
@@ -86,6 +87,9 @@ public abstract class CommandProcessor {
                 }
                 if (command instanceof MouseLeaveRoomResponse) {
                         return new MouseLeaveRoomProcessor();
+                }
+                if (command instanceof MusicPlayedResponse) {
+                        return new MusicPlayedProcessor();
                 }
 		return null;
 	}
