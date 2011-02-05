@@ -62,6 +62,8 @@ public class GameConnection {
 			} else {
 				socket = new Socket();
 			}
+                        socket.setKeepAlive(true);
+                        socket.setTcpNoDelay(true);
 			socket.connect(new InetSocketAddress(host, port), 1500);
 			in = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
 			out = new DataOutputStream(socket.getOutputStream());
@@ -120,7 +122,7 @@ public class GameConnection {
 		return player;
 	}
 
-	public void sendRequest(AbstractClientRequest request) {
+	public synchronized void sendRequest(AbstractClientRequest request) {
 		try {
                         if(request instanceof PositionRequest)
                         {
