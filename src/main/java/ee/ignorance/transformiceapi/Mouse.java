@@ -110,7 +110,7 @@ public class Mouse {
         }
 
         public void setMovY(int movY){
-                this.movY = movX;
+                this.movY = movY;
         }
 
         public int getMovY(){
