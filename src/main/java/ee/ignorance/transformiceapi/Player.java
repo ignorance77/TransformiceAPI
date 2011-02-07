@@ -58,5 +58,9 @@ public interface Player {
 	void command(String string);
 
         public void movementDone();
+
+        void crouch();
+
+        void standUp();
 	
 }

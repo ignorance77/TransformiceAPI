@@ -10,6 +10,7 @@ import ee.ignorance.transformiceapi.protocol.client.ChatPrivateRequest;
 import ee.ignorance.transformiceapi.protocol.client.ChatTribeRequest;
 import ee.ignorance.transformiceapi.protocol.client.CommandRequest;
 import ee.ignorance.transformiceapi.protocol.client.CreateObjectRequest;
+import ee.ignorance.transformiceapi.protocol.client.CrouchRequest;
 import ee.ignorance.transformiceapi.protocol.client.DeathRequest;
 import ee.ignorance.transformiceapi.protocol.client.HoleRequest;
 import ee.ignorance.transformiceapi.protocol.client.LoginRequest;
@@ -354,7 +355,18 @@ public class PlayerImpl implements Player {
 		getConnection().sendRequest(new CreateObjectRequest(type, x, y));
 	}
 
+        @Override
         public void movementDone() {
                 getConnection().sendRequest(new MovementDoneRequest());
+        }
+
+        @Override
+        public void crouch() {
+                getConnection().sendRequest(new CrouchRequest(true));
+        }
+
+        @Override
+        public void standUp() {
+                getConnection().sendRequest(new CrouchRequest(false));
         }
 }
