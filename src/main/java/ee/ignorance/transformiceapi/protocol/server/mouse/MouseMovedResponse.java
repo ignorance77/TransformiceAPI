@@ -62,7 +62,7 @@ public class MouseMovedResponse extends AbstractResponse{
         }
 
         public int getMovY(){
-            return posY;
+            return movY;
         }
 
         public boolean isJumping(){
