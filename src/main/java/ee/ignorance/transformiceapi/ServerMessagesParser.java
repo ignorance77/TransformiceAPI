@@ -15,6 +15,7 @@ import ee.ignorance.transformiceapi.protocol.server.LoginSuccessResponse;
 import ee.ignorance.transformiceapi.protocol.server.ModChatMessageResponse;
 import ee.ignorance.transformiceapi.protocol.server.MusicPlayedResponse;
 import ee.ignorance.transformiceapi.protocol.server.NormalChatResponse;
+import ee.ignorance.transformiceapi.protocol.server.PlayerProfileResponse;
 import ee.ignorance.transformiceapi.protocol.server.PrivateChatResponse;
 import ee.ignorance.transformiceapi.protocol.server.RoomResponse;
 import ee.ignorance.transformiceapi.protocol.server.ShamanStatusResponse;
@@ -22,6 +23,7 @@ import ee.ignorance.transformiceapi.protocol.server.StartGameResponse;
 import ee.ignorance.transformiceapi.protocol.server.SyncStatusResponse;
 import ee.ignorance.transformiceapi.protocol.server.TZATResponse;
 import ee.ignorance.transformiceapi.protocol.server.TribeChatMessageResponse;
+import ee.ignorance.transformiceapi.protocol.server.TribeListResponse;
 import ee.ignorance.transformiceapi.protocol.server.TribePlayerResponse;
 import ee.ignorance.transformiceapi.protocol.server.URLResponse;
 import ee.ignorance.transformiceapi.protocol.server.mouse.*;
@@ -91,6 +93,9 @@ public class ServerMessagesParser {
                                         if (codeMinor == 9) {
                                                 return new MouseListResponse(rawMessage);
                                         }
+                                        if (codeMinor == 10) {
+                                                return new PlayerProfileResponse(rawMessage);
+                                        }
                                         if (codeMinor == 11) {
                                                 return new FriendJoinResponse(rawMessage);
                                         }
@@ -110,6 +115,9 @@ public class ServerMessagesParser {
                                 if (codeMajor == 16) {
                                         if (codeMinor == 4) {
                                                 return new TribePlayerResponse(rawMessage);
+                                        }
+                                        if (codeMinor == 16) {
+                                                return new TribeListResponse(rawMessage);
                                         }
                                 }
                                 if (codeMajor == 26) {

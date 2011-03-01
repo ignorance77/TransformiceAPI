@@ -18,6 +18,8 @@ import ee.ignorance.transformiceapi.protocol.server.TribePlayerResponse;
 import ee.ignorance.transformiceapi.protocol.server.mouse.*;
 import ee.ignorance.transformiceapi.processors.mouse.*;
 import ee.ignorance.transformiceapi.protocol.server.MusicPlayedResponse;
+import ee.ignorance.transformiceapi.protocol.server.PlayerProfileResponse;
+import ee.ignorance.transformiceapi.protocol.server.TribeListResponse;
 
 public abstract class CommandProcessor {
 
@@ -90,6 +92,12 @@ public abstract class CommandProcessor {
                 }
                 if (command instanceof MusicPlayedResponse) {
                         return new MusicPlayedProcessor();
+                }
+                if (command instanceof PlayerProfileResponse) {
+                        return new PlayerProfileProcessor();
+                }
+                if (command instanceof TribeListResponse) {
+                        return new TribeListProcessor();
                 }
 		return null;
 	}
