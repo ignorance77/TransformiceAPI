@@ -1,8 +1,9 @@
 package ee.ignorance.transformiceapi.protocol.server;
 
 import ee.ignorance.transformiceapi.TribePlayer;
-import java.util.ArrayList;
+import ee.ignorance.transformiceapi.titles.TribeRank;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TribeListResponse extends AbstractResponse{
@@ -23,7 +24,7 @@ public class TribeListResponse extends AbstractResponse{
             String split[] = line.split(splitter+"");
 
             String name = split[0];
-            TribePlayer.TribeRank rank = TribePlayer.TribeRank.getRank(Integer.valueOf(split[1]));
+            TribeRank rank = TribeRank.getRank(Integer.valueOf(split[1]));
             String room = split[4];
 
             tribePlayers.add(new TribePlayer(name, rank, room));
