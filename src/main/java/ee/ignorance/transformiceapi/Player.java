@@ -62,5 +62,9 @@ public interface Player {
         void crouch();
 
         void standUp();
+
+        void requestTribeList();
+
+        void requestProfile(String nickname);
 	
 }
