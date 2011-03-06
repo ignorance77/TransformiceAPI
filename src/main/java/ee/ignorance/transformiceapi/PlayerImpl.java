@@ -19,7 +19,6 @@ import ee.ignorance.transformiceapi.protocol.client.MagicCastRequest;
 import ee.ignorance.transformiceapi.protocol.client.MagicStopRequest;
 import ee.ignorance.transformiceapi.protocol.client.MovementDoneRequest;
 import ee.ignorance.transformiceapi.protocol.client.PositionRequest;
-import ee.ignorance.transformiceapi.protocol.client.ProfileRequest;
 import ee.ignorance.transformiceapi.protocol.client.TakeCheeseRequest;
 import ee.ignorance.transformiceapi.protocol.client.TribeListRequest;
 
@@ -379,6 +378,6 @@ public class PlayerImpl implements Player {
 
         @Override
         public void requestProfile(String nickname) {
-                getConnection().sendRequest(new ProfileRequest(nickname));
+                getConnection().sendRequest(new CommandRequest("profile " + nickname));
         }
 }
