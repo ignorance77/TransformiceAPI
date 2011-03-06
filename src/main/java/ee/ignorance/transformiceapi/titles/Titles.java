@@ -7,6 +7,7 @@ public class Titles {
         private static final SortedMap<Integer, String> firstsTitles = FirstsTitles.firstsTitles;
         private static final SortedMap<Integer, String> cheeseTitles = CheeseTitles.cheeseTitles;
         private static final SortedMap<Integer, String> savesTitles = SavesTitles.savesTitles;
+        private static final SortedMap<Integer, String> hardSavesTitles = HardSavesTitles.hardSavesTitles;
 
         public static int cheeseForNextCheeseTitle(int currentCount) {
                 return nextCount(currentCount, cheeseTitles);
@@ -18,6 +19,10 @@ public class Titles {
 
         public static int savesForNextSavesTitle(int currentCount) {
                 return nextCount(currentCount, savesTitles);
+        }
+
+        public static int hardSavesForNextHardSavesTitle(int currentCount) {
+                return nextCount(currentCount, hardSavesTitles);
         }
 
         public static String nextCheeseTitle(int currentCount) {
@@ -32,6 +37,10 @@ public class Titles {
                 return nextTitle(currentCount, savesTitles);
         }
 
+        public static String nextHardSavesTitle(int currentCount) {
+                return nextTitle(currentCount, hardSavesTitles);
+        }
+
         public static SortedMap<Integer, String> getCheeseTitles() {
                 return cheeseTitles;
         }
@@ -42,6 +51,10 @@ public class Titles {
 
         public static SortedMap<Integer, String> getSavesTitles() {
                 return savesTitles;
+        }
+
+        public static SortedMap<Integer, String> getHardSavesTitles() {
+                return hardSavesTitles;
         }
 
         private static int nextCount(int currentCount, SortedMap<Integer, String> map) {

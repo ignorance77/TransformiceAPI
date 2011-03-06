@@ -22,8 +22,9 @@ public class PlayerProfileResponse extends AbstractResponse{
         int personalGathered = Integer.parseInt(profileData[1]);
         int firsts = Integer.parseInt(profileData[2]);
         int cheese = Integer.parseInt(profileData[3]);
+        int hardSaves = Integer.parseInt(profileData[4]);
 
-	setPlayerProfile(new PlayerProfile(name, tribe, saves, personalGathered, firsts, cheese));
+	setPlayerProfile(new PlayerProfile(name, tribe, saves, hardSaves, personalGathered, firsts, cheese));
     }
 
     public void setPlayerProfile(PlayerProfile player) {

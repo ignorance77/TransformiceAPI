@@ -7,14 +7,16 @@ public class PlayerProfile {
     private String playerName;
     private String tribe;
     private int saves;
+    private int hardSaves;
     private int personalGathered;
     private int firsts;
     private int cheese;
 
-    public PlayerProfile(String playerName, String tribe, int saves, int personalGathered, int firsts, int cheese) {
+    public PlayerProfile(String playerName, String tribe, int saves, int hardSaves, int personalGathered, int firsts, int cheese) {
         this.playerName = playerName;
         this.tribe = tribe;
         this.saves = saves;
+        this.hardSaves = hardSaves;
         this.personalGathered = personalGathered;
         this.firsts = firsts;
         this.cheese = cheese;
@@ -42,6 +44,14 @@ public class PlayerProfile {
 
     public void setSaves(int saves) {
         this.saves = saves;
+    }
+
+     public int getHardSaves() {
+        return hardSaves;
+    }
+
+    public void setHardSaves(int hardSaves) {
+        this.hardSaves = hardSaves;
     }
 
     public int getPersonalGathered() {
@@ -79,6 +89,9 @@ public class PlayerProfile {
     public String nextSavesTitle() {
         return Titles.nextSavesTitle(saves);
     }
+    public String nextHardSavesTitle() {
+        return Titles.nextHardSavesTitle(hardSaves);
+    }
 
     public int cheeseForNextCheeseTitle() {
         return Titles.cheeseForNextCheeseTitle(cheese);
@@ -86,8 +99,11 @@ public class PlayerProfile {
     public int firstsForNextFirstsTitle() {
         return Titles.firstsForNextFirstsTitle(firsts);
     }
-
     public int savesForNextSavesTitle() {
         return Titles.savesForNextSavesTitle(saves);
-    } 
+    }
+    public int hardSavesForNextHardSavesTitle() {
+        return Titles.hardSavesForNextHardSavesTitle(hardSaves);
+    }
+
 }
