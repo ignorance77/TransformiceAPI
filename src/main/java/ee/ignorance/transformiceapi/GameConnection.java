@@ -152,6 +152,13 @@ public class GameConnection {
                                 out.writeBytes(new String(request.getBytes()));
                                 out.flush();
                         }
+                        else if(request instanceof MagicCastRequest)
+                        {
+                                out.writeInt(request.getBytes().length + 8);
+                                writePrefix();
+                                out.writeBytes(new String(request.getBytes()));
+                                out.flush();
+                        }
                         else
                         {
                                 out.writeInt(request.getBytes().length + 8 + 4);
