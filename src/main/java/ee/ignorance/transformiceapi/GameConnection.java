@@ -15,6 +15,7 @@ import ee.ignorance.transformiceapi.protocol.client.AbstractClientRequest;
 import ee.ignorance.transformiceapi.protocol.client.ChatNormalRequest;
 import ee.ignorance.transformiceapi.protocol.client.ChatPrivateRequest;
 import ee.ignorance.transformiceapi.protocol.client.ChatTribeRequest;
+import ee.ignorance.transformiceapi.protocol.client.MagicCastRequest;
 import ee.ignorance.transformiceapi.protocol.client.PositionRequest;
 import ee.ignorance.transformiceapi.protocol.client.RegisterRequest;
 import ee.ignorance.transformiceapi.protocol.server.AbstractResponse;
