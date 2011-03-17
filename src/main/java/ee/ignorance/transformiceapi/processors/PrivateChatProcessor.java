@@ -10,7 +10,10 @@ public class PrivateChatProcessor extends CommandProcessor{
     @Override
     public void process(AbstractResponse command, PlayerImpl player) {
         PrivateChatResponse response = (PrivateChatResponse) command;
-        player.notifyListeners(new PrivateChatEvent(response.getSender(), response.getMessage()));
+        
+        if (response.getType() == 1) {  //0 indicates outgoing sent message
+            player.notifyListeners(new PrivateChatEvent(response.getSender(), response.getMessage()));
+        }
     }
 
 }

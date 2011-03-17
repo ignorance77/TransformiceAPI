@@ -2,17 +2,20 @@ package ee.ignorance.transformiceapi.processors.mouse;
 
 import ee.ignorance.transformiceapi.Mouse;
 import ee.ignorance.transformiceapi.PlayerImpl;
+import ee.ignorance.transformiceapi.event.mouse.MouseLeaveRoomEvent;
 import ee.ignorance.transformiceapi.processors.CommandProcessor;
 import ee.ignorance.transformiceapi.protocol.server.AbstractResponse;
 import ee.ignorance.transformiceapi.protocol.server.mouse.MouseLeaveRoomResponse;
 
+public class MouseLeaveRoomProcessor extends CommandProcessor {
 
-public class MouseLeaveRoomProcessor  extends CommandProcessor{
-
-	@Override
-	public void process(AbstractResponse command, PlayerImpl player) {
-		MouseLeaveRoomResponse response = (MouseLeaveRoomResponse) command;
+        @Override
+        public void process(AbstractResponse command, PlayerImpl player) {
+                MouseLeaveRoomResponse response = (MouseLeaveRoomResponse) command;
                 Mouse mouse = player.getMouseById(response.getMouseID());
-                player.getRoomMice().remove(mouse);
-	}
+                if (mouse != null) {
+                        player.getRoomMice().remove(mouse);
+                        player.notifyListeners(new MouseLeaveRoomEvent(mouse));
+                }
+        }
 }

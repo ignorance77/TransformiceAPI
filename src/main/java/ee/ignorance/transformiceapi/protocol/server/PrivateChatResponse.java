@@ -42,8 +42,8 @@ public class PrivateChatResponse extends AbstractResponse{
         return message;
     }
 
-    public String setType(int type) {
-        return sender;
+    public void setType(int type) {
+        this.type = type;
     }
 
     public int getType() {

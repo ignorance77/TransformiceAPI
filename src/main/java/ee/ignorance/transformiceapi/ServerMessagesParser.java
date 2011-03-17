@@ -34,13 +34,14 @@ public class ServerMessagesParser {
                 DataInputStream stream = new DataInputStream(new ByteArrayInputStream(message));
                 byte b1 = stream.readByte();
                 byte b2 = stream.readByte();
-                byte b3 = stream.readByte();
-                byte b4 = stream.readByte();
-                int codeMajor = stream.readByte();
-                int codeMinor = stream.readByte();
 
                 if (b1 == 1) {
                         if (b2 == 1) {
+                                byte b3 = stream.readByte();
+                                byte b4 = stream.readByte();
+                                int codeMajor = stream.readByte();
+                                int codeMinor = stream.readByte();
+
                                 List<Byte> bytes = new ArrayList<Byte>();
                                 while (stream.available() > 0) {
                                         byte b = stream.readByte();
