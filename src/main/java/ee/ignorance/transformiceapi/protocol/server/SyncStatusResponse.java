@@ -1,30 +1,30 @@
 package ee.ignorance.transformiceapi.protocol.server;
 
-import java.util.List;
+import ee.ignorance.transformiceapi.processors.AbstractProcessor;
+import ee.ignorance.transformiceapi.processors.SyncStatusProcessor;
 
+import java.util.List;
 
 public class SyncStatusResponse extends AbstractResponse {
 
-	private int codeSync;
-	
-	public SyncStatusResponse(List<String> rawMessage) {
-		super(rawMessage);
-	}
+        private int codeSync;
 
-	@Override
-	public void parse(List<String> rawMessage) {
-		int codeSync = Integer.parseInt(rawMessage.get(1));
-		setCodeSync(codeSync);
-	}
+        public SyncStatusResponse(List<String> rawMessage) {
+                super(rawMessage);
+        }
 
-	public int getCodeSync() {
-		return codeSync;
-	}
+        @Override
+        public void parse(List<String> rawMessage) {
+                codeSync = Integer.parseInt(rawMessage.get(1));
 
-	public void setCodeSync(int codeSync) {
-		this.codeSync = codeSync;
-	}
-	
-	
+        }
 
+        public int getCodeSync() {
+                return codeSync;
+        }
+
+        @Override
+        public AbstractProcessor getProcessor() {
+                return new SyncStatusProcessor();
+        }
 }

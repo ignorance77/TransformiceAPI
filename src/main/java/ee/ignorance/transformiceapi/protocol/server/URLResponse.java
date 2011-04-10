@@ -1,46 +1,44 @@
 package ee.ignorance.transformiceapi.protocol.server;
 
+import ee.ignorance.transformiceapi.processors.AbstractProcessor;
+import ee.ignorance.transformiceapi.processors.UrlProcessor;
 import java.util.List;
 
-public class URLResponse extends AbstractResponse {
+public class UrlResponse extends AbstractResponse {
 
-	private Integer CMDTEC;
-	private int[] MDT;
-	
-	public URLResponse(List<String> rawMessage) {
-		super(rawMessage);
-	}
+        private Integer CMDTEC;
+        private int[] MDT;
 
-	@Override
-	public void parse(List<String> rawMessage) {
-		int[] MDT = new int[10];
-		String MDTString = rawMessage.get(2);
-		for (int i = 0; i < 10; i++) {
-			int c = MDTString.charAt(i) - '0';
-			if (c == 0) {
-				MDT[i] = 10;
-			} else {	
-				MDT[i] = c;
-			}
-		}
-		setMDT(MDT);
-		setCMDTEC(Integer.parseInt(rawMessage.get(3)));
-	}
+        public UrlResponse(List<String> rawMessage) {
+                super(rawMessage);
+        }
 
-	public Integer getCMDTEC() {
-		return CMDTEC;
-	}
+        @Override
+        public void parse(List<String> rawMessage) {
+                MDT = new int[10];
+                String MDTString = rawMessage.get(2);
+                for (int i = 0; i < 10; i++) {
+                        int c = MDTString.charAt(i) - '0';
+                        if (c == 0) {
+                                MDT[i] = 10;
+                        } else {
+                                MDT[i] = c;
+                        }
+                }
 
-	public void setCMDTEC(Integer cMDTEC) {
-		CMDTEC = cMDTEC;
-	}
+                CMDTEC = Integer.parseInt(rawMessage.get(3));
+        }
 
-	public int[] getMDT() {
-		return MDT;
-	}
+        public Integer getCMDTEC() {
+                return CMDTEC;
+        }
 
-	public void setMDT(int[] mDT) {
-		MDT = mDT;
-	}
-	
+        public int[] getMDT() {
+                return MDT;
+        }
+
+        @Override
+        public AbstractProcessor getProcessor() {
+                return new UrlProcessor();
+        }
 }

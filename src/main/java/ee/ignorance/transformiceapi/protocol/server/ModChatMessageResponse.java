@@ -1,52 +1,47 @@
 package ee.ignorance.transformiceapi.protocol.server;
 
+import ee.ignorance.transformiceapi.processors.AbstractProcessor;
+import ee.ignorance.transformiceapi.processors.ModChatMessageProcessor;
+
 import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
 
-public class ModChatMessageResponse extends AbstractResponse{
+public class ModChatMessageResponse extends AbstractResponse {
 
-    private String message;
-    private String sender;
-    private int type;
+        private String message;
+        private String sender;
+        private int type;
 
-    public ModChatMessageResponse(byte[] rawMessage) {
-        super(rawMessage);
-    }
-
-    @Override
-    public void parse(byte[] rawMessage) {
-        DataInputStream in = new DataInputStream(new ByteArrayInputStream(rawMessage));
-        try {
-                setType(in.readByte());
-                setSender(in.readUTF());
-                setMessage(in.readUTF());
-        } catch (Exception e) {
-            e.printStackTrace();
+        public ModChatMessageResponse(byte[] rawMessage) {
+                super(rawMessage);
         }
-    }
 
-    public void setMessage(String message) {
-        this.message = message;
-    }
+        @Override
+        public void parse(byte[] rawMessage) {
+                DataInputStream in = new DataInputStream(new ByteArrayInputStream(rawMessage));
+                try {
+                        type = in.readByte();
+                        sender = in.readUTF();
+                        message = in.readUTF();
+                } catch (Exception e) {
+                        e.printStackTrace();
+                }
+        }
 
-    public String getMessage() {
-        return message;
-    }
+        public String getMessage() {
+                return message;
+        }
 
-    public void setSender(String sender) {
-        this.sender = sender;
-    }
+        public String getSender() {
+                return sender;
+        }
 
-    public String getSender() {
-        return sender;
-    }
+        public int getType() {
+                return type;
+        }
 
-    public void setType(int type) {
-        this.type = type;
-    }
-
-    public int getType() {
-        return type;
-    }
-
+        @Override
+        public AbstractProcessor getProcessor() {
+                return new ModChatMessageProcessor();
+        }
 }

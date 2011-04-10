@@ -1,5 +1,8 @@
 package ee.ignorance.transformiceapi.protocol.server;
 
+import ee.ignorance.transformiceapi.processors.AbstractProcessor;
+import ee.ignorance.transformiceapi.processors.StartGameResponseProcessor;
+
 import java.util.List;
 
 public class StartGameResponse extends AbstractResponse {
@@ -16,9 +19,9 @@ public class StartGameResponse extends AbstractResponse {
 
         @Override
         public void parse(List<String> rawMessage) {
-                setModeNext(rawMessage.get(1));
-                setText(rawMessage.get(2));
-                setGameCode(rawMessage.get(3));
+                modeNext = rawMessage.get(1);
+                text = rawMessage.get(2);
+                gameCode = rawMessage.get(3);
 
                 if (getModeNext().equals("-1")) {   //custom usermade map
                         char separator = (char) 0x02;
@@ -31,11 +34,11 @@ public class StartGameResponse extends AbstractResponse {
                         }
 
                         String[] mapData = rawMessage.get(index).split(String.valueOf(separator));
-                        setMapXML(mapData[0]);
-                        setMapMaker(mapData[1]);
+                        mapXML = mapData[0];
+                        mapMaker = mapData[1];
                 } else {        //vanilla map
-                        setMapMaker(getModeNext());         //store map number as map maker name for vanilla maps
-                        setMapXML("");                      //no xml
+                        mapMaker = getModeNext();         //store map number as map maker name for vanilla maps
+                        mapXML = "";                      //no xml
                 }
         }
 
@@ -43,39 +46,24 @@ public class StartGameResponse extends AbstractResponse {
                 return modeNext;
         }
 
-        public void setModeNext(String modeNext) {
-                this.modeNext = modeNext;
-        }
-
         public String getText() {
                 return text;
-        }
-
-        public void setText(String text) {
-                this.text = text;
         }
 
         public String getGameCode() {
                 return gameCode;
         }
 
-        public void setGameCode(String gameCode) {
-                this.gameCode = gameCode;
-        }
-
         public String getMapMaker() {
                 return mapMaker;
-        }
-
-        public void setMapMaker(String mapMaker) {
-                this.mapMaker = mapMaker;
         }
 
         public String getMapXML() {
                 return mapXML;
         }
 
-        public void setMapXML(String mapXML) {
-                this.mapXML = mapXML;
+        @Override
+        public AbstractProcessor getProcessor() {
+                return new StartGameResponseProcessor();
         }
 }

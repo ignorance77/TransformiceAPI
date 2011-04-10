@@ -1,6 +1,9 @@
 package ee.ignorance.transformiceapi.protocol.server.mouse;
 
+import ee.ignorance.transformiceapi.processors.AbstractProcessor;
+import ee.ignorance.transformiceapi.processors.mouse.MouseDeathProcessor;
 import ee.ignorance.transformiceapi.protocol.server.AbstractResponse;
+
 import java.util.List;
 
 public class MouseDeathResponse extends AbstractResponse {
@@ -13,14 +16,15 @@ public class MouseDeathResponse extends AbstractResponse {
 
         @Override
         public void parse(List<String> rawMessage) {
-                setMouseID(Integer.valueOf(rawMessage.get(1)));
+                mouseID = Integer.valueOf(rawMessage.get(1));
         }
 
         public int getMouseID() {
                 return mouseID;
         }
 
-        public void setMouseID(int mouseID) {
-                this.mouseID = mouseID;
+        @Override
+        public AbstractProcessor getProcessor() {
+                return new MouseDeathProcessor();
         }
 }

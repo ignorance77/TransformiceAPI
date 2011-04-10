@@ -1,92 +1,96 @@
 package ee.ignorance.transformiceapi.protocol.server.mouse;
 
+import ee.ignorance.transformiceapi.processors.AbstractProcessor;
+import ee.ignorance.transformiceapi.processors.mouse.MouseMovedProcessor;
 import ee.ignorance.transformiceapi.protocol.server.AbstractResponse;
+
 import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
 
+public class MouseMovedResponse extends AbstractResponse {
 
-public class MouseMovedResponse extends AbstractResponse{
+        private String gameCode;
+        private int posX;
+        private int posY;
+        private int movX;
+        private int movY;
+        private boolean goingLeft;
+        private boolean goingRight;
+        private boolean jumping;
+        private byte jumpingImage;
+        private byte unk; //unknown
+        private int playerID;
 
-    private String gameCode;
-    private int posX;
-    private int posY;
-    private int movX;
-    private int movY;
-    private boolean goingLeft;
-    private boolean goingRight;
-    private boolean jumping;
-    private byte jumpingImage;
-    private byte unk; //unknown
-    private int playerID;
-
-    	public MouseMovedResponse(byte[] rawMessage) {
-		super(rawMessage);
-	}
-
+        public MouseMovedResponse(byte[] rawMessage) {
+                super(rawMessage);
+        }
 
         @Override
-	public void parse(byte[] rawMessage) {
-            try {
-                DataInputStream in = new DataInputStream(new ByteArrayInputStream(rawMessage));
-                gameCode = Integer.toString(in.readInt());
-                goingRight = in.readBoolean();
-                goingLeft = in.readBoolean();
-                posX = in.readShort();
-                posY = in.readShort();
-                movX = in.readShort();
-                movY = in.readShort();
-                jumping = in.readBoolean();
-                jumpingImage = in.readByte();
-                unk = in.readByte(); //no clue what this is
-                playerID = in.readInt();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-	}
-
-
-        public String getGameCode(){
-            return gameCode;
+        public void parse(byte[] rawMessage) {
+                try {
+                        DataInputStream in = new DataInputStream(new ByteArrayInputStream(rawMessage));
+                        gameCode = Integer.toString(in.readInt());
+                        goingRight = in.readBoolean();
+                        goingLeft = in.readBoolean();
+                        posX = in.readShort();
+                        posY = in.readShort();
+                        movX = in.readShort();
+                        movY = in.readShort();
+                        jumping = in.readBoolean();
+                        jumpingImage = in.readByte();
+                        unk = in.readByte(); //no clue what this is
+                        playerID = in.readInt();
+                } catch (Exception e) {
+                        e.printStackTrace();
+                }
         }
 
-        public int getPosX(){
-            return posX;
+        public String getGameCode() {
+                return gameCode;
         }
 
-        public int getPosY(){
-            return posY;
+        public int getPosX() {
+                return posX;
         }
 
-        public int getMovX(){
-            return movX;
+        public int getPosY() {
+                return posY;
         }
 
-        public int getMovY(){
-            return movY;
+        public int getMovX() {
+                return movX;
         }
 
-        public boolean isJumping(){
-            return jumping;
+        public int getMovY() {
+                return movY;
         }
 
-        public boolean isGoingRight(){
-            return goingRight;
+        public boolean isJumping() {
+                return jumping;
         }
 
-        public boolean isGoingLeft(){
-            return goingLeft;
+        public boolean isGoingRight() {
+                return goingRight;
         }
 
-        public int getPlayerID(){
-            return playerID;
+        public boolean isGoingLeft() {
+                return goingLeft;
         }
 
-        public byte getJumpingImage(){
-            return jumpingImage;
+        public int getPlayerID() {
+                return playerID;
         }
 
-        public byte getUnk(){
-            return unk;
+        public byte getJumpingImage() {
+                return jumpingImage;
         }
 
+        public byte getUnk() {
+                return unk;
+        }
+
+        @Override
+        public AbstractProcessor getProcessor() {
+                return new MouseMovedProcessor();
+        }
 }

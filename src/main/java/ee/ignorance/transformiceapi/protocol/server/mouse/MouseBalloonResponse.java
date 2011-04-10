@@ -1,8 +1,10 @@
 package ee.ignorance.transformiceapi.protocol.server.mouse;
 
+import ee.ignorance.transformiceapi.processors.AbstractProcessor;
+import ee.ignorance.transformiceapi.processors.mouse.MouseBalloonProcessor;
 import ee.ignorance.transformiceapi.protocol.server.AbstractResponse;
-import java.util.List;
 
+import java.util.List;
 
 public class MouseBalloonResponse extends AbstractResponse {
 
@@ -15,23 +17,20 @@ public class MouseBalloonResponse extends AbstractResponse {
 
         @Override
         public void parse(List<String> rawMessage) {
-                setMouseID(Integer.valueOf(rawMessage.get(1)));
-                setBalloonAttached(rawMessage.size() == 2);
+                mouseID = Integer.valueOf(rawMessage.get(1));
+                balloonAttached = rawMessage.size() == 2;
         }
 
         public int getMouseID() {
                 return mouseID;
         }
 
-        public void setMouseID(int mouseID) {
-                this.mouseID = mouseID;
+        public boolean isBalloonAttached() {
+                return balloonAttached;
         }
 
-        public void setBalloonAttached(boolean balloonAttached){
-            this.balloonAttached = balloonAttached;
-        }
-
-        public boolean isBalloonAttached(){
-            return balloonAttached;
+        @Override
+        public AbstractProcessor getProcessor() {
+                return new MouseBalloonProcessor();
         }
 }

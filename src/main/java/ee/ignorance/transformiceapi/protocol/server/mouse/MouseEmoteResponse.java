@@ -1,39 +1,36 @@
 package ee.ignorance.transformiceapi.protocol.server.mouse;
 
+import ee.ignorance.transformiceapi.processors.AbstractProcessor;
+import ee.ignorance.transformiceapi.processors.mouse.MouseEmoteProcessor;
 import ee.ignorance.transformiceapi.protocol.server.AbstractResponse;
-import java.util.List;
 
+import java.util.List;
 
 public class MouseEmoteResponse extends AbstractResponse {
 
-	private int mouseID;
-	private int emote;
+        private int mouseID;
+        private int emote;
 
-	public MouseEmoteResponse(List<String> rawMessage) {
-		super(rawMessage);
-	}
+        public MouseEmoteResponse(List<String> rawMessage) {
+                super(rawMessage);
+        }
 
-	@Override
-	public void parse(List<String> rawMessage) {
-		setMouseID(Integer.valueOf(rawMessage.get(1)));
-		setEmote(Integer.valueOf(rawMessage.get(2)));
-	}
-
+        @Override
+        public void parse(List<String> rawMessage) {
+                mouseID = Integer.valueOf(rawMessage.get(1));
+                emote = Integer.valueOf(rawMessage.get(2));
+        }
 
         public int getMouseID() {
-		return mouseID;
-	}
+                return mouseID;
+        }
 
-	public void setMouseID(int mouseID) {
-		this.mouseID = mouseID;
-	}
+        public int getEmote() {
+                return emote;
+        }
 
-
-	public void setEmote(int emote) {
-		this.emote = emote;
-	}
-
-	public int getEmote() {
-		return emote;
-	}
+        @Override
+        public AbstractProcessor getProcessor() {
+                return new MouseEmoteProcessor();
+        }
 }

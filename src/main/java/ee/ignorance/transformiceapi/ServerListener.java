@@ -1,5 +1,6 @@
 package ee.ignorance.transformiceapi;
 
+import ee.ignorance.transformiceapi.protocol.server.AbstractResponse;
 import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.io.IOException;
@@ -7,7 +8,6 @@ import java.util.Arrays;
 
 import org.apache.log4j.Logger;
 
-import ee.ignorance.transformiceapi.protocol.server.AbstractResponse;
 
 public class ServerListener implements Runnable {
 

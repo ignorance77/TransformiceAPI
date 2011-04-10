@@ -1,5 +1,6 @@
 package ee.ignorance.transformiceapi;
 
+import ee.ignorance.transformiceapi.protocol.server.AbstractResponse;
 import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
 import java.io.IOException;
@@ -7,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Arrays;
 
-import ee.ignorance.transformiceapi.protocol.server.AbstractResponse;
 import ee.ignorance.transformiceapi.protocol.server.FriendJoinResponse;
 import ee.ignorance.transformiceapi.protocol.server.IntroduceResponse;
 import ee.ignorance.transformiceapi.protocol.server.LoginFailedResponse;
@@ -25,7 +25,7 @@ import ee.ignorance.transformiceapi.protocol.server.TZATResponse;
 import ee.ignorance.transformiceapi.protocol.server.TribeChatMessageResponse;
 import ee.ignorance.transformiceapi.protocol.server.TribeListResponse;
 import ee.ignorance.transformiceapi.protocol.server.TribePlayerResponse;
-import ee.ignorance.transformiceapi.protocol.server.URLResponse;
+import ee.ignorance.transformiceapi.protocol.server.UrlResponse;
 import ee.ignorance.transformiceapi.protocol.server.mouse.*;
 
 public class ServerMessagesParser {
@@ -55,7 +55,7 @@ public class ServerMessagesParser {
                                                 return new IntroduceResponse(rawMessage);
                                         }
                                         if (codeMinor == 27) {
-                                                return new URLResponse(rawMessage);
+                                                return new UrlResponse(rawMessage);
                                         }
                                         if (codeMinor == 3) {
                                                 return new LoginFailedResponse(rawMessage);

@@ -1,5 +1,8 @@
 package ee.ignorance.transformiceapi.protocol.server;
 
+import ee.ignorance.transformiceapi.processors.AbstractProcessor;
+import ee.ignorance.transformiceapi.processors.MusicPlayedProcessor;
+
 import java.util.List;
 
 public class MusicPlayedResponse extends AbstractResponse {
@@ -12,14 +15,15 @@ public class MusicPlayedResponse extends AbstractResponse {
 
         @Override
         public void parse(List<String> rawMessage) {
-                setMusicURL(rawMessage.get(1));
+                musicURL = rawMessage.get(1);
         }
 
         public String getMusicURL() {
                 return musicURL;
         }
 
-        public void setMusicURL(String musicURL) {
-                this.musicURL = musicURL;
+        @Override
+        public AbstractProcessor getProcessor() {
+                return new MusicPlayedProcessor();
         }
 }

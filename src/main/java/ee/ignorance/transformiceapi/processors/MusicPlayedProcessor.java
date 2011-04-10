@@ -1,15 +1,15 @@
 package ee.ignorance.transformiceapi.processors;
 
-import ee.ignorance.transformiceapi.PlayerImpl;
+import ee.ignorance.transformiceapi.GameConnection;
 import ee.ignorance.transformiceapi.event.MusicPlayedEvent;
 import ee.ignorance.transformiceapi.protocol.server.AbstractResponse;
 import ee.ignorance.transformiceapi.protocol.server.MusicPlayedResponse;
 
-public class MusicPlayedProcessor extends CommandProcessor{
+public class MusicPlayedProcessor extends AbstractProcessor {
 
-    @Override
-    public void process(AbstractResponse command, PlayerImpl player) {
-        MusicPlayedResponse response = (MusicPlayedResponse) command;
-        player.notifyListeners(new MusicPlayedEvent(response.getMusicURL()));
-    }
+        @Override
+        public void process(AbstractResponse response, GameConnection connection) {
+                MusicPlayedResponse resp = (MusicPlayedResponse) response;
+                connection.getPlayer().notifyListeners(new MusicPlayedEvent(resp.getMusicURL()));
+        }
 }
