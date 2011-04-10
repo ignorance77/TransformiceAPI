@@ -34,10 +34,10 @@ public class GameConnection {
         private DataInputStream in;
         private DataOutputStream out;
 
-        public boolean urlSent = false;
-        public int[] MDT;
-        public Integer CMDTEC = 2;
-        public Boolean registerResult;
+        private boolean urlSent = false;
+        private int[] MDT;
+        private Integer CMDTEC = 2;
+        private Boolean registerResult;
         
         private ServerListener serverListener;
         private PingThread pingThread;
@@ -56,10 +56,11 @@ public class GameConnection {
                                 socket = new Socket();
                         }
 
-                        socket.setKeepAlive(true);;
+                        socket.setKeepAlive(true);
                         socket.connect(new InetSocketAddress(host, port), 1500);
                         in = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
                         out = new DataOutputStream(socket.getOutputStream());
+
                         startListening();
                         introduce();
                         long startTime = System.currentTimeMillis();
@@ -67,19 +68,23 @@ public class GameConnection {
                                 synchronized (this) {
                                         wait(509);
                                         if (System.currentTimeMillis() - startTime > MAXWAITTIME) {
-                                                throw new GameException("Introduce failed. Wrong version?");
+                                                throw new GameException("Wrong version number?");
                                         }
                                 }
                         }
                         if (login) {
                                 startPingThread();
                         }
-                } catch (Exception e) {
+      
+                } catch (InterruptedException ignored) {
+                } catch (GameException e) {
+                        terminate("Introduce failed", e);
+                } catch (IOException e) {
                         terminate("Connect failed", e);
                 }
         }
 
-        public Player createPlayer(String username, String password) throws GameException {
+        public PlayerImpl createPlayer(String username, String password) throws GameException {
                 if (player != null) {
                         throw new GameException("Player was already created for this connection");
                 }
@@ -88,12 +93,10 @@ public class GameConnection {
                 return player;
         }
 
-        public void disconnect() {
-                try {
-                        socket.close();
-                } catch (IOException e) {
-                        e.printStackTrace();
-                }
+        public void disconnect() throws IOException {
+             if (socket != null) {
+                     socket.close();
+             }       
         }
 
         public DataInputStream getInputStream() {
@@ -123,8 +126,9 @@ public class GameConnection {
                                         }
                                 }
                         }
-                } catch (Exception e) {
-                        terminate("Register failed : ", e);
+                } catch (InterruptedException ignored) {
+                } catch (GameException e) {
+                        terminate("Register failed", e);
                 }
         }
 
@@ -164,7 +168,7 @@ public class GameConnection {
                                 out.writeBytes(new String(request.getBytes()));
                                 out.flush();
                         }
-                } catch (Exception e) {
+                } catch (IOException e) {
                         e.printStackTrace();
                 }
         }
@@ -184,10 +188,22 @@ public class GameConnection {
         
         public void terminate(String message, Throwable e) throws GameException {
                 serverListener.terminate();
+                closeQuietly();
                 if (pingThread != null) {
                         pingThread.terminate();
                 }
                 throw new GameException(message, e);
+        }
+
+        private void closeQuietly() {
+                if (socket == null) {
+                        return;
+                }
+
+                try {
+                        socket.close();
+                } catch (IOException ignored) {
+                }
         }
 
         private void introduce() throws IOException {
