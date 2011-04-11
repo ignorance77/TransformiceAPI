@@ -18,7 +18,7 @@ public class MouseEmoteProcessor extends AbstractProcessor {
                 Mouse mouse = player.getMouseById(resp.getMouseID());
                 if (mouse != null) {
                         mouse.setEmote(resp.getEmote());
-                        player.notifyListeners(new MouseEmoteEvent(mouse, resp.getEmote()));
+                        player.notifyListeners(new MouseEmoteEvent(mouse));
                 }
         }
 }

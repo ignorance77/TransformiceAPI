@@ -23,12 +23,7 @@ public class Mouse {
         private byte unk = 0;
         private boolean balloonAttached = false;
 
-        public static final int DANCE = 1;
-        public static final int SMILE = 2;
-        public static final int CRY = 3;
-        public static final int KISS = 4;
-        private int emote = 0;
-
+        private Emote emote;
 	
 	public static Mouse parse(String[] mouseData) {
 		Mouse mouse = new Mouse();
@@ -181,11 +176,11 @@ public class Mouse {
                 return standing;
         }
 
-        public void setEmote(int emote){
+        public void setEmote(Emote emote){
                 this.emote= emote;
         }
 
-        public int getEmote(){
+        public Emote getEmote(){
                 return emote;
         }
 
@@ -211,5 +206,31 @@ public class Mouse {
 		return "Mouse [code=" + code + ", name=" + name + ", dead=" + dead
 				+ ", score=" + score + ", codeForum=" + codeForum + "]";
 	}
-	
+
+	public static enum Emote {
+                Dance (1),
+                Smile (2),
+                Cry (3),
+                Kiss (4);
+
+                private final int value;
+
+                Emote(int value) {
+                        this.value = value;
+                }
+                
+                public static Emote getEmote(int value) {
+                        switch (value) {
+                                case 1: return Dance;
+                                case 2: return Smile;
+                                case 3: return Cry;
+                                case 4: return Kiss;             
+                        }
+                        throw new AssertionError("Unknow Emote value: " + value);
+                }
+
+
+
+
+        }
 }

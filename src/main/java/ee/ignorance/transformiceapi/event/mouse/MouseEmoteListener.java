@@ -4,5 +4,5 @@ import ee.ignorance.transformiceapi.Mouse;
 
 public interface MouseEmoteListener {
 
-        void mouseEmoted(Mouse lul, int emote);
+        void mouseEmoted(Mouse mouse);
 }
