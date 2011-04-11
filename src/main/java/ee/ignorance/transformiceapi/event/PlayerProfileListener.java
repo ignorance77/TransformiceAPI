@@ -1,11 +1,8 @@
 package ee.ignorance.transformiceapi.event;
 
-public abstract class PlayerProfileListener implements EventListener {
+import ee.ignorance.transformiceapi.PlayerProfile;
 
-	@Override
-	public boolean matches(Event e) {
-		return e instanceof PlayerProfileEvent;
-	}
+public interface PlayerProfileListener {
 
-
+        void playerProfileReceived(PlayerProfile profile);
 }

@@ -1,36 +1,48 @@
 package ee.ignorance.transformiceapi.event;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 
-public class EventService {
+public final class EventService {
 
-	private List<EventListener> listeners;
-	
-	public EventService() {
-		listeners = new ArrayList<EventListener>();
-	}
-	
-	public synchronized void registerEventListener(EventListener listener) {
-                synchronized(listeners){
-                        listeners.add(listener);
-                }
-	}
-	
-	public synchronized void unregisterEventListener(EventListener listener) {
-                synchronized(listeners){
-                        listeners.remove(listener);
-            }
-	}
-	
-	public synchronized void notifyListeners(Event e) {
-                synchronized(listeners){
-                        for (EventListener listener : listeners) {
-                                if (listener.matches(e)) {
-                                        listener.actionPerformed(e);
-                                }
+        private final HashMap<Class, ArrayList> map = new HashMap<Class, ArrayList>(25);
+
+        public <L> void add(Class<? extends Event<L>> evtClass, L listener) {
+                final ArrayList<L> listeners = listenersOf(evtClass);
+                synchronized (listeners) {
+                        if (!listeners.contains(listener)) {
+                                listeners.add(listener);
                         }
                 }
-	}
-	
+        }
+
+        public <L> void remove(Class<? extends Event<L>> evtClass, L listener) {
+                final ArrayList<L> listeners = listenersOf(evtClass);
+                synchronized (listeners) {
+                        listeners.remove(listener);
+                }
+        }
+
+        private <L> ArrayList<L> listenersOf(Class<? extends Event<L>> evtClass) {
+                synchronized (map) {
+                        @SuppressWarnings("unchecked")
+                        final ArrayList<L> existing = map.get(evtClass);
+                        if (existing != null) {
+                                return existing;
+                        }
+
+                        final ArrayList<L> emptyList = new ArrayList<L>(5);
+                        map.put(evtClass, emptyList);
+                        return emptyList;
+                }
+        }
+
+        public <L> void notify(final Event<L> evt) {
+                @SuppressWarnings("unchecked")
+                Class<Event<L>> evtClass = (Class<Event<L>>) evt.getClass();
+
+                for (L listener : listenersOf(evtClass)) {
+                        evt.notifyListener(listener);
+                }
+        }
 }

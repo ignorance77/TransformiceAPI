@@ -1,11 +1,6 @@
 package ee.ignorance.transformiceapi.event;
 
+public interface TribePlayerDisconnectListener {
 
-public abstract class TribePlayerDisconnectListener implements EventListener {
-
-    @Override
-    public boolean matches(Event e) {
-        return e instanceof TribePlayerDisconnectEvent;
-    }
-
+        void tribePlayerDisconnected(String playerName);
 }

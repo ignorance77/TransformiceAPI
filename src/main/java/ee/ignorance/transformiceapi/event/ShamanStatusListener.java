@@ -1,10 +1,6 @@
 package ee.ignorance.transformiceapi.event;
 
-public abstract class ShamanStatusListener implements EventListener {
+public interface ShamanStatusListener {
 
-	@Override
-	public boolean matches(Event e) {
-		return e instanceof ShamanStatusEvent;
-	}
-
+        void shamanStatusReceived();
 }

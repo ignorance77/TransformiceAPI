@@ -3,7 +3,7 @@ package ee.ignorance.transformiceapi.event.mouse;
 import ee.ignorance.transformiceapi.Mouse;
 import ee.ignorance.transformiceapi.event.Event;
 
-public class MouseJoinRoomEvent implements Event {
+public class MouseJoinRoomEvent implements Event<MouseJoinRoomListener> {
 
         private Mouse mouse;
 
@@ -15,7 +15,8 @@ public class MouseJoinRoomEvent implements Event {
                 return mouse;
         }
 
-        public void setMouse(Mouse mouse) {
-                this.mouse = mouse;
+        @Override
+        public void notifyListener(MouseJoinRoomListener listener) {
+                listener.mouseJoinedRoom(mouse);
         }
 }

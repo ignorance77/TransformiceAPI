@@ -1,19 +1,19 @@
 package ee.ignorance.transformiceapi.event;
 
+public class TribePlayerConnectEvent implements Event<TribePlayerConnectListener>  {
 
-public class TribePlayerConnectEvent implements Event {
+        private String playerName;
 
-    private String playerName;
+        public TribePlayerConnectEvent(String playerName) {
+                this.playerName = playerName;
+        }
 
-    public TribePlayerConnectEvent(String playerName) {
-        setPlayerName(playerName);
-    }
+        public String getPlayerName() {
+                return playerName;
+        }
 
-    public String getPlayerName() {
-        return playerName;
-    }
-
-    public void setPlayerName(String playerName) {
-        this.playerName = playerName;
-    }
+        @Override
+        public void notifyListener(TribePlayerConnectListener listener) {
+                listener.tribePlayerConnected(playerName);
+        }
 }

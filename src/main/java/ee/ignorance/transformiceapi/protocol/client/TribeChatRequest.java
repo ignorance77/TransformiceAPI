@@ -3,11 +3,11 @@ package ee.ignorance.transformiceapi.protocol.client;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 
-public class ChatTribeRequest extends AbstractClientRequest {
+public class TribeChatRequest extends AbstractClientRequest {
 
 	private String message;
 
-	public ChatTribeRequest(String message) {
+	public TribeChatRequest(String message) {
 		this.message = message;
 	}
 

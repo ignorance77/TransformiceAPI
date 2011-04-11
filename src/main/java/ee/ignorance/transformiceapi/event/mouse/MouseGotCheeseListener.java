@@ -1,13 +1,8 @@
 package ee.ignorance.transformiceapi.event.mouse;
 
-import ee.ignorance.transformiceapi.event.Event;
-import ee.ignorance.transformiceapi.event.EventListener;
+import ee.ignorance.transformiceapi.Mouse;
 
+public interface MouseGotCheeseListener {
 
-public abstract class MouseGotCheeseListener implements EventListener {
-
-	@Override
-	public boolean matches(Event e) {
-		return e instanceof MouseGotCheeseEvent;
-	}
+        void mouseGotCheese(Mouse mouse);
 }

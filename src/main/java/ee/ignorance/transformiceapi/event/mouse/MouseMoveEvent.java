@@ -3,11 +3,11 @@ package ee.ignorance.transformiceapi.event.mouse;
 import ee.ignorance.transformiceapi.Mouse;
 import ee.ignorance.transformiceapi.event.Event;
 
-public class MouseLeaveRoomEvent implements Event<MouseLeaveRoomListener> {
+public class MouseMoveEvent implements Event<MouseMoveListener> {
 
         private Mouse mouse;
 
-        public MouseLeaveRoomEvent(Mouse mouse) {
+        public MouseMoveEvent(Mouse mouse) {
                 this.mouse = mouse;
         }
 
@@ -16,7 +16,7 @@ public class MouseLeaveRoomEvent implements Event<MouseLeaveRoomListener> {
         }
 
         @Override
-        public void notifyListener(MouseLeaveRoomListener listener) {
-                listener.mouseLeftRoom(mouse);
+        public void notifyListener(MouseMoveListener listener) {
+                listener.mouseMoved(mouse);
         }
 }

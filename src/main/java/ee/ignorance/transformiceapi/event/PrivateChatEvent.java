@@ -1,30 +1,27 @@
 package ee.ignorance.transformiceapi.event;
 
-public class PrivateChatEvent implements Event {
+public class PrivateChatEvent implements Event<PrivateChatListener> {
 
-	private String sender;
-	private String message;
-	
-	public PrivateChatEvent(String sender, String message) {
-		this.sender = sender;
-		this.message = message;
-	}
+        private String sender;
+        private String message;
 
-	public String getSender() {
-		return sender;
-	}
+        public PrivateChatEvent(String sender, String message) {
+                this.sender = sender;
+                this.message = message;
+        }
 
-	public void setSender(String sender) {
-		this.sender = sender;
-	}
+        public String getSender() {
+                return sender;
+        }
 
-	public String getMessage() {
-		return message;
-	}
+        public String getMessage() {
+                return message;
+        }
 
-	public void setMessage(String message) {
-		this.message = message;
-	}
-	
-	
+        @Override
+        public void notifyListener(PrivateChatListener listener) {
+                listener.privateChatReceived(sender, message);
+        }
+
+        
 }

@@ -1,13 +1,13 @@
 package ee.ignorance.transformiceapi.protocol.server.mouse;
 
 import ee.ignorance.transformiceapi.processors.AbstractProcessor;
-import ee.ignorance.transformiceapi.processors.mouse.MouseMovedProcessor;
+import ee.ignorance.transformiceapi.processors.mouse.MouseMoveProcessor;
 import ee.ignorance.transformiceapi.protocol.server.AbstractResponse;
 
 import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
 
-public class MouseMovedResponse extends AbstractResponse {
+public class MouseMoveResponse extends AbstractResponse {
 
         private String gameCode;
         private int posX;
@@ -21,7 +21,7 @@ public class MouseMovedResponse extends AbstractResponse {
         private byte unk; //unknown
         private int playerID;
 
-        public MouseMovedResponse(byte[] rawMessage) {
+        public MouseMoveResponse(byte[] rawMessage) {
                 super(rawMessage);
         }
 
@@ -91,6 +91,6 @@ public class MouseMovedResponse extends AbstractResponse {
 
         @Override
         public AbstractProcessor getProcessor() {
-                return new MouseMovedProcessor();
+                return new MouseMoveProcessor();
         }
 }

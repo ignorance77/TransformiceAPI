@@ -1,11 +1,10 @@
 package ee.ignorance.transformiceapi.event;
 
-public abstract class TribeListListener implements EventListener {
+import ee.ignorance.transformiceapi.TribePlayer;
 
-	@Override
-	public boolean matches(Event e) {
-		return e instanceof TribeListEvent;
-	}
+import java.util.List;
 
+public interface TribeListListener {
 
+        void tribeListReceived(List<TribePlayer> playerList);
 }

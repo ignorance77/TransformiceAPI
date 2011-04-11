@@ -1,6 +1,6 @@
 package ee.ignorance.transformiceapi;
 
-import ee.ignorance.transformiceapi.event.EventListener;
+import ee.ignorance.transformiceapi.event.Event;
 
 /**
  * All external code should use this interface.
@@ -21,7 +21,9 @@ public interface Player {
 
 	void changeRoom(String roomName) throws GameException;
 
-	void registerEventListener(EventListener listener);
+	<L> void addListener(Class<? extends Event<L>> eventClass, L listener);
+
+        <L> void removeListener(Class<? extends Event<L>> eventClass, L listener);
 
 	void goLeft();
 	
@@ -39,7 +41,7 @@ public interface Player {
 
 	void moveTo(int x, int y);
 
-	void normalChat(String message);
+	void roomChat(String message);
 
 	void privateChat(String recipient, String message);
 

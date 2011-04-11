@@ -3,20 +3,20 @@ package ee.ignorance.transformiceapi.event.mouse;
 import ee.ignorance.transformiceapi.Mouse;
 import ee.ignorance.transformiceapi.event.Event;
 
-
-public class MouseBalloonEvent implements Event {
+public class MouseBalloonEvent implements Event<MouseBalloonListener> {
 
         private Mouse mouse;
 
         public MouseBalloonEvent(Mouse mouse) {
-                setMouse(mouse);
+                this.mouse = mouse;
         }
 
         public Mouse getMouse() {
                 return mouse;
         }
 
-        public void setMouse(Mouse mouse) {
-                this.mouse = mouse;
+        @Override
+        public void notifyListener(MouseBalloonListener listener) {
+                listener.mouseBallooned(mouse);
         }
 }

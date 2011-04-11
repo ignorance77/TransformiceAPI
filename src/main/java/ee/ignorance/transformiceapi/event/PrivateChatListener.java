@@ -1,11 +1,6 @@
 package ee.ignorance.transformiceapi.event;
 
-public abstract class PrivateChatListener implements EventListener {
+public interface PrivateChatListener {
 
-	@Override
-	public boolean matches(Event e) {
-		return e instanceof PrivateChatEvent;
-	}
-
-
+        void privateChatReceived(String sender, String message);
 }

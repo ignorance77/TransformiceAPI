@@ -3,16 +3,16 @@ package ee.ignorance.transformiceapi.processors.mouse;
 import ee.ignorance.transformiceapi.GameConnection;
 import ee.ignorance.transformiceapi.Mouse;
 import ee.ignorance.transformiceapi.PlayerImpl;
-import ee.ignorance.transformiceapi.event.mouse.MouseMovedEvent;
+import ee.ignorance.transformiceapi.event.mouse.MouseMoveEvent;
 import ee.ignorance.transformiceapi.processors.AbstractProcessor;
 import ee.ignorance.transformiceapi.protocol.server.AbstractResponse;
-import ee.ignorance.transformiceapi.protocol.server.mouse.MouseMovedResponse;
+import ee.ignorance.transformiceapi.protocol.server.mouse.MouseMoveResponse;
 
-public class MouseMovedProcessor extends AbstractProcessor {
+public class MouseMoveProcessor extends AbstractProcessor {
 
         @Override
         public void process(AbstractResponse response, GameConnection connection) {
-                MouseMovedResponse resp = (MouseMovedResponse) response;
+                MouseMoveResponse resp = (MouseMoveResponse) response;
                 PlayerImpl player = connection.getPlayer();
 
                 Mouse mouse = player.getMouseById(resp.getPlayerID());
@@ -26,7 +26,7 @@ public class MouseMovedProcessor extends AbstractProcessor {
                         mouse.setJumping(resp.isJumping());
                         mouse.setJumpingImage(resp.getJumpingImage());
                         mouse.setUnk(resp.getUnk());
-                        player.notifyListeners(new MouseMovedEvent(mouse));
+                        player.notifyListeners(new MouseMoveEvent(mouse));
                 }
         }
 }

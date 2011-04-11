@@ -3,11 +3,10 @@ package ee.ignorance.transformiceapi;
 import java.util.List;
 
 import ee.ignorance.transformiceapi.event.Event;
-import ee.ignorance.transformiceapi.event.EventListener;
 import ee.ignorance.transformiceapi.event.EventService;
-import ee.ignorance.transformiceapi.protocol.client.ChatNormalRequest;
-import ee.ignorance.transformiceapi.protocol.client.ChatPrivateRequest;
-import ee.ignorance.transformiceapi.protocol.client.ChatTribeRequest;
+import ee.ignorance.transformiceapi.protocol.client.RoomChatRequest;
+import ee.ignorance.transformiceapi.protocol.client.PrivateChatRequest;
+import ee.ignorance.transformiceapi.protocol.client.TribeChatRequest;
 import ee.ignorance.transformiceapi.protocol.client.CommandRequest;
 import ee.ignorance.transformiceapi.protocol.client.CreateObjectRequest;
 import ee.ignorance.transformiceapi.protocol.client.CrouchRequest;
@@ -79,8 +78,7 @@ public class PlayerImpl implements Player {
 
         public void changeRoom(final String roomName) throws GameException {
                 try {
-                        CommandRequest request = new CommandRequest("room " + roomName);
-                        connection.sendRequest(request);
+                        command("room " + roomName);
                         synchronized (this) {
                                 long startTime = System.currentTimeMillis();
                                 while (!getRoom().equals(roomName)) {
@@ -90,7 +88,8 @@ public class PlayerImpl implements Player {
                                         }
                                 }
                         }
-                } catch (Exception e) {
+                } catch (InterruptedException ignored) {
+                } catch (GameException e) {
                         getConnection().terminate("Change room failed", e);
                 }
         }
@@ -117,8 +116,8 @@ public class PlayerImpl implements Player {
         }
 
         @Override
-        public void normalChat(String message) {
-                ChatNormalRequest request = new ChatNormalRequest(message.replaceAll("<", "&lt;"));
+        public void roomChat(String message) {
+                RoomChatRequest request = new RoomChatRequest(message.replaceAll("<", "&lt;"));
                 connection.sendRequest(request);
         }
 
@@ -140,13 +139,13 @@ public class PlayerImpl implements Player {
 
         @Override
         public void tribeChat(String message) {
-                ChatTribeRequest request = new ChatTribeRequest(message);
+                TribeChatRequest request = new TribeChatRequest(message);
                 connection.sendRequest(request);
         }
 
         @Override
         public void privateChat(String recipient, String message) {
-                ChatPrivateRequest request = new ChatPrivateRequest(recipient, message.replaceAll("<", "&lt;"));
+                PrivateChatRequest request = new PrivateChatRequest(recipient, message.replaceAll("<", "&lt;"));
                 connection.sendRequest(request);
         }
 
@@ -255,6 +254,7 @@ public class PlayerImpl implements Player {
                 this.loginResult = loginResult;
         }
 
+        @Override
         public Mouse getPlayerMouse() {
                 return playerMouse;
         }
@@ -307,12 +307,17 @@ public class PlayerImpl implements Player {
         }
 
         @Override
-        public void registerEventListener(EventListener listener) {
-                eventService.registerEventListener(listener);
+        public <L> void addListener(Class<? extends Event<L>> eventClass, L listener) {
+                eventService.add(eventClass, listener);
         }
 
-        public void notifyListeners(Event e) {
-                eventService.notifyListeners(e);
+        @Override
+        public <L> void removeListener(Class<? extends Event<L>> eventClass, L listener) {
+                eventService.remove(eventClass, listener);
+        }
+
+        public <L> void notifyListeners(Event<L> e) {
+                eventService.notify(e);
         }
 
         @Override
@@ -379,7 +384,6 @@ public class PlayerImpl implements Player {
 
         @Override
         public void requestProfile(String nickname) {
-                getConnection().sendRequest(new CommandRequest("profile " + nickname));
-                
+                command("profile " + nickname);        
         }
 }

@@ -1,11 +1,6 @@
 package ee.ignorance.transformiceapi.event;
 
+public interface FriendJoinListener {
 
-public abstract class FriendJoinListener implements EventListener{
-    
-    @Override
-    public boolean matches(Event e) {
-        return e instanceof FriendJoinEvent;
-    }
-
+        void friendJoined(String friendName);
 }

@@ -1,12 +1,8 @@
 package ee.ignorance.transformiceapi.event.mouse;
 
-import ee.ignorance.transformiceapi.event.Event;
-import ee.ignorance.transformiceapi.event.EventListener;
+import ee.ignorance.transformiceapi.Mouse;
 
-public abstract class MouseJoinRoomListener implements EventListener {
+public interface MouseJoinRoomListener {
 
-        @Override
-        public boolean matches(Event e) {
-                return e instanceof MouseJoinRoomEvent;
-        }
+        void mouseJoinedRoom(Mouse mouse);
 }

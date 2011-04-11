@@ -1,10 +1,10 @@
 package ee.ignorance.transformiceapi.event;
 
-public abstract class ShamanChangeListener implements EventListener {
+import ee.ignorance.transformiceapi.Mouse;
 
-	@Override
-	public boolean matches(Event e) {
-		return e instanceof ShamanChangeEvent;
-	}
+public interface ShamanChangeListener {
 
+        void shamanChanged(Mouse shaman);
+
+        void shamansChanged(Mouse firstShaman, Mouse secondShaman);
 }

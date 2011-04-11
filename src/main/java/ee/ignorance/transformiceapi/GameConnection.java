@@ -13,9 +13,9 @@ import java.net.Socket;
 import org.apache.log4j.Logger;
 
 import ee.ignorance.transformiceapi.protocol.client.AbstractClientRequest;
-import ee.ignorance.transformiceapi.protocol.client.ChatNormalRequest;
-import ee.ignorance.transformiceapi.protocol.client.ChatPrivateRequest;
-import ee.ignorance.transformiceapi.protocol.client.ChatTribeRequest;
+import ee.ignorance.transformiceapi.protocol.client.RoomChatRequest;
+import ee.ignorance.transformiceapi.protocol.client.PrivateChatRequest;
+import ee.ignorance.transformiceapi.protocol.client.TribeChatRequest;
 import ee.ignorance.transformiceapi.protocol.client.MagicCastRequest;
 import ee.ignorance.transformiceapi.protocol.client.PositionRequest;
 import ee.ignorance.transformiceapi.protocol.client.RegisterRequest;
@@ -139,17 +139,17 @@ public class GameConnection {
                                 writePrefix();
                                 out.writeBytes(new String(request.getBytes()));
                                 out.flush();
-                        } else if (request instanceof ChatNormalRequest) {
+                        } else if (request instanceof RoomChatRequest) {
                                 out.writeInt(request.getBytes().length + 8);
                                 writePrefix();
                                 out.writeBytes(new String(request.getBytes()));
                                 out.flush();
-                        } else if (request instanceof ChatTribeRequest) {
+                        } else if (request instanceof TribeChatRequest) {
                                 out.writeInt(request.getBytes().length + 8);
                                 writePrefix();
                                 out.writeBytes(new String(request.getBytes()));
                                 out.flush();
-                        } else if (request instanceof ChatPrivateRequest) {
+                        } else if (request instanceof PrivateChatRequest) {
                                 out.writeInt(request.getBytes().length + 8);
                                 writePrefix();
                                 out.writeBytes(new String(request.getBytes()));

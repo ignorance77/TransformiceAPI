@@ -1,19 +1,19 @@
 package ee.ignorance.transformiceapi.event;
 
+public class TribePlayerDisconnectEvent implements Event<TribePlayerDisconnectListener> {
 
-public class TribePlayerDisconnectEvent implements Event {
+        private String playerName;
 
-    private String playerName;
+        public TribePlayerDisconnectEvent(String playerName) {
+                this.playerName = playerName;
+        }
 
-    public TribePlayerDisconnectEvent(String playerName) {
-        setPlayerName(playerName);
-    }
+        public String getPlayerName() {
+                return playerName;
+        }
 
-    public String getPlayerName() {
-        return playerName;
-    }
-
-    public void setPlayerName(String playerName) {
-        this.playerName = playerName;
-    }
+        @Override
+        public void notifyListener(TribePlayerDisconnectListener listener) {
+               listener.tribePlayerDisconnected(playerName);
+        }
 }

@@ -1,10 +1,6 @@
 package ee.ignorance.transformiceapi.event;
 
-public abstract class MapXMLListener implements EventListener {
+public interface MapXMLListener {
 
-	@Override
-	public boolean matches(Event e) {
-		return e instanceof MapXMLEvent;
-	}
-
+        void mapXMLReceived(String mapMaker, String mapXML);
 }

@@ -1,6 +1,6 @@
 package ee.ignorance.transformiceapi.event;
 
-public class MapXMLEvent implements Event {
+public class MapXMLEvent implements Event<MapXMLListener> {
 
         private String mapMaker;
         private String mapXML;
@@ -14,15 +14,14 @@ public class MapXMLEvent implements Event {
                 return mapMaker;
         }
 
-        public void setMapMaker(String mapMaker) {
-                this.mapMaker = mapMaker;
-        }
-
         public String getMapXML() {
                 return mapXML;
         }
 
-        public void setMapXML(String mapXML) {
-                this.mapXML = mapXML;
+        @Override
+        public void notifyListener(MapXMLListener listener) {
+                listener.mapXMLReceived(mapMaker, mapXML);
         }
+
+      
 }

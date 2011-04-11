@@ -1,19 +1,19 @@
 package ee.ignorance.transformiceapi.event;
 
-public class FriendJoinEvent implements Event{
+public class FriendJoinEvent implements Event<FriendJoinListener> {
 
-    private String name;
+        private String name;
 
-    public FriendJoinEvent(String name) {
-        setName(name);
-    }
+        public FriendJoinEvent(String name) {
+                this.name = name;
+        }
 
-    public String getName() {
-        return name;
-    }
+        public String getName() {
+                return name;
+        }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
+        @Override
+        public void notifyListener(FriendJoinListener listener) {
+                listener.friendJoined(name);
+        }
 }

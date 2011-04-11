@@ -1,14 +1,8 @@
 package ee.ignorance.transformiceapi.event.mouse;
 
-import ee.ignorance.transformiceapi.event.Event;
-import ee.ignorance.transformiceapi.event.EventListener;
+import ee.ignorance.transformiceapi.Mouse;
 
+public interface MouseDeathListener {
 
-public abstract class MouseDeathListener implements EventListener{
-
-        @Override
-        public boolean matches(Event e) {
-                return e instanceof MouseDeathEvent;
-        }
-
+        void mouseDied(Mouse mouse);
 }

@@ -2,7 +2,7 @@ package ee.ignorance.transformiceapi.event.mouse;
 
 import ee.ignorance.transformiceapi.Mouse;
 
-public interface MouseEmoteListener {
+public interface MouseMoveListener {
 
-        void mouseEmoted(Mouse lul, int emote);
+        void mouseMoved(Mouse mouse);
 }

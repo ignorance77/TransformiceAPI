@@ -1,13 +1,8 @@
 package ee.ignorance.transformiceapi.event.mouse;
 
-import ee.ignorance.transformiceapi.event.Event;
-import ee.ignorance.transformiceapi.event.EventListener;
+import ee.ignorance.transformiceapi.Mouse;
 
-public abstract class MouseFinishListener implements EventListener {
+public interface MouseFinishListener {
 
-	@Override
-	public boolean matches(Event e) {
-		return e instanceof MouseFinishEvent;
-	}
-
+        void mouseFinished(Mouse mouse);
 }

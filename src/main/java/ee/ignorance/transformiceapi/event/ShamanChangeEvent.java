@@ -1,30 +1,37 @@
 package ee.ignorance.transformiceapi.event;
 
-public class ShamanChangeEvent implements Event {
+import ee.ignorance.transformiceapi.Mouse;
 
-	private int firstCode;
-	private int secondCode;
-	
-	public ShamanChangeEvent(int firstCode, int secondCode) {
-		this.firstCode = firstCode;
-		this.secondCode = secondCode;
-	}
+public class ShamanChangeEvent implements Event<ShamanChangeListener> {
 
-	public int getFirstCode() {
-		return firstCode;
-	}
+        private Mouse firstShaman;
+        private Mouse secondShaman;
+        private boolean twoShamans;
 
-	public void setFirstCode(int firstCode) {
-		this.firstCode = firstCode;
-	}
+        public boolean isTwoShamans() {
+                return twoShamans;
+        }
 
-	public int getSecondCode() {
-		return secondCode;
-	}
+        public ShamanChangeEvent(Mouse firstCode, Mouse secondCode, boolean twoShamans) {
+                this.firstShaman = firstCode;
+                this.secondShaman = secondCode;
+                this.twoShamans = twoShamans;
+        }
 
-	public void setSecondCode(int secondCode) {
-		this.secondCode = secondCode;
-	}
-	
-	
+        public Mouse getFirstShaman() {
+                return firstShaman;
+        }
+
+        public Mouse getSecondShaman() {
+                return secondShaman;
+        }
+
+        @Override
+        public void notifyListener(ShamanChangeListener listener) {
+                if (!twoShamans) {
+                        listener.shamanChanged(firstShaman);
+                } else {
+                        listener.shamansChanged(firstShaman, secondShaman);
+                }
+        }
 }
