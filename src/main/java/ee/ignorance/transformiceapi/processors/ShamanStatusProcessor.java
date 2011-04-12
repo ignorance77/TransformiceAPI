@@ -5,37 +5,37 @@ import ee.ignorance.transformiceapi.Mouse;
 import ee.ignorance.transformiceapi.PlayerImpl;
 import ee.ignorance.transformiceapi.event.ShamanChangeEvent;
 import ee.ignorance.transformiceapi.event.ShamanStatusEvent;
-import ee.ignorance.transformiceapi.protocol.server.AbstractResponse;
 import ee.ignorance.transformiceapi.protocol.server.ShamanStatusResponse;
 
-public class ShamanStatusProcessor extends AbstractProcessor {
+public class ShamanStatusProcessor extends AbstractProcessor<ShamanStatusResponse> {
 
         @Override
-        public void process(AbstractResponse response, GameConnection connection) {
-                ShamanStatusResponse resp = (ShamanStatusResponse) response;
+        public void process(ShamanStatusResponse response, GameConnection connection) {
                 PlayerImpl player = connection.getPlayer();
 
-                if (resp.getShamanCode() == player.getMouseId()) {
+                if (response.getShamanCode() == player.getMouseId()) {
                         player.setShaman(true);
                         player.notifyListeners(new ShamanStatusEvent());
-                        
+
                 } else {
                         player.setShaman(false);
                 }
 
-                Mouse firstShaman = player.getMouseById(resp.getShamanCode());
-                if (firstShaman == null) return;
+                Mouse firstShaman = player.getMouseById(response.getShamanCode());
+                if (firstShaman == null) {
+                        return;
+                }
 
-                if (resp.isTwoShamans()) {
-                        player.setSecondShamanCode(resp.getSecondShamanCode());
+                if (response.isTwoShamans()) {
+                        player.setSecondShamanCode(response.getSecondShamanCode());
                         if (player.getSecondShamanCode() == player.getMouseId()) {
                                 player.setShaman(true);
                         }
 
-                        Mouse secondShaman = player.getMouseById(resp.getSecondShamanCode());
+                        Mouse secondShaman = player.getMouseById(response.getSecondShamanCode());
                         if (secondShaman != null) {
                                 player.notifyListeners(new ShamanChangeEvent(firstShaman, secondShaman, true));
-                        }      
+                        }
                 } else {
                         player.setSecondShamanCode(null);
                         player.notifyListeners(new ShamanChangeEvent(firstShaman, null, false));

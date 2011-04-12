@@ -1,14 +1,12 @@
 package ee.ignorance.transformiceapi.processors;
 
 import ee.ignorance.transformiceapi.GameConnection;
-import ee.ignorance.transformiceapi.protocol.server.AbstractResponse;
 import ee.ignorance.transformiceapi.protocol.server.RoomResponse;
 
-public class RoomResponseProcessor extends AbstractProcessor {
+public class RoomResponseProcessor extends AbstractProcessor<RoomResponse> {
 
         @Override
-        public void process(AbstractResponse response, GameConnection connection) {
-                RoomResponse resp = (RoomResponse) response;
-                connection.getPlayer().setRoom(resp.getRoom());
+        public void process(RoomResponse response, GameConnection connection) {
+                connection.getPlayer().setRoom(response.getRoom());
         }
 }

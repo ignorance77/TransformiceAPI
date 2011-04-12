@@ -1,16 +1,13 @@
 package ee.ignorance.transformiceapi.processors;
 
 import ee.ignorance.transformiceapi.GameConnection;
-import ee.ignorance.transformiceapi.protocol.server.AbstractResponse;
 import ee.ignorance.transformiceapi.protocol.server.UrlResponse;
 
-public class UrlProcessor  extends AbstractProcessor {
+public class UrlProcessor extends AbstractProcessor<UrlResponse> {
 
         @Override
-        public void process(AbstractResponse response, GameConnection connection) {
-                UrlResponse resp = (UrlResponse) response;
+        public void process(UrlResponse response, GameConnection connection) {
                 connection.setUrlSent(true);
-               	connection.setPrefix(resp.getMDT(), resp.getCMDTEC());
+                connection.setPrefix(response.getMDT(), response.getCMDTEC());
         }
-
 }

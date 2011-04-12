@@ -6,27 +6,25 @@ import ee.ignorance.transformiceapi.event.TribePlayerConnectEvent;
 import ee.ignorance.transformiceapi.event.TribePlayerDisconnectEvent;
 import ee.ignorance.transformiceapi.event.TribePlayerJoinEvent;
 import ee.ignorance.transformiceapi.event.TribePlayerQuitEvent;
-import ee.ignorance.transformiceapi.protocol.server.AbstractResponse;
 import ee.ignorance.transformiceapi.protocol.server.TribePlayerResponse;
 
-public class TribePlayerProcessor extends AbstractProcessor {
+public class TribePlayerProcessor extends AbstractProcessor<TribePlayerResponse> {
 
         @Override
-        public void process(AbstractResponse response, GameConnection connection) {
-                TribePlayerResponse resp = (TribePlayerResponse) response;
+        public void process(TribePlayerResponse response, GameConnection connection) {
                 PlayerImpl player = connection.getPlayer();
 
-                if (resp.getType() == 1) {
-                        player.notifyListeners(new TribePlayerConnectEvent(resp.getPlayerName()));
+                if (response.getType() == 1) {
+                        player.notifyListeners(new TribePlayerConnectEvent(response.getPlayerName()));
                 }
-                if (resp.getType() == 2) {
-                        player.notifyListeners(new TribePlayerDisconnectEvent(resp.getPlayerName()));
+                if (response.getType() == 2) {
+                        player.notifyListeners(new TribePlayerDisconnectEvent(response.getPlayerName()));
                 }
-                if (resp.getType() == 6) {
-                        player.notifyListeners(new TribePlayerJoinEvent(resp.getPlayerName()));
+                if (response.getType() == 6) {
+                        player.notifyListeners(new TribePlayerJoinEvent(response.getPlayerName()));
                 }
-                if (resp.getType() == 11) {
-                        player.notifyListeners(new TribePlayerQuitEvent(resp.getPlayerName()));
+                if (response.getType() == 11) {
+                        player.notifyListeners(new TribePlayerQuitEvent(response.getPlayerName()));
                 }
         }
 }

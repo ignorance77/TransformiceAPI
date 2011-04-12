@@ -208,17 +208,11 @@ public class Mouse {
 	}
 
 	public static enum Emote {
-                Dance (1),
-                Smile (2),
-                Cry (3),
-                Kiss (4);
+                Dance,
+                Smile,
+                Cry,
+                Kiss;
 
-                private final int value;
-
-                Emote(int value) {
-                        this.value = value;
-                }
-                
                 public static Emote getEmote(int value) {
                         switch (value) {
                                 case 1: return Dance;
@@ -228,9 +222,5 @@ public class Mouse {
                         }
                         throw new AssertionError("Unknow Emote value: " + value);
                 }
-
-
-
-
         }
 }

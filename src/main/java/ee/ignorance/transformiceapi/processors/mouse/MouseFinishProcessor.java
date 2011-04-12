@@ -5,21 +5,19 @@ import ee.ignorance.transformiceapi.Mouse;
 import ee.ignorance.transformiceapi.PlayerImpl;
 import ee.ignorance.transformiceapi.event.mouse.MouseFinishEvent;
 import ee.ignorance.transformiceapi.processors.AbstractProcessor;
-import ee.ignorance.transformiceapi.protocol.server.AbstractResponse;
 import ee.ignorance.transformiceapi.protocol.server.mouse.MouseFinishResponse;
 
-public class MouseFinishProcessor extends AbstractProcessor {
+public class MouseFinishProcessor extends AbstractProcessor<MouseFinishResponse> {
 
         @Override
-        public void process(AbstractResponse response, GameConnection connection) {
-                MouseFinishResponse resp = (MouseFinishResponse) response;
+        public void process(MouseFinishResponse response, GameConnection connection) {
                 PlayerImpl player = connection.getPlayer();
 
-                Mouse mouse = player.getMouseById(resp.getMouseID());
+                Mouse mouse = player.getMouseById(response.getMouseID());
                 if (mouse != null) {
                         mouse.setHasFinished(true);
-                        mouse.setFinishedTime(resp.getFinishTime());
-                        mouse.setStanding(resp.getStanding());
+                        mouse.setFinishedTime(response.getFinishTime());
+                        mouse.setStanding(response.getStanding());
                         player.notifyListeners(new MouseFinishEvent(mouse));
                 }
         }

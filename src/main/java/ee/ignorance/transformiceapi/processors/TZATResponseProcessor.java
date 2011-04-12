@@ -2,12 +2,12 @@ package ee.ignorance.transformiceapi.processors;
 
 import ee.ignorance.transformiceapi.GameConnection;
 import ee.ignorance.transformiceapi.protocol.client.TZATRequest;
-import ee.ignorance.transformiceapi.protocol.server.AbstractResponse;
+import ee.ignorance.transformiceapi.protocol.server.TZATResponse;
 
-public class TZATResponseProcessor extends AbstractProcessor {
+public class TZATResponseProcessor extends AbstractProcessor<TZATResponse> {
 
         @Override
-        public void process(AbstractResponse response, final GameConnection connection) {
+        public void process(TZATResponse response, final GameConnection connection) {
                 final long start = System.currentTimeMillis();
                 new Thread() {
 

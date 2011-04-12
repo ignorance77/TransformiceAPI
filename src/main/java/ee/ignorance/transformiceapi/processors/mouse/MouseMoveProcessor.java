@@ -5,27 +5,25 @@ import ee.ignorance.transformiceapi.Mouse;
 import ee.ignorance.transformiceapi.PlayerImpl;
 import ee.ignorance.transformiceapi.event.mouse.MouseMoveEvent;
 import ee.ignorance.transformiceapi.processors.AbstractProcessor;
-import ee.ignorance.transformiceapi.protocol.server.AbstractResponse;
 import ee.ignorance.transformiceapi.protocol.server.mouse.MouseMoveResponse;
 
-public class MouseMoveProcessor extends AbstractProcessor {
+public class MouseMoveProcessor extends AbstractProcessor<MouseMoveResponse> {
 
         @Override
-        public void process(AbstractResponse response, GameConnection connection) {
-                MouseMoveResponse resp = (MouseMoveResponse) response;
+        public void process(MouseMoveResponse response, GameConnection connection) {
                 PlayerImpl player = connection.getPlayer();
 
-                Mouse mouse = player.getMouseById(resp.getPlayerID());
+                Mouse mouse = player.getMouseById(response.getPlayerID());
                 if (mouse != null) {
-                        mouse.setPosX(resp.getPosX());
-                        mouse.setPosY(resp.getPosY());
-                        mouse.setMovX(resp.getMovX());
-                        mouse.setMovY(resp.getMovY());
-                        mouse.setGoingLeft(resp.isGoingLeft());
-                        mouse.setGoingRight(resp.isGoingRight());
-                        mouse.setJumping(resp.isJumping());
-                        mouse.setJumpingImage(resp.getJumpingImage());
-                        mouse.setUnk(resp.getUnk());
+                        mouse.setPosX(response.getPosX());
+                        mouse.setPosY(response.getPosY());
+                        mouse.setMovX(response.getMovX());
+                        mouse.setMovY(response.getMovY());
+                        mouse.setGoingLeft(response.isGoingLeft());
+                        mouse.setGoingRight(response.isGoingRight());
+                        mouse.setJumping(response.isJumping());
+                        mouse.setJumpingImage(response.getJumpingImage());
+                        mouse.setUnk(response.getUnk());
                         player.notifyListeners(new MouseMoveEvent(mouse));
                 }
         }

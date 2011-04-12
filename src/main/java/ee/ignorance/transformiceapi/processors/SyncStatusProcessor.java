@@ -4,19 +4,17 @@ import ee.ignorance.transformiceapi.GameConnection;
 import ee.ignorance.transformiceapi.Mouse;
 import ee.ignorance.transformiceapi.PlayerImpl;
 import ee.ignorance.transformiceapi.event.SyncChangeEvent;
-import ee.ignorance.transformiceapi.protocol.server.AbstractResponse;
 import ee.ignorance.transformiceapi.protocol.server.SyncStatusResponse;
 
-public class SyncStatusProcessor extends AbstractProcessor {
+public class SyncStatusProcessor extends AbstractProcessor<SyncStatusResponse> {
 
         @Override
-        public void process(AbstractResponse response, GameConnection connection) {
-                SyncStatusResponse resp = (SyncStatusResponse) response;
+        public void process(SyncStatusResponse response, GameConnection connection) {
                 PlayerImpl player = connection.getPlayer();
-                player.setSyncStatus(resp.getCodeSync() == player.getMouseId());
+                player.setSyncStatus(response.getCodeSync() == player.getMouseId());
 
                 for (Mouse currentMouse : player.getRoomMice()) {
-                        if (currentMouse.getCode() == resp.getCodeSync()) {
+                        if (currentMouse.getCode() == response.getCodeSync()) {
                                 player.notifyListeners(new SyncChangeEvent(currentMouse.getName()));
                         }
                 }
