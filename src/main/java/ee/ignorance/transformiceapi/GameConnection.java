@@ -138,17 +138,17 @@ public class GameConnection {
                         if (request instanceof PositionRequest) {
                                 out.writeInt(request.getBytes().length + 8);
                                 writePrefix();
-                                out.writeBytes(new String(request.getBytes()));
+                                out.write(request.getBytes());
                                 out.flush();
                         } else if (request instanceof RoomChatRequest) {
                                 out.writeInt(request.getBytes().length + 8);
                                 writePrefix();
-                                out.writeBytes(new String(request.getBytes()));
+                                out.write(request.getBytes());
                                 out.flush();
                         } else if (request instanceof TribeChatRequest) {
                                 out.writeInt(request.getBytes().length + 8);
                                 writePrefix();
-                                out.writeBytes(new String(request.getBytes()));
+                                out.write(request.getBytes());
                                 out.flush();
                         } else if (request instanceof PrivateChatRequest) {
                                 out.writeInt(request.getBytes().length + 8);
@@ -158,12 +158,12 @@ public class GameConnection {
                         } else if (request instanceof MagicCastRequest) {
                                 out.writeInt(request.getBytes().length + 8);
                                 writePrefix();
-                                out.writeBytes(new String(request.getBytes()));
+                                out.write(request.getBytes());
                                 out.flush();
                         } else if (request instanceof DeathRequest) {
                                 out.writeInt(request.getBytes().length + 8);
                                 writePrefix();
-                                out.writeBytes(new String(request.getBytes()));
+                                out.write(request.getBytes());
                                 out.flush();  
                         } else {
                                 out.writeInt(request.getBytes().length + 8 + 4);
@@ -171,7 +171,7 @@ public class GameConnection {
                                 out.writeByte(1);
                                 out.writeByte(1);
                                 out.writeShort(request.getBytes().length);
-                                out.writeBytes(new String(request.getBytes()));
+                                out.write(request.getBytes());
                                 out.flush();
                         }
                 } catch (IOException e) {

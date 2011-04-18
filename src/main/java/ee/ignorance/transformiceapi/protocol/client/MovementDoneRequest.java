@@ -5,11 +5,11 @@ import ee.ignorance.transformiceapi.protocol.ByteBuffer;
 public class MovementDoneRequest extends AbstractClientRequest {
 
 	@Override
-	public char[] getBytes() {
+	public byte[] getBytes() {
 		ByteBuffer bf = new ByteBuffer();
 		bf.write(0x04);
 		bf.write(0x0a);
-		return bf.getBytesChar();
+		return bf.getBytes();
 	}
 
 }

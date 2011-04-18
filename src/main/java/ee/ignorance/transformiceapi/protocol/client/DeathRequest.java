@@ -1,6 +1,5 @@
 package ee.ignorance.transformiceapi.protocol.client;
 
-import ee.ignorance.transformiceapi.protocol.ByteBuffer;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 
@@ -13,7 +12,7 @@ public class DeathRequest extends AbstractClientRequest {
         }
 
         @Override
-        public char[] getBytes() {
+        public byte[] getBytes() {
                 ByteArrayOutputStream byteOut = new ByteArrayOutputStream();
                 DataOutputStream out = new DataOutputStream(byteOut);
                 try {
@@ -23,13 +22,6 @@ public class DeathRequest extends AbstractClientRequest {
                 } catch (Exception e) {
                         e.printStackTrace();
                 }
-
-                byte[] bytes = byteOut.toByteArray();
-                char[] chars = new char[bytes.length];
-                for (int i = 0; i < chars.length; i++) {
-                        chars[i] = (char) bytes[i];
-                }
-
-                return chars;
+                return byteOut.toByteArray();
         }
 }

@@ -31,7 +31,7 @@ public class PositionRequest extends AbstractClientRequest {
 	}
 
 	@Override
-	public char[] getBytes() {
+	public byte[] getBytes() {
                 ByteArrayOutputStream byteOut = new ByteArrayOutputStream();
                 DataOutputStream out = new DataOutputStream(byteOut);
                 try {
@@ -52,15 +52,6 @@ public class PositionRequest extends AbstractClientRequest {
                 {
                         e.printStackTrace();
                 }
-
-                byte[] bytes = byteOut.toByteArray();
-                char[] chars = new char[bytes.length];
-                for(int i=0;i<chars.length;i++)
-                {
-                        chars[i] = (char) bytes[i];
-                }
-                
-		return chars;
+                return byteOut.toByteArray();
 	}
-
 }

@@ -11,13 +11,13 @@ public class PingRequest extends AbstractClientRequest {
 	}
 	
 	@Override
-	public char[] getBytes() {
+	public byte[] getBytes() {
 		ByteBuffer bf = new ByteBuffer();
 		bf.write(0x1a);
 		bf.write(0x02);
 		bf.write(0x01);
 		bf.print("" + (System.currentTimeMillis() - lastPingTime));
-		return bf.getBytesChar();
+		return bf.getBytes();
 	}
 
 }

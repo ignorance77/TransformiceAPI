@@ -5,32 +5,24 @@ import java.io.DataOutputStream;
 
 public class RoomChatRequest extends AbstractClientRequest {
 
-	private String message;
-	
-	public RoomChatRequest(String message) {
-		this.message = message;
-	}
-	
-	@Override
-	public char[] getBytes() {
-            ByteArrayOutputStream byteOut = new ByteArrayOutputStream();
-            DataOutputStream out = new DataOutputStream(byteOut);
-            try {
-                out.writeByte(6);
-                out.writeByte(6);
-                out.writeUTF(message);
+        private String message;
 
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+        public RoomChatRequest(String message) {
+                this.message = message;
+        }
 
-            byte[] bytes = byteOut.toByteArray();
-            char[] chars = new char[bytes.length];
-            for (int i = 0; i < chars.length; i++) {
-                chars[i] = (char) bytes[i];
-            }
+        @Override
+        public byte[] getBytes() {
+                ByteArrayOutputStream byteOut = new ByteArrayOutputStream();
+                DataOutputStream out = new DataOutputStream(byteOut);
+                try {
+                        out.writeByte(6);
+                        out.writeByte(6);
+                        out.writeUTF(message);
 
-            return chars;
-	}
-
+                } catch (Exception e) {
+                        e.printStackTrace();
+                }
+                return byteOut.toByteArray();
+        }
 }
