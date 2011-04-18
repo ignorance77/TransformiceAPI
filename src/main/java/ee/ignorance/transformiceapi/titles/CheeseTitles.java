@@ -52,6 +52,11 @@ class CheeseTitles {
                 cheeseTitles.put(42000, "Cheesoholic");
                 cheeseTitles.put(46000, "The Cheesen One");
                 cheeseTitles.put(50000, "Sailor Mouse");
+                cheeseTitles.put(55000, "Om Nom Nom");
+                cheeseTitles.put(60000, "*-*");
+                cheeseTitles.put(65000, "Cheese Addict");
+                cheeseTitles.put(70000, "Cheesus");
+                cheeseTitles.put(75000, "Queen of Cheese");
                 cheeseTitles.put(80000, "MAH CHEESE!");
         }
 }
