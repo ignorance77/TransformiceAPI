@@ -13,6 +13,7 @@ import java.net.Socket;
 import org.apache.log4j.Logger;
 
 import ee.ignorance.transformiceapi.protocol.client.AbstractClientRequest;
+import ee.ignorance.transformiceapi.protocol.client.DeathRequest;
 import ee.ignorance.transformiceapi.protocol.client.RoomChatRequest;
 import ee.ignorance.transformiceapi.protocol.client.PrivateChatRequest;
 import ee.ignorance.transformiceapi.protocol.client.TribeChatRequest;
@@ -159,6 +160,11 @@ public class GameConnection {
                                 writePrefix();
                                 out.writeBytes(new String(request.getBytes()));
                                 out.flush();
+                        } else if (request instanceof DeathRequest) {
+                                out.writeInt(request.getBytes().length + 8);
+                                writePrefix();
+                                out.writeBytes(new String(request.getBytes()));
+                                out.flush();  
                         } else {
                                 out.writeInt(request.getBytes().length + 8 + 4);
                                 writePrefix();

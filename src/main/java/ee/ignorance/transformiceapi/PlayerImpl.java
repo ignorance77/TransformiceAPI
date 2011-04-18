@@ -161,7 +161,7 @@ public class PlayerImpl implements Player {
 
         @Override
         public void die() {
-                DeathRequest request = new DeathRequest();
+                DeathRequest request = new DeathRequest(gameCode);
                 connection.sendRequest(request);
         }
 
