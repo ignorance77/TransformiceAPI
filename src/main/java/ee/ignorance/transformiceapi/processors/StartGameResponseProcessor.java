@@ -3,6 +3,7 @@ package ee.ignorance.transformiceapi.processors;
 import ee.ignorance.transformiceapi.GameConnection;
 import ee.ignorance.transformiceapi.PlayerImpl;
 import ee.ignorance.transformiceapi.event.MapXMLEvent;
+import ee.ignorance.transformiceapi.event.RoundStartEvent;
 import ee.ignorance.transformiceapi.protocol.server.StartGameResponse;
 
 public class StartGameResponseProcessor extends AbstractProcessor<StartGameResponse> {
@@ -12,5 +13,6 @@ public class StartGameResponseProcessor extends AbstractProcessor<StartGameRespo
                 PlayerImpl player = connection.getPlayer();
                 player.setGameCode(response.getGameCode());
                 player.notifyListeners(new MapXMLEvent(response.getMapMaker(), response.getMapXML()));
+                player.notifyListeners(new RoundStartEvent());
         }
 }
