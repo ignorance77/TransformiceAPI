@@ -8,7 +8,6 @@ import ee.ignorance.transformiceapi.protocol.client.RoomChatRequest;
 import ee.ignorance.transformiceapi.protocol.client.PrivateChatRequest;
 import ee.ignorance.transformiceapi.protocol.client.TribeChatRequest;
 import ee.ignorance.transformiceapi.protocol.client.CommandRequest;
-import ee.ignorance.transformiceapi.protocol.client.CreateObjectRequest;
 import ee.ignorance.transformiceapi.protocol.client.CrouchRequest;
 import ee.ignorance.transformiceapi.protocol.client.DeathRequest;
 import ee.ignorance.transformiceapi.protocol.client.HoleRequest;
@@ -54,6 +53,7 @@ public class PlayerImpl implements Player {
                 this.eventService = new EventService();
         }
 
+        @Override
         public void login() throws GameException {
                 try {
                         LoginRequest request = new LoginRequest(username, password);
@@ -76,6 +76,7 @@ public class PlayerImpl implements Player {
                 }
         }
 
+        @Override
         public void changeRoom(final String roomName) throws GameException {
                 try {
                         command("room " + roomName);
@@ -166,15 +167,21 @@ public class PlayerImpl implements Player {
         }
 
         @Override
+        public void friend(String nickname) {
+                command("friend " + nickname);
+        }
+
+        @Override
         public void kiss() {
                 command("kiss");
         }
 
         @Override
-        public void smile() {
+        public void laugh() {
                 command("laugh");
         }
 
+        @Override
         public void command(String message) {
                 message = message.replaceAll("<", "&lt;"); //otherwise the Server will filter it out
                 CommandRequest request = new CommandRequest(message);
@@ -185,6 +192,7 @@ public class PlayerImpl implements Player {
                 this.room = room;
         }
 
+        @Override
         public String getRoom() {
                 return room;
         }
@@ -288,11 +296,16 @@ public class PlayerImpl implements Player {
         }
 
         @Override
-        public void magic(int type, int x, int y) {
-                MagicBeginRequest magicBeginRequest = new MagicBeginRequest(type, x, y);
+        public void magic(MagicType type, int x, int y) {
+                magic(type, x, y, 0, 0, 0, true);
+        }
+
+        @Override
+        public void magic(MagicType type, int x, int y, int rotation, int dx, int dy, boolean solid) {
+                MagicBeginRequest magicBeginRequest = new MagicBeginRequest(type, x, y, rotation);
                 getConnection().sendRequest(magicBeginRequest);
                 sleep(50);
-                MagicCastRequest magicCastRequest = new MagicCastRequest(type, x, y);
+                MagicCastRequest magicCastRequest = new MagicCastRequest(type, x, y, rotation, dx, dy, solid);
                 getConnection().sendRequest(magicCastRequest);
                 sleep(50);
                 MagicStopRequest magicStopRequest = new MagicStopRequest();
@@ -353,13 +366,20 @@ public class PlayerImpl implements Player {
                 return null;
         }
 
+        @Override
         public List<Mouse> getRoomMice() {
                 return roomMice;
         }
 
         @Override
-        public void createObject(int type, int x, int y) {
-                getConnection().sendRequest(new CreateObjectRequest(type, x, y));
+        public void createObject(MagicType type, int x, int y) {
+                createObject(type, x, y, 0, 0, 0, true);
+        }
+
+        @Override
+        public void createObject(MagicType type, int x, int y, int rotation, int dx, int dy, boolean solid) {
+                MagicCastRequest magicCastRequest = new MagicCastRequest(type, x, y, rotation, dx, dy, solid);
+                getConnection().sendRequest(magicCastRequest);
         }
 
         @Override
@@ -378,12 +398,12 @@ public class PlayerImpl implements Player {
         }
 
         @Override
-        public void requestTribeList() {
+        public void tribeList() {
                 getConnection().sendRequest(new TribeListRequest());
         }
 
         @Override
-        public void requestProfile(String nickname) {
+        public void profile(String nickname) {
                 command("profile " + nickname);        
         }
 }

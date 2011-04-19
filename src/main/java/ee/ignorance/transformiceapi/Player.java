@@ -1,6 +1,7 @@
 package ee.ignorance.transformiceapi;
 
 import ee.ignorance.transformiceapi.event.Event;
+import java.util.List;
 
 /**
  * All external code should use this interface.
@@ -9,64 +10,82 @@ import ee.ignorance.transformiceapi.event.Event;
  */
 public interface Player {
 
-	void cheese();
+        /* chat methods */
+        void privateChat(String recipient, String message);
 
-	void dance();
+        void roomChat(String message);
 
-	void hole();
+        void tribeChat(String message);
 
-	Mouse getPlayerMouse();
-
-	void login() throws GameException;
-
-	void changeRoom(String roomName) throws GameException;
-
-	<L> void addListener(Class<? extends Event<L>> eventClass, L listener);
+        /* event service methods */
+        <L> void addListener(Class<? extends Event<L>> eventClass, L listener);
 
         <L> void removeListener(Class<? extends Event<L>> eventClass, L listener);
 
-	void goLeft();
-	
-	void goRight();
-	
-	void jump();
-	
-	void die();
+        /* emote methods */
+        void cry();
+
+        void dance();
+
+        void kiss();
+
+        void laugh();
+
+        /* movement methods */
+        void crouch();
+
+        void goLeft();
+
+        void goRight();
+
+        void jump();
 
         void move(int posX, int posY, int movX, int movY,
                 boolean goingLeft, boolean goingRight, boolean jumping);
 
-         void move(int posX, int posY, int movX, int movY,
+        void move(int posX, int posY, int movX, int movY,
                 boolean goingLeft, boolean goingRight, boolean jumping, byte jumpingImage, byte unk);
 
-	void moveTo(int x, int y);
+        void movementDone();  //use to avoid server afk kill at 1:30
 
-	void roomChat(String message);
-
-	void privateChat(String recipient, String message);
-
-	void tribeChat(String message);
-
-	void cry();
-
-	void smile();
-
-	void magic(int type, int x, int y);
-
-	void kiss();
-	
-	void createObject(int type, int x, int y);
-
-	void command(String string);
-
-        public void movementDone();
-
-        void crouch();
+        void moveTo(int x, int y);
 
         void standUp();
 
-        void requestTribeList();
+        /* mouse methods */
+        void cheese();
 
-        void requestProfile(String nickname);
-	
+        void die();
+
+        void hole();
+
+        /* shaman related methods */
+        void magic(MagicType type, int x, int y);
+
+        void magic(MagicType type, int x, int y, int rotation, int dx, int dy, boolean solid);
+
+        void createObject(MagicType type, int x, int y);
+
+        void createObject(MagicType type, int x, int y, int rotation, int dx, int dy, boolean solid);
+
+        /* other unrelated */
+        void changeRoom(String roomName) throws GameException;
+        
+        void command(String string); //send command string to the server
+
+        void friend(String nickname);
+        
+        Mouse getPlayerMouse();
+
+        String getRoom();
+        
+        List<Mouse> getRoomMice();
+
+        void login() throws GameException;
+
+        void profile(String nickname);
+
+        void tribeList();
+
+        
 }

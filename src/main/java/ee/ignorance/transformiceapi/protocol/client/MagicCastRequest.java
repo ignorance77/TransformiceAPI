@@ -1,5 +1,7 @@
 package ee.ignorance.transformiceapi.protocol.client;
 
+import ee.ignorance.transformiceapi.MagicType;
+
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 
@@ -7,12 +9,24 @@ public class MagicCastRequest extends AbstractClientRequest {
 
         private int x;
         private int y;
-        private int code;
+        private MagicType code;
+        private int rotation;
+        private int dx;
+        private int dy;
+        private boolean solid;
 
-        public MagicCastRequest(int code, int x, int y) {
+        public MagicCastRequest(MagicType code, int x, int y, int rotation, int dx, int dy, boolean solid) {
                 this.x = x;
                 this.y = y;
                 this.code = code;
+                this.rotation = rotation;
+                this.dx = dx;
+                this.dy = dy;
+                this.solid = solid;
+        }
+
+        public MagicCastRequest(MagicType code, int x, int y) {
+                this(code, x, y, 0, 0, 0, true);
         }
 
         @Override
@@ -22,14 +36,13 @@ public class MagicCastRequest extends AbstractClientRequest {
                 try {
                         out.writeByte(5);
                         out.writeByte(20);
-                        out.writeShort(code);
-                        out.writeShort(-1); //Object Identifier? Using -1 works fine
+                        out.writeShort(code.value());
                         out.writeShort(x);
                         out.writeShort(y);
-                        out.writeShort(0); //Rotation
-                        out.writeByte(0); //x Velocity
-                        out.writeByte(0); //Y Velocity
-                        out.writeByte(1); // ?
+                        out.writeShort(rotation); //Rotation
+                        out.writeByte(dx); //x Velocity
+                        out.writeByte(dy); //Y Velocity
+                        out.writeByte(solid ? 1 : 0);
                 } catch (Exception e) {
                         e.printStackTrace();
                 }

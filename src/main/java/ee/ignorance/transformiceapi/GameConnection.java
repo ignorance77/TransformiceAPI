@@ -85,7 +85,7 @@ public class GameConnection {
                 }
         }
 
-        public PlayerImpl createPlayer(String username, String password) throws GameException {
+        public Player createPlayer(String username, String password) throws GameException {
                 if (player != null) {
                         throw new GameException("Player was already created for this connection");
                 }
@@ -153,7 +153,7 @@ public class GameConnection {
                         } else if (request instanceof PrivateChatRequest) {
                                 out.writeInt(request.getBytes().length + 8);
                                 writePrefix();
-                                out.writeBytes(new String(request.getBytes()));
+                                out.write(request.getBytes());
                                 out.flush();
                         } else if (request instanceof MagicCastRequest) {
                                 out.writeInt(request.getBytes().length + 8);
