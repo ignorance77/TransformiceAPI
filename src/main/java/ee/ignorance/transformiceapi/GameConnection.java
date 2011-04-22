@@ -193,7 +193,9 @@ public class GameConnection {
         }
         
         public void terminate(String message, Throwable e) throws GameException {
-                serverListener.terminate();
+                if (serverListener != null) {
+                        serverListener.terminate();
+                }
                 closeQuietly();
                 if (pingThread != null) {
                         pingThread.terminate();
