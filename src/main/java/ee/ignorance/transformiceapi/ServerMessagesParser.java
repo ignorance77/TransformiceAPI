@@ -50,21 +50,9 @@ public class ServerMessagesParser {
                                 List<String> rawMessage = split(bytes);
                                 rawMessage.add(0, "");
 
-                                if (codeMajor == 26) {
-                                        if (codeMinor == 22) {
-                                                return new IntroduceResponse(rawMessage);
-                                        }
-                                        if (codeMinor == 27) {
-                                                return new UrlResponse(rawMessage);
-                                        }
-                                        if (codeMinor == 3) {
-                                                return new LoginFailedResponse(rawMessage);
-                                        }
-                                        if (codeMinor == 8) {
-                                                return new LoginSuccessResponse(rawMessage);
-                                        }
-                                        if (codeMinor == 26) {
-                                                return new TZATResponse(rawMessage);
+                                if (codeMajor == 4) {
+                                        if (codeMinor == 9) {
+                                                return new MouseCrouchResponse(rawMessage);
                                         }
                                 }
                                 if (codeMajor == 5) {
@@ -122,8 +110,23 @@ public class ServerMessagesParser {
                                         }
                                 }
                                 if (codeMajor == 26) {
+                                        if (codeMinor == 3) {
+                                                return new LoginFailedResponse(rawMessage);
+                                        }
+                                        if (codeMinor == 8) {
+                                                return new LoginSuccessResponse(rawMessage);
+                                        }
                                         if (codeMinor == 12) {
                                                 return new MusicUrlResponse(rawMessage);
+                                        }
+                                        if (codeMinor == 22) {
+                                                return new IntroduceResponse(rawMessage);
+                                        }
+                                        if (codeMinor == 27) {
+                                                return new UrlResponse(rawMessage);
+                                        }
+                                        if (codeMinor == 26) {
+                                                return new TZATResponse(rawMessage);
                                         }
                                 }
                         }
