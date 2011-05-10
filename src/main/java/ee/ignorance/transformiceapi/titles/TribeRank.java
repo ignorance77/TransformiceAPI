@@ -54,4 +54,36 @@ public enum TribeRank {
 
                 return Stooge;
         }
+        
+        public static int getCode(TribeRank tribeRank) {
+            if (tribeRank == Cooker) {
+                    return 1;
+            }
+            if (tribeRank == Soldier) {
+                    return 2;
+            }
+            if (tribeRank == Treasurer) {
+                    return 3;
+            }
+            if (tribeRank == Recruiter) {
+                    return 4;
+            }
+            if (tribeRank == Hunteress) {
+                    return 5;
+            }
+            if (tribeRank == Initiated) {
+                    return 6;
+            }
+            if (tribeRank == ShamanApprentice) {
+                    return 7;
+            }
+            if (tribeRank == TribesShaman) {
+                    return 8;
+            }
+            if (tribeRank == SpiritualChief) {
+                    return 9;
+            }
+
+            return 0;
+    }
 }
