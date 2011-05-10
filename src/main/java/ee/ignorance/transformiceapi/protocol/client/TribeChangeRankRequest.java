@@ -6,11 +6,11 @@ import ee.ignorance.transformiceapi.titles.TribeRank;
 public class TribeChangeRankRequest extends AbstractClientRequest {
 
 	private String playerName;
-	private int code;
+	private TribeRank rank;
 	
 	public TribeChangeRankRequest(String playerName, TribeRank rank) {
 		this.playerName = playerName;
-		this.code = TribeRank.getCode(rank);
+		this.rank = rank;
 	}
 
 	@Override
@@ -21,7 +21,7 @@ public class TribeChangeRankRequest extends AbstractClientRequest {
 		bf.write(0x01);
 		bf.print(playerName);
 		bf.write(0x01);
-        bf.write(code);
+		bf.write(TribeRank.getCode(rank) + 48);
         return bf.getBytes();
 	}
 
