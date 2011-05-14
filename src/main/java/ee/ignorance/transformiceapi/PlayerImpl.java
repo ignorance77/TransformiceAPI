@@ -20,6 +20,7 @@ import ee.ignorance.transformiceapi.protocol.client.MovementDoneRequest;
 import ee.ignorance.transformiceapi.protocol.client.PositionRequest;
 import ee.ignorance.transformiceapi.protocol.client.TakeCheeseRequest;
 import ee.ignorance.transformiceapi.protocol.client.TribeListRequest;
+import ee.ignorance.transformiceapi.protocol.client.FriendListRequest;
 import ee.ignorance.transformiceapi.titles.TribeRank;
 
 public class PlayerImpl implements Player {
@@ -411,5 +412,10 @@ public class PlayerImpl implements Player {
         @Override
         public void profile(String nickname) {
                 command("profile " + nickname);        
+        }
+
+        @Override
+        public void friendList() {
+                getConnection().sendRequest(new FriendListRequest());
         }
 }
