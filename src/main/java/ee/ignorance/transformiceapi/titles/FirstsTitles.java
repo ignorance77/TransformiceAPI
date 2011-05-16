@@ -51,7 +51,7 @@ class FirstsTitles {
                 firstsTitles.put(16000, "The Unseen");
                 firstsTitles.put(18000, "Unstoppable");
                 firstsTitles.put(20000, "The Wind Master");
-                firstsTitles.put(25000, "¡Arriba! ¡Arriba!");
+                firstsTitles.put(25000, "Arriba! Arriba!");
                 firstsTitles.put(30000, "Torpedo");
                 firstsTitles.put(35000, "Speedy Gorgonzola");
                 firstsTitles.put(40000, "LIGHTNING");
