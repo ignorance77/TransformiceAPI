@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Arrays;
 
 import ee.ignorance.transformiceapi.protocol.server.FriendJoinResponse;
+import ee.ignorance.transformiceapi.protocol.server.FriendListResponse;
 import ee.ignorance.transformiceapi.protocol.server.IntroduceResponse;
 import ee.ignorance.transformiceapi.protocol.server.LoginFailedResponse;
 import ee.ignorance.transformiceapi.protocol.server.LoginSuccessResponse;
@@ -87,6 +88,9 @@ public class ServerMessagesParser {
                                         }
                                         if (codeMinor == 11) {
                                                 return new FriendJoinResponse(rawMessage);
+                                        }
+                                        if (codeMinor == 12) {
+                                                return new FriendListResponse(rawMessage);
                                         }
                                         if (codeMinor == 16) {
                                                 return new MouseBalloonResponse(rawMessage);
