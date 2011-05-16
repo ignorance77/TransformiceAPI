@@ -87,5 +87,5 @@ public interface Player {
 
         void tribeList();
 
-        
+        void friendList();
 }
