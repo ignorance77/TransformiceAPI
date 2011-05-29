@@ -5,7 +5,7 @@ import ee.ignorance.transformiceapi.protocol.ByteBuffer;
 
 public final class MouseBalloonRequest extends AbstractClientRequest {
 	
-	Mouse mouse;
+	private Mouse mouse;
 	public MouseBalloonRequest(Mouse mouse) {
 		this.mouse = mouse;
 	}

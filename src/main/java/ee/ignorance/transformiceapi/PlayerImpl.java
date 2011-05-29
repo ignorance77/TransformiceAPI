@@ -382,7 +382,7 @@ public class PlayerImpl implements Player {
         @Override
         public void balloon(Mouse mouse, int x, int y) {
         	connection.sendRequest(new MagicCastRequest(MagicType.Balloon, x, y));
-        	getConnection().sendRequest(new MouseBalloonRequest(mouse));
+        	connection.sendRequest(new MouseBalloonRequest(mouse));
         
         }
         
