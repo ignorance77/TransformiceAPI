@@ -1,13 +1,12 @@
 package ee.ignorance.transformiceapi;
 
-import ee.ignorance.transformiceapi.protocol.server.AbstractResponse;
 import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Arrays;
+import java.util.List;
 
+import ee.ignorance.transformiceapi.protocol.server.AbstractResponse;
 import ee.ignorance.transformiceapi.protocol.server.FriendJoinResponse;
 import ee.ignorance.transformiceapi.protocol.server.FriendListResponse;
 import ee.ignorance.transformiceapi.protocol.server.IntroduceResponse;
@@ -15,9 +14,9 @@ import ee.ignorance.transformiceapi.protocol.server.LoginFailedResponse;
 import ee.ignorance.transformiceapi.protocol.server.LoginSuccessResponse;
 import ee.ignorance.transformiceapi.protocol.server.ModChatResponse;
 import ee.ignorance.transformiceapi.protocol.server.MusicUrlResponse;
-import ee.ignorance.transformiceapi.protocol.server.RoomChatResponse;
 import ee.ignorance.transformiceapi.protocol.server.PlayerProfileResponse;
 import ee.ignorance.transformiceapi.protocol.server.PrivateChatResponse;
+import ee.ignorance.transformiceapi.protocol.server.RoomChatResponse;
 import ee.ignorance.transformiceapi.protocol.server.RoomResponse;
 import ee.ignorance.transformiceapi.protocol.server.ShamanStatusResponse;
 import ee.ignorance.transformiceapi.protocol.server.StartGameResponse;
@@ -27,10 +26,20 @@ import ee.ignorance.transformiceapi.protocol.server.TribeChatResponse;
 import ee.ignorance.transformiceapi.protocol.server.TribeListResponse;
 import ee.ignorance.transformiceapi.protocol.server.TribePlayerResponse;
 import ee.ignorance.transformiceapi.protocol.server.UrlResponse;
-import ee.ignorance.transformiceapi.protocol.server.mouse.*;
+import ee.ignorance.transformiceapi.protocol.server.mouse.MouseBalloonResponse;
+import ee.ignorance.transformiceapi.protocol.server.mouse.MouseCrouchResponse;
+import ee.ignorance.transformiceapi.protocol.server.mouse.MouseDeathResponse;
+import ee.ignorance.transformiceapi.protocol.server.mouse.MouseEmoteResponse;
+import ee.ignorance.transformiceapi.protocol.server.mouse.MouseFinishResponse;
+import ee.ignorance.transformiceapi.protocol.server.mouse.MouseGotCheeseResponse;
+import ee.ignorance.transformiceapi.protocol.server.mouse.MouseJoinRoomResponse;
+import ee.ignorance.transformiceapi.protocol.server.mouse.MouseLeaveRoomResponse;
+import ee.ignorance.transformiceapi.protocol.server.mouse.MouseListResponse;
+import ee.ignorance.transformiceapi.protocol.server.mouse.MouseMoveResponse;
 
 public class ServerMessagesParser {
-
+		private final static String separator = String.valueOf((char) 0x01);
+	
         public static AbstractResponse parse(byte[] message) throws IOException {
                 DataInputStream stream = new DataInputStream(new ByteArrayInputStream(message));
                 byte b1 = stream.readByte();
@@ -38,18 +47,13 @@ public class ServerMessagesParser {
 
                 if (b1 == 1) {
                         if (b2 == 1) {
-                                byte b3 = stream.readByte();
-                                byte b4 = stream.readByte();
-                                int codeMajor = stream.readByte();
-                                int codeMinor = stream.readByte();
-
-                                List<Byte> bytes = new ArrayList<Byte>();
-                                while (stream.available() > 0) {
-                                        byte b = stream.readByte();
-                                        bytes.add(b);
-                                }
-                                List<String> rawMessage = split(bytes);
-                                rawMessage.add(0, "");
+                        		String msg = stream.readUTF();
+                                
+                                int codeMajor = msg.charAt(0);
+                                int codeMinor = msg.charAt(1);
+                                String[] data = msg.split(separator, -1);
+                                
+                                List<String> rawMessage = Arrays.asList(data);
 
                                 if (codeMajor == 4) {
                                         if (codeMinor == 9) {
@@ -157,25 +161,5 @@ public class ServerMessagesParser {
                         }
                 }
                 return null;
-        }
-
-        private static List<String> split(List<Byte> bytes) {
-                List<String> ret = new ArrayList<String>();
-                StringBuffer current = new StringBuffer();
-                for (int i = 0; i <= bytes.size(); i++) {
-                        if ((i == bytes.size()) || bytes.get(i) == 1) {
-                                if (current.length() > 0) {
-                                        if (current.charAt(current.length() - 1) == 0 && current.length() > 1) {
-                                                ret.add(current.toString().substring(0, current.length() - 2));
-                                        } else {
-                                                ret.add(current.toString());
-                                        }
-                                        current = new StringBuffer();
-                                }
-                        } else {
-                                current.append((char) bytes.get(i).byteValue());
-                        }
-                }
-                return ret;
         }
 }

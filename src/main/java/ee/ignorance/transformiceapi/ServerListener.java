@@ -13,12 +13,14 @@ public class ServerListener implements Runnable {
 
 	private static final Logger logger = Logger.getLogger(ServerListener.class);
 	
-	private GameConnection connection;
-	private DataInputStream in;
+	private final GameConnection connection;
+	private final DataInputStream in;
+	
 	private volatile boolean terminate;
 	
 	public ServerListener(GameConnection connection) {
 		this.connection = connection;
+		in = connection.getInputStream();
 	}
 	
 	@Override
