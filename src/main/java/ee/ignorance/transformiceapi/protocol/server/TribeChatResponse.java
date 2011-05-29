@@ -1,29 +1,19 @@
 package ee.ignorance.transformiceapi.protocol.server;
 
+import java.io.DataInputStream;
+import java.io.IOException;
+
 import ee.ignorance.transformiceapi.processors.AbstractProcessor;
 import ee.ignorance.transformiceapi.processors.TribeChatProcessor;
 
-import java.io.ByteArrayInputStream;
-import java.io.DataInputStream;
-
-public class TribeChatResponse extends AbstractResponse {
+public final class TribeChatResponse implements Processable {
 
         private String sender;
         private String message;
 
-        public TribeChatResponse(byte[] rawMessage) {
-                super(rawMessage);
-        }
-
-        @Override
-        public void parse(byte[] rawMessage) {
-                DataInputStream in = new DataInputStream(new ByteArrayInputStream(rawMessage));
-                try {
-                        message = in.readUTF();
-                        sender = in.readUTF();
-                } catch (Exception e) {
-                        e.printStackTrace();
-                }
+        public TribeChatResponse(DataInputStream in) throws IOException {
+	        	 message = in.readUTF();
+	             sender = in.readUTF();
         }
 
         public String getSender() {

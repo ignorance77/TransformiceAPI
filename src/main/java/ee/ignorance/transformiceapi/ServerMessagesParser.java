@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
-import ee.ignorance.transformiceapi.protocol.server.AbstractResponse;
 import ee.ignorance.transformiceapi.protocol.server.FriendJoinResponse;
 import ee.ignorance.transformiceapi.protocol.server.FriendListResponse;
 import ee.ignorance.transformiceapi.protocol.server.IntroduceResponse;
@@ -16,6 +15,7 @@ import ee.ignorance.transformiceapi.protocol.server.ModChatResponse;
 import ee.ignorance.transformiceapi.protocol.server.MusicUrlResponse;
 import ee.ignorance.transformiceapi.protocol.server.PlayerProfileResponse;
 import ee.ignorance.transformiceapi.protocol.server.PrivateChatResponse;
+import ee.ignorance.transformiceapi.protocol.server.Processable;
 import ee.ignorance.transformiceapi.protocol.server.RoomChatResponse;
 import ee.ignorance.transformiceapi.protocol.server.RoomResponse;
 import ee.ignorance.transformiceapi.protocol.server.ShamanStatusResponse;
@@ -40,7 +40,7 @@ import ee.ignorance.transformiceapi.protocol.server.mouse.MouseMoveResponse;
 public class ServerMessagesParser {
 		private final static String separator = String.valueOf((char) 0x01);
 	
-        public static AbstractResponse parse(byte[] message) throws IOException {
+        public static Processable parse(byte[] message) throws IOException {
                 DataInputStream stream = new DataInputStream(new ByteArrayInputStream(message));
                 byte b1 = stream.readByte();
                 byte b2 = stream.readByte();
@@ -119,7 +119,7 @@ public class ServerMessagesParser {
                                 }
                                 if (codeMajor == 26) {
                                         if (codeMinor == 3) {
-                                                return new LoginFailedResponse(rawMessage);
+                                                return new LoginFailedResponse();
                                         }
                                         if (codeMinor == 8) {
                                                 return new LoginSuccessResponse(rawMessage);
@@ -134,30 +134,28 @@ public class ServerMessagesParser {
                                                 return new UrlResponse(rawMessage);
                                         }
                                         if (codeMinor == 26) {
-                                                return new TZATResponse(rawMessage);
+                                                return new TZATResponse();
                                         }
                                 }
                         }
                 }
-
-                byte[] buff = Arrays.copyOfRange(message, 2, message.length);
                 if (b1 == 4) {
                         if (b2 == 4) {
-                                return new MouseMoveResponse(buff);
+                                return new MouseMoveResponse(stream);
                         }
                 }
                 if (b1 == 6) {
                         if (b2 == 6) {
-                                return new RoomChatResponse(buff);
+                                return new RoomChatResponse(stream);
                         }
                         if (b2 == 7) {
-                                return new PrivateChatResponse(buff);
+                                return new PrivateChatResponse(stream);
                         }
                         if (b2 == 8) {
-                                return new TribeChatResponse(buff);
+                                return new TribeChatResponse(stream);
                         }
                         if (b2 == 10) {
-                                return new ModChatResponse(buff);
+                                return new ModChatResponse(stream);
                         }
                 }
                 return null;

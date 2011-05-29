@@ -1,31 +1,21 @@
 package ee.ignorance.transformiceapi.protocol.server;
 
+import java.io.DataInputStream;
+import java.io.IOException;
+
 import ee.ignorance.transformiceapi.processors.AbstractProcessor;
 import ee.ignorance.transformiceapi.processors.PrivateChatProcessor;
 
-import java.io.ByteArrayInputStream;
-import java.io.DataInputStream;
-
-public class PrivateChatResponse extends AbstractResponse {
+public final class PrivateChatResponse implements Processable {
 
         private String sender;
         private String message;
         private int type;
 
-        public PrivateChatResponse(byte[] rawMessage) {
-                super(rawMessage);
-        }
-
-        @Override
-        public void parse(byte[] rawMessage) {
-                DataInputStream in = new DataInputStream(new ByteArrayInputStream(rawMessage));
-                try {
-                        type = in.readByte();
-                        sender = in.readUTF();
-                        message = in.readUTF();
-                } catch (Exception e) {
-                        e.printStackTrace();
-                }
+        public PrivateChatResponse(DataInputStream in) throws IOException {
+	            type = in.readByte();
+	            sender = in.readUTF();
+	            message = in.readUTF();
         }
 
         public String getSender() {

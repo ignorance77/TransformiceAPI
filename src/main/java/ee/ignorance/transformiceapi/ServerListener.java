@@ -6,7 +6,7 @@ import java.io.IOException;
 import org.apache.log4j.Logger;
 
 import ee.ignorance.transformiceapi.processors.AbstractProcessor;
-import ee.ignorance.transformiceapi.protocol.server.AbstractResponse;
+import ee.ignorance.transformiceapi.protocol.server.Processable;
 
 
 public class ServerListener implements Runnable {
@@ -49,7 +49,7 @@ public class ServerListener implements Runnable {
 
 	private void parse(byte[] message) {
 		try {
-			AbstractResponse response = ServerMessagesParser.parse(message);
+			Processable response = ServerMessagesParser.parse(message);
 			if (response != null) {
 				AbstractProcessor processor = response.getProcessor();
 				processor.process(response, connection);

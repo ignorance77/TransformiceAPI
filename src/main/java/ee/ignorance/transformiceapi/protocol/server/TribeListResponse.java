@@ -1,45 +1,39 @@
 package ee.ignorance.transformiceapi.protocol.server;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import ee.ignorance.transformiceapi.TribePlayer;
 import ee.ignorance.transformiceapi.processors.AbstractProcessor;
 import ee.ignorance.transformiceapi.processors.TribeListProcessor;
 import ee.ignorance.transformiceapi.titles.TribeRank;
 
-import java.util.ArrayList;
-import java.util.List;
+public final class TribeListResponse implements Processable {
 
-public class TribeListResponse extends AbstractResponse {
+	private List<TribePlayer> tribePlayers;
 
-        private List<TribePlayer> tribePlayers;
+	public TribeListResponse(List<String> rawMessage) {
+		tribePlayers = new ArrayList<TribePlayer>();
+		for (int i = 1; i < rawMessage.size(); i++) {
+			String line = rawMessage.get(i);
 
-        public TribeListResponse(List<String> rawMessage) {
-                super(rawMessage);
-        }
+			char splitter = (char) 2;
+			String split[] = line.split(splitter + "");
 
-        @Override
-        public void parse(List<String> rawMessage) {
-                tribePlayers = new ArrayList<TribePlayer>();
-                for (int i = 1; i < rawMessage.size(); i++) {
-                        String line = rawMessage.get(i);
+			String name = split[0];
+			TribeRank rank = TribeRank.getRank(Integer.valueOf(split[1]));
+			String room = split[4];
 
-                        char splitter = (char) 2;
-                        String split[] = line.split(splitter + "");
+			tribePlayers.add(new TribePlayer(name, rank, room));
+		}
+	}
 
-                        String name = split[0];
-                        TribeRank rank = TribeRank.getRank(Integer.valueOf(split[1]));
-                        String room = split[4];
+	public List<TribePlayer> getTribePlayers() {
+		return tribePlayers;
+	}
 
-                        tribePlayers.add(new TribePlayer(name, rank, room));
-
-                }
-        }
-
-        public List<TribePlayer> getTribePlayers() {
-                return tribePlayers;
-        }
-
-        @Override
-        public AbstractProcessor getProcessor() {
-                return new TribeListProcessor();
-        }
+	@Override
+	public AbstractProcessor getProcessor() {
+		return new TribeListProcessor();
+	}
 }

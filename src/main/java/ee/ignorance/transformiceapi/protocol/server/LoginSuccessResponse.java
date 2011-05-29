@@ -1,11 +1,11 @@
 package ee.ignorance.transformiceapi.protocol.server;
 
+import java.util.List;
+
 import ee.ignorance.transformiceapi.processors.AbstractProcessor;
 import ee.ignorance.transformiceapi.processors.LoginSuccessProcessor;
 
-import java.util.List;
-
-public class LoginSuccessResponse extends AbstractResponse {
+public final class LoginSuccessResponse implements Processable {
 
         private String username;
         private int mouseId;
@@ -14,16 +14,11 @@ public class LoginSuccessResponse extends AbstractResponse {
         private boolean invite;
 
         public LoginSuccessResponse(List<String> rawMessage) {
-                super(rawMessage);
-        }
-
-        @Override
-        public void parse(List<String> rawMessage) {
-                username = rawMessage.get(1);
-                mouseId = Integer.parseInt(rawMessage.get(2));
-                invite = rawMessage.get(3).equals("0"); // ?
-                moderator = rawMessage.get(3).equals("5") || rawMessage.get(3).equals("6");
-                admin = rawMessage.get(3).equals("10");
+	            username = rawMessage.get(1);
+	            mouseId = Integer.parseInt(rawMessage.get(2));
+	            invite = rawMessage.get(3).equals("0"); // ?
+	            moderator = rawMessage.get(3).equals("5") || rawMessage.get(3).equals("6");
+	            admin = rawMessage.get(3).equals("10");
         }
 
         public String getUsername() {

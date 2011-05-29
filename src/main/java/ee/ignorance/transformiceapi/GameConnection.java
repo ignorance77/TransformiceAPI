@@ -21,7 +21,6 @@ import ee.ignorance.transformiceapi.protocol.client.PrivateChatRequest;
 import ee.ignorance.transformiceapi.protocol.client.RegisterRequest;
 import ee.ignorance.transformiceapi.protocol.client.RoomChatRequest;
 import ee.ignorance.transformiceapi.protocol.client.TribeChatRequest;
-import ee.ignorance.transformiceapi.protocol.server.AbstractResponse;
 
 public class GameConnection {
 
@@ -101,11 +100,6 @@ public class GameConnection {
 
         public PlayerImpl getPlayer() {
                 return player;
-        }
-
-        public void processCommand(AbstractResponse command) {
-                AbstractProcessor processor = command.getProcessor();
-                processor.process(command, this);
         }
 
         public boolean registerPlayer(String username, String password) throws GameException {

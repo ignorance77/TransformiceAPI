@@ -1,13 +1,13 @@
 package ee.ignorance.transformiceapi.protocol.server.mouse;
 
+import java.io.DataInputStream;
+import java.io.IOException;
+
 import ee.ignorance.transformiceapi.processors.AbstractProcessor;
 import ee.ignorance.transformiceapi.processors.mouse.MouseMoveProcessor;
-import ee.ignorance.transformiceapi.protocol.server.AbstractResponse;
+import ee.ignorance.transformiceapi.protocol.server.Processable;
 
-import java.io.ByteArrayInputStream;
-import java.io.DataInputStream;
-
-public class MouseMoveResponse extends AbstractResponse {
+public final class MouseMoveResponse implements Processable {
 
         private String gameCode;
         private int posX;
@@ -21,28 +21,18 @@ public class MouseMoveResponse extends AbstractResponse {
         private byte unk; //unknown
         private int playerID;
 
-        public MouseMoveResponse(byte[] rawMessage) {
-                super(rawMessage);
-        }
-
-        @Override
-        public void parse(byte[] rawMessage) {
-                try {
-                        DataInputStream in = new DataInputStream(new ByteArrayInputStream(rawMessage));
-                        gameCode = Integer.toString(in.readInt());
-                        goingRight = in.readBoolean();
-                        goingLeft = in.readBoolean();
-                        posX = in.readShort();
-                        posY = in.readShort();
-                        movX = in.readShort();
-                        movY = in.readShort();
-                        jumping = in.readBoolean();
-                        jumpingImage = in.readByte();
-                        unk = in.readByte(); //no clue what this is
-                        playerID = in.readInt();
-                } catch (Exception e) {
-                        e.printStackTrace();
-                }
+        public MouseMoveResponse(DataInputStream in) throws IOException {
+	            gameCode = Integer.toString(in.readInt());
+	            goingRight = in.readBoolean();
+	            goingLeft = in.readBoolean();
+	            posX = in.readShort();
+	            posY = in.readShort();
+	            movX = in.readShort();
+	            movY = in.readShort();
+	            jumping = in.readBoolean();
+	            jumpingImage = in.readByte();
+	            unk = in.readByte(); //no clue what this is
+	            playerID = in.readInt();
         }
 
         public String getGameCode() {

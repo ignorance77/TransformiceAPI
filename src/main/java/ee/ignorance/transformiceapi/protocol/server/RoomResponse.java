@@ -1,21 +1,16 @@
 package ee.ignorance.transformiceapi.protocol.server;
 
+import java.util.List;
+
 import ee.ignorance.transformiceapi.processors.AbstractProcessor;
 import ee.ignorance.transformiceapi.processors.RoomResponseProcessor;
 
-import java.util.List;
-
-public class RoomResponse extends AbstractResponse {
+public final class RoomResponse implements Processable {
 
         private String room;
 
         public RoomResponse(List<String> rawMessage) {
-                super(rawMessage);
-        }
-
-        @Override
-        public void parse(List<String> rawMessage) {
-                room = rawMessage.get(1);
+        	room = rawMessage.get(1);
         }
 
         public String getRoom() {
