@@ -7,6 +7,7 @@ import org.apache.log4j.Logger;
 
 import ee.ignorance.transformiceapi.processors.AbstractProcessor;
 import ee.ignorance.transformiceapi.protocol.server.Processable;
+import ee.ignorance.transformiceapi.util.StringUtils;
 
 
 public class ServerListener implements Runnable {
@@ -55,7 +56,8 @@ public class ServerListener implements Runnable {
 				processor.process(response, connection);
 			}
 		} catch (IOException e) {
-			logger.warn("Failed to parse server response", e);
+			logger.warn("Failed to parse server response: " + 
+					StringUtils.byteArrayToHexString(message), e);
 		}
 	}
 
