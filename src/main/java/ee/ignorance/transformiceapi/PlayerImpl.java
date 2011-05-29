@@ -1,6 +1,10 @@
 package ee.ignorance.transformiceapi;
 
 import java.util.List;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
+
+import org.apache.log4j.Logger;
 
 import ee.ignorance.transformiceapi.event.Event;
 import ee.ignorance.transformiceapi.event.EventService;
@@ -26,6 +30,7 @@ import ee.ignorance.transformiceapi.titles.TribeRank;
 public class PlayerImpl implements Player {
 
         private static final long TIMEOUT = 10000;
+        private static final Logger logger = Logger.getLogger(Player.class);
         
         private GameConnection connection;
 
@@ -41,7 +46,8 @@ public class PlayerImpl implements Player {
         private boolean moderator;
         private Mouse playerMouse;
 
-        private Boolean loginResult;
+        private CountDownLatch loginLatch = new CountDownLatch(1);
+        private boolean loginResult;
         private boolean syncStatus;
 
         private Integer secondShamanCode;
@@ -58,44 +64,25 @@ public class PlayerImpl implements Player {
 
         @Override
         public void login() throws GameException {
-                try {
-                        LoginRequest request = new LoginRequest(username, password);
-                        connection.sendRequest(request);
-                        loginResult = null;
-                        synchronized (this) {
-                                long startTime = System.currentTimeMillis();
-                                while (loginResult == null) {
-                                        wait(500);
-                                        if (System.currentTimeMillis() - startTime > TIMEOUT) {
-                                                throw new GameException("Login timed out");
-                                        }
-                                }
-                        }
-                        if (!loginResult) {
-                                throw new GameException("Login failed");
-                        }
-                } catch (Exception e) {
-                        getConnection().terminate("Player login failed: ", e);
-                }
+	
+			LoginRequest request = new LoginRequest(username, password);
+			connection.sendRequest(request);
+	
+			boolean success = waitForLoginResponse();
+			if (!success) {
+				connection.shutdown();
+				throw new GameException("Login timed out");
+			}
+			if (!loginResult) {
+				connection.shutdown();
+				throw new GameException("Wrong password");
+			}
+			logger.debug("Successfully logged in");
         }
 
         @Override
         public void changeRoom(final String roomName) throws GameException {
-                try {
-                        command("room " + roomName);
-                        synchronized (this) {
-                                long startTime = System.currentTimeMillis();
-                                while (!getRoom().equals(roomName)) {
-                                        wait(500);
-                                        if (System.currentTimeMillis() - startTime > TIMEOUT) {
-                                                throw new GameException("Change room times out");
-                                        }
-                                }
-                        }
-                } catch (InterruptedException ignored) {
-                } catch (GameException e) {
-                        getConnection().terminate("Change room failed", e);
-                }
+			command("room " + roomName);  
         }
 
         @Override
@@ -261,8 +248,9 @@ public class PlayerImpl implements Player {
                 return loginResult;
         }
 
-        public void setLoginResult(Boolean loginResult) {
+        public void setLoginResult(boolean loginResult) {
                 this.loginResult = loginResult;
+                loginLatch.countDown();
         }
 
         @Override
@@ -417,5 +405,13 @@ public class PlayerImpl implements Player {
         @Override
         public void friendList() {
                 getConnection().sendRequest(new FriendListRequest());
+        }
+        
+        private boolean waitForLoginResponse() {
+        	try {
+    			return loginLatch.await(TIMEOUT, TimeUnit.MILLISECONDS);
+    		} catch (InterruptedException e) {
+    			throw new RuntimeException("Unexpectedly interrupted");
+    		}
         }
 }

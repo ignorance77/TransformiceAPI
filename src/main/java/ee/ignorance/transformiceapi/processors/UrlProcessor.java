@@ -7,7 +7,7 @@ public class UrlProcessor extends AbstractProcessor<UrlResponse> {
 
         @Override
         public void process(UrlResponse response, GameConnection connection) {
-                connection.setUrlSent(true);
+                connection.setIntroduceSuccessful();
                 connection.setPrefix(response.getMDT(), response.getCMDTEC());
         }
 }

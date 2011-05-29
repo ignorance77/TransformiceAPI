@@ -6,7 +6,7 @@ import java.util.List;
 
 public class UrlResponse extends AbstractResponse {
 
-        private Integer CMDTEC;
+        private int CMDTEC;
         private int[] MDT;
 
         public UrlResponse(List<String> rawMessage) {
