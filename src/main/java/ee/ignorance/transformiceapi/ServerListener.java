@@ -5,6 +5,7 @@ import java.io.IOException;
 
 import org.apache.log4j.Logger;
 
+import ee.ignorance.transformiceapi.event.DisconnectEvent;
 import ee.ignorance.transformiceapi.processors.AbstractProcessor;
 import ee.ignorance.transformiceapi.protocol.server.Processable;
 import ee.ignorance.transformiceapi.util.StringUtils;
@@ -34,6 +35,11 @@ public class ServerListener implements Runnable {
 		} catch (IOException e) {
 			logger.warn("connection terminated", e);
 			connection.shutdown();
+			
+			PlayerImpl player = connection.getPlayer();
+			if (player != null) {
+				player.notifyListeners(new DisconnectEvent());
+			}
 		}
 	}
 

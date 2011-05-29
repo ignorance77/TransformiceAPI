@@ -175,17 +175,6 @@ public class GameConnection {
                 introduceLatch.countDown();	
         }
         
-        public void terminate(String message, Throwable e) throws GameException {
-                if (serverListener != null) {
-                        serverListener.terminate();
-                }
-                closeQuietly();
-                if (pingThread != null) {
-                        pingThread.terminate();
-                }
-                throw new GameException(message, e);
-        }
-
         public void shutdown() {
 			if (serverListener != null) {
 				serverListener.terminate();
