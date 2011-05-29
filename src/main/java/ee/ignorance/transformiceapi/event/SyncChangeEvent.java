@@ -1,19 +1,18 @@
 package ee.ignorance.transformiceapi.event;
 
+import ee.ignorance.transformiceapi.Mouse;
+
 public class SyncChangeEvent implements Event<SyncChangeListener> {
 
-        private String syncName;
+        private Mouse sync;
 
-        public SyncChangeEvent(String syncName) {
-                this.syncName = syncName;
+        public SyncChangeEvent(Mouse sync) {
+                this.sync = sync;
         }
 
-        public String getSyncName() {
-                return syncName;
-        }
-
+       
         @Override
         public void notifyListener(SyncChangeListener listener) {
-                listener.syncChanged(syncName);
+                listener.syncChanged(sync);
         }
 }

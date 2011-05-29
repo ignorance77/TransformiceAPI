@@ -13,10 +13,10 @@ public class SyncStatusProcessor extends AbstractProcessor<SyncStatusResponse> {
                 PlayerImpl player = connection.getPlayer();
                 player.setSyncStatus(response.getCodeSync() == player.getMouseId());
 
-                for (Mouse currentMouse : player.getRoomMice()) {
-                        if (currentMouse.getCode() == response.getCodeSync()) {
-                                player.notifyListeners(new SyncChangeEvent(currentMouse.getName()));
-                        }
+                Mouse mouse = player.getMouseById(response.getCodeSync());
+                if (mouse != null) {
+                	player.notifyListeners(new SyncChangeEvent(mouse));
                 }
+                
         }
 }
