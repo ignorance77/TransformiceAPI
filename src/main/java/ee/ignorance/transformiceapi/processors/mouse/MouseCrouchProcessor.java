@@ -15,7 +15,7 @@ public class MouseCrouchProcessor extends AbstractProcessor<MouseCrouchResponse>
 
                 Mouse mouse = player.getMouseById(response.getMouseID());
                 if (mouse != null) {
-                        player.notifyListeners(new MouseCrouchEvent(mouse));
+                        player.notifyListeners(new MouseCrouchEvent(mouse, response.isCrouched()));
                 }
         }
 }

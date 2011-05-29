@@ -6,9 +6,11 @@ import ee.ignorance.transformiceapi.event.Event;
 public class MouseCrouchEvent implements Event<MouseCrouchListener> {
 
         private Mouse mouse;
-
-        public MouseCrouchEvent(Mouse mouse) {
+        private boolean crouched;
+        
+        public MouseCrouchEvent(Mouse mouse, boolean crouched) {
                 this.mouse = mouse;
+                this.crouched = crouched;
         }
 
         public Mouse getMouse() {
@@ -17,6 +19,10 @@ public class MouseCrouchEvent implements Event<MouseCrouchListener> {
 
         @Override
         public void notifyListener(MouseCrouchListener listener) {
-                listener.mouseCrouched(mouse);
+            if (crouched) {
+            	listener.mouseCrouched(mouse);	
+            } else {
+            	listener.mouseStoodUp(mouse);
+            } 	
         }
 }

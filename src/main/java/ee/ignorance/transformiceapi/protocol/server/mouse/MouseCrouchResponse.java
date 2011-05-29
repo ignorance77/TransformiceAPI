@@ -9,15 +9,25 @@ import ee.ignorance.transformiceapi.protocol.server.Processable;
 public final class MouseCrouchResponse implements Processable {
 
         private int mouseID;
-
+        private boolean crouched;
+        
         public MouseCrouchResponse(List<String> rawMessage) {
-        	  if (rawMessage.size() == 3) {
-                  mouseID = Integer.valueOf(rawMessage.get(1));
-        	  }
+			if (rawMessage.size() == 2) {
+				mouseID = Integer.valueOf(rawMessage.get(1));
+				crouched = false;
+			}
+			if (rawMessage.size() == 3) {
+				mouseID = Integer.valueOf(rawMessage.get(1));
+				crouched = true;
+			}
         }
 
         public int getMouseID() {
                 return mouseID;
+        }
+        
+        public boolean isCrouched() {
+        	return crouched;
         }
 
         @Override
