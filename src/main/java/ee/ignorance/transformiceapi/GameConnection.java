@@ -15,6 +15,7 @@ import org.apache.log4j.Logger;
 import ee.ignorance.transformiceapi.processors.AbstractProcessor;
 import ee.ignorance.transformiceapi.protocol.client.AbstractClientRequest;
 import ee.ignorance.transformiceapi.protocol.client.DeathRequest;
+import ee.ignorance.transformiceapi.protocol.client.IntroduceRequest;
 import ee.ignorance.transformiceapi.protocol.client.MagicCastRequest;
 import ee.ignorance.transformiceapi.protocol.client.PositionRequest;
 import ee.ignorance.transformiceapi.protocol.client.PrivateChatRequest;
@@ -36,7 +37,7 @@ public class GameConnection {
         private DataInputStream in;
         private DataOutputStream out;
 
-        private int[] MDT;
+        private int[] MDT = new int[10];
         private int CMDTEC;
         
         private boolean registerResult;
@@ -143,10 +144,15 @@ public class GameConnection {
                                 out.write(request.getBytes());
                                 out.flush();
                         } else if (request instanceof DeathRequest) {
-                                out.writeInt(request.getBytes().length + 8);
-                                writePrefix();
-                                out.write(request.getBytes());
-                                out.flush();  
+	                            out.writeInt(request.getBytes().length + 8);
+	                            writePrefix();
+	                            out.write(request.getBytes());
+	                            out.flush();
+                        } else if (request instanceof IntroduceRequest) {
+	                            out.writeInt(request.getBytes().length + 8);
+	                            writePrefix();
+	                            out.write(request.getBytes());
+	                            out.flush();
                         } else {
                                 out.writeInt(request.getBytes().length + 8 + 4);
                                 writePrefix();
@@ -197,18 +203,7 @@ public class GameConnection {
         }
 
         private void introduce()  {
-                try {
-					out.writeInt(12);
-		              out.writeInt(0);
-		                out.writeByte(28);
-		                out.writeByte(1);
-		                out.writeShort(version);
-		                out.flush();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-  
+               sendRequest(new IntroduceRequest(version));
         }
         
         private void setProxy(Proxy proxy) {
