@@ -68,6 +68,9 @@ public interface Player {
 
         void createObject(MagicType type, int x, int y, int rotation, int dx, int dy, boolean solid);
 
+        /*  Spawns a balloon at specified coordinates and attaches a mouse to it. */
+        void balloon(Mouse mouse, int x, int y);
+        
         /* other unrelated */
         void changeRoom(String roomName);
         

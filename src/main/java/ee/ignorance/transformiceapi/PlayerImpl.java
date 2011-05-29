@@ -8,6 +8,7 @@ import org.apache.log4j.Logger;
 
 import ee.ignorance.transformiceapi.event.Event;
 import ee.ignorance.transformiceapi.event.EventService;
+import ee.ignorance.transformiceapi.protocol.client.MouseBalloonRequest;
 import ee.ignorance.transformiceapi.protocol.client.RoomChatRequest;
 import ee.ignorance.transformiceapi.protocol.client.PrivateChatRequest;
 import ee.ignorance.transformiceapi.protocol.client.TribeChangeRankRequest;
@@ -378,6 +379,13 @@ public class PlayerImpl implements Player {
                 getConnection().sendRequest(new MovementDoneRequest());
         }
 
+        @Override
+        public void balloon(Mouse mouse, int x, int y) {
+        	connection.sendRequest(new MagicCastRequest(MagicType.Balloon, x, y));
+        	getConnection().sendRequest(new MouseBalloonRequest(mouse));
+        
+        }
+        
         @Override
         public void crouch() {
                 getConnection().sendRequest(new CrouchRequest(true));
