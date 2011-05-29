@@ -81,7 +81,7 @@ public class PlayerImpl implements Player {
         }
 
         @Override
-        public void changeRoom(final String roomName) throws GameException {
+        public void changeRoom(final String roomName) {
 			command("room " + roomName);  
         }
 

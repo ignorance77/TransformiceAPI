@@ -69,7 +69,7 @@ public interface Player {
         void createObject(MagicType type, int x, int y, int rotation, int dx, int dy, boolean solid);
 
         /* other unrelated */
-        void changeRoom(String roomName) throws GameException;
+        void changeRoom(String roomName);
         
         void command(String string); //send command string to the server
 
