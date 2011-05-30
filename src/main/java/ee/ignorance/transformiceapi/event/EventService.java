@@ -22,6 +22,18 @@ public final class EventService {
                         listeners.remove(listener);
                 }
         }
+        
+        public <L> void remove(Class<? extends Event<L>> eventClass) {
+        	synchronized (map) {
+				map.remove(eventClass);
+			}
+        }
+        
+        public void removeAll() {
+        	synchronized (map) {
+        		map.clear();
+			}
+        }
 
         private <L> ArrayList<L> listenersOf(Class<? extends Event<L>> evtClass) {
                 synchronized (map) {

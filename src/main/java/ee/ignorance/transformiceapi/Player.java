@@ -21,6 +21,10 @@ public interface Player {
         <L> void addListener(Class<? extends Event<L>> eventClass, L listener);
 
         <L> void removeListener(Class<? extends Event<L>> eventClass, L listener);
+        
+        <L> void removeListeners(Class<? extends Event<L>> eventClass);
+        
+        void removeAllListeners();
 
         /* emote methods */
         void cry();

@@ -321,6 +321,16 @@ public class PlayerImpl implements Player {
                 eventService.remove(eventClass, listener);
         }
 
+        @Override
+        public <L> void removeListeners(Class<? extends Event<L>> eventClass) {
+        	eventService.remove(eventClass);
+        }
+        
+        @Override
+        public void removeAllListeners() {
+        	eventService.removeAll();
+        }
+        
         public <L> void notifyListeners(Event<L> e) {
                 eventService.notify(e);
         }
