@@ -18,7 +18,7 @@ public final class MouseMoveResponse implements Processable {
         private boolean goingRight;
         private boolean jumping;
         private byte jumpingImage;
-        private byte unk; //unknown
+        private byte portalId; //mouse movement done through a portal. 1 = blue, 2 = orange.
         private int playerID;
 
         public MouseMoveResponse(DataInputStream in) throws IOException {
@@ -31,7 +31,7 @@ public final class MouseMoveResponse implements Processable {
 	            movY = in.readShort();
 	            jumping = in.readBoolean();
 	            jumpingImage = in.readByte();
-	            unk = in.readByte(); //no clue what this is
+	            portalId = in.readByte();
 	            playerID = in.readInt();
         }
 
@@ -75,8 +75,8 @@ public final class MouseMoveResponse implements Processable {
                 return jumpingImage;
         }
 
-        public byte getUnk() {
-                return unk;
+        public byte getPortalId() {
+                return portalId;
         }
 
         @Override

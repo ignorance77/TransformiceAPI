@@ -23,7 +23,7 @@ public class MouseMoveProcessor extends AbstractProcessor<MouseMoveResponse> {
                         mouse.setGoingRight(response.isGoingRight());
                         mouse.setJumping(response.isJumping());
                         mouse.setJumpingImage(response.getJumpingImage());
-                        mouse.setUnk(response.getUnk());
+                        mouse.setPortalId(response.getPortalId());
                         player.notifyListeners(new MouseMoveEvent(mouse));
                 }
         }
