@@ -144,8 +144,8 @@ public class Mouse {
                 return jumpingImage;
         }
 
-        public void setPortalId(byte unk){
-                this.portalId = unk;
+        public void setPortalId(byte portalId){
+                this.portalId = portalId;
         }
 
         public byte getPortalId(){
