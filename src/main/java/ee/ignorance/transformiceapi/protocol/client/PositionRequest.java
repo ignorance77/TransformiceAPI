@@ -14,10 +14,10 @@ public class PositionRequest extends AbstractClientRequest {
 	private boolean goingRight;
 	private boolean jumping;
         private byte jumpingImage;
-        private byte unk;
+        private byte portalId;
 	
 	public PositionRequest(String gameCode, int posX, int posY, int movX, int movY,
-			boolean goingLeft, boolean goingRight, boolean jumping, byte jumpingImage, byte unk) {
+			boolean goingLeft, boolean goingRight, boolean jumping, byte jumpingImage, byte portalId) {
 		this.gameCode = gameCode;
 		this.posX = posX;
 		this.posY = posY;
@@ -27,7 +27,7 @@ public class PositionRequest extends AbstractClientRequest {
 		this.goingRight = goingRight;
 		this.jumping = jumping;
                 this.jumpingImage = jumpingImage;
-                this.unk = unk;
+                this.portalId = portalId;
 	}
 
 	@Override
@@ -46,7 +46,7 @@ public class PositionRequest extends AbstractClientRequest {
                         out.writeShort(movY); // y vector
                         out.writeBoolean(jumping);
                         out.writeByte(jumpingImage);
-                        out.writeByte(unk); // no clue what this is
+                        out.writeByte(portalId); // no clue what this is
 
                 } catch (Exception e)
                 {

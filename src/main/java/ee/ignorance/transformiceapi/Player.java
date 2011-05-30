@@ -48,7 +48,7 @@ public interface Player {
                 boolean goingLeft, boolean goingRight, boolean jumping);
 
         void move(int posX, int posY, int movX, int movY,
-                boolean goingLeft, boolean goingRight, boolean jumping, byte jumpingImage, byte unk);
+                boolean goingLeft, boolean goingRight, boolean jumping, byte jumpingImage, byte portalId);
 
         void movementDone();  //use to avoid server afk kill at 1:30
 

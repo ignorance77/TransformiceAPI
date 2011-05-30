@@ -94,11 +94,11 @@ public class PlayerImpl implements Player {
 
         @Override
         public void move(int posX, int posY, int movX, int movY, boolean goingLeft,
-                boolean goingRight, boolean jumping, byte jumpingImage, byte unk) {
+                boolean goingRight, boolean jumping, byte jumpingImage, byte portalId) {
                 setCurrentX(posX);
                 setCurrentY(posY);
                 PositionRequest request = new PositionRequest(getGameCode(),
-                        posX, posY, movX, movY, goingLeft, goingRight, jumping, jumpingImage, unk);
+                        posX, posY, movX, movY, goingLeft, goingRight, jumping, jumpingImage, portalId);
                 connection.sendRequest(request);
         }
 
