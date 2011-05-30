@@ -12,7 +12,6 @@ import java.util.concurrent.TimeUnit;
 
 import org.apache.log4j.Logger;
 
-import ee.ignorance.transformiceapi.processors.AbstractProcessor;
 import ee.ignorance.transformiceapi.protocol.client.AbstractClientRequest;
 import ee.ignorance.transformiceapi.protocol.client.DeathRequest;
 import ee.ignorance.transformiceapi.protocol.client.IntroduceRequest;
@@ -54,30 +53,19 @@ public class GameConnection {
         }
 
         public void connect(boolean login, Proxy proxy) throws GameException {
-        	setProxy(proxy);
-	
-			try {
-				socket.setKeepAlive(true);
-				socket.connect(new InetSocketAddress(host, port), 1500);
-				in = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
-				out = new DataOutputStream(socket.getOutputStream());
-				logger.debug("Successfully connected");
-			} catch (IOException e) {
-				shutdown();
-				throw new GameException("Connect failed", e);
-			}
-			startListening();
-			introduce();
-	
-			boolean success = waitForIntroduceResponse();
-			if (!success) {
-				shutdown();
-				throw new GameException("Introduce failed. Wrong version number?");
-			}
-			if (login) {
-				startPingThread();
-			}	
-			logger.debug("Successfully introduced");
+            initialize(proxy);
+            startListening();
+            introduce();
+
+            boolean success = waitForIntroduceResponse();
+            if (!success) {
+                shutdown();
+                throw new GameException("Introduce failed. Wrong version number?");
+            }
+            if (login) {
+                startPingThread();
+            }
+            logger.debug("Successfully introduced");
         }
 
         public Player createPlayer(String username, String password) throws GameException {
@@ -202,6 +190,21 @@ public class GameConnection {
                 }
         }
 
+        private void initialize(Proxy proxy) throws GameException {
+            setProxy(proxy);
+
+            try {
+                socket.setKeepAlive(true);
+                socket.connect(new InetSocketAddress(host, port), 1500);
+                in = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
+                out = new DataOutputStream(socket.getOutputStream());
+                logger.debug("Successfully connected");
+            } catch (IOException e) {
+                shutdown();
+                throw new GameException("Connect failed", e);
+            }
+        }
+        
         private void introduce()  {
                sendRequest(new IntroduceRequest(version));
         }
