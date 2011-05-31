@@ -322,7 +322,7 @@ public class PlayerImpl implements Player {
         }
 
         @Override
-        public <L> void removeListeners(Class<? extends Event<L>> eventClass) {
+        public void removeListeners(Class<? extends Event<?>> eventClass) {
         	eventService.remove(eventClass);
         }
         

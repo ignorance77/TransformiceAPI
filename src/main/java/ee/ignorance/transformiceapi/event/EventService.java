@@ -23,7 +23,7 @@ public final class EventService {
                 }
         }
         
-        public <L> void remove(Class<? extends Event<L>> eventClass) {
+        public void remove(Class<? extends Event<?>> eventClass) {
         	synchronized (map) {
 				map.remove(eventClass);
 			}

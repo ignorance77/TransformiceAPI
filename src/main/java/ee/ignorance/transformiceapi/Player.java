@@ -22,7 +22,7 @@ public interface Player {
 
         <L> void removeListener(Class<? extends Event<L>> eventClass, L listener);
         
-        <L> void removeListeners(Class<? extends Event<L>> eventClass);
+        void removeListeners(Class<? extends Event<?>> eventClass);
         
         void removeAllListeners();
 
