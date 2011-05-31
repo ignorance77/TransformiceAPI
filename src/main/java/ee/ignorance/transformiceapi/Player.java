@@ -90,6 +90,8 @@ public interface Player {
 
         void login() throws GameException;
 
+        void moveCheese(int x, int y);
+        
         void profile(String nickname);
 
         void tribeList();

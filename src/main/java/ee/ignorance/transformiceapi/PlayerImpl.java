@@ -9,6 +9,7 @@ import org.apache.log4j.Logger;
 import ee.ignorance.transformiceapi.event.Event;
 import ee.ignorance.transformiceapi.event.EventService;
 import ee.ignorance.transformiceapi.protocol.client.MouseBalloonRequest;
+import ee.ignorance.transformiceapi.protocol.client.MoveCheeseRequest;
 import ee.ignorance.transformiceapi.protocol.client.RoomChatRequest;
 import ee.ignorance.transformiceapi.protocol.client.PrivateChatRequest;
 import ee.ignorance.transformiceapi.protocol.client.TribeChangeRankRequest;
@@ -413,6 +414,11 @@ public class PlayerImpl implements Player {
 
         public void changeTribeRank(String playerName, TribeRank rank) {
             	getConnection().sendRequest(new TribeChangeRankRequest(playerName, rank));
+        }
+        
+        @Override
+        public void moveCheese(int x, int y) {
+        	connection.sendRequest(new MoveCheeseRequest(x, y));
         }
         
         @Override
