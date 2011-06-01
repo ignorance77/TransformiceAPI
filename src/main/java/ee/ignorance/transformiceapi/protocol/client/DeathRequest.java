@@ -3,7 +3,7 @@ package ee.ignorance.transformiceapi.protocol.client;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 
-public class DeathRequest extends AbstractClientRequest {
+public final class DeathRequest implements ByteMessageRequest {
 
         private int gameCode;
 

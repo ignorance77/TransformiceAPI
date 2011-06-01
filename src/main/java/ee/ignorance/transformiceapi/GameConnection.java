@@ -12,15 +12,10 @@ import java.util.concurrent.TimeUnit;
 
 import org.apache.log4j.Logger;
 
-import ee.ignorance.transformiceapi.protocol.client.AbstractClientRequest;
-import ee.ignorance.transformiceapi.protocol.client.DeathRequest;
+import ee.ignorance.transformiceapi.protocol.client.ByteMessageRequest;
 import ee.ignorance.transformiceapi.protocol.client.IntroduceRequest;
-import ee.ignorance.transformiceapi.protocol.client.MagicCastRequest;
-import ee.ignorance.transformiceapi.protocol.client.PositionRequest;
-import ee.ignorance.transformiceapi.protocol.client.PrivateChatRequest;
+import ee.ignorance.transformiceapi.protocol.client.StringMessageRequest;
 import ee.ignorance.transformiceapi.protocol.client.RegisterRequest;
-import ee.ignorance.transformiceapi.protocol.client.RoomChatRequest;
-import ee.ignorance.transformiceapi.protocol.client.TribeChatRequest;
 
 public class GameConnection {
 
@@ -104,57 +99,34 @@ public class GameConnection {
 			return registerResult;
         }
 
-        public synchronized void sendRequest(AbstractClientRequest request) {
-                try {
-                        if (request instanceof PositionRequest) {
-                                out.writeInt(request.getBytes().length + 8);
-                                writePrefix();
-                                out.write(request.getBytes());
-                                out.flush();
-                        } else if (request instanceof RoomChatRequest) {
-                                out.writeInt(request.getBytes().length + 8);
-                                writePrefix();
-                                out.write(request.getBytes());
-                                out.flush();
-                        } else if (request instanceof TribeChatRequest) {
-                                out.writeInt(request.getBytes().length + 8);
-                                writePrefix();
-                                out.write(request.getBytes());
-                                out.flush();
-                        } else if (request instanceof PrivateChatRequest) {
-                                out.writeInt(request.getBytes().length + 8);
-                                writePrefix();
-                                out.write(request.getBytes());
-                                out.flush();
-                        } else if (request instanceof MagicCastRequest) {
-                                out.writeInt(request.getBytes().length + 8);
-                                writePrefix();
-                                out.write(request.getBytes());
-                                out.flush();
-                        } else if (request instanceof DeathRequest) {
-	                            out.writeInt(request.getBytes().length + 8);
-	                            writePrefix();
-	                            out.write(request.getBytes());
-	                            out.flush();
-                        } else if (request instanceof IntroduceRequest) {
-	                            out.writeInt(request.getBytes().length + 8);
-	                            writePrefix();
-	                            out.write(request.getBytes());
-	                            out.flush();
-                        } else {
-                                out.writeInt(request.getBytes().length + 8 + 4);
-                                writePrefix();
-                                out.writeByte(1);
-                                out.writeByte(1);
-                                out.writeShort(request.getBytes().length);
-                                out.write(request.getBytes());
-                                out.flush();
-                        }
-                } catch (IOException e) {
-                        e.printStackTrace();
-                }
-        }
+        public synchronized void sendRequest(ByteMessageRequest request) {
+            try {
+                byte[] data = request.getBytes();
+                out.writeInt(data.length + 8);
+                writePrefix();
+                out.write(data);
+                out.flush();
 
+            } catch (IOException e) {
+                logger.warn("Failed to send request" + e);
+            }
+        }
+        
+        public synchronized void sendRequest(StringMessageRequest request) {
+            try {
+                byte[] data = request.getBytes();
+                out.writeInt(data.length + 8 + 4);
+                writePrefix();
+                out.writeByte(1);
+                out.writeByte(1);
+                out.writeShort(data.length);
+                out.write(data);
+                out.flush();
+            } catch (IOException e) {
+                logger.warn("Failed to send request" + e);
+            }
+        }
+        
         public void setPrefix(int[] MDT, int CMDTEC) {
                 this.MDT = MDT;
                 this.CMDTEC = CMDTEC;

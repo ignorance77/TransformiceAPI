@@ -6,7 +6,7 @@ import java.io.IOException;
 
 import org.apache.log4j.Logger;
 
-public final class IntroduceRequest extends AbstractClientRequest {
+public final class IntroduceRequest implements ByteMessageRequest {
 
 	private static final Logger logger = Logger.getLogger(IntroduceRequest.class);
 	private final int version;

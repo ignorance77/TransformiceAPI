@@ -2,7 +2,7 @@ package ee.ignorance.transformiceapi.protocol.client;
 
 import ee.ignorance.transformiceapi.protocol.ByteBuffer;
 
-public class PingRequest extends AbstractClientRequest {
+public final class PingRequest implements StringMessageRequest {
 
 	private long lastPingTime;
 	

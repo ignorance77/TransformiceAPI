@@ -3,7 +3,7 @@ package ee.ignorance.transformiceapi.protocol.client;
 import ee.ignorance.transformiceapi.MagicType;
 import ee.ignorance.transformiceapi.protocol.ByteBuffer;
 
-public class MagicBeginRequest extends AbstractClientRequest {
+public final class MagicBeginRequest implements StringMessageRequest {
 
         private int x;
         private int y;

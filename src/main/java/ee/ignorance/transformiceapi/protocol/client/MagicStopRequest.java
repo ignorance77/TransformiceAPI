@@ -2,7 +2,7 @@ package ee.ignorance.transformiceapi.protocol.client;
 
 import ee.ignorance.transformiceapi.protocol.ByteBuffer;
 
-public class MagicStopRequest extends AbstractClientRequest {
+public final class MagicStopRequest implements StringMessageRequest {
 
         @Override
         public byte[] getBytes() {

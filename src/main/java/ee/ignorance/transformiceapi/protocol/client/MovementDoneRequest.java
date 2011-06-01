@@ -2,7 +2,7 @@ package ee.ignorance.transformiceapi.protocol.client;
 
 import ee.ignorance.transformiceapi.protocol.ByteBuffer;
 
-public class MovementDoneRequest extends AbstractClientRequest {
+public final class MovementDoneRequest implements StringMessageRequest {
 
 	@Override
 	public byte[] getBytes() {

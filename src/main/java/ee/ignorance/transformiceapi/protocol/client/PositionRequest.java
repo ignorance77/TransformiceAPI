@@ -3,7 +3,7 @@ package ee.ignorance.transformiceapi.protocol.client;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 
-public class PositionRequest extends AbstractClientRequest {
+public final class PositionRequest implements ByteMessageRequest {
 
 	private String gameCode;
 	private int posX;

@@ -5,7 +5,7 @@ import ee.ignorance.transformiceapi.MagicType;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 
-public class MagicCastRequest extends AbstractClientRequest {
+public final class MagicCastRequest implements ByteMessageRequest {
 
         private int x;
         private int y;

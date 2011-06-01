@@ -2,7 +2,7 @@ package ee.ignorance.transformiceapi.protocol.client;
 
 import ee.ignorance.transformiceapi.protocol.ByteBuffer;
 
-public class TZATRequest extends AbstractClientRequest {
+public final class TZATRequest implements StringMessageRequest {
 
         @Override
         public byte[] getBytes() {

@@ -2,7 +2,7 @@ package ee.ignorance.transformiceapi.protocol.client;
 
 import ee.ignorance.transformiceapi.protocol.ByteBuffer;
 
-public final class MoveCheeseRequest extends AbstractClientRequest {
+public final class MoveCheeseRequest implements StringMessageRequest {
 
 	private int x;
 	private int y;

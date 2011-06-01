@@ -3,7 +3,7 @@ package ee.ignorance.transformiceapi.protocol.client;
 import ee.ignorance.transformiceapi.Mouse;
 import ee.ignorance.transformiceapi.protocol.ByteBuffer;
 
-public final class MouseBalloonRequest extends AbstractClientRequest {
+public final class MouseBalloonRequest implements StringMessageRequest {
 	
 	private Mouse mouse;
 	public MouseBalloonRequest(Mouse mouse) {

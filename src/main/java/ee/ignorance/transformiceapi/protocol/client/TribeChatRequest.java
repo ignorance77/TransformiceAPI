@@ -3,7 +3,7 @@ package ee.ignorance.transformiceapi.protocol.client;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 
-public class TribeChatRequest extends AbstractClientRequest {
+public final class TribeChatRequest implements ByteMessageRequest {
 
         private String message;
 

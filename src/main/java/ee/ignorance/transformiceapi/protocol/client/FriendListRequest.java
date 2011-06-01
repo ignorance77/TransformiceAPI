@@ -2,7 +2,7 @@ package ee.ignorance.transformiceapi.protocol.client;
 
 import ee.ignorance.transformiceapi.protocol.ByteBuffer;
 
-public class FriendListRequest extends AbstractClientRequest {
+public final class FriendListRequest implements StringMessageRequest {
 
         @Override
         public byte[] getBytes() {

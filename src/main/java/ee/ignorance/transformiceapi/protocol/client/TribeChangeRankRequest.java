@@ -3,7 +3,7 @@ package ee.ignorance.transformiceapi.protocol.client;
 import ee.ignorance.transformiceapi.protocol.ByteBuffer;
 import ee.ignorance.transformiceapi.titles.TribeRank;
 
-public class TribeChangeRankRequest extends AbstractClientRequest {
+public final class TribeChangeRankRequest implements StringMessageRequest {
 
 	private String playerName;
 	private TribeRank rank;
