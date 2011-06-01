@@ -52,7 +52,6 @@ public class PlayerImpl implements Player {
         private boolean loginResult;
         private boolean sync;
 
-        private Integer secondShamanCode;
         private boolean shaman;
         
         private EventService eventService;
@@ -271,14 +270,6 @@ public class PlayerImpl implements Player {
 
         public void setSync(boolean sync) {
                 this.sync = sync;
-        }
-
-        public Integer getSecondShamanCode() {
-                return secondShamanCode;
-        }
-
-        public void setSecondShamanCode(Integer secondShamanCode) {
-                this.secondShamanCode = secondShamanCode;
         }
 
         @Override
