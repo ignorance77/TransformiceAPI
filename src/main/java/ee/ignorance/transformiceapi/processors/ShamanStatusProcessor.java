@@ -13,32 +13,25 @@ public class ShamanStatusProcessor extends AbstractProcessor<ShamanStatusRespons
         public void process(ShamanStatusResponse response, GameConnection connection) {
                 PlayerImpl player = connection.getPlayer();
 
-                if (response.getShamanCode() == player.getMouseId()) {
-                        player.setShaman(true);
-                        player.notifyListeners(new ShamanStatusEvent());
-
+                if (response.getShamanCode() == player.getMouseId() ||
+                		response.getSecondShamanCode() == player.getMouseId()) {
+                	player.setShaman(true);
+                	player.notifyListeners(new ShamanStatusEvent());
                 } else {
-                        player.setShaman(false);
+                	player.setShaman(false);
                 }
-
-                Mouse firstShaman = player.getMouseById(response.getShamanCode());
-                if (firstShaman == null) {
-                        return;
-                }
-
-                if (response.isTwoShamans()) {
-                        player.setSecondShamanCode(response.getSecondShamanCode());
-                        if (player.getSecondShamanCode() == player.getMouseId()) {
-                                player.setShaman(true);
-                        }
-
-                        Mouse secondShaman = player.getMouseById(response.getSecondShamanCode());
-                        if (secondShaman != null) {
-                                player.notifyListeners(new ShamanChangeEvent(firstShaman, secondShaman, true));
-                        }
+                
+                if (!response.isTwoShamans()) {
+                	Mouse first = player.getMouseById(response.getShamanCode());
+                	if (first != null) {
+                		player.notifyListeners(new ShamanChangeEvent(first, null, false));
+                	}
                 } else {
-                        player.setSecondShamanCode(null);
-                        player.notifyListeners(new ShamanChangeEvent(firstShaman, null, false));
-                }
+                	Mouse first = player.getMouseById(response.getShamanCode());
+                	Mouse second = player.getMouseById(response.getSecondShamanCode());
+                	if (first != null && second != null) {
+                		player.notifyListeners(new ShamanChangeEvent(first, second, true));
+                	}
+                }        
         }
 }

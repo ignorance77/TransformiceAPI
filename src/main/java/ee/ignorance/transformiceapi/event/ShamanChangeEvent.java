@@ -12,9 +12,9 @@ public class ShamanChangeEvent implements Event<ShamanChangeListener> {
                 return twoShamans;
         }
 
-        public ShamanChangeEvent(Mouse firstCode, Mouse secondCode, boolean twoShamans) {
-                this.firstShaman = firstCode;
-                this.secondShaman = secondCode;
+        public ShamanChangeEvent(Mouse first, Mouse second, boolean twoShamans) {
+                this.firstShaman = first;
+                this.secondShaman = second;
                 this.twoShamans = twoShamans;
         }
 
