@@ -11,7 +11,7 @@ public class SyncStatusProcessor extends AbstractProcessor<SyncStatusResponse> {
         @Override
         public void process(SyncStatusResponse response, GameConnection connection) {
                 PlayerImpl player = connection.getPlayer();
-                player.setSyncStatus(response.getCodeSync() == player.getMouseId());
+                player.setSync(response.getCodeSync() == player.getMouseId());
 
                 Mouse mouse = player.getMouseById(response.getCodeSync());
                 if (mouse != null) {

@@ -50,10 +50,10 @@ public class PlayerImpl implements Player {
 
         private CountDownLatch loginLatch = new CountDownLatch(1);
         private boolean loginResult;
-        private boolean syncStatus;
+        private boolean sync;
 
         private Integer secondShamanCode;
-        private boolean isShaman;
+        private boolean shaman;
         
         private EventService eventService;
 
@@ -264,12 +264,13 @@ public class PlayerImpl implements Player {
                 this.playerMouse = playerMouse;
         }
 
-        public boolean isSyncStatus() {
-                return syncStatus;
+        @Override
+        public boolean isSync() {
+                return sync;
         }
 
-        public void setSyncStatus(boolean syncStatus) {
-                this.syncStatus = syncStatus;
+        public void setSync(boolean sync) {
+                this.sync = sync;
         }
 
         public Integer getSecondShamanCode() {
@@ -280,12 +281,13 @@ public class PlayerImpl implements Player {
                 this.secondShamanCode = secondShamanCode;
         }
 
+        @Override
         public boolean isShaman() {
-                return isShaman;
+                return shaman;
         }
 
-        public void setShaman(boolean isShaman) {
-                this.isShaman = isShaman;
+        public void setShaman(boolean shaman) {
+                this.shaman = shaman;
         }
 
         @Override

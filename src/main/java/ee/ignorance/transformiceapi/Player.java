@@ -97,4 +97,8 @@ public interface Player {
         void tribeList();
 
         void friendList();
+        
+        boolean isSync();
+        
+        boolean isShaman();
 }
