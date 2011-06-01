@@ -108,7 +108,7 @@ public class GameConnection {
                 out.flush();
 
             } catch (IOException e) {
-                logger.warn("Failed to send request" + e);
+                logger.warn("Failed to send request", e);
             }
         }
         
@@ -123,7 +123,7 @@ public class GameConnection {
                 out.write(data);
                 out.flush();
             } catch (IOException e) {
-                logger.warn("Failed to send request" + e);
+                logger.warn("Failed to send request", e);
             }
         }
         
