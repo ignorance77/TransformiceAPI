@@ -4,5 +4,5 @@ import ee.ignorance.transformiceapi.processors.AbstractProcessor;
 
 public interface Processable {
 
-	public abstract AbstractProcessor getProcessor();
+	AbstractProcessor getProcessor();
 }
