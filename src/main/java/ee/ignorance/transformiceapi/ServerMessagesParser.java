@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
+import ee.ignorance.transformiceapi.protocol.server.CountdownResponse;
 import ee.ignorance.transformiceapi.protocol.server.FriendJoinResponse;
 import ee.ignorance.transformiceapi.protocol.server.FriendListResponse;
 import ee.ignorance.transformiceapi.protocol.server.IntroduceResponse;
@@ -70,6 +71,11 @@ public class ServerMessagesParser {
                                         if (codeMinor == 21) {
                                                 return new RoomResponse(rawMessage);
                                         }
+                                }
+                                if (codeMajor == 6) {
+                                	if (codeMinor == 17) {
+                                		return new CountdownResponse(); //timer reset to :20
+                                	}
                                 }
                                 if (codeMajor == 8) {
                                         if (codeMinor == 5) {
