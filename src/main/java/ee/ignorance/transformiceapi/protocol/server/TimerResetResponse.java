@@ -1,13 +1,13 @@
 package ee.ignorance.transformiceapi.protocol.server;
 
 import ee.ignorance.transformiceapi.processors.AbstractProcessor;
-import ee.ignorance.transformiceapi.processors.CountdownProcessor;
+import ee.ignorance.transformiceapi.processors.TimerResetProcessor;
 
-public class CountdownResponse implements Processable {
+public class TimerResetResponse implements Processable {
 
 	@Override
 	public AbstractProcessor getProcessor() {
-		return new CountdownProcessor();
+		return new TimerResetProcessor();
 	}
 
 }

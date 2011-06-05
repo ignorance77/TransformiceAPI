@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
-import ee.ignorance.transformiceapi.protocol.server.CountdownResponse;
 import ee.ignorance.transformiceapi.protocol.server.FriendJoinResponse;
 import ee.ignorance.transformiceapi.protocol.server.FriendListResponse;
 import ee.ignorance.transformiceapi.protocol.server.IntroduceResponse;
@@ -23,6 +22,7 @@ import ee.ignorance.transformiceapi.protocol.server.ShamanStatusResponse;
 import ee.ignorance.transformiceapi.protocol.server.StartGameResponse;
 import ee.ignorance.transformiceapi.protocol.server.SyncStatusResponse;
 import ee.ignorance.transformiceapi.protocol.server.TZATResponse;
+import ee.ignorance.transformiceapi.protocol.server.TimerResetResponse;
 import ee.ignorance.transformiceapi.protocol.server.TribeChatResponse;
 import ee.ignorance.transformiceapi.protocol.server.TribeListResponse;
 import ee.ignorance.transformiceapi.protocol.server.TribePlayerResponse;
@@ -74,7 +74,7 @@ public class ServerMessagesParser {
                                 }
                                 if (codeMajor == 6) {
                                 	if (codeMinor == 17) {
-                                		return new CountdownResponse(); //timer reset to :20
+                                		return new TimerResetResponse(); //timer reset to :20
                                 	}
                                 }
                                 if (codeMajor == 8) {
