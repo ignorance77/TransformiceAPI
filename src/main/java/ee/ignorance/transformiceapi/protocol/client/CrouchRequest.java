@@ -2,7 +2,7 @@ package ee.ignorance.transformiceapi.protocol.client;
 
 import ee.ignorance.transformiceapi.protocol.ByteBuffer;
 
-public class CrouchRequest extends AbstractClientRequest {
+public final class CrouchRequest implements StringMessageRequest {
 
         boolean crouched;
 

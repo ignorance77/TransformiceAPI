@@ -21,6 +21,10 @@ public interface Player {
         <L> void addListener(Class<? extends Event<L>> eventClass, L listener);
 
         <L> void removeListener(Class<? extends Event<L>> eventClass, L listener);
+        
+        void removeListeners(Class<? extends Event<?>> eventClass);
+        
+        void removeAllListeners();
 
         /* emote methods */
         void cry();
@@ -44,7 +48,7 @@ public interface Player {
                 boolean goingLeft, boolean goingRight, boolean jumping);
 
         void move(int posX, int posY, int movX, int movY,
-                boolean goingLeft, boolean goingRight, boolean jumping, byte jumpingImage, byte unk);
+                boolean goingLeft, boolean goingRight, boolean jumping, byte jumpingImage, byte portalId);
 
         void movementDone();  //use to avoid server afk kill at 1:30
 
@@ -68,8 +72,11 @@ public interface Player {
 
         void createObject(MagicType type, int x, int y, int rotation, int dx, int dy, boolean solid);
 
+        /*  Spawns a balloon at specified coordinates and attaches a mouse to it. */
+        void balloon(Mouse mouse, int x, int y);
+        
         /* other unrelated */
-        void changeRoom(String roomName) throws GameException;
+        void changeRoom(String roomName);
         
         void command(String string); //send command string to the server
 
@@ -83,9 +90,15 @@ public interface Player {
 
         void login() throws GameException;
 
+        void moveCheese(int x, int y);
+        
         void profile(String nickname);
 
         void tribeList();
 
         void friendList();
+        
+        boolean isSync();
+        
+        boolean isShaman();
 }

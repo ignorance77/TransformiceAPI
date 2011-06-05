@@ -1,5 +1,9 @@
 package ee.ignorance.transformiceapi;
 
+/**
+ * test
+ *
+ */
 public class Friend {
 
     private String playerName;

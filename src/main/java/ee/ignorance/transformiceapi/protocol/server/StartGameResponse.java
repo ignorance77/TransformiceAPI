@@ -1,11 +1,11 @@
 package ee.ignorance.transformiceapi.protocol.server;
 
+import java.util.List;
+
 import ee.ignorance.transformiceapi.processors.AbstractProcessor;
 import ee.ignorance.transformiceapi.processors.StartGameResponseProcessor;
 
-import java.util.List;
-
-public class StartGameResponse extends AbstractResponse {
+public final class StartGameResponse implements Processable {
 
         private String modeNext;
         private String text;
@@ -14,32 +14,27 @@ public class StartGameResponse extends AbstractResponse {
         private String mapMaker;
 
         public StartGameResponse(List<String> rawMessage) {
-                super(rawMessage);
-        }
-
-        @Override
-        public void parse(List<String> rawMessage) {
-                modeNext = rawMessage.get(1);
-                text = rawMessage.get(2);
-                gameCode = rawMessage.get(3);
-
-                if (getModeNext().equals("-1")) {   //custom usermade map
-                        char separator = (char) 0x02;
-                        int index;
-
-                        if (rawMessage.get(4).startsWith("<")) {
-                                index = 4;
-                        } else {
-                                index = 5;
-                        }
-
-                        String[] mapData = rawMessage.get(index).split(String.valueOf(separator));
-                        mapXML = mapData[0];
-                        mapMaker = mapData[1];
-                } else {        //vanilla map
-                        mapMaker = getModeNext();         //store map number as map maker name for vanilla maps
-                        mapXML = "";                      //no xml
-                }
+	            modeNext = rawMessage.get(1);
+	            text = rawMessage.get(2);
+	            gameCode = rawMessage.get(3);
+	
+	            if (getModeNext().equals("-1")) {   //custom usermade map
+	                    char separator = (char) 0x02;
+	                    int index;
+	
+	                    if (rawMessage.get(4).startsWith("<")) {
+	                            index = 4;
+	                    } else {
+	                            index = 5;
+	                    }
+	
+	                    String[] mapData = rawMessage.get(index).split(String.valueOf(separator));
+	                    mapXML = mapData[0];
+	                    mapMaker = mapData[1];
+	            } else {        //vanilla map
+	                    mapMaker = getModeNext();         //store map number as map maker name for vanilla maps
+	                    mapXML = "";                      //no xml
+	            }
         }
 
         public String getModeNext() {

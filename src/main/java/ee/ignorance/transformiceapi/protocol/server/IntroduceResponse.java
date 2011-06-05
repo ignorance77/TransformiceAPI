@@ -1,22 +1,16 @@
 package ee.ignorance.transformiceapi.protocol.server;
 
-import ee.ignorance.transformiceapi.GameConnection;
+import java.util.List;
+
 import ee.ignorance.transformiceapi.processors.AbstractProcessor;
 import ee.ignorance.transformiceapi.processors.IntroduceProcessor;
 
-import java.util.List;
-
-public class IntroduceResponse extends AbstractResponse {
+public final class IntroduceResponse implements Processable {
 
         private String hashedBytes;
 
         public IntroduceResponse(List<String> rawMessage) {
-                super(rawMessage);
-        }
-
-        @Override
-        public void parse(List<String> rawMessage) {
-                hashedBytes = rawMessage.get(1);
+        		hashedBytes = rawMessage.get(1);
         }
 
         public String getHashedBytes() {

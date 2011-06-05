@@ -1,9 +1,15 @@
 package ee.ignorance.transformiceapi;
 
 import java.util.List;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
+
+import org.apache.log4j.Logger;
 
 import ee.ignorance.transformiceapi.event.Event;
 import ee.ignorance.transformiceapi.event.EventService;
+import ee.ignorance.transformiceapi.protocol.client.MouseBalloonRequest;
+import ee.ignorance.transformiceapi.protocol.client.MoveCheeseRequest;
 import ee.ignorance.transformiceapi.protocol.client.RoomChatRequest;
 import ee.ignorance.transformiceapi.protocol.client.PrivateChatRequest;
 import ee.ignorance.transformiceapi.protocol.client.TribeChangeRankRequest;
@@ -26,6 +32,7 @@ import ee.ignorance.transformiceapi.titles.TribeRank;
 public class PlayerImpl implements Player {
 
         private static final long TIMEOUT = 10000;
+        private static final Logger logger = Logger.getLogger(Player.class);
         
         private GameConnection connection;
 
@@ -41,11 +48,11 @@ public class PlayerImpl implements Player {
         private boolean moderator;
         private Mouse playerMouse;
 
-        private Boolean loginResult;
-        private boolean syncStatus;
+        private CountDownLatch loginLatch = new CountDownLatch(1);
+        private boolean loginResult;
+        private boolean sync;
 
-        private Integer secondShamanCode;
-        private boolean isShaman;
+        private boolean shaman;
         
         private EventService eventService;
 
@@ -58,44 +65,25 @@ public class PlayerImpl implements Player {
 
         @Override
         public void login() throws GameException {
-                try {
-                        LoginRequest request = new LoginRequest(username, password);
-                        connection.sendRequest(request);
-                        loginResult = null;
-                        synchronized (this) {
-                                long startTime = System.currentTimeMillis();
-                                while (loginResult == null) {
-                                        wait(500);
-                                        if (System.currentTimeMillis() - startTime > TIMEOUT) {
-                                                throw new GameException("Login timed out");
-                                        }
-                                }
-                        }
-                        if (!loginResult) {
-                                throw new GameException("Login failed");
-                        }
-                } catch (Exception e) {
-                        getConnection().terminate("Player login failed: ", e);
-                }
+	
+			LoginRequest request = new LoginRequest(username, password);
+			connection.sendRequest(request);
+	
+			boolean success = waitForLoginResponse();
+			if (!success) {
+				connection.shutdown();
+				throw new GameException("Login timed out");
+			}
+			if (!loginResult) {
+				connection.shutdown();
+				throw new GameException("Wrong password");
+			}
+			logger.debug("Successfully logged in");
         }
 
         @Override
-        public void changeRoom(final String roomName) throws GameException {
-                try {
-                        command("room " + roomName);
-                        synchronized (this) {
-                                long startTime = System.currentTimeMillis();
-                                while (!getRoom().equals(roomName)) {
-                                        wait(500);
-                                        if (System.currentTimeMillis() - startTime > TIMEOUT) {
-                                                throw new GameException("Change room times out");
-                                        }
-                                }
-                        }
-                } catch (InterruptedException ignored) {
-                } catch (GameException e) {
-                        getConnection().terminate("Change room failed", e);
-                }
+        public void changeRoom(final String roomName) {
+			command("room " + roomName);  
         }
 
         @Override
@@ -106,11 +94,11 @@ public class PlayerImpl implements Player {
 
         @Override
         public void move(int posX, int posY, int movX, int movY, boolean goingLeft,
-                boolean goingRight, boolean jumping, byte jumpingImage, byte unk) {
+                boolean goingRight, boolean jumping, byte jumpingImage, byte portalId) {
                 setCurrentX(posX);
                 setCurrentY(posY);
                 PositionRequest request = new PositionRequest(getGameCode(),
-                        posX, posY, movX, movY, goingLeft, goingRight, jumping, jumpingImage, unk);
+                        posX, posY, movX, movY, goingLeft, goingRight, jumping, jumpingImage, portalId);
                 connection.sendRequest(request);
         }
 
@@ -261,8 +249,9 @@ public class PlayerImpl implements Player {
                 return loginResult;
         }
 
-        public void setLoginResult(Boolean loginResult) {
+        public void setLoginResult(boolean loginResult) {
                 this.loginResult = loginResult;
+                loginLatch.countDown();
         }
 
         @Override
@@ -274,28 +263,22 @@ public class PlayerImpl implements Player {
                 this.playerMouse = playerMouse;
         }
 
-        public boolean isSyncStatus() {
-                return syncStatus;
+        @Override
+        public boolean isSync() {
+                return sync;
         }
 
-        public void setSyncStatus(boolean syncStatus) {
-                this.syncStatus = syncStatus;
+        public void setSync(boolean sync) {
+                this.sync = sync;
         }
 
-        public Integer getSecondShamanCode() {
-                return secondShamanCode;
-        }
-
-        public void setSecondShamanCode(Integer secondShamanCode) {
-                this.secondShamanCode = secondShamanCode;
-        }
-
+        @Override
         public boolean isShaman() {
-                return isShaman;
+                return shaman;
         }
 
-        public void setShaman(boolean isShaman) {
-                this.isShaman = isShaman;
+        public void setShaman(boolean shaman) {
+                this.shaman = shaman;
         }
 
         @Override
@@ -332,6 +315,16 @@ public class PlayerImpl implements Player {
                 eventService.remove(eventClass, listener);
         }
 
+        @Override
+        public void removeListeners(Class<? extends Event<?>> eventClass) {
+        	eventService.remove(eventClass);
+        }
+        
+        @Override
+        public void removeAllListeners() {
+        	eventService.removeAll();
+        }
+        
         public <L> void notifyListeners(Event<L> e) {
                 eventService.notify(e);
         }
@@ -391,6 +384,13 @@ public class PlayerImpl implements Player {
         }
 
         @Override
+        public void balloon(Mouse mouse, int x, int y) {
+        	connection.sendRequest(new MagicCastRequest(MagicType.Balloon, x, y));
+        	connection.sendRequest(new MouseBalloonRequest(mouse));
+        
+        }
+        
+        @Override
         public void crouch() {
                 getConnection().sendRequest(new CrouchRequest(true));
         }
@@ -410,6 +410,11 @@ public class PlayerImpl implements Player {
         }
         
         @Override
+        public void moveCheese(int x, int y) {
+        	connection.sendRequest(new MoveCheeseRequest(x, y));
+        }
+        
+        @Override
         public void profile(String nickname) {
                 command("profile " + nickname);        
         }
@@ -417,5 +422,13 @@ public class PlayerImpl implements Player {
         @Override
         public void friendList() {
                 getConnection().sendRequest(new FriendListRequest());
+        }
+        
+        private boolean waitForLoginResponse() {
+        	try {
+    			return loginLatch.await(TIMEOUT, TimeUnit.MILLISECONDS);
+    		} catch (InterruptedException e) {
+    			throw new RuntimeException("Unexpectedly interrupted");
+    		}
         }
 }

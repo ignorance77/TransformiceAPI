@@ -20,7 +20,7 @@ public class Mouse {
         private boolean goingRight = false;
         private boolean jumping = false;
         private byte jumpingImage = 0;
-        private byte unk = 0;
+        private byte portalId = 0;
         private boolean balloonAttached = false;
 
         private Emote emote;
@@ -144,12 +144,12 @@ public class Mouse {
                 return jumpingImage;
         }
 
-        public void setUnk(byte unk){
-                this.unk = unk;
+        public void setPortalId(byte portalId){
+                this.portalId = portalId;
         }
 
-        public byte getUnk(){
-                return unk;
+        public byte getPortalId(){
+                return portalId;
         }
 
         public void setHasFinished(boolean hasFinished){

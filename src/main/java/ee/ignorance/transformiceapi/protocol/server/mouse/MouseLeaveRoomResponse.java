@@ -1,24 +1,19 @@
 package ee.ignorance.transformiceapi.protocol.server.mouse;
 
-import ee.ignorance.transformiceapi.processors.AbstractProcessor;
-import ee.ignorance.transformiceapi.processors.mouse.MouseLeaveRoomProcessor;
-import ee.ignorance.transformiceapi.protocol.server.AbstractResponse;
-
 import java.util.List;
 
-public class MouseLeaveRoomResponse extends AbstractResponse {
+import ee.ignorance.transformiceapi.processors.AbstractProcessor;
+import ee.ignorance.transformiceapi.processors.mouse.MouseLeaveRoomProcessor;
+import ee.ignorance.transformiceapi.protocol.server.Processable;
+
+public final class MouseLeaveRoomResponse implements Processable {
 
         private int mouseID;
 
         public MouseLeaveRoomResponse(List<String> rawMessage) {
-                super(rawMessage);
+        		mouseID = Integer.parseInt(rawMessage.get(1));
         }
-
-        @Override
-        public void parse(List<String> rawMessage) {
-                mouseID = Integer.parseInt(rawMessage.get(1));
-        }
-
+        
         public int getMouseID() {
                 return mouseID;
         }

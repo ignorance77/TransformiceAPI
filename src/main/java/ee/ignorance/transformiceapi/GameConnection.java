@@ -1,7 +1,5 @@
 package ee.ignorance.transformiceapi;
 
-import ee.ignorance.transformiceapi.processors.AbstractProcessor;
-import ee.ignorance.transformiceapi.protocol.server.AbstractResponse;
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -9,16 +7,14 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.Proxy;
 import java.net.Socket;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 
 import org.apache.log4j.Logger;
 
-import ee.ignorance.transformiceapi.protocol.client.AbstractClientRequest;
-import ee.ignorance.transformiceapi.protocol.client.DeathRequest;
-import ee.ignorance.transformiceapi.protocol.client.RoomChatRequest;
-import ee.ignorance.transformiceapi.protocol.client.PrivateChatRequest;
-import ee.ignorance.transformiceapi.protocol.client.TribeChatRequest;
-import ee.ignorance.transformiceapi.protocol.client.MagicCastRequest;
-import ee.ignorance.transformiceapi.protocol.client.PositionRequest;
+import ee.ignorance.transformiceapi.protocol.client.ByteMessageRequest;
+import ee.ignorance.transformiceapi.protocol.client.IntroduceRequest;
+import ee.ignorance.transformiceapi.protocol.client.StringMessageRequest;
 import ee.ignorance.transformiceapi.protocol.client.RegisterRequest;
 
 public class GameConnection {
@@ -35,10 +31,12 @@ public class GameConnection {
         private DataInputStream in;
         private DataOutputStream out;
 
-        private boolean urlSent = false;
-        private int[] MDT;
-        private Integer CMDTEC = 2;
-        private Boolean registerResult;
+        private int[] MDT = new int[10];
+        private int CMDTEC;
+        
+        private boolean registerResult;
+        private CountDownLatch introduceLatch = new CountDownLatch(1);
+        private CountDownLatch registerLatch = new CountDownLatch(1);
         
         private ServerListener serverListener;
         private PingThread pingThread;
@@ -50,39 +48,19 @@ public class GameConnection {
         }
 
         public void connect(boolean login, Proxy proxy) throws GameException {
-                try {
-                        if (proxy != null) {
-                                socket = new Socket(proxy);
-                        } else {
-                                socket = new Socket();
-                        }
+            initialize(proxy);
+            startListening();
+            introduce();
 
-                        socket.setKeepAlive(true);
-                        socket.connect(new InetSocketAddress(host, port), 1500);
-                        in = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
-                        out = new DataOutputStream(socket.getOutputStream());
-
-                        startListening();
-                        introduce();
-                        long startTime = System.currentTimeMillis();
-                        while (!(urlSent)) {
-                                synchronized (this) {
-                                        wait(509);
-                                        if (System.currentTimeMillis() - startTime > MAXWAITTIME) {
-                                                throw new GameException("Wrong version number?");
-                                        }
-                                }
-                        }
-                        if (login) {
-                                startPingThread();
-                        }
-      
-                } catch (InterruptedException ignored) {
-                } catch (GameException e) {
-                        terminate("Introduce failed", e);
-                } catch (IOException e) {
-                        terminate("Connect failed", e);
-                }
+            boolean success = waitForIntroduceResponse();
+            if (!success) {
+                shutdown();
+                throw new GameException("Introduce failed. Wrong version number?");
+            }
+            if (login) {
+                startPingThread();
+            }
+            logger.debug("Successfully introduced");
         }
 
         public Player createPlayer(String username, String password) throws GameException {
@@ -108,77 +86,47 @@ public class GameConnection {
                 return player;
         }
 
-        public void processCommand(AbstractResponse command) {
-                AbstractProcessor processor = command.getProcessor();
-                processor.process(command, this);
+        public boolean registerPlayer(String username, String password) throws GameException {
+			RegisterRequest registerRequest = new RegisterRequest(username, password);
+			sendRequest(registerRequest);
+	
+			boolean success = waitForRegisterResponse();
+			if (!success) {
+				shutdown();
+				throw new GameException("Register timed out");
+			}
+			
+			return registerResult;
         }
 
-        public void registerPlayer(String username, String password) throws GameException {
-                RegisterRequest registerRequest = new RegisterRequest(username, password);
-                sendRequest(registerRequest);
-                try {
-                        synchronized (this) {
-                                registerResult = null;
-                                long startTime = System.currentTimeMillis();
-                                while (registerResult == null) {
-                                        wait(500);
-                                        if (System.currentTimeMillis() - startTime > MAXWAITTIME) {
-                                                throw new GameException("Register timed out");
-                                        }
-                                }
-                        }
-                } catch (InterruptedException ignored) {
-                } catch (GameException e) {
-                        terminate("Register failed", e);
-                }
-        }
+        public synchronized void sendRequest(ByteMessageRequest request) {
+            try {
+                byte[] data = request.getBytes();
+                out.writeInt(data.length + 8);
+                writePrefix();
+                out.write(data);
+                out.flush();
 
-        public synchronized void sendRequest(AbstractClientRequest request) {
-                try {
-                        if (request instanceof PositionRequest) {
-                                out.writeInt(request.getBytes().length + 8);
-                                writePrefix();
-                                out.write(request.getBytes());
-                                out.flush();
-                        } else if (request instanceof RoomChatRequest) {
-                                out.writeInt(request.getBytes().length + 8);
-                                writePrefix();
-                                out.write(request.getBytes());
-                                out.flush();
-                        } else if (request instanceof TribeChatRequest) {
-                                out.writeInt(request.getBytes().length + 8);
-                                writePrefix();
-                                out.write(request.getBytes());
-                                out.flush();
-                        } else if (request instanceof PrivateChatRequest) {
-                                out.writeInt(request.getBytes().length + 8);
-                                writePrefix();
-                                out.write(request.getBytes());
-                                out.flush();
-                        } else if (request instanceof MagicCastRequest) {
-                                out.writeInt(request.getBytes().length + 8);
-                                writePrefix();
-                                out.write(request.getBytes());
-                                out.flush();
-                        } else if (request instanceof DeathRequest) {
-                                out.writeInt(request.getBytes().length + 8);
-                                writePrefix();
-                                out.write(request.getBytes());
-                                out.flush();  
-                        } else {
-                                out.writeInt(request.getBytes().length + 8 + 4);
-                                writePrefix();
-                                out.writeByte(1);
-                                out.writeByte(1);
-                                out.writeShort(request.getBytes().length);
-                                out.write(request.getBytes());
-                                out.flush();
-                        }
-                } catch (IOException e) {
-                        e.printStackTrace();
-                }
+            } catch (IOException e) {
+                logger.warn("Failed to send request", e);
+            }
         }
-
+        
+        public synchronized void sendRequest(StringMessageRequest request) {
+            try {
+                byte[] data = request.getBytes();
+                out.writeInt(data.length + 8 + 4);
+                writePrefix();
+                out.writeByte(1);
+                out.writeByte(1);
+                out.writeShort(data.length);
+                out.write(data);
+                out.flush();
+            } catch (IOException e) {
+                logger.warn("Failed to send request", e);
+            }
+        }
+        
         public void setPrefix(int[] MDT, int CMDTEC) {
                 this.MDT = MDT;
                 this.CMDTEC = CMDTEC;
@@ -186,23 +134,23 @@ public class GameConnection {
 
         public void setRegisterResult(boolean registerResult) {
                 this.registerResult = registerResult;
+                registerLatch.countDown();
         }
 
-        public void setUrlSent(boolean urlSent) {
-                this.urlSent = urlSent;
+        public void setIntroduceSuccessful() {
+                introduceLatch.countDown();	
         }
         
-        public void terminate(String message, Throwable e) throws GameException {
-                if (serverListener != null) {
-                        serverListener.terminate();
-                }
-                closeQuietly();
-                if (pingThread != null) {
-                        pingThread.terminate();
-                }
-                throw new GameException(message, e);
+        public void shutdown() {
+			if (serverListener != null) {
+				serverListener.terminate();
+			}
+			if (pingThread != null) {
+				pingThread.terminate();
+			}
+			closeQuietly();
         }
-
+        
         private void closeQuietly() {
                 if (socket == null) {
                         return;
@@ -214,15 +162,33 @@ public class GameConnection {
                 }
         }
 
-        private void introduce() throws IOException {
-                out.writeInt(12);
-                out.writeInt(0);
-                out.writeByte(28);
-                out.writeByte(1);
-                out.writeShort(version);
-                out.flush();
-        }
+        private void initialize(Proxy proxy) throws GameException {
+            setProxy(proxy);
 
+            try {
+                socket.setKeepAlive(true);
+                socket.connect(new InetSocketAddress(host, port), 1500);
+                in = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
+                out = new DataOutputStream(socket.getOutputStream());
+                logger.debug("Successfully connected");
+            } catch (IOException e) {
+                shutdown();
+                throw new GameException("Connect failed", e);
+            }
+        }
+        
+        private void introduce()  {
+               sendRequest(new IntroduceRequest(version));
+        }
+        
+        private void setProxy(Proxy proxy) {
+			if (proxy != null) {
+				socket = new Socket(proxy);
+			} else {
+				socket = new Socket();
+			}
+        }
+        
         private void startPingThread() {
                 pingThread = new PingThread(this);
                 pingThread.start();
@@ -233,6 +199,22 @@ public class GameConnection {
                 new Thread(serverListener).start();
         }
 
+        private boolean waitForIntroduceResponse() {
+    		try {
+    			return introduceLatch.await(MAXWAITTIME, TimeUnit.MILLISECONDS);
+    		} catch (InterruptedException e) {
+    			throw new RuntimeException("Unexpectedly interrupted");
+    		}
+        }
+        
+        private boolean waitForRegisterResponse() {
+    		try {
+    			return registerLatch.await(MAXWAITTIME, TimeUnit.MILLISECONDS);
+    		} catch (InterruptedException e) {
+    			throw new RuntimeException("Unexpectedly interrupted");
+    		}
+        }
+        
         private void writePrefix() throws IOException {
                 int val = (CMDTEC % 9000) + 1000;
                 out.writeByte(MDT[val / 1000]);

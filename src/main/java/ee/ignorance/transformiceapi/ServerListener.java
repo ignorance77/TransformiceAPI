@@ -1,68 +1,70 @@
 package ee.ignorance.transformiceapi;
 
-import ee.ignorance.transformiceapi.protocol.server.AbstractResponse;
-import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.io.IOException;
-import java.util.Arrays;
 
 import org.apache.log4j.Logger;
+
+import ee.ignorance.transformiceapi.event.DisconnectEvent;
+import ee.ignorance.transformiceapi.processors.AbstractProcessor;
+import ee.ignorance.transformiceapi.protocol.server.Processable;
+import ee.ignorance.transformiceapi.util.StringUtils;
 
 
 public class ServerListener implements Runnable {
 
 	private static final Logger logger = Logger.getLogger(ServerListener.class);
 	
-	private GameConnection connection;
+	private final GameConnection connection;
+	private final DataInputStream in;
 	
-	private DataInputStream in;
-
-	private boolean terminate;
+	private volatile boolean terminate;
 	
 	public ServerListener(GameConnection connection) {
 		this.connection = connection;
+		in = connection.getInputStream();
 	}
 	
 	@Override
 	public void run() {
 		try {
-			in = connection.getInputStream();
-			while (true) {
-					while (in.available() > 0) {
-						byte[] message = readMessage();
-						AbstractResponse response = ServerMessagesParser.parse(message);
-						if (response != null) {
-							synchronized (connection) {
-								connection.processCommand(response);
-								connection.notifyAll();
-							}
-						}
-					}
-					Thread.sleep(50);
-					if (terminate) {
-						break;
-					}
+			while (!terminate) {
+				byte[] message = readMessage();
+				parse(message);
 			}
-		} catch (Exception e) {
-                    e.printStackTrace();
-			logger.error("Error receiving data ", e);
+		} catch (IOException e) {
+			logger.warn("connection terminated", e);
+			connection.shutdown();
+			
+			PlayerImpl player = connection.getPlayer();
+			if (player != null) {
+				player.notifyListeners(new DisconnectEvent());
+			}
 		}
-	}
-
-	private byte[] readMessage() throws IOException {
-		int len = in.readInt();
-		ByteArrayOutputStream ret = new ByteArrayOutputStream();
-		for (int i = 0; i < len - 4; i++) {
-			byte c = in.readByte();
-			ret.write(c);
-		}
-		return ret.toByteArray();
 	}
 
 	public void terminate() {
 		this.terminate = true;
 	}
-	
-	
+
+	private byte[] readMessage() throws IOException {
+		int len = in.readInt() - 4;
+		byte[] buff = new byte[len];
+		in.readFully(buff);
+		return buff;
+	}
+
+	private void parse(byte[] message) {
+		try {
+			Processable response = ServerMessagesParser.parse(message);
+			if (response != null) {
+				AbstractProcessor processor = response.getProcessor();
+				processor.process(response, connection);
+			}
+		} catch (IOException e) {
+			logger.warn("Failed to parse server response: " + 
+					StringUtils.byteArrayToHexString(message), e);
+		}
+	}
 
 }

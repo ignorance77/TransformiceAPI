@@ -2,7 +2,7 @@ package ee.ignorance.transformiceapi.protocol.client;
 
 import ee.ignorance.transformiceapi.protocol.ByteBuffer;
 
-public class HoleRequest extends AbstractClientRequest {
+public final class HoleRequest implements StringMessageRequest {
 
         private String gameCode;
 

@@ -1,21 +1,16 @@
 package ee.ignorance.transformiceapi.protocol.server;
 
+import java.util.List;
+
 import ee.ignorance.transformiceapi.processors.AbstractProcessor;
 import ee.ignorance.transformiceapi.processors.FriendJoinProcessor;
 
-import java.util.List;
-
-public class FriendJoinResponse extends AbstractResponse {
+public final class FriendJoinResponse implements Processable {
 
         private String name;
 
         public FriendJoinResponse(List<String> rawMessage) {
-                super(rawMessage);
-        }
-
-        @Override
-        public void parse(List<String> rawMessage) {
-                name = rawMessage.get(1);
+        		name = rawMessage.get(1);
         }
 
         public String getName() {

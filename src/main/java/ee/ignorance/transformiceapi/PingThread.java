@@ -5,13 +5,14 @@ import ee.ignorance.transformiceapi.protocol.client.PingRequest;
 public class PingThread extends Thread {
 
 	private static final long PING_INTERVAL = 11000;
+	private static final long SLEEP_TIME = 50;
+	
+	private final GameConnection connection;
 
-	private GameConnection connection;
-	
 	private long lastPingTime;
-	
-	private boolean terminate;
-	
+
+	private volatile boolean terminate;
+
 	public PingThread(GameConnection connection) {
 		this.connection = connection;
 		this.lastPingTime = System.currentTimeMillis();
@@ -20,28 +21,27 @@ public class PingThread extends Thread {
 	@Override
 	public void run() {
 		try {
-			synchronized (this) {
-				while (!terminate) {
-					wait(50);
-					if (System.currentTimeMillis() - lastPingTime >= PING_INTERVAL) {
-                                                long tmp = System.currentTimeMillis();
-						sendPing();
-                                                lastPingTime = tmp;
-					}
+			while (!terminate) {
+				sleep(SLEEP_TIME);
+				if (System.currentTimeMillis() - lastPingTime >= PING_INTERVAL) {
+					long tmp = System.currentTimeMillis();
+					sendPing();
+					lastPingTime = tmp;
 				}
+
 			}
 		} catch (InterruptedException e) {
 			throw new RuntimeException("Ping thread failed", e);
 		}
 	}
-	
+
 	private void sendPing() {
-		PingRequest pingRequest = new PingRequest( lastPingTime );
+		PingRequest pingRequest = new PingRequest(lastPingTime);
 		connection.sendRequest(pingRequest);
 	}
 
 	public void terminate() {
 		this.terminate = true;
 	}
-	
+
 }

@@ -1,31 +1,21 @@
 package ee.ignorance.transformiceapi.protocol.server;
 
+import java.io.DataInputStream;
+import java.io.IOException;
+
 import ee.ignorance.transformiceapi.processors.AbstractProcessor;
 import ee.ignorance.transformiceapi.processors.ModChatProcessor;
 
-import java.io.ByteArrayInputStream;
-import java.io.DataInputStream;
-
-public class ModChatResponse extends AbstractResponse {
+public final class ModChatResponse implements Processable {
 
         private String message;
         private String sender;
         private int type;
 
-        public ModChatResponse(byte[] rawMessage) {
-                super(rawMessage);
-        }
-
-        @Override
-        public void parse(byte[] rawMessage) {
-                DataInputStream in = new DataInputStream(new ByteArrayInputStream(rawMessage));
-                try {
-                        type = in.readByte();
-                        sender = in.readUTF();
-                        message = in.readUTF();
-                } catch (Exception e) {
-                        e.printStackTrace();
-                }
+        public ModChatResponse(DataInputStream in) throws IOException {
+	            type = in.readByte();
+	            sender = in.readUTF();
+	            message = in.readUTF();
         }
 
         public String getMessage() {

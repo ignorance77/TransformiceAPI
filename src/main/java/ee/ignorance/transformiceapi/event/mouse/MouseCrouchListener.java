@@ -4,5 +4,7 @@ import ee.ignorance.transformiceapi.Mouse;
 
 public interface MouseCrouchListener {
 
-        void mouseCrouched(Mouse mouse);
+	void mouseCrouched(Mouse mouse);
+
+	void mouseStoodUp(Mouse mouse);
 }

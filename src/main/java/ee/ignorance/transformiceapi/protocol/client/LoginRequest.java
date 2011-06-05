@@ -3,7 +3,7 @@ package ee.ignorance.transformiceapi.protocol.client;
 import ee.ignorance.transformiceapi.protocol.ByteBuffer;
 import ee.ignorance.transformiceapi.util.HashUtils;
 
-public class LoginRequest extends AbstractClientRequest {
+public final class LoginRequest implements StringMessageRequest {
 
         private String username;
         private String password;
