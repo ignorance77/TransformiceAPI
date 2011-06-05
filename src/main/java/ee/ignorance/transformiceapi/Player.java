@@ -101,4 +101,10 @@ public interface Player {
         boolean isSync();
         
         boolean isShaman();
+        
+        boolean isAdmin();
+        
+        boolean isModerator();
+        
+        void shutdown();
 }

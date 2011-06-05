@@ -229,6 +229,7 @@ public class PlayerImpl implements Player {
                 this.mouseId = mouseId;
         }
 
+        @Override
         public boolean isAdmin() {
                 return admin;
         }
@@ -237,6 +238,7 @@ public class PlayerImpl implements Player {
                 this.admin = admin;
         }
 
+        @Override
         public boolean isModerator() {
                 return moderator;
         }
@@ -422,6 +424,11 @@ public class PlayerImpl implements Player {
         @Override
         public void friendList() {
                 getConnection().sendRequest(new FriendListRequest());
+        }
+        
+        @Override
+        public void shutdown() {
+        	connection.shutdown();
         }
         
         private boolean waitForLoginResponse() {

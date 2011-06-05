@@ -72,12 +72,6 @@ public class GameConnection {
                 return player;
         }
 
-        public void disconnect() throws IOException {
-             if (socket != null) {
-                     socket.close();
-             }       
-        }
-
         public DataInputStream getInputStream() {
                 return in;
         }
