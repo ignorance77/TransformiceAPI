@@ -17,6 +17,7 @@ import ee.ignorance.transformiceapi.protocol.client.TribeChatRequest;
 import ee.ignorance.transformiceapi.protocol.client.CommandRequest;
 import ee.ignorance.transformiceapi.protocol.client.CrouchRequest;
 import ee.ignorance.transformiceapi.protocol.client.DeathRequest;
+import ee.ignorance.transformiceapi.protocol.client.DefriendRequest;
 import ee.ignorance.transformiceapi.protocol.client.HoleRequest;
 import ee.ignorance.transformiceapi.protocol.client.LoginRequest;
 import ee.ignorance.transformiceapi.protocol.client.MagicBeginRequest;
@@ -160,6 +161,12 @@ public class PlayerImpl implements Player {
         @Override
         public void friend(String nickname) {
                 command("friend " + nickname);
+        }
+		
+        @Override
+        public void defriend(String nickname) {
+                DefriendRequest request = new DefriendRequest(nickname);
+                connection.sendRequest(request);
         }
 
         @Override
