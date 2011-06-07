@@ -20,6 +20,11 @@ public final class FriendListResponse implements Processable {
                     String split[] = line.split(splitter + "");
 
                     String name = split[0];
+					
+                    if (name.length() < 3) {
+                        continue;
+                    }
+					
                     boolean online;
 
                     if (split.length == 1) {

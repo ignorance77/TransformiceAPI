@@ -81,6 +81,8 @@ public interface Player {
         void command(String string); //send command string to the server
 
         void friend(String nickname);
+		
+        void defriend(String nickname);
         
         Mouse getPlayerMouse();
 
