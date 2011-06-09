@@ -16,8 +16,6 @@ public final class TribeListResponse implements Processable {
 
 	public TribeListResponse(List<String> rawMessage) {
 		tribePlayers = new ArrayList<TribePlayer>();
-		
-		System.out.println(rawMessage.size());
 				
 		for (int i = 1; i < rawMessage.size(); i++) {
 			String playerInfo = rawMessage.get(i);
