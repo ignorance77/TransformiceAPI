@@ -1,25 +1,41 @@
 package ee.ignorance.transformiceapi;
 
+import java.util.List;
+
 import ee.ignorance.transformiceapi.titles.Titles;
 
 public class PlayerProfile {
 
         private String playerName;
-        private String tribe;
+        
         private int saves;
         private int hardSaves;
         private int personalGathered;
         private int firsts;
         private int cheese;
+        
+        private String titleNumber;
+        
+        private List<String> unlockedTitles;
+        
+        private String avatarId;
+        
+        private String tribe;
 
-        public PlayerProfile(String playerName, String tribe, int saves, int hardSaves, int personalGathered, int firsts, int cheese) {
+        public PlayerProfile(String playerName, int saves, int hardSaves, int personalGathered, int firsts, int cheese, 
+        						String titleNumber, List<String> unlockedTitles, String avatarId, String tribe) {
                 this.playerName = playerName;
-                this.tribe = tribe;
+                
                 this.saves = saves;
                 this.hardSaves = hardSaves;
                 this.personalGathered = personalGathered;
                 this.firsts = firsts;
                 this.cheese = cheese;
+                
+                this.titleNumber = titleNumber;
+                this.unlockedTitles = unlockedTitles;
+                this.avatarId = avatarId;
+                this.tribe = tribe;
         }
 
         public String getPlayer() {
@@ -28,14 +44,6 @@ public class PlayerProfile {
 
         public void setPlayer(String playerName) {
                 this.playerName = playerName;
-        }
-
-        public String getTribe() {
-                return tribe;
-        }
-
-        public void setTribe(String tribe) {
-                this.tribe = tribe;
         }
 
         public int getSaves() {
@@ -78,6 +86,37 @@ public class PlayerProfile {
                 this.cheese = cheese;
         }
 
+        public String getTitleNumber() {
+        	return titleNumber;
+        }
+        public void setTitleNumber(String titleNumber) {
+        	this.titleNumber = titleNumber;
+        }
+        
+        public List<String> getUnlockedTitles() {
+        	return unlockedTitles;
+        }
+        public void setUnlockedTitles(List<String> unlockedTitles) {
+        	this.unlockedTitles = unlockedTitles;
+        }
+        
+        public String getAvatarId() {
+        	return avatarId;
+        }
+        public void setAvatarId(String avatarId) {
+        	this.avatarId = avatarId;
+        }
+        
+        public String getTribe() {
+            return tribe;
+	    }
+	
+	    public void setTribe(String tribe) {
+	            this.tribe = tribe;
+	    }
+
+        
+        
         /* Some interesting information about upcoming titles */
         public String nextCheeseTitle() {
                 return Titles.nextCheeseTitle(cheese);
@@ -113,8 +152,10 @@ public class PlayerProfile {
 
         @Override
         public String toString() {
-                return "PlayerProfile [playerName=" + playerName + ", tribe=" + tribe + ", saves=" + saves
-                        + ", hardSaves=" + hardSaves + ", personalGathered=" + personalGathered
-                        + ", first=" + firsts + ", cheese=" + cheese + "]";
+                return "PlayerProfile [playerName=" + playerName + ", titleNumber = "+titleNumber
+                		+ ", saves=" + saves + ", hardSaves=" + hardSaves + ", personalGathered=" + personalGathered
+                		+ ", first=" + firsts + ", cheese=" + cheese 
+                		+ ", unlockedTitles = ("+unlockedTitles.size()+" titles)" + ", avatarId = "+avatarId
+                        + ", tribe=" + tribe +"]";
         }
 }

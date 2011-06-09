@@ -1,5 +1,6 @@
 package ee.ignorance.transformiceapi.titles;
 
+import java.util.Map;
 import java.util.SortedMap;
 
 public class Titles {
@@ -62,6 +63,28 @@ public class Titles {
         }
 
         private static String nextTitle(int currentCount, SortedMap<Integer, String> map) {
-                return map.get(nextCount(currentCount, map));
+                return AllTitles.get(map.get(nextCount(currentCount, map)));
+        }
+              
+        public static int firstsNeededForTitle(String titleNumber) {
+        	return getNeededCountForTitle(titleNumber, firstsTitles);
+        }
+        public static int cheeseNeededForTitle(String titleNumber) {
+        	return getNeededCountForTitle(titleNumber, cheeseTitles);
+        }
+        public static int savesNeededForTitle(String titleNumber) {
+        	return getNeededCountForTitle(titleNumber, savesTitles);
+        }
+        
+        public static int hardSavesNeededForTitle(String titleNumber) {
+        	return getNeededCountForTitle(titleNumber, hardSavesTitles);
+        }
+        
+        private static int getNeededCountForTitle(String titleNumber, Map<Integer, String> map) {
+        	for (int neededCount : map.keySet()) {
+        		if (map.get(neededCount).equals(titleNumber))
+        			return neededCount;
+        	}
+        	return -1;
         }
 }

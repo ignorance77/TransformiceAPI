@@ -1,5 +1,8 @@
 package ee.ignorance.transformiceapi.protocol.server;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import ee.ignorance.transformiceapi.PlayerProfile;
@@ -11,18 +14,25 @@ public final class PlayerProfileResponse implements Processable {
         private PlayerProfile playerProfile;
 
         public PlayerProfileResponse(List<String> rawMessage) {
-				String name = rawMessage.get(1);
-				String tribe = rawMessage.get(rawMessage.size() - 1);
+				String playerName = rawMessage.get(1);
+						
+				String[] statsData = rawMessage.get(2).split(",");
+				int saves = Integer.parseInt(statsData[0]);
+				int personalGathered = Integer.parseInt(statsData[1]);
+				int firsts = Integer.parseInt(statsData[2]);
+				int cheese = Integer.parseInt(statsData[3]);
+				int hardSaves = Integer.parseInt(statsData[4]);
+				
+				String titleNumber = rawMessage.get(3);
+				
+				List<String> unlockedTitles = Arrays.asList(rawMessage.get(4).split(","));
+				
+				String avatarId = rawMessage.get(5);
 		
-				String[] profileData = rawMessage.get(2).split(",");
-				int saves = Integer.parseInt(profileData[0]);
-				int personalGathered = Integer.parseInt(profileData[1]);
-				int firsts = Integer.parseInt(profileData[2]);
-				int cheese = Integer.parseInt(profileData[3]);
-				int hardSaves = Integer.parseInt(profileData[4]);
-		
-				playerProfile = new PlayerProfile(name, tribe, saves, hardSaves, personalGathered, firsts,
-						cheese);
+				String tribe = rawMessage.get(6);
+				
+				playerProfile = new PlayerProfile(playerName, saves, hardSaves, personalGathered, firsts,
+						cheese, titleNumber, unlockedTitles, avatarId, tribe);
         }
 
         public PlayerProfile getPlayerProfile() {
