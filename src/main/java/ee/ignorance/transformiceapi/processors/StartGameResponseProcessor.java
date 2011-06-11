@@ -13,6 +13,5 @@ public class StartGameResponseProcessor extends AbstractProcessor<StartGameRespo
                 PlayerImpl player = connection.getPlayer();
                 player.setGameCode(response.getGameCode());
                 player.notifyListeners(new MapXMLEvent(response.getMapMaker(), response.getMapXML()));
-                player.notifyListeners(new RoundStartEvent());
         }
 }
