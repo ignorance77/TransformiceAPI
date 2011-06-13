@@ -1,6 +1,9 @@
 package ee.ignorance.transformiceapi;
 
 import ee.ignorance.transformiceapi.event.Event;
+import ee.ignorance.transformiceapi.shop.Item;
+import ee.ignorance.transformiceapi.shop.Outfit;
+
 import java.util.List;
 
 /**
@@ -89,6 +92,12 @@ public interface Player {
         String getRoom();
         
         List<Mouse> getRoomMice();
+        
+        int getCheeseInShop();
+        
+        Outfit getCurrentOutfit();
+        
+        List<Item> getOwnedItems();
 
         void login() throws GameException;
 
@@ -99,6 +108,8 @@ public interface Player {
         void tribeList();
 
         void friendList();
+        
+        void shopInfo();
         
         boolean isSync();
         

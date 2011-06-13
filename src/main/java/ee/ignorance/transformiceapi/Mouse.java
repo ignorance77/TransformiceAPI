@@ -1,10 +1,13 @@
 package ee.ignorance.transformiceapi;
 
+import ee.ignorance.transformiceapi.shop.Outfit;
+
 
 public class Mouse {
 
 	private int code;
 	private String name;
+	private Outfit outfit;
 	private boolean dead;
 	private int score;
 	private int codeForum;
@@ -33,6 +36,7 @@ public class Mouse {
 		int codeForum = Integer.parseInt(mouseData[8].trim());
 		boolean dead = mouseData[2].equals("1");
 		mouse.setName(name);
+		mouse.setOutfit(Outfit.parse(mouseData[7]));
 		mouse.setDead(dead);
 		mouse.setCode(code);
 		mouse.setScore(score);
@@ -54,6 +58,13 @@ public class Mouse {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	public Outfit getOutfit() {
+		return outfit;
+	}
+	public void setOutfit(Outfit outfit) {
+		this.outfit = outfit;
 	}
 
 	public int getCode() {

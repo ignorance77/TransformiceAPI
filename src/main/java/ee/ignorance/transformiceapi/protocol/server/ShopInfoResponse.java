@@ -1,35 +1,41 @@
 package ee.ignorance.transformiceapi.protocol.server;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import ee.ignorance.transformiceapi.processors.AbstractProcessor;
 import ee.ignorance.transformiceapi.processors.ShopInfoProcessor;
+import ee.ignorance.transformiceapi.shop.Item;
+import ee.ignorance.transformiceapi.shop.Outfit;
 import ee.ignorance.transformiceapi.shop.Shop;
 
 public final class ShopInfoResponse implements Processable {
+	private int cheeseInShop;
+	private Outfit currentOutfit;
+	private List<Item> ownedItems = new ArrayList<Item>();
 	
-	public ShopInfoResponse(List<String> rawMessage) {
-		System.out.println("new ShopInfoResponse");
+	public ShopInfoResponse(List<String> rawMessage) {	
+		cheeseInShop = Integer.valueOf(rawMessage.get(1));
 		
-		/*for (String s : rawMessage)
-			System.out.println("\t\t"+s);*/
+		Shop.parse(rawMessage.get(2));		
 		
-		String cheeseInShop = rawMessage.get(1);
+		currentOutfit = Outfit.parse(rawMessage.get(3));
 		
-		Shop.parse(rawMessage.get(2));
-				
-		String[] data = rawMessage.get(3).split(",");
-		String currentHat = data[0];
-		String currentGlasses = data[1];
-		String currentEarWear = data[2];
-		String currentMuzzle = data[3];
-		String currentNeckWear = data[4];
-		
-		System.out.printf("(%s,%s,%s,%s,%s)%n", currentHat, currentGlasses, currentEarWear, currentMuzzle, currentNeckWear);
-				
 		for (String ownedItem : rawMessage.get(4).split(",")) {			
-			System.out.println("I own "+ownedItem);
+			ownedItems.add(Shop.getItem(Integer.valueOf(ownedItem)));
 		}
+	}
+	
+	public int getCheeseInShop() {
+		return cheeseInShop;
+	}
+	
+	public Outfit getCurrentOutfit() {
+		return currentOutfit;
+	}
+	
+	public List<Item> getOwnedItems() {
+		return ownedItems;
 	}
 		
 	@Override

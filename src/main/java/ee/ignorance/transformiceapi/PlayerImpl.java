@@ -12,6 +12,7 @@ import ee.ignorance.transformiceapi.protocol.client.MouseBalloonRequest;
 import ee.ignorance.transformiceapi.protocol.client.MoveCheeseRequest;
 import ee.ignorance.transformiceapi.protocol.client.RoomChatRequest;
 import ee.ignorance.transformiceapi.protocol.client.PrivateChatRequest;
+import ee.ignorance.transformiceapi.protocol.client.ShopInfoRequest;
 import ee.ignorance.transformiceapi.protocol.client.TribeChangeRankRequest;
 import ee.ignorance.transformiceapi.protocol.client.TribeChatRequest;
 import ee.ignorance.transformiceapi.protocol.client.CommandRequest;
@@ -28,6 +29,8 @@ import ee.ignorance.transformiceapi.protocol.client.PositionRequest;
 import ee.ignorance.transformiceapi.protocol.client.TakeCheeseRequest;
 import ee.ignorance.transformiceapi.protocol.client.TribeListRequest;
 import ee.ignorance.transformiceapi.protocol.client.FriendListRequest;
+import ee.ignorance.transformiceapi.shop.Item;
+import ee.ignorance.transformiceapi.shop.Outfit;
 import ee.ignorance.transformiceapi.titles.TribeRank;
 
 public class PlayerImpl implements Player {
@@ -43,6 +46,10 @@ public class PlayerImpl implements Player {
 
         private String room = "null";
         private List<Mouse> roomMice;
+        
+        private int cheeseInShop;
+        private Outfit currentOutfit = Outfit.NAKED;
+        private List<Item> ownedItems;
 
         private int mouseId;
         private boolean admin;
@@ -227,7 +234,30 @@ public class PlayerImpl implements Player {
                 }
                 this.roomMice = mice;
         }
-
+        
+        public int getCheeseInShop() {
+        	return cheeseInShop;
+        }
+        
+        public void setCheeseInShop(int cheeseInShop) {
+        	this.cheeseInShop = cheeseInShop;
+        }
+        
+        public Outfit getCurrentOutfit() {
+        	return currentOutfit;
+        }
+        public void setCurrentOutfit(Outfit outfit) {
+        	currentOutfit = outfit;
+        }
+        
+        public List<Item> getOwnedItems() {
+        	return ownedItems;
+        }
+        
+        public void setOwnedItems(List<Item> ownedItems) {
+        	this.ownedItems = ownedItems;
+        }
+        
         public int getMouseId() {
                 return mouseId;
         }
@@ -431,6 +461,11 @@ public class PlayerImpl implements Player {
         @Override
         public void friendList() {
                 getConnection().sendRequest(new FriendListRequest());
+        }
+        
+        @Override
+        public void shopInfo() {
+        		getConnection().sendRequest(new ShopInfoRequest());
         }
         
         @Override

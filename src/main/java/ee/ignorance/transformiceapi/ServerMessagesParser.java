@@ -19,6 +19,7 @@ import ee.ignorance.transformiceapi.protocol.server.Processable;
 import ee.ignorance.transformiceapi.protocol.server.RoomChatResponse;
 import ee.ignorance.transformiceapi.protocol.server.RoomResponse;
 import ee.ignorance.transformiceapi.protocol.server.ShamanStatusResponse;
+import ee.ignorance.transformiceapi.protocol.server.ShopInfoResponse;
 import ee.ignorance.transformiceapi.protocol.server.StartGameResponse;
 import ee.ignorance.transformiceapi.protocol.server.SyncStatusResponse;
 import ee.ignorance.transformiceapi.protocol.server.TZATResponse;
@@ -63,6 +64,7 @@ public class ServerMessagesParser {
                                 }
                                 if (codeMajor == 5) {
                                         if (codeMinor == 5) {
+                                        	System.out.println("StartGameResponse @ "+System.currentTimeMillis());
                                                 return new StartGameResponse(rawMessage);
                                         }
                                         if (codeMinor == 19) {
@@ -91,6 +93,7 @@ public class ServerMessagesParser {
                                                 return new MouseJoinRoomResponse(rawMessage);
                                         }
                                         if (codeMinor == 9) {
+                                        	System.out.println("MouseListResponse @ "+System.currentTimeMillis());
                                                 return new MouseListResponse(rawMessage);
                                         }
                                         if (codeMinor == 10) {
@@ -122,6 +125,11 @@ public class ServerMessagesParser {
                                         if (codeMinor == 16) {
                                                 return new TribeListResponse(rawMessage);
                                         }
+                                }
+                                if (codeMajor == 0x14) {
+                                		if (codeMinor == 0x14) {
+                                			return new ShopInfoResponse(rawMessage);
+                                		}
                                 }
                                 if (codeMajor == 26) {
                                         if (codeMinor == 3) {
