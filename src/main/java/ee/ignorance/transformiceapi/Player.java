@@ -98,9 +98,11 @@ public interface Player {
         Outfit getCurrentOutfit();
         
         List<Item> getOwnedItems();
-
+        
         void login() throws GameException;
-
+        
+        void login(String room) throws GameException;
+        
         void moveCheese(int x, int y);
         
         void profile(String nickname);

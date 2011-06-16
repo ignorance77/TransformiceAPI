@@ -70,11 +70,16 @@ public class PlayerImpl implements Player {
                 this.password = password;
                 this.eventService = new EventService();
         }
-
+        
         @Override
         public void login() throws GameException {
+			login("1"); // 1 - auto room
+        }
+        
+        @Override
+        public void login(String room) throws GameException {
 	
-			LoginRequest request = new LoginRequest(username, password);
+			LoginRequest request = new LoginRequest(username, password, room);
 			connection.sendRequest(request);
 	
 			boolean success = waitForLoginResponse();
