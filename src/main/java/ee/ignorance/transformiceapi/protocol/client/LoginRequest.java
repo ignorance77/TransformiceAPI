@@ -7,10 +7,12 @@ public final class LoginRequest implements StringMessageRequest {
 
         private String username;
         private String password;
+        private String room;
 
-        public LoginRequest(String username, String password) {
+        public LoginRequest(String username, String password, String room) {
                 this.username = username;
                 this.password = password;
+                this.room = room;
         }
 
         @Override
@@ -23,7 +25,7 @@ public final class LoginRequest implements StringMessageRequest {
                 bf.write(0x01);
                 bf.print(HashUtils.SHA256(password));
                 bf.write(0x01);
-                bf.write(0x31);
+                bf.print(room);
                 return bf.getBytes();
         }
 }
