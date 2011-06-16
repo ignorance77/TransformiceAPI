@@ -23,6 +23,12 @@ public class Outfit {
 	
 	public static Outfit parse(String line) {	
 	
+		// It's 0 in bootcamp
+		if (line.equals("0"))
+		{
+			return Outfit.NAKED;
+		}
+
 		String[] data = line.split(",");
 		return new Outfit(
 				ee.ignorance.transformiceapi.shop.Hat.getByLocalId(Integer.valueOf(data[0])),
