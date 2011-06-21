@@ -64,7 +64,6 @@ public class ServerMessagesParser {
                                 }
                                 if (codeMajor == 5) {
                                         if (codeMinor == 5) {
-                                        	System.out.println("StartGameResponse @ "+System.currentTimeMillis());
                                                 return new StartGameResponse(rawMessage);
                                         }
                                         if (codeMinor == 19) {
@@ -93,7 +92,6 @@ public class ServerMessagesParser {
                                                 return new MouseJoinRoomResponse(rawMessage);
                                         }
                                         if (codeMinor == 9) {
-                                        	System.out.println("MouseListResponse @ "+System.currentTimeMillis());
                                                 return new MouseListResponse(rawMessage);
                                         }
                                         if (codeMinor == 10) {
