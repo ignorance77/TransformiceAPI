@@ -28,6 +28,7 @@ import ee.ignorance.transformiceapi.protocol.client.MovementDoneRequest;
 import ee.ignorance.transformiceapi.protocol.client.PositionRequest;
 import ee.ignorance.transformiceapi.protocol.client.TakeCheeseRequest;
 import ee.ignorance.transformiceapi.protocol.client.TribeListRequest;
+import ee.ignorance.transformiceapi.protocol.client.TribeKickRequest;
 import ee.ignorance.transformiceapi.protocol.client.FriendListRequest;
 import ee.ignorance.transformiceapi.shop.Item;
 import ee.ignorance.transformiceapi.shop.Outfit;
@@ -449,10 +450,21 @@ public class PlayerImpl implements Player {
                 getConnection().sendRequest(new TribeListRequest());
         }
 
+        @Override
         public void changeTribeRank(String playerName, TribeRank rank) {
             	getConnection().sendRequest(new TribeChangeRankRequest(playerName, rank));
         }
-        
+
+        @Override
+        public void recruitToTribe(String playerName) {
+                command("rt " + playerName);
+        }
+
+        @Override
+        public void kickFromTribe(String playerName) {
+                getConnection().sendRequest(new TribeKickRequest(playerName));
+        }
+
         @Override
         public void moveCheese(int x, int y) {
         	connection.sendRequest(new MoveCheeseRequest(x, y));

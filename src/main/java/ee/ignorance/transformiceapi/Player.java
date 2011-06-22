@@ -3,6 +3,7 @@ package ee.ignorance.transformiceapi;
 import ee.ignorance.transformiceapi.event.Event;
 import ee.ignorance.transformiceapi.shop.Item;
 import ee.ignorance.transformiceapi.shop.Outfit;
+import ee.ignorance.transformiceapi.titles.TribeRank;
 
 import java.util.List;
 
@@ -108,6 +109,12 @@ public interface Player {
         void profile(String nickname);
 
         void tribeList();
+
+        void changeTribeRank(String playerName, TribeRank rank);
+
+        void recruitToTribe(String playerName);
+
+        void kickFromTribe(String playerName);
 
         void friendList();
         
