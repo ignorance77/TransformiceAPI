@@ -19,7 +19,7 @@ public final  class TribePlayerResponse implements Processable {
 				if (rawMessage.size() > 2) {
 						playerName = rawMessage.get(2);
 				}
-				if (rawMessage.size() > 3) {
+				if (getType() == 12) { // Not sure if it's good to place it here
 						rank = TribeRank.getRank(Integer.parseInt(rawMessage.get(3)));
 				}
         }
