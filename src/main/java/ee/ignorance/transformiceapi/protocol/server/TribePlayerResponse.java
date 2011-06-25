@@ -4,10 +4,12 @@ import java.util.List;
 
 import ee.ignorance.transformiceapi.processors.AbstractProcessor;
 import ee.ignorance.transformiceapi.processors.TribePlayerProcessor;
+import ee.ignorance.transformiceapi.titles.TribeRank;
 
 public final  class TribePlayerResponse implements Processable {
 
         private String playerName;
+        private TribeRank rank;
         private int type;
 
         public TribePlayerResponse(List<String> rawMessage) {
@@ -17,10 +19,17 @@ public final  class TribePlayerResponse implements Processable {
 				if (rawMessage.size() > 2) {
 						playerName = rawMessage.get(2);
 				}
+				if (rawMessage.size() > 3) {
+						rank = TribeRank.getRank(Integer.parseInt(rawMessage.get(3)));
+				}
         }
 
         public String getPlayerName() {
                 return playerName;
+        }
+
+        public TribeRank getRank() {
+                return rank;
         }
 
         public int getType() {

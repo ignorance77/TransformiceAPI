@@ -6,6 +6,7 @@ import ee.ignorance.transformiceapi.event.TribePlayerConnectEvent;
 import ee.ignorance.transformiceapi.event.TribePlayerDisconnectEvent;
 import ee.ignorance.transformiceapi.event.TribePlayerJoinEvent;
 import ee.ignorance.transformiceapi.event.TribePlayerQuitEvent;
+import ee.ignorance.transformiceapi.event.TribePlayerRankChangeEvent;
 import ee.ignorance.transformiceapi.protocol.server.TribePlayerResponse;
 
 public class TribePlayerProcessor extends AbstractProcessor<TribePlayerResponse> {
@@ -25,6 +26,9 @@ public class TribePlayerProcessor extends AbstractProcessor<TribePlayerResponse>
                 }
                 if (response.getType() == 11) {
                         player.notifyListeners(new TribePlayerQuitEvent(response.getPlayerName()));
+                }
+                if (response.getType() == 12) {
+                        player.notifyListeners(new TribePlayerRankChangeEvent(response.getPlayerName(), response.getRank()));
                 }
         }
 }
