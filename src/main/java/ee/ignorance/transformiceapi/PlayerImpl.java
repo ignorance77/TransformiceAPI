@@ -145,7 +145,7 @@ public class PlayerImpl implements Player {
 
         @Override
         public void tribeChat(String message) {
-                TribeChatRequest request = new TribeChatRequest(message);
+                TribeChatRequest request = new TribeChatRequest(message.replaceAll("<", "&lt;"));
                 connection.sendRequest(request);
         }
 

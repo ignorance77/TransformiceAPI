@@ -11,7 +11,7 @@
     </appender> 
 
     <logger name="ee.ignorance.transformiceapi">
-        <level value="fatal"/> 
+        <level value="debug"/> 
         <appender-ref ref="console" />
     </logger>
   
