@@ -1,49 +1,46 @@
 package ee.ignorance.transformiceapi.event;
 
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public final class EventService {
-
-        private final HashMap<Class, ArrayList> map = new HashMap<Class, ArrayList>(25);
+        private final Map<Class<?>, List<?>> map = new HashMap<Class<?>, List<?>>(25);
 
         public <L> void add(Class<? extends Event<L>> evtClass, L listener) {
-                final ArrayList<L> listeners = listenersOf(evtClass);
-                synchronized (listeners) {
-                        if (!listeners.contains(listener)) {
-                                listeners.add(listener);
-                        }
+                final List<L> listeners = listenersOf(evtClass);
+                if (!listeners.contains(listener)) {
+                        listeners.add(listener);
                 }
         }
 
         public <L> void remove(Class<? extends Event<L>> evtClass, L listener) {
-                final ArrayList<L> listeners = listenersOf(evtClass);
-                synchronized (listeners) {
-                        listeners.remove(listener);
-                }
+                final List<L> listeners = listenersOf(evtClass);
+                listeners.remove(listener);
         }
         
         public void remove(Class<? extends Event<?>> eventClass) {
-        	synchronized (map) {
-				map.remove(eventClass);
-			}
+            synchronized (map) {
+                map.remove(eventClass);
+            }
         }
         
         public void removeAll() {
-        	synchronized (map) {
-        		map.clear();
-			}
+            synchronized (map) {
+                map.clear();
+            }
         }
 
-        private <L> ArrayList<L> listenersOf(Class<? extends Event<L>> evtClass) {
+        private <L> List<L> listenersOf(Class<? extends Event<L>> evtClass) {
                 synchronized (map) {
                         @SuppressWarnings("unchecked")
-                        final ArrayList<L> existing = map.get(evtClass);
+                        final List<L> existing = (List<L>) map.get(evtClass);
                         if (existing != null) {
                                 return existing;
                         }
 
-                        final ArrayList<L> emptyList = new ArrayList<L>(5);
+                        final List<L> emptyList = new CopyOnWriteArrayList<L>();
                         map.put(evtClass, emptyList);
                         return emptyList;
                 }
