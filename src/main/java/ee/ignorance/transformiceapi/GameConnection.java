@@ -47,6 +47,10 @@ public class GameConnection {
                 this.version = version;
         }
 
+        public void connect() throws GameException {
+            connect(true, Proxy.NO_PROXY);
+        }
+        
         public void connect(boolean login, Proxy proxy) throws GameException {
             initialize(proxy);
             startListening();
