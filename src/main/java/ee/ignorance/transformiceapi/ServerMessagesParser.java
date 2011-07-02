@@ -50,7 +50,8 @@ public class ServerMessagesParser {
 
                 if (b1 == 1) {
                         if (b2 == 1) {
-                                String msg = stream.readUTF();
+                                // String msg = stream.readUTF();
+                                String msg = new String(message, 4, message.length - 6);
                                 int codeMajor = msg.charAt(0);
                                 int codeMinor = msg.charAt(1);
                                 String[] data = pattern.split(msg, -1);
