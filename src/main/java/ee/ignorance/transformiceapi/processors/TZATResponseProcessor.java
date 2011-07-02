@@ -16,11 +16,11 @@ public class TZATResponseProcessor extends AbstractProcessor<TZATResponse> {
                                 while (true) {
                                         if (System.currentTimeMillis() - start > 10000) {
                                                 TZATRequest request = new TZATRequest();
-                                                connection.getPlayer().getConnection().sendRequest(request);
+                                                connection.sendRequest(request);
                                                 break;
                                         }
                                         try {
-                                                Thread.sleep(50);
+                                                Thread.sleep(250);
                                         } catch (InterruptedException e) {
                                         }
                                 }

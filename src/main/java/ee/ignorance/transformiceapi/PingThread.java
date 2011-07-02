@@ -5,7 +5,7 @@ import ee.ignorance.transformiceapi.protocol.client.PingRequest;
 public class PingThread extends Thread {
 
 	private static final long PING_INTERVAL = 11000;
-	private static final long SLEEP_TIME = 50;
+	private static final long SLEEP_TIME = 250;
 	
 	private final GameConnection connection;
 

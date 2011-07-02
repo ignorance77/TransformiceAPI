@@ -5,6 +5,7 @@ import java.io.DataInputStream;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import ee.ignorance.transformiceapi.protocol.server.FriendJoinResponse;
 import ee.ignorance.transformiceapi.protocol.server.FriendListResponse;
@@ -40,7 +41,7 @@ import ee.ignorance.transformiceapi.protocol.server.mouse.MouseListResponse;
 import ee.ignorance.transformiceapi.protocol.server.mouse.MouseMoveResponse;
 
 public class ServerMessagesParser {
-		private final static String separator = String.valueOf((char) 0x01);
+        private static final Pattern pattern = Pattern.compile(String.valueOf((char) 0x01));
 	
         public static Processable parse(byte[] message) throws IOException {
                 DataInputStream stream = new DataInputStream(new ByteArrayInputStream(message));
@@ -49,12 +50,10 @@ public class ServerMessagesParser {
 
                 if (b1 == 1) {
                         if (b2 == 1) {
-                        		String msg = stream.readUTF();
-                                
+                                String msg = stream.readUTF();
                                 int codeMajor = msg.charAt(0);
                                 int codeMinor = msg.charAt(1);
-                                String[] data = msg.split(separator, -1);
-                                
+                                String[] data = pattern.split(msg, -1);
                                 List<String> rawMessage = Arrays.asList(data);
 
                                 if (codeMajor == 4) {
