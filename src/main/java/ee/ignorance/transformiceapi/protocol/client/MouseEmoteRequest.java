@@ -16,7 +16,7 @@ public final class MouseEmoteRequest implements ByteMessageRequest {
 		ByteBuffer bf = new ByteBuffer();
 		bf.write(8);
 		bf.write(1);
-		bf.write(Emote.getCode(emote));
+		bf.write(emote.ordinal());
 		return bf.getBytes();
 	}
 }

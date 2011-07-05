@@ -229,31 +229,13 @@ public class Mouse {
                 Facepalm;
 
                 public static Emote getEmote(int value) {
-                        switch (value) {
-                                case 0: return Dance;
-                                case 1: return Smile;
-                                case 2: return Cry;
-                                case 3: return Kiss;             
-                                case 4: return Angry;
-                                case 5: return Clap;
-                                case 6: return Sleep;
-                                case 7: return Facepalm;
-						}
-                        throw new AssertionError("Unknow Emote value: " + value);
-                }
-
-                public static int getCode(Emote emote) {
-                        switch (emote) {
-                                case Dance: return 0;
-                                case Smile: return 1;
-                                case Cry: return 2;
-                                case Kiss: return 3;
-                                case Angry: return 4;
-                                case Clap: return 5;
-                                case Sleep: return 6;
-                                case Facepalm: return 7;
-                        }
-                        throw new AssertionError("Unknown Emote: " + emote);
-                }		
+                    Emote[] vals = values();
+                    if (value < vals.length) {
+                        return vals[value];
+                    }
+                    else  {
+                        return Dance;
+                    }
+                }	
         }
 }
