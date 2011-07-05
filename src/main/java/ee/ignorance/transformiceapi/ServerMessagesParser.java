@@ -112,9 +112,6 @@ public class ServerMessagesParser {
                                         if (codeMinor == 20) {
                                                 return new ShamanStatusResponse(rawMessage);
                                         }
-                                        if (codeMinor == 22) {
-                                                return new MouseEmoteResponse(rawMessage);
-                                        }
                                 }
                                 if (codeMajor == 16) {
                                         if (codeMinor == 4) {
@@ -168,6 +165,11 @@ public class ServerMessagesParser {
                         }
                         if (b2 == 10) {
                                 return new ModChatResponse(stream);
+                        }
+                }
+                if (b1 == 8) {
+                        if (b2 == 1) {
+                                return new MouseEmoteResponse(stream);
                         }
                 }
                 return null;

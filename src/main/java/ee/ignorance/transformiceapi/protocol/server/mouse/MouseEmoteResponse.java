@@ -1,6 +1,7 @@
 package ee.ignorance.transformiceapi.protocol.server.mouse;
 
-import java.util.List;
+import java.io.DataInputStream;
+import java.io.IOException;
 
 import ee.ignorance.transformiceapi.Mouse;
 import ee.ignorance.transformiceapi.processors.AbstractProcessor;
@@ -12,9 +13,9 @@ public final class MouseEmoteResponse implements Processable {
         private int mouseID;
         private Mouse.Emote emote;
 
-        public MouseEmoteResponse(List<String> rawMessage) {
-	            mouseID = Integer.valueOf(rawMessage.get(1));
-	            emote = Mouse.Emote.getEmote(Integer.valueOf(rawMessage.get(2)));
+        public MouseEmoteResponse(DataInputStream in) throws IOException {
+	            mouseID = in.readInt();
+	            emote = Mouse.Emote.getEmote(in.readByte());				
         }
 
         public int getMouseID() {

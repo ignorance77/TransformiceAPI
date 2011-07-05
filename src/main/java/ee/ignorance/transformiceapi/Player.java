@@ -31,6 +31,8 @@ public interface Player {
         void removeAllListeners();
 
         /* emote methods */
+        void emote(Mouse.Emote emote);
+
         void cry();
 
         void dance();

@@ -9,6 +9,7 @@ import org.apache.log4j.Logger;
 import ee.ignorance.transformiceapi.event.Event;
 import ee.ignorance.transformiceapi.event.EventService;
 import ee.ignorance.transformiceapi.protocol.client.MouseBalloonRequest;
+import ee.ignorance.transformiceapi.protocol.client.MouseEmoteRequest;
 import ee.ignorance.transformiceapi.protocol.client.MoveCheeseRequest;
 import ee.ignorance.transformiceapi.protocol.client.RoomChatRequest;
 import ee.ignorance.transformiceapi.protocol.client.PrivateChatRequest;
@@ -156,13 +157,18 @@ public class PlayerImpl implements Player {
         }
 
         @Override
+        public void emote(Mouse.Emote emote) {
+                connection.sendRequest(new MouseEmoteRequest(emote));
+        }
+
+        @Override
         public void cry() {
-                command("cry");
+                emote(Mouse.Emote.Cry);
         }
 
         @Override
         public void dance() {
-                command("dance");
+                emote(Mouse.Emote.Dance);
         }
 
         @Override
@@ -184,12 +190,12 @@ public class PlayerImpl implements Player {
 
         @Override
         public void kiss() {
-                command("kiss");
+                emote(Mouse.Emote.Kiss);
         }
 
         @Override
         public void laugh() {
-                command("laugh");
+                emote(Mouse.Emote.Smile);
         }
 
         @Override
