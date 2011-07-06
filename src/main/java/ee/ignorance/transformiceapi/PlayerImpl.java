@@ -8,6 +8,7 @@ import org.apache.log4j.Logger;
 
 import ee.ignorance.transformiceapi.event.Event;
 import ee.ignorance.transformiceapi.event.EventService;
+import ee.ignorance.transformiceapi.protocol.client.BalloonDetachRequest;
 import ee.ignorance.transformiceapi.protocol.client.MouseBalloonRequest;
 import ee.ignorance.transformiceapi.protocol.client.MouseEmoteRequest;
 import ee.ignorance.transformiceapi.protocol.client.MoveCheeseRequest;
@@ -449,6 +450,11 @@ public class PlayerImpl implements Player {
         @Override
         public void standUp() {
                 getConnection().sendRequest(new CrouchRequest(false));
+        }
+
+        @Override
+        public void detachBalloon() {
+                getConnection().sendRequest(new BalloonDetachRequest());
         }
 
         @Override

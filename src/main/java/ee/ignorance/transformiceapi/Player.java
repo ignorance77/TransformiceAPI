@@ -62,6 +62,8 @@ public interface Player {
 
         void standUp();
 
+        void detachBalloon();
+
         /* mouse methods */
         void cheese();
 
