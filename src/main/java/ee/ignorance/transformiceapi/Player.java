@@ -120,6 +120,8 @@ public interface Player {
 
         void kickFromTribe(String playerName);
 
+        void acceptTribeInvite(int tribeId);
+
         void friendList();
         
         void shopInfo();

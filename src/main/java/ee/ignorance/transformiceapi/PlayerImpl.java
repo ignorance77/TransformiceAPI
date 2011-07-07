@@ -29,6 +29,7 @@ import ee.ignorance.transformiceapi.protocol.client.MagicStopRequest;
 import ee.ignorance.transformiceapi.protocol.client.MovementDoneRequest;
 import ee.ignorance.transformiceapi.protocol.client.PositionRequest;
 import ee.ignorance.transformiceapi.protocol.client.TakeCheeseRequest;
+import ee.ignorance.transformiceapi.protocol.client.TribeAcceptInviteRequest;
 import ee.ignorance.transformiceapi.protocol.client.TribeListRequest;
 import ee.ignorance.transformiceapi.protocol.client.TribeKickRequest;
 import ee.ignorance.transformiceapi.protocol.client.FriendListRequest;
@@ -475,6 +476,11 @@ public class PlayerImpl implements Player {
         @Override
         public void kickFromTribe(String playerName) {
                 getConnection().sendRequest(new TribeKickRequest(playerName));
+        }
+
+        @Override
+        public void acceptTribeInvite(int tribeId) {
+                getConnection().sendRequest(new TribeAcceptInviteRequest(tribeId));
         }
 
         @Override
