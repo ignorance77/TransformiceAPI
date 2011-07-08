@@ -1,0 +1,1301 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!-- generated from http://transformicewiki.com/index.php?title=Titles
+	some id values above 225 were false, fixed those by hand -->
+<titles>
+	<title type="CheeseGathered">
+		<id>0</id>
+		<requirement>0</requirement>
+		<en>Little Mouse</en>
+		<fr>Souris Grise</fr>
+		<pt>Ratinho</pt>
+		<ru>Маленький мышонок</ru>
+	</title>
+	<title type="ShamanSave">
+		<id>1</id>
+		<requirement>10</requirement>
+		<en>Shaman Disciple</en>
+		<fr>Disciple Chamane</fr>
+		<pt>Aprendiz de Shaman</pt>
+		<ru>Шаман нуб и опозорился</ru>
+	</title>
+	<title type="ShamanSave">
+		<id>2</id>
+		<requirement>100</requirement>
+		<en>Accomplished Shaman</en>
+		<fr>Chamane Accomplie</fr>
+		<pt>Shaman Graduado</pt>
+		<ru>Шаман-любитель</ru>
+	</title>
+	<title type="ShamanSave">
+		<id>3</id>
+		<requirement>1000</requirement>
+		<en>Shaman</en>
+		<fr>Chamane</fr>
+		<pt>Shaman</pt>
+		<ru>Шаман</ru>
+	</title>
+	<title type="ShamanSave">
+		<id>4</id>
+		<requirement>2000</requirement>
+		<en>Shaman Master</en>
+		<fr>Maîtresse Chamane</fr>
+		<pt>Mestre Shaman</pt>
+		<ru>Шаман-мастер</ru>
+	</title>
+	<title type="CheeseGathered">
+		<id>5</id>
+		<requirement>5</requirement>
+		<en>Greedy Mouse</en>
+		<fr>Souris Gourmande</fr>
+		<pt>Rato Ambicioso</pt>
+		<ru>Алчный мышонок</ru>
+	</title>
+	<title type="CheeseGathered">
+		<id>6</id>
+		<requirement>20</requirement>
+		<en>Here ! Cheese !</en>
+		<fr>Là ! Fromage !</fr>
+		<pt>Olha! Queijo!</pt>
+		<ru>Сюда! Сыыыыр!</ru>
+	</title>
+	<title type="CheeseGathered">
+		<id>7</id>
+		<requirement>100</requirement>
+		<en>Yeeeeah Cheese ^^</en>
+		<fr>Owi Fromage ^^</fr>
+		<pt>Obaaaaa Queijo ^^</pt>
+		<ru>Оооооо Сыыыр ^^</ru>
+	</title>
+	<title type="CheeseGathered">
+		<id>8</id>
+		<requirement>200</requirement>
+		<en>Cheeeeeese *-*</en>
+		<fr>Fromaaaage *-*</fr>
+		<pt>Queeeeeijo *-*</pt>
+		<ru>Сыыыыыыыр *-*</ru>
+	</title>
+	<title type="FirstPlace">
+		<id>9</id>
+		<requirement>1</requirement>
+		<en>Fast Mouse</en>
+		<fr>Souris Rapide</fr>
+		<pt>Rato Veloz</pt>
+		<ru>Быстрая Мышь</ru>
+	</title>
+	<title type="FirstPlace">
+		<id>10</id>
+		<requirement>10</requirement>
+		<en>Agile Mouse</en>
+		<fr>Souris Agile</fr>
+		<pt>Ligeirinho</pt>
+		<ru>Ловкая Мышь</ru>
+	</title>
+	<title type="FirstPlace">
+		<id>11</id>
+		<requirement>100</requirement>
+		<en>Pirate Mouse</en>
+		<fr>Souris Pirate</fr>
+		<pt>Rato Pirata</pt>
+		<ru>Мышь-пират</ru>
+	</title>
+	<title type="FirstPlace">
+		<id>12</id>
+		<requirement>200</requirement>
+		<en>Ninja Mouse</en>
+		<fr>Souris Ninja</fr>
+		<pt>Rato Ninja</pt>
+		<ru>Мышь-нинзя</ru>
+	</title>
+	<title type="ShamanSave">
+		<id>13</id>
+		<requirement>3000</requirement>
+		<en>Inspired Shaman</en>
+		<fr>Chamane Inspiré</fr>
+		<pt>Shaman Inspirado</pt>
+		<ru>Вдохновленный шаман</ru>
+	</title>
+	<title type="ShamanSave">
+		<id>14</id>
+		<requirement>4000</requirement>
+		<en>Shaman Champion</en>
+		<fr>Championne Chamane</fr>
+		<pt>Shaman Campeão</pt>
+		<ru>Шаман-чемпион</ru>
+	</title>
+	<title type="ShamanSave">
+		<id>15</id>
+		<requirement>5000</requirement>
+		<en>Glorious Shaman</en>
+		<fr>Chamane Glorieuse</fr>
+		<pt>Shaman Glorioso</pt>
+		<ru>Славный шаман</ru>
+	</title>
+	<title type="ShamanSave">
+		<id>16</id>
+		<requirement>6000</requirement>
+		<en>Shaman Duchess</en>
+		<fr>Duchesse Chamane</fr>
+		<pt>Duquesa Shaman</pt>
+		<ru>Шаман-герцогиня</ru>
+	</title>
+	<title type="ShamanSave">
+		<id>17</id>
+		<requirement>7000</requirement>
+		<en>Shaman Princess</en>
+		<fr>Princesse Chamane</fr>
+		<pt>Princesa Shaman</pt>
+		<ru>Шаман-принцесса</ru>
+	</title>
+	<title type="ShamanSave">
+		<id>18</id>
+		<requirement>8000</requirement>
+		<en>Shaman Empress</en>
+		<fr>Impératrice Chamane</fr>
+		<pt>Imperatriz Shaman</pt>
+		<ru>Шаман-императрица</ru>
+	</title>
+	<title type="ShamanSave">
+		<id>19</id>
+		<requirement>9000</requirement>
+		<en>Legendary Shaman</en>
+		<fr>Chamane Légendaire</fr>
+		<pt>Shaman Lendário</pt>
+		<ru>Легендарный шаман</ru>
+	</title>
+	<title type="ShamanSave">
+		<id>20</id>
+		<requirement>10000</requirement>
+		<en>Immortal Shaman</en>
+		<fr>Chamane Immortelle</fr>
+		<pt>Shaman Imortal</pt>
+		<ru>Бессмертный шаман</ru>
+	</title>
+	<title type="ShamanSave">
+		<id>21</id>
+		<requirement>11000</requirement>
+		<en>The Chosen Shaman</en>
+		<fr>Chamane Élue</fr>
+		<pt>O Shaman Escolhido</pt>
+		<ru>Избранный шаман</ru>
+	</title>
+	<title type="ShamanSave">
+		<id>22</id>
+		<requirement>12000</requirement>
+		<en>Holy Shaman</en>
+		<fr>Chamane Sacrée</fr>
+		<pt>Shaman Sagrado</pt>
+		<ru>Святой шаман</ru>
+	</title>
+	<title type="ShamanSave">
+		<id>23</id>
+		<requirement>13000</requirement>
+		<en>Shaman Oracle</en>
+		<fr>Oracle Chamane</fr>
+		<pt>Shaman Oráculo</pt>
+		<ru>Шаман-оракул</ru>
+	</title>
+	<title type="ShamanSave">
+		<id>24</id>
+		<requirement>14000</requirement>
+		<en>Shaman Prophet</en>
+		<fr>Prophète Chamane</fr>
+		<pt>Shaman Profeta</pt>
+		<ru>Шаман-пророк</ru>
+	</title>
+	<title type="ShamanSave">
+		<id>25</id>
+		<requirement>15000</requirement>
+		<en>Shamarvelous</en>
+		<fr>Chamagnifique</fr>
+		<pt>Shaman Supremo</pt>
+		<ru>Шамодивительный</ru>
+	</title>
+	<title type="CheeseGathered">
+		<id>26</id>
+		<requirement>600</requirement>
+		<en>Glutton Mouse</en>
+		<fr>Souris Gloutonne</fr>
+		<pt>Rato Guloso</pt>
+		<ru>Мышь-Обжора</ru>
+	</title>
+	<title type="CheeseGathered">
+		<id>27</id>
+		<requirement>700</requirement>
+		<en>Gleany</en>
+		<fr>Grapilleuse</fr>
+		<pt>Apanhador de Queijos</pt>
+		<ru>Подбирающий</ru>
+	</title>
+	<title type="CheeseGathered">
+		<id>28</id>
+		<requirement>800</requirement>
+		<en>Plumpy Mouse</en>
+		<fr>Souris Dodue</fr>
+		<pt>Rato Fofinho</pt>
+		<ru>Пухленький</ru>
+	</title>
+	<title type="CheeseGathered">
+		<id>29</id>
+		<requirement>900</requirement>
+		<en>Paunchy Mouse</en>
+		<fr>Souris Ventrue</fr>
+		<pt>Sr. Barriga</pt>
+		<ru>Пузач</ru>
+	</title>
+	<title type="CheeseGathered">
+		<id>30</id>
+		<requirement>1000</requirement>
+		<en>Chubby Mouse</en>
+		<fr>Souris Joufflue</fr>
+		<pt>Gorducho</pt>
+		<ru>Полненький</ru>
+	</title>
+	<title type="CheeseGathered">
+		<id>31</id>
+		<requirement>1100</requirement>
+		<en>Fluffy Mouse</en>
+		<fr>Bouboule</fr>
+		<pt>Rato Peludinho</pt>
+		<ru>Пушистик</ru>
+	</title>
+	<title type="CheeseGathered">
+		<id>32</id>
+		<requirement>1200</requirement>
+		<en>Tubby Mouse</en>
+		<fr>Patapouffe</fr>
+		<pt>Rato Obeso</pt>
+		<ru>Упитанный</ru>
+	</title>
+	<title type="CheeseGathered">
+		<id>33</id>
+		<requirement>1300</requirement>
+		<en>The Chubby</en>
+		<fr>La Rondouillarde</fr>
+		<pt>O Fofão</pt>
+		<ru>Толстячок</ru>
+	</title>
+	<title type="CheeseGathered">
+		<id>34</id>
+		<requirement>1400</requirement>
+		<en>The Puffy</en>
+		<fr>La Boursoufflée</fr>
+		<pt>O Sedentário</pt>
+		<ru>Опухший</ru>
+	</title>
+	<title type="CheeseGathered">
+		<id>35</id>
+		<requirement>300</requirement>
+		<en>Activist Mouse</en>
+		<fr>Souris Militante</fr>
+		<pt>Rato Militante</pt>
+		<ru>Активная мышь</ru>
+	</title>
+	<title type="CheeseGathered">
+		<id>36</id>
+		<requirement>400</requirement>
+		<en>Unionized Mouse</en>
+		<fr>Souris Syndiquée</fr>
+		<pt>Rato Sindicalista</pt>
+		<ru>Сплоченная мышь</ru>
+	</title>
+	<title type="CheeseGathered">
+		<id>37</id>
+		<requirement>500</requirement>
+		<en>Mouse on Strike</en>
+		<fr>Souris en Grève</fr>
+		<pt>Rato em Greve</pt>
+		<ru>Мышь в ударе</ru>
+	</title>
+	<title type="CheeseGathered">
+		<id>38</id>
+		<requirement>1500</requirement>
+		<en>The Cheese Initiated</en>
+		<fr>Initiée du Fromage</fr>
+		<pt>O Recruta do Queijo</pt>
+		<ru>Сырнопосвящённый</ru>
+	</title>
+	<title type="CheeseGathered">
+		<id>39</id>
+		<requirement>1600</requirement>
+		<en>The Cheese Adept</en>
+		<fr>Adepte du Fromage</fr>
+		<pt>O Viciado em Queijo</pt>
+		<ru>Знаток Сыра</ru>
+	</title>
+	<title type="CheeseGathered">
+		<id>40</id>
+		<requirement>1700</requirement>
+		<en>The Cheese Priest</en>
+		<fr>Prêtresse du Fromage</fr>
+		<pt>O Guardião do Queijo</pt>
+		<ru>Священник Сыра</ru>
+	</title>
+	<title type="CheeseGathered">
+		<id>41</id>
+		<requirement>1800</requirement>
+		<en>The Reaper</en>
+		<fr>La Moissonneuse</fr>
+		<pt>Mestre do Queijo</pt>
+		<ru>Пожинатель</ru>
+	</title>
+	<title type="FirstPlace">
+		<id>42</id>
+		<requirement>300</requirement>
+		<en>Rogue Mouse</en>
+		<fr>Souris Fripponne</fr>
+		<pt>Rato Fanfarrão</pt>
+		<ru>Мышь-разбойник</ru>
+	</title>
+	<title type="FirstPlace">
+		<id>43</id>
+		<requirement>400</requirement>
+		<en>Looter</en>
+		<fr>Pilleuse</fr>
+		<pt>Ladrão</pt>
+		<ru>Грабитель</ru>
+	</title>
+	<title type="FirstPlace">
+		<id>44</id>
+		<requirement>500</requirement>
+		<en>Stalker</en>
+		<fr>Traqueuse</fr>
+		<pt>Perseguidor</pt>
+		<ru>Искатель</ru>
+	</title>
+	<title type="FirstPlace">
+		<id>45</id>
+		<requirement>600</requirement>
+		<en>Frothy Mouse</en>
+		<fr>Ecumeuse</fr>
+		<pt>Rato Fútil</pt>
+		<ru>Пенная Мышь</ru>
+	</title>
+	<title type="FirstPlace">
+		<id>46</id>
+		<requirement>700</requirement>
+		<en>The Silent</en>
+		<fr>La Silencieuse</fr>
+		<pt>O Silencioso</pt>
+		<ru>Бесшумный</ru>
+	</title>
+	<title type="FirstPlace">
+		<id>47</id>
+		<requirement>800</requirement>
+		<en>Hawk Mouse</en>
+		<fr>Souris Faucon</fr>
+		<pt>Rato Falcão</pt>
+		<ru>Мышь-орёл</ru>
+	</title>
+	<title type="FirstPlace">
+		<id>48</id>
+		<requirement>900</requirement>
+		<en>Cobra Mouse</en>
+		<fr>Souris Cobra</fr>
+		<pt>Rato Cobra</pt>
+		<ru>Мышь-кобра</ru>
+	</title>
+	<title type="FirstPlace">
+		<id>49</id>
+		<requirement>1000</requirement>
+		<en>Spidermouse</en>
+		<fr>Spidersouris</fr>
+		<pt>Rato-Aranha</pt>
+		<ru>Мышь Паук</ru>
+	</title>
+	<title type="FirstPlace">
+		<id>50</id>
+		<requirement>1100</requirement>
+		<en>Quick Silver</en>
+		<fr>Vif Argent</fr>
+		<pt>O Mito</pt>
+		<ru>Пуля</ru>
+	</title>
+	<title type="FirstPlace">
+		<id>51</id>
+		<requirement>1200</requirement>
+		<en>Athletic Mouse</en>
+		<fr>Souris Athlétique</fr>
+		<pt>Rato Atlético</pt>
+		<ru>Атлетичная Мышь</ru>
+	</title>
+	<title type="FirstPlace">
+		<id>52</id>
+		<requirement>1400</requirement>
+		<en>Hasty Mouse</en>
+		<fr>Souris Hâtive</fr>
+		<pt>Rato Apressado</pt>
+		<ru>Поспешная Мышь</ru>
+	</title>
+	<title type="FirstPlace">
+		<id>53</id>
+		<requirement>1600</requirement>
+		<en>Rocket Mouse</en>
+		<fr>Le Missile</fr>
+		<pt>O Míssil</pt>
+		<ru>Мышь-ракета</ru>
+	</title>
+	<title type="FirstPlace">
+		<id>54</id>
+		<requirement>1800</requirement>
+		<en>Sonic The Mouse</en>
+		<fr>Sonic La Souris</fr>
+		<pt>Sonic The Mouse</pt>
+		<ru>Соник-Мышь</ru>
+	</title>
+	<title type="FirstPlace">
+		<id>55</id>
+		<requirement>2000</requirement>
+		<en>Pingless</en>
+		<fr>Meilleur Ping</fr>
+		<pt>Pingless</pt>
+		<ru>Лучший Пинг</ru>
+	</title>
+	<title type="FirstPlace">
+		<id>56</id>
+		<requirement>2200</requirement>
+		<en>Kamikaze</en>
+		<fr>Kamikaze</fr>
+		<pt>Kamikaze</pt>
+		<ru>Камикадзе</ru>
+	</title>
+	<title type="FirstPlace">
+		<id>57</id>
+		<requirement>2400</requirement>
+		<en>Warrior Mouse</en>
+		<fr>Souris Guerrière</fr>
+		<pt>Rato Guerreiro</pt>
+		<ru>Мышь-воин</ru>
+	</title>
+	<title type="FirstPlace">
+		<id>58</id>
+		<requirement>2600</requirement>
+		<en>Mach 1</en>
+		<fr>Mach 1</fr>
+		<pt>Mach 1</pt>
+		<ru>1 Мах</ru>
+	</title>
+	<title type="FirstPlace">
+		<id>59</id>
+		<requirement>2800</requirement>
+		<en>Hunter</en>
+		<fr>Chasseresse</fr>
+		<pt>Caçador</pt>
+		<ru>Охотник</ru>
+	</title>
+	<title type="FirstPlace">
+		<id>60</id>
+		<requirement>3000</requirement>
+		<en>First!</en>
+		<fr>Prem's !</fr>
+		<pt>Primeiro!</pt>
+		<ru>Первый!</ru>
+	</title>
+	<title type="FirstPlace">
+		<id>61</id>
+		<requirement>3200</requirement>
+		<en>Sniper</en>
+		<fr>Sniper</fr>
+		<pt>Sniper</pt>
+		<ru>Снайпер</ru>
+	</title>
+	<title type="FirstPlace">
+		<id>62</id>
+		<requirement>3400</requirement>
+		<en>Flash</en>
+		<fr>Flash</fr>
+		<pt>Flash</pt>
+		<ru>Вспышка</ru>
+	</title>
+	<title type="FirstPlace">
+		<id>63</id>
+		<requirement>3600</requirement>
+		<en>Supermouse</en>
+		<fr>Supermouse</fr>
+		<pt>Supermouse</pt>
+		<ru>Супермышь</ru>
+	</title>
+	<title type="FirstPlace">
+		<id>64</id>
+		<requirement>3800</requirement>
+		<en>Light Speed</en>
+		<fr>Vitesse Lumière</fr>
+		<pt>Velocidade da Luz</pt>
+		<ru>Скорость Света</ru>
+	</title>
+	<title type="FirstPlace">
+		<id>65</id>
+		<requirement>4000</requirement>
+		<en>Time Traveler</en>
+		<fr>Voyageuse Du Temps</fr>
+		<pt>Viajante do Tempo</pt>
+		<ru>Путешественник во Времени</ru>
+	</title>
+	<title type="FirstPlace">
+		<id>66</id>
+		<requirement>4500</requirement>
+		<en>Fast Wind</en>
+		<fr>Vent Rapide</fr>
+		<pt>Tornado</pt>
+		<ru>Быстрый Ветер</ru>
+	</title>
+	<title type="FirstPlace">
+		<id>67</id>
+		<requirement>5000</requirement>
+		<en>E=MouseC²</en>
+		<fr>E=MouseC²</fr>
+		<pt>E=MouseC²</pt>
+		<ru>E=MouseC²</ru>
+	</title>
+	<title type="FirstPlace">
+		<id>68</id>
+		<requirement>5500</requirement>
+		<en>Jumper</en>
+		<fr>La Sauteuse</fr>
+		<pt>Canguru</pt>
+		<ru>Прыгун</ru>
+	</title>
+	<title type="FirstPlace">
+		<id>69</id>
+		<requirement>6000</requirement>
+		<en>The Untouchable</en>
+		<fr>L'Intouchable</fr>
+		<pt>O Intocável</pt>
+		<ru>Неприкасаемый</ru>
+	</title>
+	<title type="FirstPlace">
+		<id>70</id>
+		<requirement>10000</requirement>
+		<en>Wall-Jumper</en>
+		<fr>Wall-Jumper</fr>
+		<pt>Wall-Jumper</pt>
+		<ru>Wall-Jumper</ru>
+	</title>
+	<title type="FirstPlace">
+		<id>71</id>
+		<requirement>40000</requirement>
+		<en>LIGHTNING</en>
+		<fr>FOUDRE</fr>
+		<pt>RELÂMPAGO</pt>
+		<ru>LE ZADROTTE</ru>
+	</title>
+	<title type="CheeseGathered">
+		<id>72</id>
+		<requirement>2000</requirement>
+		<en>Cheese Finder</en>
+		<fr>Chercheuse De Fromage</fr>
+		<pt>Rato Sherlock</pt>
+		<ru>Ищущий сыра</ru>
+	</title>
+	<title type="CheeseGathered">
+		<id>73</id>
+		<requirement>2300</requirement>
+		<en>Cheese Knight</en>
+		<fr>Chevalier Fromage</fr>
+		<pt>Cavaleiro do Queijo</pt>
+		<ru>Рыцарь Сыра</ru>
+	</title>
+	<title type="CheeseGathered">
+		<id>74</id>
+		<requirement>2700</requirement>
+		<en>Cheesegrubber</en>
+		<fr>Cheesegrubber</fr>
+		<pt>Cheesegrubber</pt>
+		<ru>Cheesegrubber</ru>
+	</title>
+	<title type="CheeseGathered">
+		<id>75</id>
+		<requirement>3200</requirement>
+		<en>Fatty</en>
+		<fr>Grassouillette</fr>
+		<pt>Seboso</pt>
+		<ru>Жирненький</ru>
+	</title>
+	<title type="CheeseGathered">
+		<id>76</id>
+		<requirement>3800</requirement>
+		<en>Stout Mouse</en>
+		<fr>Souris Robuste</fr>
+		<pt>Rato Robusto</pt>
+		<ru>Надежная Мышь</ru>
+	</title>
+	<title type="CheeseGathered">
+		<id>77</id>
+		<requirement>4600</requirement>
+		<en>Cheese Lover</en>
+		<fr>Amoureuse Du Fromage</fr>
+		<pt>Amante de Queijo</pt>
+		<ru>Любитель Сыра</ru>
+	</title>
+	<title type="CheeseGathered">
+		<id>78</id>
+		<requirement>6000</requirement>
+		<en>Camembert</en>
+		<fr>Camembert</fr>
+		<pt>Camembert</pt>
+		<ru>Camembert</ru>
+	</title>
+	<title type="CheeseGathered">
+		<id>79</id>
+		<requirement>7000</requirement>
+		<en>Pont-L'Évêque</en>
+		<fr>Pont-L'Évêque</fr>
+		<pt>Pont-L'Évêque</pt>
+		<ru>Pont-L'Évêque</ru>
+	</title>
+	<title type="CheeseGathered">
+		<id>80</id>
+		<requirement>8000</requirement>
+		<en>Cheese Catcher</en>
+		<fr>L'Attrape Fromage</fr>
+		<pt>Pega-Queijo</pt>
+		<ru>Собиратель сыра</ru>
+	</title>
+	<title type="CheeseGathered">
+		<id>81</id>
+		<requirement>9001</requirement>
+		<en>It's Over 9000</en>
+		<fr>It's Over 9000</fr>
+		<pt>It's Over 9000</pt>
+		<ru>It's Over 9000</ru>
+	</title>
+	<title type="CheeseGathered">
+		<id>82</id>
+		<requirement>10000</requirement>
+		<en>Collector</en>
+		<fr>Collectionneuse</fr>
+		<pt>Colecionador</pt>
+		<ru>Собиратель</ru>
+	</title>
+	<title type="CheeseGathered">
+		<id>83</id>
+		<requirement>14000</requirement>
+		<en>Cheeseleader</en>
+		<fr>Cheeseleader</fr>
+		<pt>Cheeseleader</pt>
+		<ru>Сырлидер</ru>
+	</title>
+	<title type="CheeseGathered">
+		<id>84</id>
+		<requirement>18000</requirement>
+		<en>Cheese Thief</en>
+		<fr>Voleuse De Fromage</fr>
+		<pt>Ladrão de Queijos</pt>
+		<ru>Вор Сыра</ru>
+	</title>
+	<title type="CheeseGathered">
+		<id>85</id>
+		<requirement>22000</requirement>
+		<en>Cheese Creator</en>
+		<fr>Fromagère</fr>
+		<pt>Criador do Queijo</pt>
+		<ru>Создатель сыра</ru>
+	</title>
+	<title type="CheeseGathered">
+		<id>86</id>
+		<requirement>26000</requirement>
+		<en>Cheese Pizza</en>
+		<fr>Pizza Fromage</fr>
+		<pt>Pizza de Queijo</pt>
+		<ru>Сырная Пицца</ru>
+	</title>
+	<title type="CheeseGathered">
+		<id>87</id>
+		<requirement>30000</requirement>
+		<en>Cheese Minister</en>
+		<fr>Ministre Du Fromage</fr>
+		<pt>Ministro do Queijo</pt>
+		<ru>Министр Сыра</ru>
+	</title>
+	<title type="CheeseGathered">
+		<id>88</id>
+		<requirement>34000</requirement>
+		<en>Prodigy Mouse</en>
+		<fr>Souris Prodigieuse</fr>
+		<pt>Rato Prodígio</pt>
+		<ru>Удивительная Мышь</ru>
+	</title>
+	<title type="CheeseGathered">
+		<id>89</id>
+		<requirement>38000</requirement>
+		<en>Princess Of Transformice</en>
+		<fr>Princesse De Transformice</fr>
+		<pt>Princesa do Transformice</pt>
+		<ru>Принцесса Transformice</ru>
+	</title>
+	<title type="CheeseGathered">
+		<id>90</id>
+		<requirement>42000</requirement>
+		<en>Cheesoholic</en>
+		<fr>Fromalcoolique</fr>
+		<pt>Queijólatra</pt>
+		<ru>Сыроголик</ru>
+	</title>
+	<title type="CheeseGathered">
+		<id>91</id>
+		<requirement>46000</requirement>
+		<en>The Cheesen One</en>
+		<fr>The Cheesen One</fr>
+		<pt>The Cheesen One</pt>
+		<ru>The Cheesen One</ru>
+	</title>
+	<title type="CheeseGathered">
+		<id>92</id>
+		<requirement>50000</requirement>
+		<en>Sailor Mouse</en>
+		<fr>Sailor Mouse</fr>
+		<pt>Sailor Mouse</pt>
+		<ru>Сейлор Мышь</ru>
+	</title>
+	<title type="CheeseGathered">
+		<id>93</id>
+		<requirement>80000</requirement>
+		<en>MAH CHEESE!</en>
+		<fr>MON FROMAGE!</fr>
+		<pt>MAH CHEESE!</pt>
+		<ru>МОЙ СЫЫЫР!</ru>
+	</title>
+	<title type="ShamanSave">
+		<id>94</id>
+		<requirement>16000</requirement>
+		<en>Ancient Shaman</en>
+		<fr>Ancienne Chamane</fr>
+		<pt>Shaman Ancião</pt>
+		<ru>Древний Шаман</ru>
+	</title>
+	<title type="ShamanSave">
+		<id>95</id>
+		<requirement>18000</requirement>
+		<en>Fearless Shaman</en>
+		<fr>Chamane Sans Peur</fr>
+		<pt>Shaman Destemido</pt>
+		<ru>Бесстрашный Шаман</ru>
+	</title>
+	<title type="ShamanSave">
+		<id>96</id>
+		<requirement>20000</requirement>
+		<en>Almight Shaman</en>
+		<fr>Toute-Puissante Chamane</fr>
+		<pt>Shaman Divino</pt>
+		<ru>Всемогущий Шаман</ru>
+	</title>
+	<title type="ShamanSave">
+		<id>97</id>
+		<requirement>22000</requirement>
+		<en>Architect Shaman</en>
+		<fr>Chamane Architecte</fr>
+		<pt>Shaman Arquiteto</pt>
+		<ru>Шаман-архитектор</ru>
+	</title>
+	<title type="ShamanSave">
+		<id>98</id>
+		<requirement>24000</requirement>
+		<en>Mademoiselle</en>
+		<fr>Mademoiselle</fr>
+		<pt>Mademoiselle</pt>
+		<ru>Мадемуазель</ru>
+	</title>
+	<title type="ShamanSave">
+		<id>99</id>
+		<requirement>26000</requirement>
+		<en>Lady Chamane</en>
+		<fr>Lady Chamane</fr>
+		<pt>Madame Shaman</pt>
+		<ru>Леди Шаман</ru>
+	</title>
+	<title type="ShamanSave">
+		<id>100</id>
+		<requirement>28000</requirement>
+		<en>Loved</en>
+		<fr>Aimée</fr>
+		<pt>Amado</pt>
+		<ru>Любящий</ru>
+	</title>
+	<title type="ShamanSave">
+		<id>101</id>
+		<requirement>30000</requirement>
+		<en>Magician</en>
+		<fr>Magicienne</fr>
+		<pt>Mago</pt>
+		<ru>Магический</ru>
+	</title>
+	<title type="ShamanSave">
+		<id>102</id>
+		<requirement>35000</requirement>
+		<en>Hero of Mice</en>
+		<fr>Héroïne Des Souris</fr>
+		<pt>Herói dos Ratos</pt>
+		<ru>Герой Мышей</ru>
+	</title>
+	<title type="ShamanSave">
+		<id>103</id>
+		<requirement>40000</requirement>
+		<en>Angel Shaman</en>
+		<fr>Ange Chamane</fr>
+		<pt>Shaman Anjo</pt>
+		<ru>Ангел-шаман</ru>
+	</title>
+	<title type="ShamanSave">
+		<id>104</id>
+		<requirement>45000</requirement>
+		<en>The Creator</en>
+		<fr>La Créatrice</fr>
+		<pt>O Criador</pt>
+		<ru>Создатель</ru>
+	</title>
+	<title type="ShamanSave">
+		<id>105</id>
+		<requirement>50000</requirement>
+		<en>Absolute Shaman</en>
+		<fr>Chamane Absolute</fr>
+		<pt>Shaman Absoluto</pt>
+		<ru>Абсолютный Шаман</ru>
+	</title>
+	<title type="ShamanSave">
+		<id>106</id>
+		<requirement>55000</requirement>
+		<en>Miraculous Shaman</en>
+		<fr>Chamane Miraculeuse</fr>
+		<pt>Shaman Milagroso</pt>
+		<ru>Чудотворный Шаман</ru>
+	</title>
+	<title type="ShamanSave">
+		<id>107</id>
+		<requirement>60000</requirement>
+		<en>Liberator</en>
+		<fr>Libératrice</fr>
+		<pt>Libertador</pt>
+		<ru>Освободитель</ru>
+	</title>
+	<title type="ShamanSave">
+		<id>108</id>
+		<requirement>65000</requirement>
+		<en>Troll Shaman</en>
+		<fr>CDM</fr>
+		<pt>Troll Shaman</pt>
+		<ru>Тролль-шаман</ru>
+	</title>
+	<title type="ShamanSave">
+		<id>109</id>
+		<requirement>70000</requirement>
+		<en>Ghost Shaman</en>
+		<fr>Chamane Fantôme</fr>
+		<pt>Shaman Fantasma</pt>
+		<ru>Призрак-шаман</ru>
+	</title>
+	<title type="ShamanSave">
+		<id>110</id>
+		<requirement>75000</requirement>
+		<en>Spirit</en>
+		<fr>Esprit</fr>
+		<pt>Espírito</pt>
+		<ru>Дух</ru>
+	</title>
+	<title type="ShamanSave">
+		<id>111</id>
+		<requirement>80000</requirement>
+		<en>Demigodess Shaman</en>
+		<fr>Demi-Déesse Chamane</fr>
+		<pt>Shaman Semideus</pt>
+		<ru>Полубогиня-шаман</ru>
+	</title>
+	<title type="ShamanSave">
+		<id>112</id>
+		<requirement>85000</requirement>
+		<en>Last Hope</en>
+		<fr>Dernier Espoir</fr>
+		<pt>Última Esperança</pt>
+		<ru>Последняя Надежда</ru>
+	</title>
+	<title type="ShamanSave">
+		<id>113</id>
+		<requirement>90000</requirement>
+		<en>Redeemer</en>
+		<fr>Rédemptrice</fr>
+		<pt>Redentor</pt>
+		<ru>Спаситель</ru>
+	</title>
+	<title type="ShamanSave">
+		<id>114</id>
+		<requirement>140000</requirement>
+		<en>Alpha &amp; Omega</en>
+		<fr>Alpha &amp; Omega</fr>
+		<pt>Alpha &amp; Omega</pt>
+		<ru>Шаман-задрот</ru>
+	</title>
+	<title type="Shop">
+		<id>115</id>
+		<requirement>1</requirement>
+		<en>Nice Mouse</en>
+		<fr>Jolie Souris</fr>
+		<pt>Rato Descolado</pt>
+		<ru>Отличная мышь</ru>
+	</title>
+	<title type="Shop">
+		<id>116</id>
+		<requirement>2</requirement>
+		<en>Adorable Mouse</en>
+		<fr>Souris Adorable</fr>
+		<pt>Rato Adorável</pt>
+		<ru>Восхитительная Мышь</ru>
+	</title>
+	<title type="Shop">
+		<id>117</id>
+		<requirement>4</requirement>
+		<en>Charming Mouse</en>
+		<fr>Souris Charmante</fr>
+		<pt>Rato Charmoso</pt>
+		<ru>Очаровательная Мышь</ru>
+	</title>
+	<title type="Shop">
+		<id>118</id>
+		<requirement>6</requirement>
+		<en>Pretty Mouse</en>
+		<fr>Souris Coquette</fr>
+		<pt>Rato Atraente</pt>
+		<ru>Хорошенькая Мышь</ru>
+	</title>
+	<title type="Shop">
+		<id>119</id>
+		<requirement>8</requirement>
+		<en>Cute Mouse</en>
+		<fr>Souris Mignonne</fr>
+		<pt>Rato Bonitinho</pt>
+		<ru>Милая Мышь</ru>
+	</title>
+	<title type="Shop">
+		<id>120</id>
+		<requirement>10</requirement>
+		<en>Frivolous Mouse</en>
+		<fr>Souris Frivole</fr>
+		<pt>Rato Galã</pt>
+		<ru>Фривольная Мышь</ru>
+	</title>
+	<title type="Shop">
+		<id>121</id>
+		<requirement>12</requirement>
+		<en>Snob Mouse</en>
+		<fr>Souris Snob</fr>
+		<pt>Rato Esnobe</pt>
+		<ru>Мышь-сноб</ru>
+	</title>
+	<title type="Shop">
+		<id>122</id>
+		<requirement>14</requirement>
+		<en>Stylish Mouse</en>
+		<fr>Souris à la Mode</fr>
+		<pt>Rato Estiloso</pt>
+		<ru>Стильная мышь</ru>
+	</title>
+	<title type="Shop">
+		<id>123</id>
+		<requirement>16</requirement>
+		<en>Actress Mouse</en>
+		<fr>Souris Actrice</fr>
+		<pt>Diva</pt>
+		<ru>Мышь-актер</ru>
+	</title>
+	<title type="Shop">
+		<id>124</id>
+		<requirement>18</requirement>
+		<en>Fashion Mouse</en>
+		<fr>Souris Fashion</fr>
+		<pt>Rato Fashion</pt>
+		<ru>Модная Мышь</ru>
+	</title>
+	<title type="Shop">
+		<id>125</id>
+		<requirement>20</requirement>
+		<en>Sexy</en>
+		<fr>Sexy</fr>
+		<pt>Sexy</pt>
+		<ru>Секси</ru>
+	</title>
+	<title type="Shop">
+		<id>126</id>
+		<requirement>22</requirement>
+		<en>SuperStar</en>
+		<fr>SuperStar</fr>
+		<pt>SuperStar</pt>
+		<ru>СуперЗвезда</ru>
+	</title>
+	<title type="Christmas">
+		<id>127</id>
+		<requirement>5</requirement>
+		<en>Little Snowflake</en>
+		<fr>Petit Flocon</fr>
+		<pt>Floquinho de Neve</pt>
+		<ru>Маленькая Снежинка</ru>
+	</title>
+	<title type="Christmas">
+		<id>128</id>
+		<requirement>10</requirement>
+		<en>Christmas Spirit</en>
+		<fr>Esprit de Noël</fr>
+		<pt>Espírito Natalino</pt>
+		<ru>Рождественский дух</ru>
+	</title>
+	<title type="Christmas">
+		<id>129</id>
+		<requirement>40</requirement>
+		<en>Little Pixie</en>
+		<fr>Petit Lutin</fr>
+		<pt>Duende</pt>
+		<ru>Мелкая Пикси</ru>
+	</title>
+	<title type="Christmas">
+		<id>130</id>
+		<requirement>60</requirement>
+		<en>Santa Claus</en>
+		<fr>Papa Noël</fr>
+		<pt>Papai Noel</pt>
+		<ru>Санта Клаус</ru>
+	</title>
+	<title type="ShamanSave">
+		<id>200</id>
+		<requirement>100000</requirement>
+		<en>Goddess Shaman</en>
+		<fr>Déesse_Chamane</fr>
+		<pt>Deusa Shaman</pt>
+		<ru>Богиня-шаман</ru>
+	</title>
+	<title type="FirstPlace">
+		<id>202</id>
+		<requirement>20000</requirement>
+		<en>The Wind Master</en>
+		<fr>The Wind Master</fr>
+		<pt>The Wind Master</pt>
+		<ru>Мастер Ветра</ru>
+	</title>
+	<title type="Valentine">
+		<id>210</id>
+		<requirement>5</requirement>
+		<en>Alluring Mouse</en>
+		<fr>Aguicheuse</fr>
+		<pt>Rato Sedutor</pt>
+		<ru>Очаровательная мышь</ru>
+	</title>
+	<title type="Valentine">
+		<id>211</id>
+		<requirement>30</requirement>
+		<en>Temptress</en>
+		<fr>Tentatrice</fr>
+		<pt>Rata Atraente</pt>
+		<ru>Соблазнительница</ru>
+	</title>
+	<title type="Valentine">
+		<id>212</id>
+		<requirement>360</requirement>
+		<en>Latin Lover</en>
+		<fr>Latin Lover</fr>
+		<pt>Latin Lover</pt>
+		<ru>Латинская любовница</ru>
+	</title>
+	<title type="ShamanHardSave">
+		<id>213</id>
+		<requirement>500</requirement>
+		<en>Decorator</en>
+		<fr>Décoratrice</fr>
+		<pt>Decorator</pt>
+		<ru>Декоратор</ru>
+	</title>
+	<title type="ShamanHardSave">
+		<id>214</id>
+		<requirement>2000</requirement>
+		<en>Builder</en>
+		<fr>Bâtisseuse</fr>
+		<pt>Builder</pt>
+		<ru>Строитель</ru>
+	</title>
+	<title type="ShamanHardSave">
+		<id>215</id>
+		<requirement>4000</requirement>
+		<en>Manufacturer</en>
+		<fr>Fabricante</fr>
+		<pt>Fabricante</pt>
+		<ru>Мануфактурщик</ru>
+	</title>
+	<title type="ShamanHardSave">
+		<id>216</id>
+		<requirement>7000</requirement>
+		<en>Technician</en>
+		<fr>Technicienne</fr>
+		<pt>Técnico</pt>
+		<ru>Технический</ru>
+	</title>
+	<title type="ShamanHardSave">
+		<id>217</id>
+		<requirement>10000</requirement>
+		<en>Mechanic</en>
+		<fr>Mécanicienne</fr>
+		<pt>Mecânico</pt>
+		<ru>Механик</ru>
+	</title>
+	<title type="ShamanHardSave">
+		<id>218</id>
+		<requirement>14000</requirement>
+		<en>Specialist</en>
+		<fr>Spécialiste</fr>
+		<pt>Especialista</pt>
+		<ru>Специалист</ru>
+	</title>
+	<title type="ShamanHardSave">
+		<id>219</id>
+		<requirement>18000</requirement>
+		<en>Inventor</en>
+		<fr>Inventeur</fr>
+		<pt>Inventor</pt>
+		<ru>Изобретатель</ru>
+	</title>
+	<title type="ShamanHardSave">
+		<id>220</id>
+		<requirement>22000</requirement>
+		<en>Engineer</en>
+		<fr>Ingénieur</fr>
+		<pt>Engenheiro</pt>
+		<ru>Инженер</ru>
+	</title>
+	<title type="ShamanHardSave">
+		<id>221</id>
+		<requirement>26000</requirement>
+		<en>Inventive Mouse</en>
+		<fr>L'Inventive</fr>
+		<pt>Rato Inventor</pt>
+		<ru>Изобретательная Мышь</ru>
+	</title>
+	<title type="ShamanHardSave">
+		<id>222</id>
+		<requirement>30000</requirement>
+		<en>Ingenious Mouse</en>
+		<fr>L'Ingénieuse</fr>
+		<pt>Rato Engenhoso</pt>
+		<ru>Оригинальная Мышь</ru>
+	</title>
+	<title type="ShamanHardSave">
+		<id>223</id>
+		<requirement>34000</requirement>
+		<en>Virtuoso</en>
+		<fr>Virtuose</fr>
+		<pt>Virtuoso</pt>
+		<ru>Виртуоз</ru>
+	</title>
+	<title type="FirstPlace">
+		<id>224</id>
+		<requirement>12000</requirement>
+		<en>Sprinter</en>
+		<fr>Sprinter</fr>
+		<pt>Corredor</pt>
+		<ru>Спринтер</ru>
+	</title>
+	<title type="FirstPlace">
+		<id>225</id>
+		<requirement>14000</requirement>
+		<en>Batmouse</en>
+		<fr>Chauve Souris</fr>
+		<pt>Batmouse</pt>
+		<ru>Летучая Мышь</ru>
+	</title>
+	<title type="FirstPlace">
+		<id>226</id>
+		<requirement>16000</requirement>
+		<en>The Unseen</en>
+		<fr>L'Invisible</fr>
+		<pt>Invisível</pt>
+		<ru>Невидимка</ru>
+	</title>
+	<title type="FirstPlace">
+		<id>227</id>
+		<requirement>18000</requirement>
+		<en>Unstoppable</en>
+		<fr>L'Instoppable</fr>
+		<pt>Imparável</pt>
+		<ru>Неостановимый</ru>
+	</title>
+	<title type="FirstPlace">
+		<id>228</id>
+		<requirement>25000</requirement>
+		<en>¡Ándale! ¡Ándale!</en>
+		<fr>¡Ándale! ¡Ándale!</fr>
+		<pt>¡Ándale! ¡Ándale!</pt>
+		<ru>¡Ándale! ¡Ándale!</ru>
+	</title>
+	<title type="FirstPlace">
+		<id>229</id>
+		<requirement>30000</requirement>
+		<en>Torpedo</en>
+		<fr>La Torpille</fr>
+		<pt>Torpedo</pt>
+		<ru>Торпеда</ru>
+	</title>
+	<title type="FirstPlace">
+		<id>230</id>
+		<requirement>35000</requirement>
+		<en>Speedy Gorgonzola</en>
+		<fr>Speedy Gorgonzola</fr>
+		<pt>Speedy Gorgonzola</pt>
+		<ru>Скоростная Гонгонзола</ru>
+	</title>
+	<title type="FirstPlace">
+		<id>231</id>
+		<requirement>7000</requirement>
+		<en>Dynamite</en>
+		<fr>Dynamite</fr>
+		<pt>Dinamite</pt>
+		<ru>Динамит</ru>
+	</title>
+	<title type="FirstPlace">
+		<id>232</id>
+		<requirement>8000</requirement>
+		<en>Speedmaster</en>
+		<fr>Vitesse Suprême</fr>
+		<pt>Velocidade Máxima</pt>
+		<ru>Мастер скорости</ru>
+	</title>
+	<title type="FirstPlace">
+		<id>233</id>
+		<requirement>9000</requirement>
+		<en>Whirlwind</en>
+		<fr>Tornade</fr>
+		<pt>Ventania</pt>
+		<ru>Вихрь</ru>
+	</title>
+	<title type="CheeseGathered">
+		<id>234</id>
+		<requirement>55000</requirement>
+		<en>Om Nom Nom</en>
+		<fr>Nom Nom de l'OM</fr>
+		<pt>Om nom nom</pt>
+		<ru>Om Nom Nom</ru>
+	</title>
+	<title type="CheeseGathered">
+		<id>235</id>
+		<requirement>60000</requirement>
+		<en>*-*</en>
+		<fr>*-*</fr>
+		<pt>*-*</pt>
+		<ru>*-*</ru>
+	</title>
+	<title type="CheeseGathered">
+		<id>236</id>
+		<requirement>65000</requirement>
+		<en>Cheese Addict</en>
+		<fr>Accro au Fromage</fr>
+		<pt>Viciado em Queijo</pt>
+		<ru>Сыр Addict</ru>
+	</title>
+	<title type="CheeseGathered">
+		<id>237</id>
+		<requirement>70000</requirement>
+		<en>Cheesus</en>
+		<fr>Cheesus</fr>
+		<pt>Cheesus</pt>
+		<ru>Cheesus</ru>
+	</title>
+	<title type="CheeseGathered">
+		<id>238</id>
+		<requirement>75000</requirement>
+		<en>Queen of Cheese</en>
+		<fr>Reine du fromage</fr>
+		<pt>Rainha do Queijo</pt>
+		<ru>Королевой сыра</ru>
+	</title>
+</titles>

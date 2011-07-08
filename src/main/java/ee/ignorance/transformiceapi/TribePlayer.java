@@ -1,6 +1,7 @@
 package ee.ignorance.transformiceapi;
 
-import ee.ignorance.transformiceapi.titles.AllTitles;
+import ee.ignorance.transformiceapi.titles.Title;
+import ee.ignorance.transformiceapi.titles.Titles;
 import ee.ignorance.transformiceapi.titles.TribeRank;
 
 public class TribePlayer {
@@ -8,10 +9,10 @@ public class TribePlayer {
     private String playerName;
     private TribeRank rank;
     private String avatarId;
-    private String titleNumber;
+    private int titleNumber;
     private String roomName;
 
-    public TribePlayer(String playerName, TribeRank rank, String avatarId, String titleNumber, String roomName) {
+    public TribePlayer(String playerName, TribeRank rank, String avatarId, int titleNumber, String roomName) {
         this.playerName = playerName;
         this.rank = rank;
         this.avatarId = avatarId;
@@ -51,17 +52,17 @@ public class TribePlayer {
     	return avatarId;
     }
     
-    public String getTitleNumber() {
+    public int getTitleNumber() {
     	return titleNumber;
     }
-    public String getTitle() {
-    	return AllTitles.get(titleNumber);
+    public Title getTitle() {
+    	return Titles.getTitle(titleNumber);
     }
 
 	@Override
 	public String toString() {
 		return "TribePlayer [playerName=" + playerName + ", rank=" + rank
-				+ ", avatarId=" + avatarId + ", titleNumber=" + titleNumber + "("+AllTitles.get(titleNumber)+")"
+				+ ", avatarId=" + avatarId + ", titleNumber=" + titleNumber + "("+Titles.getTitle(titleNumber)+")"
 				+ ", roomName=" + roomName + "]";
 	}
 }

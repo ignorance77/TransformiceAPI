@@ -2,6 +2,7 @@ package ee.ignorance.transformiceapi;
 
 import java.util.List;
 
+import ee.ignorance.transformiceapi.titles.Title;
 import ee.ignorance.transformiceapi.titles.Titles;
 
 public class PlayerProfile {
@@ -14,16 +15,16 @@ public class PlayerProfile {
         private int firsts;
         private int cheese;
         
-        private String titleNumber;
+        private int titleNumber;
         
-        private List<String> unlockedTitles;
+        private List<Integer> unlockedTitles;
         
         private String avatarId;
         
         private String tribe;
 
         public PlayerProfile(String playerName, int saves, int hardSaves, int personalGathered, int firsts, int cheese, 
-        						String titleNumber, List<String> unlockedTitles, String avatarId, String tribe) {
+        						int titleNumber, List<Integer> unlockedTitles, String avatarId, String tribe) {
                 this.playerName = playerName;
                 
                 this.saves = saves;
@@ -86,17 +87,17 @@ public class PlayerProfile {
                 this.cheese = cheese;
         }
 
-        public String getTitleNumber() {
+        public int getTitleNumber() {
         	return titleNumber;
         }
-        public void setTitleNumber(String titleNumber) {
+        public void setTitleNumber(int titleNumber) {
         	this.titleNumber = titleNumber;
         }
         
-        public List<String> getUnlockedTitles() {
+        public List<Integer> getUnlockedTitles() {
         	return unlockedTitles;
         }
-        public void setUnlockedTitles(List<String> unlockedTitles) {
+        public void setUnlockedTitles(List<Integer> unlockedTitles) {
         	this.unlockedTitles = unlockedTitles;
         }
         
@@ -115,39 +116,21 @@ public class PlayerProfile {
 	            this.tribe = tribe;
 	    }
 
-        
-        
-        /* Some interesting information about upcoming titles */
-        public String nextCheeseTitle() {
+        /* all nextTitle methods return null if no title is found */
+        public Title nextCheeseTitle() {
                 return Titles.nextCheeseTitle(cheese);
         }
 
-        public String nextFirstsTitle() {
+        public Title nextFirstsTitle() {
                 return Titles.nextFirstsTitle(firsts);
         }
 
-        public String nextSavesTitle() {
+        public Title nextSavesTitle() {
                 return Titles.nextSavesTitle(saves);
         }
 
-        public String nextHardSavesTitle() {
+        public Title nextHardSavesTitle() {
                 return Titles.nextHardSavesTitle(hardSaves);
-        }
-
-        public int cheeseForNextCheeseTitle() {
-                return Titles.cheeseForNextCheeseTitle(cheese);
-        }
-
-        public int firstsForNextFirstsTitle() {
-                return Titles.firstsForNextFirstsTitle(firsts);
-        }
-
-        public int savesForNextSavesTitle() {
-                return Titles.savesForNextSavesTitle(saves);
-        }
-
-        public int hardSavesForNextHardSavesTitle() {
-                return Titles.hardSavesForNextHardSavesTitle(hardSaves);
         }
 
         @Override

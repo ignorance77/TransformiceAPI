@@ -1,8 +1,6 @@
 package ee.ignorance.transformiceapi.protocol.server;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import ee.ignorance.transformiceapi.PlayerProfile;
@@ -23,9 +21,12 @@ public final class PlayerProfileResponse implements Processable {
 				int cheese = Integer.parseInt(statsData[3]);
 				int hardSaves = Integer.parseInt(statsData[4]);
 				
-				String titleNumber = rawMessage.get(3);
+				int titleNumber = Integer.parseInt(rawMessage.get(3));
 				
-				List<String> unlockedTitles = Arrays.asList(rawMessage.get(4).split(","));
+				List<Integer> unlockedTitles = new ArrayList<Integer>();
+				for (String s : rawMessage.get(4).split(",")) {
+				    unlockedTitles.add(Integer.valueOf(s));
+				}
 				
 				String avatarId = rawMessage.get(5);
 		

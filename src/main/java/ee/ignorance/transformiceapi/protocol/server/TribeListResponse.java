@@ -25,7 +25,7 @@ public final class TribeListResponse implements Processable {
 			String playerName = data[0];
 			TribeRank rank = TribeRank.getRank(Integer.valueOf(data[1]));
 			String avatarId = data[2];
-			String titleNumber = data[3];
+			int titleNumber = Integer.parseInt(data[3]);
 			String roomName = data[4];
 			
 			tribePlayers.add(new TribePlayer(playerName, rank, avatarId, titleNumber, roomName));	
