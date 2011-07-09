@@ -398,9 +398,11 @@ public class PlayerImpl implements Player {
         }
 
         public Mouse getMouseById(int id) {
-                for (Mouse mouse : roomMice) {
-                        if (mouse.getCode() == id) {
-                                return mouse;
+                if (roomMice != null) {
+                        for (Mouse mouse : roomMice) {
+                                if (mouse.getCode() == id) {
+                                        return mouse;
+                                }
                         }
                 }
                 return null;
