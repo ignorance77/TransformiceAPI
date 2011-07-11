@@ -11,6 +11,8 @@ public class Mouse {
 	private boolean dead;
 	private int score;
 	private int codeForum;
+	private String furColor; // RRGGBB
+	private String shamanTatoosColor; // RRGGBB
         private boolean hasFinished = false;
         private double finishTime = 0.0;
         private int standing = 0;
@@ -41,6 +43,8 @@ public class Mouse {
 		mouse.setCode(code);
 		mouse.setScore(score);
 		mouse.setCodeForum(codeForum);
+		mouse.setFurColor(mouseData[9]);
+		mouse.setShamanTatoosColor(mouseData[10]);
 		return mouse;
 	}
 
@@ -89,6 +93,22 @@ public class Mouse {
 
 	public void setCodeForum(int codeForum) {
 		this.codeForum = codeForum;
+	}
+
+	public String getFurColor() {
+		return furColor;
+	}
+
+	public void setFurColor(String furColor) {
+		this.furColor = furColor;
+	}
+
+	public String getShamanTatoosColor() {
+		return shamanTatoosColor;
+	}
+
+	public void setShamanTatoosColor(String shamanTatoosColor) {
+		this.shamanTatoosColor = shamanTatoosColor;
 	}
 
         public void setPosX(int posX){
