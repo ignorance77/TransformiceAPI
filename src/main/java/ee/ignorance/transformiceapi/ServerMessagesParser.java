@@ -40,6 +40,7 @@ import ee.ignorance.transformiceapi.protocol.server.mouse.MouseJoinRoomResponse;
 import ee.ignorance.transformiceapi.protocol.server.mouse.MouseLeaveRoomResponse;
 import ee.ignorance.transformiceapi.protocol.server.mouse.MouseListResponse;
 import ee.ignorance.transformiceapi.protocol.server.mouse.MouseMoveResponse;
+import ee.ignorance.transformiceapi.protocol.server.mouse.MouseUnlockTitleResponse;
 
 public class ServerMessagesParser {
         private static final Pattern pattern = Pattern.compile(String.valueOf((char) 0x01));
@@ -103,6 +104,9 @@ public class ServerMessagesParser {
                                         }
                                         if (codeMinor == 12) {
                                                 return new FriendListResponse(rawMessage);
+                                        }
+                                        if (codeMinor == 14) {
+                                                return new MouseUnlockTitleResponse(rawMessage);
                                         }
                                         if (codeMinor == 16) {
                                                 return new MouseBalloonResponse(rawMessage);
