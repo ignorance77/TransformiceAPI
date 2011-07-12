@@ -13,6 +13,7 @@ import java.util.concurrent.TimeUnit;
 import org.apache.log4j.Logger;
 
 import ee.ignorance.transformiceapi.protocol.client.ByteMessageRequest;
+import ee.ignorance.transformiceapi.protocol.client.ClientInfoRequest;
 import ee.ignorance.transformiceapi.protocol.client.IntroduceRequest;
 import ee.ignorance.transformiceapi.protocol.client.StringMessageRequest;
 import ee.ignorance.transformiceapi.protocol.client.RegisterRequest;
@@ -65,6 +66,8 @@ public class GameConnection {
                 startPingThread();
             }
             logger.debug("Successfully introduced");
+
+            sendRequest(new ClientInfoRequest("en", "", ""));
         }
 
         public Player createPlayer(String username, String password) throws GameException {
